@@ -1,8 +1,8 @@
  * [Proposal#Introduction Introduction]
- * [Proposal#Project_Description Project_Description]
+ * [Proposal#Project_Description Project Description]
  * [Proposal#Group_Members_&_Roles Group Members & Roles]
- * [ProjectProposal#Development_Tools Development Tools]
- * [ProjectProposal#Development_Schedule Development Schedule]
+ * [Proposal#Development_Tools Development Tools]
+ * [Proposal#Development_Schedule Development Schedule]
 
 = Introduction =
 
