@@ -16,10 +16,11 @@ abcd
 = Group Members & Roles =
 
 || *Name* || *ITSC* || *Year* || *Role*||
-|| WANG, Ding || || 2|| ||
+|| WANG, Ding || dwangac || 2|| ||
 || YANG, Ji || jyangaa || 3 || ||
-|| ZHANG, Tian || || 2 ||  ||
-|| ZENG, Xiong || || 2 || ||
+|| ZHANG, Tian || tzhangaa || 2 ||  ||
+|| ZENG, Xiong || xzengac || 2 || ||
+||  || || 2 || ||
 
 = Development Tools =
 
