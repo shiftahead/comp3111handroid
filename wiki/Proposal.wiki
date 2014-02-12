@@ -45,8 +45,8 @@ The app will be designed and made by using the following tools:
 || 8 || Mar. 29 || Release Beta version (1.0b1)|| 
 || 8 || Mar. 29 || 1st inner test for 1.0b1 ||
 || 9 || Apr. 1 || Prototype presentation ||
-|| 10 || Apr. 7 || Complete optional task 1 ||
-|| 11 || Apr. 15 || Test ||
+|| 10 || Apr. 7 || Complete optional task 1, update version to 1.0b2 ||
+|| 11 || Apr. 15 || 2nd inner test for 1.0b2 ||
 || 13 || May 8 || Final presentation ||			
 		
 		
