@@ -13,11 +13,10 @@
 
 == 1. Approve of Minutes ==
 
-This is the first meeting.
+
 
 == 2. Report on Progress ==
 
-This is the first meeting so no progress to report.
 
 == 3. Discussion Items ==
 
