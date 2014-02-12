@@ -39,10 +39,10 @@ The app will be designed and made by using the following tools:
 = Development Schedule =
 
  || *Week*      || *Finishing Date*      || *Task*         ||
- 
-		
-		
-		
+ || *Week*      || *Finishing Date*      || *Task*         || 
+ || *Week*      || *Finishing Date*      || *Task*         ||		
+ || *Week*      || *Finishing Date*      || *Task*         ||		
+ || *Week*      || *Finishing Date*      || *Task*         ||		
 		
 		
 		
