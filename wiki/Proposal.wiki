@@ -21,10 +21,8 @@ The location of the event;
 ===Description===
 The description of the event (optional for the user);
 ===Event type===
-
-*Compulsory: If an event is set as compulsory, the user’s location will be checked at the start time of the event;
-*Optional
-
+ *Compulsory: If an event is set as compulsory, the user’s location will be checked at the start time of the event;
+ *Optional
 ===Transportation type (Optional)===
 Drive, Public transportation, walking would be provided as 3 options to the user and the user are promoted to select one of them as the transportation method, then the estimated time needed will be provided.
 
