@@ -39,11 +39,11 @@ The app will be designed and made by using the following tools:
 = Development Schedule =
 
 || *Week* || *Finishing Date* || *Task* ||
-|| Week2 || Feb.14 || Submission of initial proposal ||	
-|| Week3 || Feb. 20 || proposal presentation ||	
-|| Week 4 || Mar.3 || System requirement and functional specification || 
-|| Week 9 || Apr.1 || Prototype presentation ||
-|| Week14 || Apr || Final presentation ||			
+|| 2 || Feb.14 || Submission of initial proposal ||	
+|| 3 || Feb. 20 || proposal presentation ||	
+|| 4 || Mar.3 || System requirement and functional specification || 
+|| 9 || Apr.1 || Prototype presentation ||
+|| 14 || Apr || Final presentation ||			
 		
 		
 		
