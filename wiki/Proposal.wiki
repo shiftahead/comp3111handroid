@@ -4,7 +4,7 @@
  * [Proposal#Development_Tools Development Tools]
  * [Proposal#Development_Schedule Development Schedule]
 
-
+----
 = Project Description =
 
 ==Google Map Search==
@@ -45,10 +45,7 @@ When the start time reached, the application will check the indoor location of t
 
 ==Login (optional)==
 This application allows user to login with his google account and moreover, to sync his schedule from a location-based list to Google Calender.
-
-
-
-
+----
 
 =Motivation=
 
