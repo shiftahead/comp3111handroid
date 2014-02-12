@@ -16,11 +16,11 @@ abcd
 = Group Members & Roles =
 
 || *Name* || *ITSC* || *Year* || *Role*||
+|| TAM, Shih Lung  || sltamab || 2 || ||
 || WANG, Ding || dwangac || 2|| ||
 || YANG, Ji || jyangaa || 3 || ||
-|| ZHANG, Tian || tzhangaa || 2 ||  ||
 || ZENG, Xiong || xzengac || 2 || ||
-|| Tam, Shih Lung  || sltamab || 2 || ||
+|| ZHANG, Tian || tzhangaa || 2 ||  ||
 
 = Development Tools =
 
@@ -39,11 +39,15 @@ The app will be designed and made by using the following tools:
 = Development Schedule =
 
 || *Week* || *Finishing Date* || *Task* ||
-|| 2 || Feb.14 || Submission of initial proposal ||	
-|| 3 || Feb. 20 || proposal presentation ||	
-|| 4 || Mar.3 || System requirement and functional specification || 
-|| 9 || Apr.1 || Prototype presentation ||
-|| 14 || Apr || Final presentation ||			
+|| 2 || Feb. 14 || Submission of initial proposal ||	
+|| 3 || Feb. 20 || Proposal presentation ||	
+|| 4 || Mar. 3 || System requirement and functional specification ||
+|| 8 || Mar. 29 || Release Beta version (1.0b1)|| 
+|| 8 || Mar. 29 || 1st inner test for 1.0b1, focu
+|| 9 || Apr. 1 || Prototype presentation ||
+|| 10 || Apr. 7 || Complete optional task 1 ||
+|| 11 || Apr. 15 || Test
+|| 13 || May 8 || Final presentation ||			
 		
 		
 		
