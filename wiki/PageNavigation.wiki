@@ -1,4 +1,4 @@
-#sidebar TableOfContents
+#summary Wiki sidebar.
 
  * [Proposal Proposal]
  * Meeting Minutes
