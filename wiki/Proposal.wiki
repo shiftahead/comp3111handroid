@@ -13,6 +13,17 @@ efgh
 
 
 
+
+=Motivation=
+
+Nowadays, calendar we use is basically time-based schedule. From them, we can clearly know the time and order of events. However, for location information of those events, we have to open google map application to get details. 
+
+This location- based apps we designed is based on Google map. By checking location on maps, users can know time and other important information about those events. Other fantastic features of classical calendar like reminder, can be also implemented in this location-based schedule.
+
+Since location is main feature of event, more function about path or estimated arrival time can be added to this application. 
+
+
+
 = Group Members & Roles =
 
 || *Name* || *ITSC* || *Year* || *Role*||
