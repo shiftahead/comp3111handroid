@@ -11,10 +11,10 @@ Our COMP3111 group project is basically a location-based calendar. Apart from cl
 
 = Project Description =
 
-`*``*`==Google Map Search==
+**==Google Map Search==
 As a location-based TODO kind application which is based on Google Map, searching places should be available, this allows user to input a place to the search bar and get the result displayed on the google map.
 
-`*`==Adding Event==
+*==Adding Event==
 To create an event, the user are promoted to input several basic informations related to his event going to be scheduled:
 ===Name=== 
 Input the title(name) of the event;
