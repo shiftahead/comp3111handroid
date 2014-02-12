@@ -52,17 +52,7 @@ This application allows user to login with google account and moreover, to sync 
 ----
 =Motivation=
 
-Nowadays, calendar we use is basically time-based schedule. From them, we can clearly know the time and order of events. However, for location information of those events, we have to open Google map application to get details. 
-
-This location-based apps we designed is based on Google map. By checking location on maps, users can know the time and other important information about those events. Other fantastic features of classical calendar like reminder, can be also implemented in this location-based schedule.
-
-Since location is main feature of event, more functions about path or estimated arrival time can be added to this application. 
-
-
-
-
-
-Nowadays, we usually use time-based schedule. For sure, we can clearly know the time-ordering of events, yet, we have no idea about the location-ordering of those events. We also do not know anything regarding travel time or best path unless we switch to other map applications. 
+Nowadays, we usually use time-based schedule. For sure, we can clearly know the time-ordering of events, yet, we have no idea about the location of those events. We also do not know anything regarding travel time or best path unless we switch to other map applications. 
 
 The problem is we do not always remember to check it. Instead of forgetting the tasks, what happens more often is, we are late. This motivates us to build a to-do apps with recommend path or estimated arrival time. An alarm reminder based-on the estimated arrival time and current location would further secure Android user from being late. It could help people to manage their time easily and more relaxingly.
 
