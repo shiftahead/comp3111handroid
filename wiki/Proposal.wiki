@@ -43,10 +43,10 @@ The app will be designed and made by using the following tools:
 || 3 || Feb. 20 || Proposal presentation ||	
 || 4 || Mar. 3 || System requirement and functional specification ||
 || 8 || Mar. 29 || Release Beta version (1.0b1)|| 
-|| 8 || Mar. 29 || 1st inner test for 1.0b1, focu
+|| 8 || Mar. 29 || 1st inner test for 1.0b1 ||
 || 9 || Apr. 1 || Prototype presentation ||
 || 10 || Apr. 7 || Complete optional task 1 ||
-|| 11 || Apr. 15 || Test
+|| 11 || Apr. 15 || Test ||
 || 13 || May 8 || Final presentation ||			
 		
 		
