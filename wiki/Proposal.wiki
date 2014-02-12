@@ -6,6 +6,32 @@
 
 
 = Project Description =
+==Google Map Search==
+As a location-based TODO kind application which is based on Google Map, searching places should be available, this allows user to input a place to the search bar and get the result displayed on the google map.
+==Adding Event==
+To create an event, the user are promoted to input several basic informations related to his event going to be scheduled:
+===Name=== 
+Input the title(name) of the event;
+	Time: The Start time, Duration of the event;
+	Location: The location of the event;
+	Description: The description of the event (optional for the user);
+	Event type:
+1.	Compulsory: If an event is set as compulsory, the user’s location will be checked at the start time of the event.
+2.	Optional
+Transportation type (Optional): Drive, Public transportation, walking would be provided as 3 options to the user and the user are promoted to select one of them as the transportation method, then the estimated time needed will be provided.
+
+Editing or Deleting Event
+For the user to edit the basic informations of an event or to delete an event.
+
+Reminder: there are 2 way to remind a user:
+Timed Reminder: A specified time is set during adding an event procedure and the app will remind the user at that specified time.
+	Remind me based on my current location: The system will check the remaining time for the next event, calculate the time needed based on my current location and remind me if the remaining time is shorter than the time needed.
+
+Check location using GPS: When the start time reached, the application will check the location of the user using GPS and to report to the user about whether he reached the place on time.
+
+Check location using Wifi (optional): When the start time reached, the application will check the indoor location of the user using Wifi and to report to the user about whether he reached the place on time.
+
+Login (optional): This application allows user to login with his google account and moreover, to sync his schedule from a location-based list to Google Calender.
 
 
 
