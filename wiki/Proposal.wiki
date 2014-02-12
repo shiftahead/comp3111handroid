@@ -46,7 +46,6 @@ When the start time reached, the application will check the indoor location of t
 ==Login (optional)==
 This application allows user to login with his google account and moreover, to sync his schedule from a location-based list to Google Calender.
 ----
-
 =Motivation=
 
 Nowadays, calendar we use is basically time-based schedule. From them, we can clearly know the time and order of events. However, for location information of those events, we have to open Google map application to get details. 
@@ -54,9 +53,7 @@ Nowadays, calendar we use is basically time-based schedule. From them, we can cl
 This location-based apps we designed is based on Google map. By checking location on maps, users can know the time and other important information about those events. Other fantastic features of classical calendar like reminder, can be also implemented in this location-based schedule.
 
 Since location is main feature of event, more functions about path or estimated arrival time can be added to this application. 
-
-
-
+----
 = Group Members & Roles =
 
 || *Name* || *ITSC* || *Year* || *Role*||
@@ -65,7 +62,7 @@ Since location is main feature of event, more functions about path or estimated 
 || YANG, Ji || jyangaa || 3 || ||
 || ZENG, Xiong || xzengac || 2 || ||
 || ZHANG, Tian || tzhangaa || 2 ||  ||
-
+----
 = Development Tools =
 
 The app will be designed and made by using the following tools:
@@ -77,9 +74,7 @@ The app will be designed and made by using the following tools:
  * Google API
 
  * Subversion
-
-
-
+----
 = Development Schedule =
 
 || *Week* || *Finishing Date* || *Task* ||
