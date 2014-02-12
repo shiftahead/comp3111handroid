@@ -24,4 +24,16 @@ abcd
 
 = Development Tools =
 
+The app will be designed and made by using the following tools:
+
+●	Eclipse , Android Developer Tools   Build: v22.3.0-887826
+
+●	Android SDK 
+
+●	Google API
+
+●	Subversion
+
+
+
 = Development Schedule =
