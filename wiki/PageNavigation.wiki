@@ -1,5 +1,4 @@
-#summary Wiki sidebar.
-
+#sidebar TableOfContents
  * [Proposal Proposal]
  * Meeting Minutes
   * [Minutes0208 1st meeting on Feb. 8]
