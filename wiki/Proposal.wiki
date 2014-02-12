@@ -18,13 +18,11 @@ Our COMP3111 group project is basically a location-based calendar. Apart from cl
 As a location-based TODO kind application which is based on Google Map, searching places should be available, this allows user to input a place to the search bar and get the result displayed on the google map.
 
 ==Adding Event==
-To create an event, the user are promoted to input several basic informations related to his event going to be scheduled:
+To create an event, the user are promoted to first locate the correct place of the event, and then input several basic information related to this event going to be scheduled:
  ===Name=== 
  Input the title(name) of the event; 
  ===Time=== 
  The Start time, Duration of the event;
- ===Location===
- The location of the event;
  ===Description===
  The description of the event (optional for the user);
  ===Event type===
