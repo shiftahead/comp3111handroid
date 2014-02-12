@@ -1,3 +1,4 @@
+ * [Proposal#Introduction Introduction]
  * [Proposal#Project_Description Project Description]
  * [Proposal#Motivation Motivation]
  * [Proposal#Group_Members_&_Roles Group Members & Roles]
@@ -5,6 +6,9 @@
  * [Proposal#Development_Schedule Development Schedule]
 
 ----
+=Introduction=
+Our COMP3111 group project is basically a location-based calendar. Apart from classical calendar features, it can also implement function closely related to location of event and users.
+
 = Project Description =
 
 ==Google Map Search==
