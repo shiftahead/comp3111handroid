@@ -18,7 +18,7 @@ Our COMP3111 group project is basically a location-based calendar. Apart from cl
 As a location-based TODO kind application which is based on Google Map, searching places should be available, this allows user to input a place to the search bar and get the result displayed on the google map.
 
 ==Adding Event==
-To create an event, the user are promoted to first locate the correct place of the event, and then input several basic information related to this event going to be scheduled:
+To create an event, the user is prompted to first locate the correct place of the event, and then input several pieces of basic information related to the event to be scheduled:
  ===Name=== 
  Input the title(name) of the event; 
  ===Time=== 
@@ -29,7 +29,7 @@ To create an event, the user are promoted to first locate the correct place of t
   * Compulsory: If an event is set as compulsory, the user’s location will be checked at the start time of the event;
   * Optional
  ===Transportation type (Optional)===
- Drive, Public transportation, walking would be provided as 3 options to the user and the user are     promoted to select one of them as the transportation method, then the estimated time needed will be  provided.
+ Drive, Public transportation, walking would be provided as 3 options to the user and the user is prompted to select one of them as the transportation method, then the estimated time needed will be provided.
 
 ==Editing or Deleting Event==
 For the user to edit the basic information of an event or to delete an event.
@@ -42,13 +42,13 @@ There are 2 way to remind a user:
  The system will check the remaining time for the next event, calculate the time needed based on my current location and remind me if the remaining time is shorter than the time needed.
 
 ==Check location using GPS==
-When the start time reached, the application will check the location of the user using GPS and to report to the user about whether he reached the place on time.
+When the start time is reached, the application will check the location of the user using GPS and to report to the user about whether he or she reached the place on time.
 
 ==Check location using Wifi (optional)==
-When the start time reached, the application will check the indoor location of the user using Wifi and to report to the user about whether he reached the place on time.
+When the start time is reached, the application will check the indoor location of the user using Wifi and to report to the user about whether he or she reached the place on time.
 
 ==Login (optional)==
-This application allows user to login with his google account and moreover, to sync his schedule from a location-based list to Google Calender.
+This application allows user to login with google account and moreover, to sync his or her schedule from a location-based list to Google Calender.
 ----
 =Motivation=
 
