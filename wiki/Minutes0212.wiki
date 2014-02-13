@@ -13,11 +13,18 @@
 
 == 1. Approval of Minutes ==
 
+The minutes of the last meeting were approved without amendment.
 
 == 2. Report on Progress ==
 
 
 == 3. Discussion Items ==
+
+*3.1* Come up new idea related to mobile phone feature, such as localization and mobile sensor.
+
+*3.2* Finish the wiki page on code.google.com about project proposal
+
+*3.3* Send wiki link to TA, and ask for advice.
 
 == 4. Goals for coming week ==
 
