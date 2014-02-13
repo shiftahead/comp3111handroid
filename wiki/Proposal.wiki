@@ -7,7 +7,7 @@
   * [Proposal#Editing_or_Deleting_Event Editing or Deleting Event]
   * [Proposal#Reminder Reminder]
   * [Proposal#Check_location_using_GPS Check location using GPS]
-  * [Proposal#Check_location_using_WiFi_(Optional) Check location using WiFi]
+  * [Proposal#Check_location_using_!WiFi_(Optional) Check location using WiFi]
   * [Proposal#Login_(optional) Login]
  * [Proposal#Motivation Motivation]
  * [Proposal#Group_Members_&_Roles Group Members & Roles]
