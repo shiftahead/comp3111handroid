@@ -2,6 +2,13 @@
 
  * [Proposal#Introduction Introduction]
  * [Proposal#Project_Description Project Description]
+  * [Proposal#Google_Map_Search Google Map Search]
+  * [Proposal#Adding_Event Adding Event]
+  * [Proposal#Editing_or_Deleting_Event Editing or Deleting Event]
+  * [Proposal#Reminder Reminder]
+  * [Proposal#Check_location_using_GPS Check location using GPS]
+  * [Proposal#Check_location_using_WiFi_(Optional) Check location using WiFi]
+  * [Proposal#Login_(optional) Login]
  * [Proposal#Motivation Motivation]
  * [Proposal#Group_Members_&_Roles Group Members & Roles]
  * [Proposal#Development_Tools Development Tools]
@@ -44,11 +51,11 @@ There are 2 way to remind a user:
 ==Check location using GPS==
 When the start time is reached, the application will check the location of the user using GPS and to report to the user about whether he or she reached the place on time.
 
-==Check location using Wifi (optional)==
-When the start time is reached, the application will check the indoor location of the user using Wifi and to report to the user about whether he or she reached the place on time.
+==Check location using WiFi (optional)==
+When the start time is reached, the application will check the indoor location of the user using WiFi and to report to the user about whether he or she reached the place on time.
 
 ==Login (optional)==
-This application allows user to login with google account and moreover, to sync his or her schedule from a location-based list to Google Calender.
+This application allows user to login with Google account and moreover, to sync his or her schedule from a location-based list to Google Calender.
 ----
 =Motivation=
 
