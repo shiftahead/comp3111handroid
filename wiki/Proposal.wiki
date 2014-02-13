@@ -59,12 +59,12 @@ The problem is we do not always remember to check it. Instead of forgetting the 
 ----
 = Group Members & Roles =
 
-|| *Name* || *ITSC* || *Year* || *Role*||
-|| TAM, Shih Lung  || sltamab || 2 || ||
-|| WANG, Ding || dwangac || 2|| ||
-|| YANG, Ji || jyangaa || 3 || ||
-|| ZENG, Xiong || xzengac || 2 || ||
-|| ZHANG, Tian || tzhangaa || 2 ||  ||
+|| *Name* || *ITSC* || *STU ID (Last 4 digits)* || *Year* || *Role*||
+|| TAM, Shih Lung  || sltamab || 8730 || 2 || ||
+|| WANG, Ding || dwangac || 6270 || 2|| ||
+|| YANG, Ji || jyangaa || sltamab || 3 || ||
+|| ZENG, Xiong || xzengac || 5056 || 2 || ||
+|| ZHANG, Tian || tzhangaa || sltamab || 2 ||  ||
 
 ----
 = Development Tools =
