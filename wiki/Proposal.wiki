@@ -62,9 +62,9 @@ The problem is we do not always remember to check it. Instead of forgetting the 
 || *Name* || *ITSC* || *STU ID (Last 4 digits)* || *Year* || *Role*||
 || TAM, Shih Lung  || sltamab || 8730 || 2 || ||
 || WANG, Ding || dwangac || 6270 || 2|| ||
-|| YANG, Ji || jyangaa || sltamab || 3 || ||
+|| YANG, Ji || jyangaa || 9133 || 3 || ||
 || ZENG, Xiong || xzengac || 5056 || 2 || ||
-|| ZHANG, Tian || tzhangaa || sltamab || 2 ||  ||
+|| ZHANG, Tian || tzhangaa || 6098 || 2 ||  ||
 
 ----
 = Development Tools =
