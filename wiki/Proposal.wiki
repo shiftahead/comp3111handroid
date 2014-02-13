@@ -22,7 +22,7 @@ Our COMP3111 group project is basically a location-based calendar. Apart from cl
 = Project Description =
 
 ==Google Map Search==
-As a location-based TODO kind application which is based on Google Map, searching places should be available, this allows user to input a place to the search bar and get the result displayed on the google map.
+As a location-based To-do kind application which is based on Google Map, searching places should be available, this allows user to input a place to the search bar and get the result displayed on the Google Map.
 
 ==Adding Event==
 To create an event, the user is prompted to first locate the correct place of the event, and then input several pieces of basic information related to the event to be scheduled:
@@ -51,7 +51,7 @@ There are 2 way to remind a user:
 ==Check location using GPS==
 When the start time is reached, the application will check the location of the user using GPS and to report to the user about whether he or she reached the place on time.
 
-== Check location using !WiFi (optional) == 
+== Check location using WiFi (optional) == 
 When the start time is reached, the application will check the indoor location of the user using WiFi and to report to the user about whether he or she reached the place on time.
 
 ==Login (optional)==
