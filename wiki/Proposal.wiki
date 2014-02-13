@@ -18,7 +18,7 @@
 
 ----
 =Introduction=
-Our COMP3111 group project is basically a location-based calendar. Apart from classical calendar features, it can also implement function closely related to location of event and users.
+Our COMP3111 group project is basically a location-based calendar. Apart from classical calendar features, it can also implement function closely related to location of events and users.
 ----
 
 = Project Description =
@@ -31,27 +31,27 @@ To create an event, the user is prompted to first locate the correct place of th
  ===Name=== 
  Input the title(name) of the event; 
  ===Time=== 
- The Start time, Duration of the event;
+ The start time and duration of the event;
  ===Description===
  The description of the event (optional for the user);
  ===Event type===
   * Compulsory: If an event is set as compulsory, the user’s location will be checked at the start time of the event;
   * Optional
  ===Transportation type (Optional)===
- Drive, Public transportation, walking would be provided as 3 options to the user and the user is prompted to select one of them as the transportation method, then the estimated time needed will be provided.
+ Drive, public transportation and walking would be provided as 3 options to the user and the user is prompted to select one of them as the transportation method, then the estimated time needed will be provided.
 
 ==Editing or Deleting Events==
 For the user to edit the basic information of an event or to delete an event.
 
 ==Reminder==
-There are 2 way to remind a user:
+There are 2 ways to remind a user:
  ===Timed Reminder===
  A specified time is set during adding an event procedure and the app will remind the user at that specified time.
  ===Remind me based on my current location===
  The system will check the remaining time for the next event, calculate the time needed based on my current location and remind me if the remaining time is shorter than the time needed.
 
 ==Check location using GPS==
-When the start time is reached, the application will check the location of the user using GPS and to report to the user about whether he or she reached the place on time.
+When the start time is reached, the application will check the location of the user using GPS and to report to the user about whether he or she has reached the place on time.
 
 == Check location using !WiFi (optional) == 
 When the start time is reached, the application will check the indoor location of the user using !WiFi and to report to the user about whether he or she reached the place on time.
