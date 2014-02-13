@@ -51,7 +51,7 @@ There are 2 way to remind a user:
 ==Check location using GPS==
 When the start time is reached, the application will check the location of the user using GPS and to report to the user about whether he or she reached the place on time.
 
-== Check location using WiFi (optional) == 
+== Check location using !WiFi (optional) == 
 When the start time is reached, the application will check the indoor location of the user using WiFi and to report to the user about whether he or she reached the place on time.
 
 ==Login (optional)==
