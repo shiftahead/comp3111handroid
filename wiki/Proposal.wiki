@@ -72,7 +72,7 @@ The problem is we do not always remember to check it. Instead of forgetting the 
 || TAM, Shih Lung  || sltam--  || 8730 || 2 || ||
 || WANG, Ding || dwang-- || 6270 || 2|| ||
 || YANG, Ji || jyang-- || 9133 || 3 || ||
-|| ZENG, Xiong || xzeng-- || 5056 || 2 || || UI developer
+|| ZENG, Xiong || xzeng-- || 5056 || 2 ||  UI developer ||
 || ZHANG, Tian || tzhang-- || 6098 || 2 || UI developer ||
 
 ----
