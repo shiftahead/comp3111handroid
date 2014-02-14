@@ -69,7 +69,7 @@ The problem is we do not always remember to check it. Instead of forgetting the 
 = Group Members & Roles =
 
 || *Name* || *ITSC* || *STU ID (Last 4 digits)* || *Year* || *Role*||
-|| TAM, Shih Lung  || sltam--  || 8730 || 2 || ||
+|| TAM, Shih Lung  || sltam--  || 8730 || 2 || Developer ||
 || WANG, Ding || dwang-- || 6270 || 2|| Server Administrator ||
 || YANG, Ji || jyang-- || 9133 || 3 || Developer ||
 || ZENG, Xiong || xzeng-- || 5056 || 2 ||  UI developer ||
