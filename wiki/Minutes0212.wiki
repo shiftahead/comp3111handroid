@@ -7,7 +7,7 @@
 || Place || LC-14, LG1, Library, HKUST ||
 || Attendance || TAM Shih Lung, WANG Ding, YANG Ji, ZENG Xiong, ZHANG Tian ||
 || Absence || -- ||
-|| Recorder ||  ||
+|| Recorder || YANG Ji ||
 
 ----
 
@@ -17,15 +17,19 @@ The minutes of the last meeting were approved without amendment.
 
 == 2. Report on Progress ==
 
+Project initial ideas have been discussed with JC and the professor.
 
 == 3. Discussion Items ==
 
-*3.1* Come up new idea related to mobile phone feature, such as localization and mobile sensor.
-
-*3.2* Finish the wiki page on code.google.com about project proposal
-
-*3.3* Send wiki link to TA, and ask for advice.
+ # Come up new idea related to mobile phone feature, such as localization and mobile sensor.
+ # Make a tentative project management plan and schedule.
+ # Finish the project [Proposal proposal].
+ # Send wiki link to TA, and ask for advice.
 
 == 4. Goals for coming week ==
 
+ # Start coding.
+ # All team members learn some basic knowledge on Java/Android programming.
+
 == 5. Meeting adjournment and next meeting ==
+ 
