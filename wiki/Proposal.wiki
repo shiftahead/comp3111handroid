@@ -73,7 +73,7 @@ The problem is we do not always remember to check it. Instead of forgetting the 
 || WANG, Ding || dwang-- || 6270 || 2|| ||
 || YANG, Ji || jyang-- || 9133 || 3 || ||
 || ZENG, Xiong || xzeng-- || 5056 || 2 || ||
-|| ZHANG, Tian || tzhang-- || 6098 || 2 ||  ||
+|| ZHANG, Tian || tzhang-- || 6098 || 2 || UI developer ||
 
 ----
 = Development Tools =
