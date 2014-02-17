@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<item value="162" key="CommitDialog.location.y"/>
+	<item value="false" key="CommitDialog.sortReversed"/>
+	<item value="447" key="CommitDialog.location.x"/>
+	<item value="150" key="CommitDialog.column2"/>
+	<item value="1" key="CommitDialog.sortColumn"/>
+	<item value="150" key="CommitDialog.column1"/>
+	<item value="547" key="CommitDialog.size.x"/>
+	<item value="433" key="CommitDialog.size.y"/>
+	<item value="150" key="CommitDialog.column3"/>
+	<item value="20" key="CommitDialog.column0"/>
+	<section name="NewLocationWizard">
+		<list key="ConfigurationWizardMainPage.STORE_URL_ID">
+			<item value="https://comp3111handroid.googlecode.com/svn/"/>
+			<item value="https://comp3111handroid.googlecode.com/svn/trunk/ "/>
+			<item value="https://comp3111handroid.googlecode.com/svn/trunk/ comp3111handroid"/>
+		</list>
+	</section>
+</section>

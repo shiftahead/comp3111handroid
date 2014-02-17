@@ -1,0 +1,16 @@
+package tutorial2;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class myClassTest {
+
+	@Test
+	public void testMultiply() {
+		myClass testerClass = new myClass();
+		
+		assertEquals("Result",50,testerClass.multiply(5, 10));
+	}
+
+}
