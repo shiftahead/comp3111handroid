@@ -1,7 +1,0 @@
-package tutorial2;
-
-public class myClass {
-    public int  multiply(int x,int y) {
-		return x/y;
-	}
-}
