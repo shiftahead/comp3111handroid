@@ -25,7 +25,7 @@ Since work division is not finished, no individual progress report
 
 ===*3.1 Presentation*===
 
-*3.1.1* Wang Ding, Zeng xiong, and TAM Shih Lung will present our proposal 
+*3.1.1* Wang Ding, Zeng Xiong, and TAM Shih Lung will present our proposal 
 
 *3.1.2* Zhang Tian and Yang Ji are  responsible for PPT
 
@@ -33,9 +33,9 @@ Since work division is not finished, no individual progress report
 
 ===*3.2 Division of Work*===
 
-*3.2.1* The total project is divided into 3 main parts
+*3.2.1* The total project is divided into 3 main parts: Google Map implementation, UI design and event manipulation.
 
-*3.2.2* Zhang Tian and Wang Ding are responsible for google map implementation.
+*3.2.2* Zhang Tian and Wang Ding are responsible for Google Map implementation.
 
 *3.2.3* The UI design will be finished by Zeng Xiong and Yang Ji
 
