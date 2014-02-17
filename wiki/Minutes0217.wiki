@@ -37,7 +37,7 @@ Since work division is not finished, no individual progress report
 
 *3.2.2* Zhang Tian and Wang Ding are responsible for google map implementation.
 
-*3.2.3*The UI design will be finished by Zeng Xiong and Yang Ji
+*3.2.3* The UI design will be finished by Zeng Xiong and Yang Ji
 
 *3.2.4* TAM Shih Lung's task is creating the event list
 
@@ -48,6 +48,8 @@ Since work division is not finished, no individual progress report
 *4.2* Before March, 7th, we should almost finish our own part and start to synthesis them into one apps
 
 == 5. Meeting adjournment and next meeting ==
+
+No meeting adjournment 
 
 *Time* : Feb, 20 2014, 10: 30 am to 12: 00 am
 
