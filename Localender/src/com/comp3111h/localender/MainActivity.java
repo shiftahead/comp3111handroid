@@ -5,8 +5,9 @@ import android.app.Activity;
 import android.os.Bundle;
 
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.GoogleMap.OnMarkerDragListener;
+import com.google.android.gms.maps.GoogleMap.OnMyLocationButtonClickListener;
 import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -27,12 +28,12 @@ public class MainActivity extends Activity {
         localenderMap = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
         
         // config UI setting
-        UiSettings settings = localenderMap.getUiSettings();
-        settings.setZoomControlsEnabled(true);
-        settings.setCompassEnabled(true);
-        settings.setMyLocationButtonEnabled(true);
-        settings.setScrollGesturesEnabled(true);
-        settings.setRotateGesturesEnabled(true);
+        UiSettings localenderMapSettings = localenderMap.getUiSettings();
+        localenderMapSettings.setZoomControlsEnabled(true);
+        localenderMapSettings.setCompassEnabled(true);
+        localenderMapSettings.setMyLocationButtonEnabled(true);
+        localenderMapSettings.setScrollGesturesEnabled(true);
+        localenderMapSettings.setRotateGesturesEnabled(true);
         localenderMap.setMyLocationEnabled(true);
         
         //get my location 
@@ -43,7 +44,7 @@ public class MainActivity extends Activity {
 				    // TODO Auto-generated method stub
 				    return false;
 			      }
-		     });
+		     });        
         //This pieces of codes are testing the OnMarkerClickListener's availability
         /*
         localenderMap.setOnMarkerClickListener(new OnMarkerClickListener() {
@@ -89,6 +90,23 @@ public class MainActivity extends Activity {
 			}
 		});
         */
+        
+        //This pieces of codes are testing the OnInfoWindowClickListener's availability
+        /*
+        localenderMap.setOnInfoWindowClickListener(new OnInfoWindowClickListener() {
+			
+			@Override
+			public void onInfoWindowClick(Marker arg0) {
+				// TODO Auto-generated method stub
+				if(arg0.equals(testMarker)){
+					arg0.setSnippet("Display on the event List?");
+					arg0.showInfoWindow();
+				}			
+			}
+		});
+		*/
+        
+        
         
         //Do not add it in the onCreate method!
         testMarker = localenderMap.addMarker(new MarkerOptions()
