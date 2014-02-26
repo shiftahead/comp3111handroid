@@ -13,11 +13,16 @@
 
 == 1. Approval of Minutes ==
 
-
+The minutes of the last meeting were approved without amendment.
 
 == 2. Report on Progress ==
 
-
+|| Zhang Tian || Finish google map finding location and map UI setting.
+|| Wang Ding  || Complete android  google map marker design and info window design
+|| Yang Ji       ||  Main UI design finished
+|| Zeng Xiong  || Design UI and implement functions
+|| TAM Shih Lung || Create event list and corresponding list
+ 
 
 == 3. Discussion Items ==
 
