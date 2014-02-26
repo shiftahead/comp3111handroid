@@ -3,6 +3,13 @@ package com.comp3111.localendar;
 
 import java.util.ArrayList;
 
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.UiSettings;
+import com.google.android.gms.maps.GoogleMap.OnMyLocationButtonClickListener;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.support.v4.view.PagerAdapter;
@@ -25,6 +32,8 @@ public class MainActivity extends Activity {
 	private int currentTabIndex = 0;
 	private LayoutInflater inflator;
 	private int animationShiftOneScale, animationShiftTwoScale;
+	private GoogleMap localenderMap;
+	private Marker testMarker;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +91,30 @@ public class MainActivity extends Activity {
 		pager.setAdapter(myPagerAdapter);
 		pager.setCurrentItem(1);
        
+		//map setting
+		UiSettings localenderMapSettings = localenderMap.getUiSettings();
+        localenderMapSettings.setZoomControlsEnabled(true);
+        localenderMapSettings.setCompassEnabled(true);
+        localenderMapSettings.setMyLocationButtonEnabled(true);
+        localenderMapSettings.setScrollGesturesEnabled(true);
+        localenderMapSettings.setRotateGesturesEnabled(true);
+        localenderMap.setMyLocationEnabled(true);
+        
+        //get my location 
+        localenderMap.setOnMyLocationButtonClickListener(new OnMyLocationButtonClickListener() {
+                        
+                           @Override
+                              public boolean onMyLocationButtonClick() {
+                                    // TODO Auto-generated method stub
+                                    return false;
+                              }
+                     });  
+        
+      //Do not add it in the onCreate method!
+       testMarker = localenderMap.addMarker(new MarkerOptions()
+       .position(new LatLng(22.3375, 114.2630))
+       .title("COMP3111H Lecture").snippet("Today\n15:00 - 16:30\nLT-E").draggable(true));
+        
 	}
 	/*
 	@Override
