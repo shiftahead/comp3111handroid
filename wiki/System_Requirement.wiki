@@ -1,3 +1,7 @@
 #summary One-sentence summary of this page.
 
-*COMP3111H : Introduction to software engineering*
+=COMP 3111H: Introduction to Software Engineering=
+
+==System Requirements for Localendar==
+
+===Localendar app needs to provide the following functionalities:===
