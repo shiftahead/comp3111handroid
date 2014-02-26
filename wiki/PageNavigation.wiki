@@ -6,4 +6,4 @@
   * [Minutes0212 2nd meeting on Feb. 12]
   * [Minutes0217 3rd meeting on Feb. 17]
   * [Minutes4 4th meeting on Feb. 26]
-  * [https://code.google.com/p/comp3111handroid/w/list All Wiki pages]
+ [https://code.google.com/p/comp3111handroid/w/list All Wiki pages]
