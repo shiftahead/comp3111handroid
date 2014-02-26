@@ -82,7 +82,7 @@ public class MainActivity extends Activity {
 			}
 		};
 		pager.setAdapter(myPagerAdapter);
-		MapActivity mapActivity = new MapActivity();
+		
        
 	}
 	/*
