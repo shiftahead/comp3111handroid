@@ -9,9 +9,7 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.DisplayMetrics;
-import android.view.Display;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
@@ -82,7 +80,7 @@ public class MainActivity extends Activity {
 			}
 		};
 		pager.setAdapter(myPagerAdapter);
-		
+		pager.setCurrentItem(1);
        
 	}
 	/*
