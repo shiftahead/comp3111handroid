@@ -25,8 +25,25 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         localenderMap = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
-        localenderMap.setPadding(0, 0, 0, 100);
-                
+        
+        // config UI setting
+        UiSettings settings = localenderMap.getUiSettings();
+        settings.setZoomControlsEnabled(true);
+        settings.setCompassEnabled(true);
+        settings.setMyLocationButtonEnabled(true);
+        settings.setScrollGesturesEnabled(true);
+        settings.setRotateGesturesEnabled(true);
+        localenderMap.setMyLocationEnabled(true);
+        
+        //get my location 
+        localenderMap.setOnMyLocationButtonClickListener(new OnMyLocationButtonClickListener() {
+			
+			   @Override
+			      public boolean onMyLocationButtonClick() {
+				    // TODO Auto-generated method stub
+				    return false;
+			      }
+		     });
         //This pieces of codes are testing the OnMarkerClickListener's availability
         /*
         localenderMap.setOnMarkerClickListener(new OnMarkerClickListener() {
