@@ -26,7 +26,12 @@ The minutes of the last meeting were approved without amendment.
 
 == 3. Discussion Items ==
 
+=== 3.1 Synthesis of individual code ===
 
+*3.1.1* embedded map to Android UI
+
+
+=== 3.2 System Requirement === 
 
 
 
@@ -36,7 +41,9 @@ The minutes of the last meeting were approved without amendment.
 
 == 4. Goals for coming week ==
 
+*4.1* implement search function on map
 
+*4.2* Changing of map type
 
 
 
