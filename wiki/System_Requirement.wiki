@@ -6,10 +6,8 @@
 
 ===Localendar app needs to provide the following functionalities:===
 
- *1 Map
-            
-           *1.1 map
+ * *Map*
  
-*2  Event List
+ * *Event List*
 
- *3 setting
+ * *setting*
