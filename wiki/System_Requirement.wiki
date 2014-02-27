@@ -5,3 +5,11 @@
 ==System Requirements for Localendar==
 
 ===Localendar app needs to provide the following functionalities:===
+
+ *1 Map
+            
+           *1.1 map
+ 
+*2  Event List
+
+ *3 setting
