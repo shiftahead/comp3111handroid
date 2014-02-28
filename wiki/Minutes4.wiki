@@ -19,7 +19,7 @@ The minutes of the last meeting were approved without amendment.
 
 || Zhang Tian || Finish google map finding location and map UI setting. ||
 || Wang Ding  ||  ||
-|| Yang Ji       ||   ||
+|| Yang Ji       || Complete main page UI design  ||
 || Zeng Xiong  ||  ||
 || TAM Shih Lung ||  ||
  
