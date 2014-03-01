@@ -4,6 +4,8 @@
 
 ==System Requirements for Localendar==
 
+===Localendar app UI introduction===
+
 ===Localendar app needs to provide the following functionalities:===
 
 ====1. Map====
