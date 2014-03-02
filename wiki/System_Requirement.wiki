@@ -90,9 +90,7 @@ The default page of this application is a world map based on the Google Maps And
 ===1.3 Interacting with the Map===
 
  * Find my current location and put that view at the center
-
  * users can use special gesture to zoom, rotate or shift map view
-
  * When rotating maps, on the left top cornor of there will be compass to show direction. 
 
 ===1.4 Indoor Maps (Optional)===
