@@ -6,8 +6,8 @@
 
 ===Localendar app UI introduction===
 
-====1. Add Event====
-====2. Map View====
+====1. Map View ====
+====2. Event List====
 ====3. List View====
 ====4. Settings====
 
