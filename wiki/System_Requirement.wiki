@@ -2,11 +2,11 @@
 
 =System Requirements=
 
- * [System_requirement#UI_Introduction UI Introduction]
-  * [System_requirement#1._Map_View Map View]
-  * [System_requirement#2._List_View List View]
-  * [System_requirement#3._Settings Settings]
- * [System_requirement#Functionalities Functionalities]
+ * [System_Requirement#UI_Introduction UI Introduction]
+  * [System_Requirement#1._Map_View Map View]
+  * [System_Requirement#2._List_View List View]
+  * [System_Requirement#3._Settings Settings]
+ * [System_Requirement#Functionalities Functionalities]
 ----
 
 =UI Introduction=
