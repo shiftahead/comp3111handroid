@@ -6,8 +6,7 @@
         android:layout_height="fill_parent"
         android:background="#eee"
         android:orientation="vertical"
-        tools:context=".MapActivity" 
-        map:mapType="normal"  >
+        tools:context=".MapActivity"  >
         
         <RelativeLayout 
   			android:layout_width="fill_parent"

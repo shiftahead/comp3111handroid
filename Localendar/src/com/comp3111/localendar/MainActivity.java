@@ -36,7 +36,7 @@ public class MainActivity extends Activity {
 	private LayoutInflater inflator;
 	private int animationShiftOneScale, animationShiftTwoScale;
 	
-	// lcalendar is map object
+	// localendar is map object
 	MyGoogleMap localendar = new MyGoogleMap();
 	
 	@Override
