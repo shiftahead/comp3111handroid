@@ -70,6 +70,33 @@ The default page of this application is a world map based on the Google Maps And
  
  * *Event List*
 
+Event Management
+It requires the user to enter the following information: Name of the event, Date and time, location(to be confirmed upon a map), event type and optional fields including:  timed reminder, description and transpotational type.
+
+Regarding Name of the event, it must consist of at least 1 character and at most XXX characters. Space, special characters will not be accepted as the first character, other than that, there are no further restrictions.
+
+Regarding date and time, user will be required to input the time in either am/pm or.
+
+Regarding location, user will be required to first input the location, and clicked search. A map will be showed with a marker on the particular location. User will be required to confirm whether the marker is at the correct position. User can also perform vaious task like changing location by dragging the marker. (for more infotmion, please refer to requirement XXX)
+
+Regarding event type, 
+ user will be required to set whether the event is a compuslory or optional one.  (XXXXXXXXXXXXXXXXXXXXXXXXXxx if computlsory? If optional?)
+
+Regarding timed reminder, user may initiate the reminder function for the event by setting a time for the notification to pop up. Note that the time can not be later than the time of the event.
+
+Regarding description, user may add any remarks about the event.
+
+Regarding transpotation type, user may select from a few choices like bus, on foot, MTR, minibus...etc  (PROBLEM, USER MAY TAKE A FEW TRAFFIC TOOLS TO GO THERE)
+
+Clicking "Add", the event will be added to the event list, Clicking Cancel (or return ), a message will be prompted to ask whether you are sure to return beforegoing back to the map or event list(depending on where you jump into add section).
+
+Click any event, then click "modify", the edit event page will be prompted with same input field as add event page. All information can be modified as long as the changes is valid.
+
+Click any event, then click "delete", a warning message will be prompted to confirm the changes. Click "confirm", the specific event wil be deleted. Click "Cancel", it will return to the page you are in before clicking delete..
+
+
+
+
 ====3. settings====
 
 =====3.1 General Settings=====
