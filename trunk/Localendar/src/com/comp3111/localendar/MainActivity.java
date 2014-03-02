@@ -30,23 +30,26 @@ import com.google.android.gms.maps.UiSettings;
 
 public class MainActivity extends Activity {
 	public static MainActivity instance = null;
-	private ViewPager pager;	
-	private ImageView image, tab0, tab1, tab2;
-	private int currentTabIndex = 0;
-	private int animationShiftOneScale, animationShiftTwoScale;
+	private ViewPager pager;	//view pager
+	private ImageView image, tab0, tab1, tab2;	//tabs for list, map and settings
+	private int currentTabIndex = 0;	//tab index
+	private int animationShiftOneScale, animationShiftTwoScale;	//animation effect
 	
 	// localendar is map object
 	MyGoogleMap localendar = new MyGoogleMap();
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		
 		// map activities  
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
+		//hide the keyboard
 		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN); 
         instance = this;
         
+        //initialize pager and tabs
         pager = (ViewPager)findViewById(R.id.tabpager);
         pager.setOnPageChangeListener(new MyOnPageChangeListener());
         tab0 = (ImageView) findViewById(R.id.img_list);
@@ -56,11 +59,14 @@ public class MainActivity extends Activity {
         tab1.setOnClickListener(new MyOnClickListener(1));
         tab2.setOnClickListener(new MyOnClickListener(2));
         image = (ImageView) findViewById(R.id.img_tab_now);
+        
+        //get screen pixel to fulfill animation
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
         animationShiftOneScale = metrics.widthPixels / 3;
         animationShiftTwoScale = animationShiftOneScale * 2;
         
+        //initialize views for each tab
         LayoutInflater myLayout = LayoutInflater.from(this);
         View view0 = myLayout.inflate(R.layout.tab_list, null);
         View view1 = myLayout.inflate(R.layout.tab_map, null);
@@ -70,6 +76,7 @@ public class MainActivity extends Activity {
         views.add(view1);
         views.add(view2);
         
+        //initialize the pager adapter
         PagerAdapter myPagerAdapter = new PagerAdapter() {
 			
 			@Override
@@ -93,6 +100,8 @@ public class MainActivity extends Activity {
 				return views.get(position);
 			}
 		};
+		
+		//set the map as the startup page and load the map
 		pager.setAdapter(myPagerAdapter);
 		pager.setCurrentItem(1);
 		localendar.localenderMap = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
@@ -103,6 +112,7 @@ public class MainActivity extends Activity {
 	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
+		
 		// Inflate the menu; this adds items to the action bar if it is present.
 		MenuInflater inflater = getMenuInflater(); 
 		inflater.inflate(R.menu.main, menu); 
