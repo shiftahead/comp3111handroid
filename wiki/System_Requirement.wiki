@@ -6,6 +6,11 @@
 
 ===Localendar app UI introduction===
 
+====1. Add Event====
+====2. Search Map====
+====3. List View====
+====4. Settings====
+
 ===Localendar app needs to provide the following functionalities:===
 
 ====1. Map====
