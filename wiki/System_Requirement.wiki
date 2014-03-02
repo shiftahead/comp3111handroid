@@ -2,7 +2,7 @@
 
 =System Requirements=
 
- * [System_Requirement#UI_Introduction UI Introduction]
+ * [System_Requirement#User_Interface User Interface]
   * [System_Requirement#1._Map_View 1. Map View]
   * [System_Requirement#2._List_View 2. List View]
   * [System_Requirement#3._Settings_View 3. Settings View]
@@ -32,7 +32,7 @@
 
 ----
 
-=UI Introduction=
+=User Interface=
 
 ==1. Map View ==
 The Map View is the startup page of the app on the middle page. It shows as following.<br><br>
