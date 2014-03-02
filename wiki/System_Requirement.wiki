@@ -14,6 +14,14 @@
    * [System_Requirement#1.4_Indoor_Maps_(Optional) 1.4 Indoor Maps (Optional)]
   * [System_Requirement#2._Event_List 2. Event List]
    * [System_Requirement#2.1_Event_Creation 2.1 Event Creation]
+   * [System_Requirement#2.2_Event_Name 2.2 Event Name]
+   * [System_Requirement#2.3_Date_and_Time 2.3 Date and Time]
+   * [System_Requirement#2.4_Location 2.4 Location]
+   * [System_Requirement#2.5_Event_Type 2.4 Event Type]
+   * [System_Requirement#2.6_Timed_Reminder Timed Reminder]
+   * [System_Requirement#2.7_Description 2.7 Description]
+   * [System_Requirement#2.8_Transportation_Type 2.8 Transportation Type]
+   * [System_Requirement#2.9_Event_Manipulation 2.9 Event Manipulation]
   * [System_Requirement#3._Settings 3. Settings]
 ----
 
@@ -95,25 +103,25 @@ After filling in all the required fields of an event, taping "Add", the event wi
 ===2.2 Event Name===
 User will be required to input the name of the event which must consist of at least 1 character and at most 64 characters. All space or special characters before first English or number characters will be ignored. Other than that, there are no further restrictions.
 
-===2.3 Date and time===
+===2.3 Date and Time===
 User will be required to fill in two different fields, namely "Date" and "Time". User can set both fields by scrolling up and down the scroll bars and tapping on particular item. (Time will be shown in 24 hour format)
 
 ===2.4 Location===
 User will be required to first input the location (Auto fill function will be provided), and Taped search. A map will be showed with a marker on the particular location. User will be required to confirm whether the marker is at the correct position. User can also perform various task like changing location by dragging the marker. 
 
-===2.5 Event type=== 
+===2.5 Event Type=== 
 User will be required to choose from "Work", "Academic", "", "Entertainment", and "" in a  scroll bar.
 
-===2.6 Timed reminder===
+===2.6 Timed Reminder===
 User may initiate the reminder function for the event by setting a time for the notification to pop up. User will set the time by scroll bar. Note that the time can not be later than the time of the event.
 
 ===2.7 Description===
 User may add any remarks about the event. The maximum length of this field is 256 characters. As mentioned before, all space or special characters before first English or number characters will be ignored. Other than that, there are no further restrictions.
 
-===2.8 Transportation type===
+===2.8 Transportation Type===
 User may select from a few choices like bus, on foot, MTR, minibus...etc
 
-===2.9 Event manipulation===
+===2.9 Event Manipulation===
  * Click any event, then click "modify", the edit event page will be prompted with same input field as add event page. All information can be modified as long as the changes is valid.
  *Click any event, then click "delete", a warning message will be prompted to confirm the changes. Click "confirm", the specific event will be deleted. Click "Cancel", it will return to the page you are in before clicking delete..
 
