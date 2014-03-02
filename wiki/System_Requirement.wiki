@@ -1,4 +1,4 @@
-#summary One-sentence summary of this page.
+#summary This page briefly describe the system requirement of this project.
 
 =COMP 3111H: Introduction to Software Engineering=
 
@@ -7,7 +7,7 @@
 ===Localendar app UI introduction===
 
 ====1. Add Event====
-====2. Search Map====
+====2. Map View====
 ====3. List View====
 ====4. Settings====
 
