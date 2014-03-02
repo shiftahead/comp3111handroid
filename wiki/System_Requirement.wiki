@@ -29,6 +29,7 @@
    * [System_Requirement#3.1_General_Settings 3.1 General Settings]
    * [System_Requirement#3.2_Login 3.2 Login]
    * [System_Requirement#3.3_About_us 3.3 About us]
+
 ----
 
 =UI Introduction=
@@ -39,6 +40,7 @@ The Map View is the startup page of the app on the middle page. It shows as foll
 <img src="https://comp3111handroid.googlecode.com/svn/wiki/map2.png" width="40%" height="40%"/>
 <br>
 Some Markers will be shown on the map as well, based on the locations of the scheduled events.
+
 ==2. List View==
 It shows the list of the user's scheduled events in chronological order on the left page, like following.<br><br>
 <img src="https://comp3111handroid.googlecode.com/svn/wiki/list.png" width="40%" height="40%"/>
@@ -47,6 +49,7 @@ It shows the list of the user's scheduled events in chronological order on the l
 ==3. Settings View==
 It shows the settings on the right page, which contains user's preference, map and event settings and other information, like following.<br><br>
 <img src="https://comp3111handroid.googlecode.com/svn/wiki/settings.png" width="40%" height="40%"/>
+<br>
 ----
 
 =Functionalities=
