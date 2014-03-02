@@ -1,120 +1,114 @@
-#summary This page briefly describe the system requirement of this project.
+#summary A briefly description to the system requirement of this project.
 
-=COMP 3111H: Introduction to Software Engineering=
+=System Requirements=
 
-==System Requirements for Localendar==
+----
 
-===Localendar app UI introduction===
+=UI introduction=
 
-====1. Map View ====
-====2. Event List====
-====3. List View====
-====4. Settings====
+==1. Map View ==
+==2. Event List==
+==3. List View==
+==4. Settings==
 
-===Localendar app needs to provide the following functionalities:===
+----
 
-====1. Map====
+=Functionalities=
+
+==1. Map==
 
 The default page of this application is a world map based on the Google Maps Android API v2.
 
-=====1.1 Default Map Properties Settings=====
+===1.1 Default Map Properties Settings===
 
-1.1.1 The default location of the Google Map is set to London, in this Application it is modified to HKUST with proper Latitude and Longitude (22.3375, 114.2630) and proper zoom in scale (13);
+ * The default location of the Google Map is set to London, in this Application it is modified to HKUST with proper Latitude and Longitude (22.3375, 114.2630) and proper zoom in scale (13).
+ * The default Map Type is set to "Normal".
 
-1.1.2 The default Map Type is set to "Normal";
+===1.2 Drawing on the Map===
 
-=====1.2 Drawing on the Map=====
+====1.2.1 Marker====
 
-======1.2.1 Marker======
+ * The user can draw a marker on the map by creating a event.
+ * The user can draw a marker on the map by search on a place.
+ * The user can draw a marker on the map by click on the map.
+ * Click on the existing marker could show the info window of the specific event.
+ * Click and drag the marker can change the position of the marker, after dragging there will be a popup window asking whether to change the location of the event to the newer position.
+ * The user can define the colour of the marker to categorize his event.
 
-1.2.1.1 The user can draw a marker on the map by creating a event;
+====1.2.2 Info Window====
 
-1.2.1.2 The user can draw a marker on the map by search on a place;
+ * The info window will pop up if the user clicked on the event marker.
+ * The info window will pop up if the user clicked on the event from the event list.
+ * Once an event is created or edited under the Map page, the info window and the marker of the event will automatically show up.
+ * Click on the info window will bring the user to the event page, showing the detailed information of the specific event.
+ * The title of the info window should be the title of the event.
+ * The content of the info window should be the Date, Time and Location of the event.
 
-1.2.1.3 The user can draw a marker on the map by click on the map;
+====1.2.3 Shapes====
 
-1.2.1.4 Click on the existing marker could show the info window of the specific event;
+ * Polylines are used to show the proper guidance on how to reach the destination.
 
-1.2.1.5 Click and drag the marker can change the position of the marker, after dragging there will be a popup window asking whether to change the location of the event to the newer position;
-
-1.2.1.6 The user can define the color of the marker to categorize his event;
-
-======1.2.2 Info Window======
-
-1.2.2.1 The info window will pop up if the user clicked on the event marker;
-
-1.2.2.2 The info window will pop up if the user clicked on the event from the event list;
-
-1.2.2.3 Once an event is created or edited under the Map page, the info window and the marker of the event will automatically show up;
-
-1.2.2.4 Click on the info window will bring the user to the event page, showing the detailed information of the specific event;
-
-1.2.2.4 The title of the info window should be the title of the event;
-
-1.2.2.5 The content of the info window should be the Date, Time and Location of the event;
-
-======1.2.3 Shapes======
-
-1.2.3.1 Polylines are used to show the proper guidance on how to reach the destination;
-
-=====1.3 Interacting with the Map=====
+===1.3 Interacting with the Map===
 
 
-=====1.4 Acquire Location Data=====
+===1.4 Acquire Location Data===
 
-=====1.5 Indoor Maps (Optional)=====
+===1.5 Indoor Maps (Optional)===
 
-1.5.1 The user could check the indoor map based on the Google Indoor Map;
-
-1.5.2 The user's indoor location could be generated using Wifi Technology;
+ * The user could check the indoor map based on the Google Indoor Map.
+ * The user's indoor location could be generated using Wifi Technology.
  
- * *Event List*
+----
 
-Event Management
-It requires the user to enter the following information: Name of the event, Date and time, location(to be confirmed upon a map), event type and optional fields including:  timed reminder, description and transpotational type.
+==2. Event List==
 
-Regarding Name of the event, it must consist of at least 1 character and at most XXX characters. Space, special characters will not be accepted as the first character, other than that, there are no further restrictions.
+===2.1 Event Creation===
+It requires the user to enter the following information: Name of the event, Date and time, location(to be confirmed upon a map), event type and optional fields including:  timed reminder, description and transportation type.
 
-Regarding date and time, user will be required to input the time in either am/pm or.
+===2.2 Event Name===
+It must consist of at least 1 character and at most XXX characters. Space, special characters will not be accepted as the first character, other than that, there are no further restrictions.
 
-Regarding location, user will be required to first input the location, and clicked search. A map will be showed with a marker on the particular location. User will be required to confirm whether the marker is at the correct position. User can also perform vaious task like changing location by dragging the marker. (for more infotmion, please refer to requirement XXX)
+===2.3 Date and time===
+User will be required to input the time in either am/pm format or 24-hour format.
 
-Regarding event type, 
- user will be required to set whether the event is a compuslory or optional one.  (XXXXXXXXXXXXXXXXXXXXXXXXXxx if computlsory? If optional?)
+===2.4 Location===
+User will be required to first input the location, and clicked search. A map will be showed with a marker on the particular location. User will be required to confirm whether the marker is at the correct position. User can also perform various task like changing location by dragging the marker. (for more information, please refer to requirement XXX)
 
-Regarding timed reminder, user may initiate the reminder function for the event by setting a time for the notification to pop up. Note that the time can not be later than the time of the event.
+===2.5 Event type=== 
+User will be required to set whether the event is a compulsory or optional one.  (XXXXXXXXXXXXXXXXXXXXXXXXXxx if compulsory? If optional?)
 
-Regarding description, user may add any remarks about the event.
+===2.6 Timed reminder===
+User may initiate the reminder function for the event by setting a time for the notification to pop up. Note that the time can not be later than the time of the event.
 
-Regarding transpotation type, user may select from a few choices like bus, on foot, MTR, minibus...etc  (PROBLEM, USER MAY TAKE A FEW TRAFFIC TOOLS TO GO THERE)
+===2.7 Description===
+User may add any remarks about the event.
 
-Clicking "Add", the event will be added to the event list, Clicking Cancel (or return ), a message will be prompted to ask whether you are sure to return beforegoing back to the map or event list(depending on where you jump into add section).
+===2.8 Transportation type===
+User may select from a few choices like bus, on foot, MTR, minibus...etc  (PROBLEM, USER MAY TAKE A FEW TRAFFIC TOOLS TO GO THERE)
 
-Click any event, then click "modify", the edit event page will be prompted with same input field as add event page. All information can be modified as long as the changes is valid.
+===2.9 Event manipulation===
+ * Clicking "Add", the event will be added to the event list, Clicking Cancel (or return ), a message will be prompted to ask whether you are sure to return before going back to the map or event list(depending on where you jump into add section).
+ * Click any event, then click "modify", the edit event page will be prompted with same input field as add event page. All information can be modified as long as the changes is valid.
+ *Click any event, then click "delete", a warning message will be prompted to confirm the changes. Click "confirm", the specific event will be deleted. Click "Cancel", it will return to the page you are in before clicking delete..
 
-Click any event, then click "delete", a warning message will be prompted to confirm the changes. Click "confirm", the specific event wil be deleted. Click "Cancel", it will return to the page you are in before clicking delete..
+----
 
+==3. settings==
 
+===3.1 General Settings===
 
+ * The default color of the marker.
+ * The default location of the map.
+ * The default map type.
+ * The default page.
+ * The default event periods showing on the map (1 - 7 Day).
 
-====3. settings====
+===3.2 Login===
 
-=====3.1 General Settings=====
+ * Login with Google account and synchronize the event from today to Google Calendar.
 
-3.1.1 The default color of the marker;
+===3.3 About us===
 
-3.1.2 The default location of the map;
-
-3.1.3 The default map type;
-
-3.1.4 The default page;
-
-3.1.5 The default event periods showing on the map (1 - 7 Day);
-
-=====3.2 Login=====
-
-3.2.1 Login with Google account and synchronize the event from today to Google Calender;
-
-=====3.3 About us=====
-
-3.3.1 An introduction to our team;
+ * An introduction to our team.
+ * Privacy issue.
+ * Other information.
