@@ -1,4 +1,4 @@
-#summary A briefly description to the system requirement of this project.
+#summary A brief description to the system requirement of this project.
 
 =System Requirements=
 
