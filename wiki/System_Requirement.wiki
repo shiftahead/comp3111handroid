@@ -10,6 +10,9 @@
   * [System_Requirement#1._Map 1. Map]
    * [System_Requirement#1.1_Default_Map_Properties_Settings 1.1 Default Map Properties Settings]
    * [System_Requirement#1.2_Drawing_on_the_Map 1.2 Drawing on the Map]
+    * [System_Requirement#1.2.1_Marker 1.2.1 Marker]
+    * [System_Requirement#1.2.2_Info_Window 1.2.2 Info Window]
+    * [System_Requirement#1.2.3_Shapes 1.2.3 Shapes]
    * [System_Requirement#1.3_Interacting_with_the_Map 1.3 Interacting with the Map]
    * [System_Requirement#1.4_Indoor_Maps_(Optional) 1.4 Indoor Maps (Optional)]
   * [System_Requirement#2._Event_List 2. Event List]
@@ -18,11 +21,14 @@
    * [System_Requirement#2.3_Date_and_Time 2.3 Date and Time]
    * [System_Requirement#2.4_Location 2.4 Location]
    * [System_Requirement#2.5_Event_Type 2.4 Event Type]
-   * [System_Requirement#2.6_Timed_Reminder Timed Reminder]
+   * [System_Requirement#2.6_Timed_Reminder 2.6 Timed Reminder]
    * [System_Requirement#2.7_Description 2.7 Description]
    * [System_Requirement#2.8_Transportation_Type 2.8 Transportation Type]
    * [System_Requirement#2.9_Event_Manipulation 2.9 Event Manipulation]
   * [System_Requirement#3._Settings 3. Settings]
+   * [System_Requirement#3.1_General_Settings 3.1 General Settings]
+   * [System_Requirement#3.2_Login 3.2 Login]
+   * [System_Requirement#3.3_About_us 3.3 About us]
 ----
 
 =UI Introduction=
