@@ -50,10 +50,9 @@ The default page of this application is a world map based on the Google Maps And
 
 ===1.3 Interacting with the Map===
 
+ * 
 
-===1.4 Acquire Location Data===
-
-===1.5 Indoor Maps (Optional)===
+===1.4 Indoor Maps (Optional)===
 
  * The user could check the indoor map based on the Google Indoor Map.
  * The user's indoor location could be generated using Wifi Technology.
