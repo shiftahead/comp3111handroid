@@ -33,7 +33,6 @@ public class MainActivity extends Activity {
 	private ViewPager pager;	
 	private ImageView image, tab0, tab1, tab2;
 	private int currentTabIndex = 0;
-	private LayoutInflater inflator;
 	private int animationShiftOneScale, animationShiftTwoScale;
 	
 	// localendar is map object
