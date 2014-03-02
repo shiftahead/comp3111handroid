@@ -3,10 +3,18 @@
 =System Requirements=
 
  * [System_Requirement#UI_Introduction UI Introduction]
-  * [System_Requirement#1._Map_View Map View]
-  * [System_Requirement#2._List_View List View]
-  * [System_Requirement#3._Settings Settings]
+  * [System_Requirement#1._Map_View 1. Map View]
+  * [System_Requirement#2._List_View 2. List View]
+  * [System_Requirement#3._Settings_View 3. Settings View]
  * [System_Requirement#Functionalities Functionalities]
+  * [System_Requirement#1._Map 1. Map]
+   * [System_Requirement#1.1_Default_Map_Properties_Settings 1.1 Default Map Properties Settings]
+   * [System_Requirement#1.2_Drawing_on_the_Map 1.2 Drawing on the Map]
+   * [System_Requirement#1.3_Interacting_with_the_Map 1.3 Interacting with the Map]
+   * [System_Requirement#1.4_Indoor_Maps_(Optional) 1.4 Indoor Maps (Optional)]
+  * [System_Requirement#2._Event_List 2. Event List]
+   * [System_Requirement#2.1_Event_Creation 2.1 Event Creation]
+  * [System_Requirement#3._Settings 3. Settings]
 ----
 
 =UI Introduction=
@@ -22,7 +30,7 @@ It shows the list of the user's scheduled events in chronological order on the l
 <img src="https://comp3111handroid.googlecode.com/svn/wiki/list.png" width="40%" height="40%"/>
 <br>
 
-==3. Settings==
+==3. Settings View==
 It shows the settings on the right page, which contains user's preference, map and event settings and other information, like following.<br><br>
 <img src="https://comp3111handroid.googlecode.com/svn/wiki/settings.png" width="40%" height="40%"/>
 ----
