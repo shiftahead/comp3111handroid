@@ -14,19 +14,19 @@
       		<TextView
         		android:layout_width="wrap_content" 
         		android:layout_height="wrap_content" 
-        		android:text="Events"
+        		android:text="Sign in"
         		android:layout_centerInParent="true"
         		android:textSize="20sp"		
 				android:textColor="#ffffff" />
 
       		<Button
-      		    android:id="@+id/add_event_button1"
-			    android:layout_width="67dp" 
+      		    android:id="@+id/back_from_signin_to_settings"
+			    android:layout_width="80dp" 
         		android:layout_height="wrap_content"
-        		android:layout_alignParentRight="true" 
+        		android:layout_alignParentLeft="true" 
         		android:layout_centerVertical="true"
-        		android:layout_marginRight="5dp"
-        		android:text="Add"
+        		android:layout_marginLeft="5dp"
+        		android:text="Settings"
         		android:textColor="#fff"
         		android:textSize="15sp"
         		android:onClick="onClick"
@@ -34,11 +34,30 @@
         		android:background="@drawable/bottom_bar" />
  
 		</RelativeLayout>
-		<TextView
+		<GridLayout
+			 android:orientation="horizontal"  
+			 android:layout_width="fill_parent"  
+			 android:layout_height="fill_parent"
+			 android:columnCount="1"
+    		 android:rowCount="6" 
+			 android:gravity="center">
+      		<TextView
         		android:layout_width="wrap_content" 
         		android:layout_height="wrap_content" 
-        		android:text="Event List Here"
-        		android:textSize="50sp"		
+        		android:text="Sign in to synchronize with"
+        		android:textSize="25sp"		
 				android:textColor="#000" />
+      		<ImageView
+        			android:layout_width="wrap_content"
+        			android:layout_height="wrap_content"        	     	
+        			android:adjustViewBounds="true"  
+					android:maxWidth="200dp"  
+					android:maxHeight="100dp"  
+					android:scaleType="fitCenter" 
+        			android:src="@drawable/google_calendar" />
+		    
+			 
+		    
+		</GridLayout>
 	</LinearLayout>
 	

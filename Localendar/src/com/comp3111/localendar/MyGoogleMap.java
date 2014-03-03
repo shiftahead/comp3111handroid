@@ -1,7 +1,5 @@
 package com.comp3111.localendar;
 
-import android.view.MenuItem;
-
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
