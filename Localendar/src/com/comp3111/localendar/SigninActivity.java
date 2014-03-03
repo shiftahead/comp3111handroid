@@ -15,9 +15,7 @@ public class SigninActivity extends Activity implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		if(getResources().getResourceEntryName(v.getId()).equals("back_from_signin_to_settings")){
-			Intent intent = new Intent (this, MainActivity.class);
-			startActivity(intent);
-			this.finish();
+			finish();
 		}
 	}
 		
