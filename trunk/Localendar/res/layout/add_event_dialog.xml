@@ -66,8 +66,10 @@
 	   	        android:id="@+id/date_picker"
 	   	        android:layout_width="wrap_content"
 	   	        android:layout_height="wrap_content"
-	   	        android:scaleX="0.6"
-	   	        android:scaleY="0.6" />
+	   	        android:scaleX="0.8"
+	   	        android:scaleY="0.8" 
+	   	        android:spinnersShown="true"
+	   	        android:calendarViewShown="false"/>
     		<TextView
 	   	        android:layout_width="wrap_content"
 	   	        android:layout_height="wrap_content"
@@ -79,8 +81,8 @@
 	   	        android:id="@+id/time_picker"
 	   	        android:layout_width="wrap_content"
 	   	        android:layout_height="wrap_content"
-	   	        android:scaleX="0.6"
-	   	        android:scaleY="0.6" />
+	   	        android:scaleX="0.8"
+	   	        android:scaleY="0.8" />
    	    </GridLayout>
 
    	    <TextView
