@@ -6,7 +6,7 @@
   * [System_Requirement#1._Map_View 1. Map View]
   * [System_Requirement#2._List_View 2. List View]
   * [System_Requirement#3._Settings_View 3. Settings View]
- * [System_Requirement#Functionalities Functionalities]
+ * [System_Requirement#Functional_Requirements Functional Requirements]
   * [System_Requirement#1._Map 1. Map]
    * [System_Requirement#1.1_Default_Map_Properties_Settings 1.1 Default Map Properties Settings]
    * [System_Requirement#1.2_Drawing_on_the_Map 1.2 Drawing on the Map]
@@ -35,24 +35,24 @@
 =User Interface=
 
 ==1. Map View ==
-The Map View is the startup page of the app on the middle page. It shows as following.<br><br>
+The Map View is the startup page of the app on the middle page. It can be loaded by tapping the middle icon "Map" at the bottom of the main page. It shows the scheduled events on Google Maps as following.<br><br>
 <img src="https://comp3111handroid.googlecode.com/svn/wiki/map1.png" width="40%" height="40%"/>
 <img src="https://comp3111handroid.googlecode.com/svn/wiki/map2.png" width="40%" height="40%"/>
 <br>
 Some Markers will be shown on the map as well, based on the locations of the scheduled events.
 
 ==2. List View==
-It shows the list of the user's scheduled events in chronological order on the left page, like following.<br><br>
+The List View can be loaded by tapping the left icon "Events" at the bottom of the main page. It shows the list of the user's scheduled events in chronological order as following.<br><br>
 <img src="https://comp3111handroid.googlecode.com/svn/wiki/list.png" width="40%" height="40%"/>
 <br>
 
 ==3. Settings View==
-It shows the settings on the right page, which contains user's preference, map and event settings and other information, like following.<br><br>
+The Settings View  can be loaded by tapping the right icon "Settings" at the bottom of the main page. It shows the settings of this app, which contains user's preference, account, map and event settings and other information as following.<br><br>
 <img src="https://comp3111handroid.googlecode.com/svn/wiki/settings.png" width="40%" height="40%"/>
 <br>
 ----
 
-=Functionalities=
+=Functional Requirements=
 
 ==1. Map==
 
