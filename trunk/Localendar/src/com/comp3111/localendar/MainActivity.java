@@ -4,6 +4,7 @@ package com.comp3111.localendar;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -17,22 +18,18 @@ import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
-import com.google.android.gms.maps.GoogleMap.OnMarkerDragListener;
-import com.google.android.gms.maps.GoogleMap.OnMyLocationButtonClickListener;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.MapFragment;
-import com.google.android.gms.maps.UiSettings;
 
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements View.OnClickListener{
 	public static MainActivity instance = null;
 	private ViewPager pager;	//view pager
 	private ImageView image, tab0, tab1, tab2;	//tabs for list, map and settings
-	private int currentTabIndex = 0;	//tab index
+	private int currentTabIndex = 0;	//tab index, maps is set default 
 	private int animationShiftOneScale, animationShiftTwoScale;	//animation effect
 	
 	// localendar is map object
@@ -60,6 +57,12 @@ public class MainActivity extends Activity {
         tab2.setOnClickListener(new MyOnClickListener(2));
         image = (ImageView) findViewById(R.id.img_tab_now);
         
+        //initialize buttons
+        //addEvent1 = (Button) findViewById(R.id.add_event_button1);
+        //addEvent2 = (Button) findViewById(R.id.add_event_button2);
+        //addEvent1.setOnClickListener(new AddEventButtonListener());
+        //addEvent2.setOnClickListener(new AddEventButtonListener());
+
         //get screen pixel to fulfill animation
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
@@ -103,7 +106,7 @@ public class MainActivity extends Activity {
 		
 		//set the map as the startup page and load the map
 		pager.setAdapter(myPagerAdapter);
-		pager.setCurrentItem(1);
+		//pager.setCurrentItem(1);
 		localendar.localenderMap = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
 		localendar.setMap();    
 	}
@@ -135,8 +138,9 @@ public class MainActivity extends Activity {
 	
 	
 	/* Class to be defined
-	 * 1. MyOnClickListener
-	 * 2. MyOnPageChangeListener
+	 * 1. MyOnClickListener (for pager index)
+	 * 2. MyOnPageChangeListener (for tab change)
+	 * 3. OnClick (for buttons)
 	 */
 	public class MyOnClickListener implements View.OnClickListener {
 		private int index = 0;
@@ -193,6 +197,7 @@ public class MainActivity extends Activity {
 			image.startAnimation(animation);
 		}
 		
+		
 		@Override
 		public void onPageScrolled(int arg0, float arg1, int arg2) {
 		}
@@ -200,6 +205,32 @@ public class MainActivity extends Activity {
 		@Override
 		public void onPageScrollStateChanged(int arg0) {
 		}
+	}
+	
+
+	@Override
+	public void onClick(View v) {
+		switch(v.getId()) {
+		case R.id.about_us: {
+			Intent intent = new Intent (this, AboutusActivity.class);			
+			startActivity(intent);
+		}
+		break;
+		case R.id.my_account: {
+			Intent intent = new Intent (this, SigninActivity.class);			
+			startActivity(intent);
+		}
+		break;
+		case R.id.add_event_button1:
+		case R.id.add_event_button2: {
+			Intent intent = new Intent (MainActivity.this, AddEventActivity.class);			
+			startActivity(intent);
+		}
+		break;
+		}
+		
+			
+		
 	}
 	
 }
