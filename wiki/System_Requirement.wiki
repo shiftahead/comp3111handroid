@@ -65,8 +65,8 @@ The default page of this application is a world map based on the Google Maps And
  * The default Map Type is set to "Normal", as following.
 <img src="https://comp3111handroid.googlecode.com/svn/wiki/map3.png" width="40%" height="40%"/>
  * Also, the type can be set as "Satellite" or "Hybrid".
-<img src="https://comp3111handroid.googlecode.com/svn/wiki/map4.png" width="30%" height="36%"/>
-<img src="https://comp3111handroid.googlecode.com/svn/wiki/map5.png" width="30%" height="36%"/>
+<img src="https://comp3111handroid.googlecode.com/svn/wiki/map4.png" width="35%" height="35%"/>
+<img src="https://comp3111handroid.googlecode.com/svn/wiki/map5.png" width="35%" height="35%"/>
 
 ===1.2 Drawing on the Map===
 
