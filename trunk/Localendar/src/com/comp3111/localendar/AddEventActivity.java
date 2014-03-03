@@ -18,9 +18,8 @@ public class AddEventActivity extends Activity implements OnClickListener{
 		if(getResources().getResourceEntryName(v.getId()).equals("confirm_add")){
 			
 		}
-		Intent intent = new Intent (this, MainActivity.class);			
-		startActivity(intent);
-		this.finish();
+		
+		finish();
 	}
 		
 	
