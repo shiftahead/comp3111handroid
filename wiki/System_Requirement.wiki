@@ -148,8 +148,8 @@ A check button will be provided to the user to specify whether the event is comp
 
  * The default color of the marker.
  * The default location of the map.
- * The default map type.
- * The default page.
+ * The default map type: Normal, Satellite or Hybrid.
+ * The default page: Map or Event List
  * The default event periods showing on the map (1 - 7 Day).
 
 ===3.2 Login===
