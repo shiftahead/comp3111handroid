@@ -1,11 +1,13 @@
 package com.comp3111.localendar;
 
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 import com.google.android.gms.maps.GoogleMap.OnMarkerDragListener;
 import com.google.android.gms.maps.GoogleMap.OnMyLocationButtonClickListener;
+import com.google.android.gms.maps.UiSettings;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MyGoogleMap {
 	/* User Defined variable
@@ -32,9 +34,14 @@ public class MyGoogleMap {
                                     // TODO Auto-generated method stub
                                     return false;
                               }
-                     });   
+                     });
+        
+        testMarker = localenderMap.addMarker(new MarkerOptions()
+        .position(new LatLng(22.3375, 114.2630))
+        .title("COMP3111H Lecture").snippet("Today\n15:00 - 16:30\nLT-E").draggable(true));
 		
 	}
+	
 	public void setMarker(){
 		 localenderMap.setOnMarkerClickListener(new OnMarkerClickListener() {
             
