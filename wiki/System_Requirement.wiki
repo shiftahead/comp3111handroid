@@ -129,8 +129,8 @@ User may add any remarks about the event. The maximum length of this field is 25
 User may select from a few choices like bus, on foot, MTR, minibus, etc.
 
 ===2.9 Event Manipulation===
- * Click any event, then click "modify", the edit event page will be prompted with same input field as add event page. All information can be modified as long as the changes is valid.
- *Click any event, then click "delete", a warning message will be prompted to confirm the changes. Click "confirm", the specific event will be deleted. Click "Cancel", it will return to the page you are in before clicking delete..
+ * Click any event, then click "modify", the edit event page will be prompted with same input field as add event page. All information can be modified as long as the changes are valid.
+ * Click any event, then click "delete", a warning message will be prompted to confirm the changes. Click "confirm", the specific event will be deleted. Click "Cancel", it will return to the page you are in before clicking delete..
 
 ----
 
