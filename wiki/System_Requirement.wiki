@@ -21,7 +21,7 @@
   * [System_Requirement#2.3_Date_and_Time 2.3 Date and Time]
   * [System_Requirement#2.4_Location 2.4 Location]
   * [System_Requirement#2.5_Event_Type 2.4 Event Type]
-  * [System_Requirement#2.6_Reminder 2.6 Timed Reminder]
+  * [System_Requirement#2.6_Reminder 2.6 Reminder]
   * [System_Requirement#2.7_Description 2.7 Description]
   * [System_Requirement#2.8_Transportation_Type 2.8 Transportation Type]
   * [System_Requirement#2.9_Event_Manipulation 2.9 Event Manipulation]
