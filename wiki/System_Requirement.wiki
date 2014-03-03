@@ -79,7 +79,7 @@ The default page of this application is a world map based on the Google Maps And
  * Clicking and dragging the marker can change the position of the marker, after dragging there will be a popup window asking whether to change the location of the event to the newer position.
  * The user can define the color of the marker to categorize his or her event.
 <br>
-<img src="https://comp3111handroid.googlecode.com/svn/wiki/marker.png" width="40%" height="40%"/>
+<img src="https://comp3111handroid.googlecode.com/svn/wiki/marker.png" width="40%" height="40%"/><br>
 A marker is shown on the map, indicating the location of the event.
 
 ====1.2.2 Info Window====
@@ -115,7 +115,7 @@ In "Adding event"  page, user will be required to input the following informatio
 
 After filling in all the required fields of an event, taping "Add", the event will be successfully added and being showed on event list and map while taping Cancel (or return ), a message will be prompted to ask whether user is sure to return before going back to the map or event list(depending on where the user jumps into adding section).
 
-This is a proposed Adding event page.
+This is a proposed Adding event page.<br>
 <img src="https://comp3111handroid.googlecode.com/svn/wiki/addevent.png" width="40%" height="40%"/>
 ===2.2 Event Name===
 User will be required to input the name of the event which must consist of at least 1 character and at most 64 characters. All space or special characters before first English or number characters will be ignored. Other than that, there are no further restrictions.
