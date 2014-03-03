@@ -62,7 +62,11 @@ The default page of this application is a world map based on the Google Maps And
 ===1.1 Default Map Properties Settings===
 
  * The default location of the Google Map is set to London, in this Application it is modified to HKUST with proper Latitude and Longitude (22.3375, 114.2630) and proper zoom in scale (13).
- * The default Map Type is set to "Normal".
+ * The default Map Type is set to "Normal", as following.
+<img src="https://comp3111handroid.googlecode.com/svn/wiki/map3.png" width="40%" height="40%"/>
+ * Also, the type can be set as "Satellite" or "Hybrid".
+<img src="https://comp3111handroid.googlecode.com/svn/wiki/map4.png" width="40%" height="40%"/>
+<img src="https://comp3111handroid.googlecode.com/svn/wiki/map5.png" width="40%" height="40%"/>
 
 ===1.2 Drawing on the Map===
 
