@@ -1,0 +1,42 @@
+Constructor
+	Event(String name, String location, Calendar time, String description, Calendar reminder, Boolean compulsory, eventType type, transportationType ttype);
+
+Functions:
+
+	public String showEventName();
+	
+	public String showEventLocation();
+	
+	public String showEventDate();
+		return date of the event in the format of dd - MM - yyyy
+
+	public String showEventTime();
+		return time of the event in the format of hh : mm
+
+	public String showReminder();
+		return date and time of the reminder in the format of hh : mm on dd - MM - yyyy	
+	
+	public String autoCorrectName(String name);
+		Auto-correct any invalid input and return as a string
+	
+	public String autoCorrectDescription(String string);
+		Auto-correct any invalid input and return as a string
+
+	
+	public String getName();
+	
+	public String getLocation();
+	
+	public Calendar getTime();
+	
+	public String getDescription();
+	
+	public Calendar getReminder();
+	
+	public Boolean getCompulsory();
+	
+	public String getEventType();
+		return type of the event as a string
+		
+	public String getTransportationType();
+		return transportation type as a string
