@@ -119,8 +119,10 @@ User will be required to first input the location (Auto fill function will be pr
 ===2.5 Event Type=== 
 User will be required to choose from "Work", "Academic", "", "Entertainment", and "" in a scroll bar.
 
-===2.6 Timed Reminder===
-User may initiate the reminder function for the event by setting a time for the notification to pop up. User will set the time by scroll bar. Note that the time cannot be later than the time of the event.
+===2.6 Reminder===
+ * User may initiate the reminder function for the event by setting a time for the notification to pop up. User will set the time by scroll bar. Note that the time cannot be later than the time of the event.
+
+ * The system will check the remaining time for the next event, calculate the time needed based on user's current location and remind the user if the remaining time is shorter than the time needed.
 
 ===2.7 Description===
 User may add any remarks about the event. The maximum length of this field is 256 characters. As mentioned before, all spaces or special characters before first English or number characters will be ignored. Other than that, there are no further restrictions.
@@ -130,7 +132,11 @@ User may select from a few choices like bus, on foot, MTR, minibus, etc.
 
 ===2.9 Event Manipulation===
  * Click any event, then click "modify", the edit event page will be prompted with same input field as add event page. All information can be modified as long as the changes are valid.
- * Click any event, then click "delete", a warning message will be prompted to confirm the changes. Click "confirm", the specific event will be deleted. Click "Cancel", it will return to the page you are in before clicking delete..
+ * Click any event, then click "delete", a warning message will be prompted to confirm the changes. Click "confirm", the specific event will be deleted. Click "Cancel", it will return to the page you are in before clicking delete.
+
+===2.10 Compulsory or Optional===
+A check button will be provided to the user to specify whether the event is compulsory or optional, if an event is set as compulsory, the user’s location will be checked at the start time of the event.
+
 
 ----
 
