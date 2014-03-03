@@ -68,16 +68,16 @@ The default page of this application is a world map based on the Google Maps And
 ====1.2.1 Marker====
 
  * The user can draw a marker on the map by creating a event.
- * The user can draw a marker on the map by search on a place.
- * The user can draw a marker on the map by click on the map.
- * Click on the existing marker could show the info window of the specific event.
- * Click and drag the marker can change the position of the marker, after dragging there will be a popup window asking whether to change the location of the event to the newer position.
- * The user can define the colour of the marker to categorize his event.
+ * The user can draw a marker on the map by searching on a place.
+ * The user can draw a marker on the map by clicking on the map.
+ * Clicking on the existing marker can show the info window of the specific event.
+ * Clicking and dragging the marker can change the position of the marker, after dragging there will be a popup window asking whether to change the location of the event to the newer position.
+ * The user can define the color of the marker to categorize his or her event.
 
 ====1.2.2 Info Window====
 
- * The info window will pop up if the user clicked on the event marker.
- * The info window will pop up if the user clicked on the event from the event list.
+ * The info window will pop up if the user clicks on the event marker.
+ * The info window will pop up if the user clicks on the event from the event list.
  * Once an event is created or edited under the Map page, the info window and the marker of the event will automatically show up.
  * Click on the info window will bring the user to the event page, showing the detailed information of the specific event.
  * The title of the info window should be the title of the event.
@@ -91,7 +91,7 @@ The default page of this application is a world map based on the Google Maps And
 
  * Find my current location and put that view at the center
  * users can use special gesture to zoom, rotate or shift map view
- * When rotating maps, on the left top cornor of there will be compass to show direction. 
+ * When rotating maps, on the left top corner of there will be compass to show direction. 
 
 ===1.4 Indoor Maps (Optional)===
 
@@ -105,7 +105,7 @@ The default page of this application is a world map based on the Google Maps And
 ===2.1 Event Creation===
 In "Adding event"  page, user will be required to input the following information: Name of the event, Date and time, Location(to be confirmed upon a map), Event type and optional fields including: Timed reminder, Description and Transportation type in their corresponding fields.
 
-After filling in all the required fields of an event, taping "Add", the event will be successfully added and being showed on event list and map while taping Cancel (or return ), a message will be prompted to ask whether you are sure to return before going back to the map or event list(depending on where you jump into add section).
+After filling in all the required fields of an event, taping "Add", the event will be successfully added and being showed on event list and map while taping Cancel (or return ), a message will be prompted to ask whether user is sure to return before going back to the map or event list(depending on where the user jumps into adding section).
 
 ===2.2 Event Name===
 User will be required to input the name of the event which must consist of at least 1 character and at most 64 characters. All space or special characters before first English or number characters will be ignored. Other than that, there are no further restrictions.
@@ -117,16 +117,16 @@ User will be required to fill in two different fields, namely "Date" and "Time".
 User will be required to first input the location (Auto fill function will be provided), and Taped search. A map will be showed with a marker on the particular location. User will be required to confirm whether the marker is at the correct position. User can also perform various task like changing location by dragging the marker. 
 
 ===2.5 Event Type=== 
-User will be required to choose from "Work", "Academic", "", "Entertainment", and "" in a  scroll bar.
+User will be required to choose from "Work", "Academic", "", "Entertainment", and "" in a scroll bar.
 
 ===2.6 Timed Reminder===
-User may initiate the reminder function for the event by setting a time for the notification to pop up. User will set the time by scroll bar. Note that the time can not be later than the time of the event.
+User may initiate the reminder function for the event by setting a time for the notification to pop up. User will set the time by scroll bar. Note that the time cannot be later than the time of the event.
 
 ===2.7 Description===
-User may add any remarks about the event. The maximum length of this field is 256 characters. As mentioned before, all space or special characters before first English or number characters will be ignored. Other than that, there are no further restrictions.
+User may add any remarks about the event. The maximum length of this field is 256 characters. As mentioned before, all spaces or special characters before first English or number characters will be ignored. Other than that, there are no further restrictions.
 
 ===2.8 Transportation Type===
-User may select from a few choices like bus, on foot, MTR, minibus...etc
+User may select from a few choices like bus, on foot, MTR, minibus, etc.
 
 ===2.9 Event Manipulation===
  * Click any event, then click "modify", the edit event page will be prompted with same input field as add event page. All information can be modified as long as the changes is valid.
@@ -138,7 +138,7 @@ User may select from a few choices like bus, on foot, MTR, minibus...etc
 
 ===3.1 General Settings===
 
- * The default colour of the marker.
+ * The default color of the marker.
  * The default location of the map.
  * The default map type.
  * The default page.
@@ -146,10 +146,10 @@ User may select from a few choices like bus, on foot, MTR, minibus...etc
 
 ===3.2 Login===
 
- * Login with Google account and synchronize the event from today to Google Calendar.
+ * Log in with Google account and synchronize the event from today to Google Calendar.
 
 ===3.3 About us===
 
  * An introduction to our team.
  * Privacy issue.
- * Other information.
+ * Miscellaneous information.
