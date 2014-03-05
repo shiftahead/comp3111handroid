@@ -1,6 +1,7 @@
 package com.comp3111.localendar;
 
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener;
 import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 import com.google.android.gms.maps.GoogleMap.OnMarkerDragListener;
 import com.google.android.gms.maps.GoogleMap.OnMyLocationButtonClickListener;
@@ -14,10 +15,18 @@ public class MyGoogleMap {
 	 *  1. localendarMap
 	 *  2. Marker
 	 */
-	public GoogleMap localenderMap;
-	public Marker testMarker;
+	private GoogleMap localenderMap;
+	private ConnectionDetector mapConnectionDetector;
+	private GPSTracker mapGpsTracker;
+
+	//A test Marker
+	private Marker testMarker;
 	
-	public void setMap(){
+	public void setMap(GoogleMap map, ConnectionDetector iDetector, GPSTracker gDetector){
+		localenderMap = map;
+		mapConnectionDetector = iDetector;
+		mapGpsTracker = gDetector;
+				
 		UiSettings localenderMapSettings = localenderMap.getUiSettings();
         localenderMapSettings.setZoomControlsEnabled(true);
         localenderMapSettings.setCompassEnabled(true);
@@ -36,10 +45,19 @@ public class MyGoogleMap {
                               }
                      });
         
+        //testMarker created;
         testMarker = localenderMap.addMarker(new MarkerOptions()
         .position(new LatLng(22.3375, 114.2630))
         .title("COMP3111H Lecture").snippet("Today\n15:00 - 16:30\nLT-E").draggable(true));
-		
+        
+        //set Marker called;
+        setMarker();
+        setInfoWindow();
+
+	}
+	
+	public GoogleMap getMyGoogleMap(){
+		return localenderMap;
 	}
 	
 	public void setMarker(){
@@ -48,9 +66,9 @@ public class MyGoogleMap {
             @Override
             public boolean onMarkerClick(Marker arg0) {
                     // 
-                    if(arg0.equals(testMarker)){
-                            arg0.setVisible(false);
-                            return true;
+                    if(arg0.equals(testMarker) && mapConnectionDetector.isConnectingToInternet() && mapGpsTracker.canGetLocation()){
+                        arg0.setVisible(false);
+                        return true;
                     }
                     return false;
             }
@@ -81,4 +99,23 @@ public class MyGoogleMap {
              }
      });
   }
+
+	public void setInfoWindow(){
+        localenderMap.setOnInfoWindowClickListener(new OnInfoWindowClickListener() {
+			
+			@Override
+			public void onInfoWindowClick(Marker arg0) {
+				// TODO Auto-generated method stub
+				if(arg0.equals(testMarker)){
+					testMarker.setSnippet("Hello!");
+					testMarker.showInfoWindow();
+				}
+				else{
+					testMarker.setSnippet("No");
+					testMarker.showInfoWindow();
+				}
+				
+			}
+		});
+	}
 }
