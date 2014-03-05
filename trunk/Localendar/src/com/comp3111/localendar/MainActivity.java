@@ -18,8 +18,8 @@ import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
-import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
@@ -29,7 +29,8 @@ public class MainActivity extends Activity implements View.OnClickListener{
 	public static MainActivity instance = null;
 	private ViewPager pager;	//view pager
 	private ImageView image, tab0, tab1, tab2;	//tabs for list, map and settings
-	private int currentTabIndex = 0;	//tab index, maps is set default 
+	private TextView text0, text1, text2;	//text tabs for list, map and settings
+	private int currentTabIndex;	//tab index, maps is set default 
 	private int animationShiftOneScale, animationShiftTwoScale;	//animation effect
 	
 	// MyLocalendar is map object
@@ -59,11 +60,12 @@ public class MainActivity extends Activity implements View.OnClickListener{
         tab2.setOnClickListener(new MyOnClickListener(2));
         image = (ImageView) findViewById(R.id.img_tab_now);
         
-        //initialize buttons
-        //addEvent1 = (Button) findViewById(R.id.add_event_button1);
-        //addEvent2 = (Button) findViewById(R.id.add_event_button2);
-        //addEvent1.setOnClickListener(new AddEventButtonListener());
-        //addEvent2.setOnClickListener(new AddEventButtonListener());
+        text0 = (TextView) findViewById(R.id.text_list);
+        text1 = (TextView) findViewById(R.id.text_map);
+        text2 = (TextView) findViewById(R.id.text_settings);
+        text0.setOnClickListener(new MyOnClickListener(0));
+        text1.setOnClickListener(new MyOnClickListener(1));
+        text2.setOnClickListener(new MyOnClickListener(2));
 
         //get screen pixel to fulfill animation
         DisplayMetrics metrics = new DisplayMetrics();
@@ -108,8 +110,8 @@ public class MainActivity extends Activity implements View.OnClickListener{
 		
 		//set the map as the startup page and load the map
 		pager.setAdapter(myPagerAdapter);
-		//pager.setCurrentItem(1);
-		
+		pager.setCurrentItem(1);
+		currentTabIndex = 1;
 		//Set up map
 		MyLocalendar = new MyGoogleMap();
 		MyLocalendar.setMap(((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap(), internetConnectionDetector, gpsDetector);	
@@ -215,11 +217,13 @@ public class MainActivity extends Activity implements View.OnClickListener{
 	@Override
 	public void onClick(View v) {
 		switch(v.getId()) {
+		case R.id.about_us_arrow:
 		case R.id.about_us: {
 			Intent intent = new Intent (this, AboutusActivity.class);			
-			startActivity(intent);
+			startActivity(intent); 
 		}
 		break;
+		case R.id.my_account_arrow:
 		case R.id.my_account: {
 			Intent intent = new Intent (this, SigninActivity.class);			
 			startActivity(intent);

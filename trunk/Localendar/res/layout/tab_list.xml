@@ -30,8 +30,7 @@
         		android:textColor="#fff"
         		android:textSize="15sp"
         		android:onClick="onClick"
-        		android:clickable="true"
-        		android:background="@drawable/bottom_bar" />
+        		android:clickable="true" />
  
 		</RelativeLayout>
 		<TextView
