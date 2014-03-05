@@ -1,10 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?>	
+<?xml version="1.0" encoding="utf-8"?>
+
 	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:background="#eee"
         android:orientation="vertical" >
         
+	    
+
         <LinearLayout 
   			android:layout_width="fill_parent"
   			android:layout_height="45dp"
@@ -29,6 +32,10 @@
             	android:layout_height="wrap_content"
             	android:orientation="vertical" >
             	
+        	 
+		 
+		
+		
         	    <RelativeLayout
             		android:layout_width="fill_parent"
             		android:layout_height="wrap_content"
@@ -37,15 +44,16 @@
             		android:clickable="true" >
             		<TextView
             		    android:id="@+id/my_account"
-        				android:layout_width="wrap_content" 
+        				android:layout_width="fill_parent" 
         				android:layout_height="wrap_content"
         				android:padding="8dp" 
         				android:text="My Account"
-        				android:textSize="17sp"		
-						android:textColor="#000"
+        				android:textSize="16sp"		
+						android:textColor="@color/text_view_settings"
 						android:onClick="onClick"                
        					android:clickable="true"/>
             		<ImageView
+            		    android:id="@+id/my_account_arrow"
             			android:layout_width="wrap_content"
         				android:layout_height="wrap_content"        	     	
         				android:scaleType="matrix"
@@ -63,20 +71,23 @@
             			android:clickable="true" >
             			<TextView
             			    android:id="@+id/about_us"
-        					android:layout_width="wrap_content" 
+        					android:layout_width="fill_parent" 
         					android:layout_height="wrap_content"
         					android:padding="8dp" 
         					android:text="About us"
-        					android:textSize="17sp"		
-							android:textColor="#000"
+        					android:textSize="16sp"		
+							android:textColor="@color/text_view_settings"
 							android:onClick="onClick"                
        						android:clickable="true"/> 
 						<ImageView
+						    android:id="@+id/about_us_arrow"
             				android:layout_width="wrap_content"
         					android:layout_height="wrap_content"        	     	
         					android:scaleType="matrix"
         					android:layout_centerVertical="true"
         					android:layout_alignParentRight="true"
+        					android:onClick="onClick"                
+       						android:clickable="true"
         					android:src="@drawable/submenu" />      					
       			</RelativeLayout>
       		</LinearLayout>

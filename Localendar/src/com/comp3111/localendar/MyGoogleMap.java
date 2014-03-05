@@ -1,5 +1,9 @@
 package com.comp3111.localendar;
 
+import android.location.Location;
+import android.provider.SyncStateContract.Constants;
+
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener;
 import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
@@ -22,6 +26,9 @@ public class MyGoogleMap {
 	//A test Marker
 	private Marker testMarker;
 	
+	    
+	    
+	
 	public void setMap(GoogleMap map, ConnectionDetector iDetector, GPSTracker gDetector){
 		localenderMap = map;
 		mapConnectionDetector = iDetector;
@@ -34,6 +41,9 @@ public class MyGoogleMap {
         localenderMapSettings.setScrollGesturesEnabled(true);
         localenderMapSettings.setRotateGesturesEnabled(true);
         localenderMap.setMyLocationEnabled(true);
+        
+        //Zoom to Hong Kong
+        localenderMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(22.26666, 114.166664), 10));
         
         //get my location 
         localenderMap.setOnMyLocationButtonClickListener(new OnMyLocationButtonClickListener() {
@@ -118,4 +128,5 @@ public class MyGoogleMap {
 			}
 		});
 	}
+	
 }

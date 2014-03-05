@@ -45,9 +45,11 @@
         			android:clickable="true"
         			android:src="@drawable/tab_list_pressed" />
                 <TextView
+                    android:id="@+id/text_list"
             		android:layout_width="wrap_content"
             		android:layout_height="wrap_content"
             		android:text="Events"
+            		android:clickable="true"
             		android:textColor="#fff"
             		android:textSize="12sp" />                
         	 </LinearLayout>
@@ -66,9 +68,11 @@
         			android:clickable="true"
         			android:src="@drawable/tab_map_normal" />
                 <TextView
+                    android:id="@+id/text_map"
             		android:layout_width="wrap_content"
             		android:layout_height="wrap_content"
             		android:text="Map"
+            		android:clickable="true"
             		android:textColor="#fff"
             		android:textSize="12sp" />                
         	 </LinearLayout>
@@ -87,9 +91,11 @@
         			android:clickable="true"
         			android:src="@drawable/tab_settings_normal" />
                 <TextView
+                    android:id="@+id/text_settings"
             		android:layout_width="wrap_content"
             		android:layout_height="wrap_content"
             		android:text="Settings"
+            		android:clickable="true"
             		android:textColor="#fff"
             		android:textSize="12sp" />                
         	 </LinearLayout>

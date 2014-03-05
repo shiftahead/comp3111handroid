@@ -32,8 +32,7 @@
         		android:textColor="#fff"
         		android:textSize="15sp"
         		android:onClick="onClick"
-        		android:clickable="true"
-        		android:background="@drawable/bottom_bar" />
+        		android:clickable="true" />
 		</RelativeLayout>
 		<fragment android:id="@+id/map"
           android:layout_width="fill_parent"

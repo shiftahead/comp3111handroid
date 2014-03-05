@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-   	android:layout_width="fill_parent"
-   	android:layout_height="fill_parent"  
-    android:layout_marginTop="46dp" >
 
-	<ScrollView 
-    	android:layout_width="fill_parent"
-    	android:layout_height="fill_parent"
-    	android:scrollbarStyle="outsideOverlay" >
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:scrollbarStyle="outsideOverlay" >
 
    	<LinearLayout
    	    android:id="@+id/add_event_dialog_layout"
@@ -29,8 +25,9 @@
    	        android:layout_height="wrap_content"
    	        android:padding="8dp"
    	        android:textColor="#000"
-   	        android:textSize="10sp" />
+   	        android:textSize="12sp" />
 
+   	    
    	    <TextView
    	        android:layout_width="wrap_content"
    	        android:layout_height="wrap_content"
@@ -45,9 +42,7 @@
    	        android:layout_height="wrap_content"
    	        android:padding="8dp"
    	        android:textColor="#000"
-   	        android:textSize="10sp" />
-
-   	    
+   	        android:textSize="12sp" />
 
    	    <GridLayout
    	        android:layout_width="match_parent"
@@ -99,7 +94,31 @@
    	        android:layout_height="wrap_content"
    	        android:padding="8dp"
    	        android:textColor="#000"
-   	        android:textSize="10sp" />
+   	        android:textSize="12sp" />
+   	    
+   	    <TextView
+   	        android:layout_width="wrap_content"
+   	        android:layout_height="wrap_content"
+   	        android:padding="8dp"
+   	        android:text="Vehicle"
+   	        android:textColor="#000"
+   	        android:textSize="18sp" />
+   	    
+   	    <Spinner
+		    android:id="@+id/transportation_chooser"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:padding="8dp"
+   	        android:textColor="#000"
+   	        android:textSize="18sp"
+		    android:spinnerMode="dropdown" />
+   	    
+   	    <CheckBox
+   	        android:id="@+id/check_compulsory"
+   	        android:layout_width="wrap_content"
+   	        android:layout_height="wrap_content"
+   	        android:textSize="18sp"
+   	        android:text="Compulsory" />
 
    	    <RelativeLayout
    	        android:layout_width="match_parent"
@@ -116,7 +135,8 @@
    	            android:onClick="onClick"
         		android:clickable="true"
    	            android:gravity="center_vertical|center_horizontal|left"
-   	            android:text="Cancel" />
+   	            android:text="Cancel"
+   	            android:textColor="@color/cancel_button"  />
 
    	        <Button
    	            android:id="@+id/confirm_add"
@@ -128,11 +148,11 @@
    	            android:onClick="onClick"
         		android:clickable="true"
    	            android:gravity="center_vertical|center_horizontal|left"
-   	            android:text="Confirm" />
+   	            android:text="Confirm"
+   	            android:textColor="@color/confirm_button" />
 
    	    </RelativeLayout>
 
    	</LinearLayout>
 
-    </ScrollView>
-</LinearLayout>
+</ScrollView>
