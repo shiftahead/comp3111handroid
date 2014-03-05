@@ -32,8 +32,10 @@ public class MainActivity extends Activity implements View.OnClickListener{
 	private int currentTabIndex = 0;	//tab index, maps is set default 
 	private int animationShiftOneScale, animationShiftTwoScale;	//animation effect
 	
-	// localendar is map object
-	MyGoogleMap localendar = new MyGoogleMap();
+	// MyLocalendar is map object
+	MyGoogleMap MyLocalendar;
+	ConnectionDetector internetConnectionDetector;
+	GPSTracker gpsDetector;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -107,8 +109,10 @@ public class MainActivity extends Activity implements View.OnClickListener{
 		//set the map as the startup page and load the map
 		pager.setAdapter(myPagerAdapter);
 		//pager.setCurrentItem(1);
-		localendar.localenderMap = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
-		localendar.setMap();    
+		
+		//Set up map
+		MyLocalendar = new MyGoogleMap();
+		MyLocalendar.setMap(((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap(), internetConnectionDetector, gpsDetector);	
 	}
 	/* set the pop up menu
 	 * in this menu people can set up map type
@@ -124,13 +128,13 @@ public class MainActivity extends Activity implements View.OnClickListener{
 	public boolean onOptionsItemSelected(MenuItem item){
 		switch (item.getItemId()) {
 		case R.id.mapNormal :
-			localendar.localenderMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+			MyLocalendar.getMyGoogleMap().setMapType(GoogleMap.MAP_TYPE_NORMAL);
 			return true;
 		case R.id.mapSatellite :
-			localendar.localenderMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+			MyLocalendar.getMyGoogleMap().setMapType(GoogleMap.MAP_TYPE_SATELLITE);
 			return true;
 		case R.id.mapHybrid :
-			localendar.localenderMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+			MyLocalendar.getMyGoogleMap().setMapType(GoogleMap.MAP_TYPE_HYBRID);
 			return true;
 		}
 		return false;
