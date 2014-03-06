@@ -113,7 +113,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
 		pager.setCurrentItem(1);
 		currentTabIndex = 1;
 		//Set up map
-		MyLocalendar = new MyGoogleMap();
+		MyLocalendar = new MyGoogleMap(this);
 		MyLocalendar.setMap(((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap(), internetConnectionDetector, gpsDetector);	
 	}
 	/* set the pop up menu
