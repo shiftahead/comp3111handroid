@@ -1,6 +1,10 @@
 package com.comp3111.localendar;
 
+import android.app.Activity;
+import android.content.Context;
+import android.location.Criteria;
 import android.location.Location;
+import android.location.LocationManager;
 import android.provider.SyncStateContract.Constants;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -14,7 +18,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class MyGoogleMap {
+public class MyGoogleMap{
 	/* User Defined variable
 	 *  1. localendarMap
 	 *  2. Marker
@@ -22,12 +26,14 @@ public class MyGoogleMap {
 	private GoogleMap localenderMap;
 	private ConnectionDetector mapConnectionDetector;
 	private GPSTracker mapGpsTracker;
-
+	private Context mContext;
 	//A test Marker
 	private Marker testMarker;
 	
 	    
-	    
+	public MyGoogleMap(Context c) {
+		mContext = c;
+	}
 	
 	public void setMap(GoogleMap map, ConnectionDetector iDetector, GPSTracker gDetector){
 		localenderMap = map;
@@ -43,7 +49,17 @@ public class MyGoogleMap {
         localenderMap.setMyLocationEnabled(true);
         
         //Zoom to Hong Kong
-        localenderMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(22.26666, 114.166664), 10));
+        //localenderMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(22.26666, 114.166664), 10));
+        
+        LocationManager locationmanager = (LocationManager) mContext.getSystemService(Context.LOCATION_SERVICE);;
+        String provider = LocationManager.GPS_PROVIDER;
+        Location myLocation = locationmanager.getLastKnownLocation(provider);
+
+        double latitude= myLocation.getLatitude();
+        double longtitude = myLocation.getLongitude();
+        LatLng ll = new LatLng(latitude, longtitude);
+
+        localenderMap.animateCamera(CameraUpdateFactory.newLatLngZoom(ll, 15));
         
         //get my location 
         localenderMap.setOnMyLocationButtonClickListener(new OnMyLocationButtonClickListener() {
