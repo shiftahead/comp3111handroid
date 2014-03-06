@@ -48,8 +48,7 @@ public class MyGoogleMap{
         localenderMapSettings.setRotateGesturesEnabled(true);
         localenderMap.setMyLocationEnabled(true);
         
-        //Zoom to Hong Kong
-        //localenderMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(22.26666, 114.166664), 10));
+        //Zoom to my current location
         
         LocationManager locationmanager = (LocationManager) mContext.getSystemService(Context.LOCATION_SERVICE);;
         String provider = LocationManager.GPS_PROVIDER;
@@ -58,7 +57,6 @@ public class MyGoogleMap{
         double latitude= myLocation.getLatitude();
         double longtitude = myLocation.getLongitude();
         LatLng ll = new LatLng(latitude, longtitude);
-
         localenderMap.animateCamera(CameraUpdateFactory.newLatLngZoom(ll, 15));
         
         //get my location 
