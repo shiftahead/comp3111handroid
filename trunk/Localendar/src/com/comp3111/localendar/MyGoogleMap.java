@@ -1,11 +1,10 @@
 package com.comp3111.localendar;
 
-import android.app.Activity;
+
 import android.content.Context;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
-import android.provider.SyncStateContract.Constants;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -51,9 +50,12 @@ public class MyGoogleMap{
         //Zoom to my current location
         
         LocationManager locationmanager = (LocationManager) mContext.getSystemService(Context.LOCATION_SERVICE);;
-        String provider = LocationManager.GPS_PROVIDER;
+        //String provider = LocationManager.GPS_PROVIDER;
+        //Location myLocation = locationmanager.getLastKnownLocation(provider);
+        
+        Criteria cri= new Criteria();
+        String provider = locationmanager.getBestProvider(cri, true);
         Location myLocation = locationmanager.getLastKnownLocation(provider);
-
         double latitude= myLocation.getLatitude();
         double longtitude = myLocation.getLongitude();
         LatLng ll = new LatLng(latitude, longtitude);
