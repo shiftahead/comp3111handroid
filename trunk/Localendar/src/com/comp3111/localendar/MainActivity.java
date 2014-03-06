@@ -32,6 +32,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
 	private TextView text0, text1, text2;	//text tabs for list, map and settings
 	private int currentTabIndex;	//tab index, maps is set default 
 	private int animationShiftOneScale, animationShiftTwoScale;	//animation effect
+	private int screenWidth;
 	
 	// MyLocalendar is map object
 	MyGoogleMap MyLocalendar;
@@ -70,7 +71,8 @@ public class MainActivity extends Activity implements View.OnClickListener{
         //get screen pixel to fulfill animation
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
-        animationShiftOneScale = metrics.widthPixels / 3;
+        screenWidth = metrics.widthPixels;
+        animationShiftOneScale = screenWidth / 3;
         animationShiftTwoScale = animationShiftOneScale * 2;
         
         //initialize views for each tab
@@ -141,7 +143,9 @@ public class MainActivity extends Activity implements View.OnClickListener{
 		}
 		return false;
 	}
-	
+	public int getScreenWidth() {
+		return screenWidth;
+	}
 	
 	/* Class to be defined
 	 * 1. MyOnClickListener (for pager index)
@@ -220,13 +224,15 @@ public class MainActivity extends Activity implements View.OnClickListener{
 		case R.id.about_us_arrow:
 		case R.id.about_us: {
 			Intent intent = new Intent (this, AboutusActivity.class);			
-			startActivity(intent); 
+			startActivity(intent);
+			overridePendingTransition(R.anim.right_in, R.anim.right_out);
 		}
 		break;
 		case R.id.my_account_arrow:
 		case R.id.my_account: {
 			Intent intent = new Intent (this, SigninActivity.class);			
 			startActivity(intent);
+			overridePendingTransition(R.anim.right_in, R.anim.right_out);
 		}
 		break;
 		case R.id.add_event_button1:

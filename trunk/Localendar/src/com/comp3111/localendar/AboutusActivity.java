@@ -17,6 +17,7 @@ public class AboutusActivity extends Activity implements OnClickListener{
 	public void onClick(View v) {
 		if(getResources().getResourceEntryName(v.getId()).equals("back_from_aboutus_to_settings")){
 			finish();
+			overridePendingTransition(R.anim.left_in, R.anim.left_out);
 		}
 		
 	}
