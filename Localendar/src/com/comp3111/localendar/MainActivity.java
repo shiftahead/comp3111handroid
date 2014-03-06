@@ -203,7 +203,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
 			}
 			currentTabIndex = index;
 			animation.setFillAfter(true);
-			animation.setDuration(150);
+			animation.setDuration(250);
 			image.startAnimation(animation);
 		}
 		
