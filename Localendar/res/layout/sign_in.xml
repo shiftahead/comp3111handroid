@@ -17,7 +17,7 @@
         		android:text="Sign in"
         		android:layout_centerInParent="true"
         		android:textSize="20sp"		
-				android:textColor="#ffffff" />
+				android:textColor="#000000" />
 
       		<Button
       		    android:id="@+id/back_from_signin_to_settings"
@@ -31,7 +31,7 @@
         		android:textSize="15sp"
         		android:onClick="onClick"
         		android:clickable="true"
-        		android:background="@drawable/bottom_bar" />
+        		 />  <!-- android:background="@drawable/bottom_bar" -->
  
 		</RelativeLayout>
 		<GridLayout
@@ -44,7 +44,7 @@
       		<TextView
         		android:layout_width="wrap_content" 
         		android:layout_height="wrap_content" 
-        		android:text="Sign in to synchronize with"
+        		android:text="Sign in to synchronize with Google"
         		android:textSize="25sp"		
 				android:textColor="#000" />
       		<ImageView
