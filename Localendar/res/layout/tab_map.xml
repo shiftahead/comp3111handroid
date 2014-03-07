@@ -8,32 +8,7 @@
         android:orientation="vertical"
         tools:context=".MapActivity"  >
         
-        <RelativeLayout 
-  			android:layout_width="fill_parent"
-  			android:layout_height="45dp"
-  			android:id="@+id/map_title" 
-  			android:background="@drawable/title_bar"
-  			android:gravity="center_vertical" >  
-      		<TextView
-        		android:layout_width="wrap_content" 
-        		android:layout_height="wrap_content" 
-        		android:text="Map"
-        		android:layout_centerInParent="true"
-        		android:textSize="20sp"		
-				android:textColor="#ffffff" />       
-			<Button
-			    android:id="@+id/add_event_button2"
-			    android:layout_width="67dp" 
-        		android:layout_height="wrap_content"
-        		android:layout_alignParentRight="true" 
-        		android:layout_centerVertical="true"
-        		android:layout_marginRight="5dp"
-        		android:text="Add"
-        		android:textColor="#fff"
-        		android:textSize="15sp"
-        		android:onClick="onClick"
-        		android:clickable="true" />
-		</RelativeLayout>
+        
 		<fragment android:id="@+id/map"
           android:layout_width="fill_parent"
           android:layout_height="fill_parent"

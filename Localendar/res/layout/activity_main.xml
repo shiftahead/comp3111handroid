@@ -8,12 +8,17 @@
 
     <RelativeLayout
         android:id="@+id/main_bottom"
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal"
-        android:background="@drawable/bottom_bar"
+        android:background="@android:color/white"
         >
+        <View
+		    android:layout_width="fill_parent"
+		    android:layout_height="1dp"
+		    android:background="@android:color/darker_gray"/>
+        
         
         <ImageView
         	android:id="@+id/img_tab_now"
@@ -28,9 +33,36 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:paddingBottom="2dp"            
+            android:paddingBottom="2dp"
+            android:paddingTop="5dp"
+            
         	>
         	
+             <LinearLayout
+            	android:layout_width="wrap_content"
+            	android:layout_height="wrap_content"
+              	android:gravity="center_horizontal"
+              	android:orientation="vertical"
+              	android:layout_weight="1">               	
+                <ImageView
+            		android:id="@+id/add_event_button"
+        			android:layout_width="wrap_content"
+        			android:layout_height="wrap_content"        	     	
+        			android:scaleType="matrix"
+        			android:clickable="true"
+        			android:onClick="onClick"
+        			android:src="@drawable/add_normal" />
+                <TextView
+                    android:id="@+id/add_event_text"
+            		android:layout_width="wrap_content"
+            		android:layout_height="wrap_content"
+            		android:text="New"
+            		android:clickable="true"
+            		android:onClick="onClick"
+            		android:textColor="@android:color/black"
+            		android:textSize="10sp" />                
+        	 </LinearLayout>
+        	 
              <LinearLayout
             	android:layout_width="wrap_content"
             	android:layout_height="wrap_content"
@@ -43,15 +75,15 @@
         			android:layout_height="wrap_content"        	     	
         			android:scaleType="matrix"
         			android:clickable="true"
-        			android:src="@drawable/tab_list_pressed" />
+        			android:src="@drawable/tab_list_normal" />
                 <TextView
                     android:id="@+id/text_list"
             		android:layout_width="wrap_content"
             		android:layout_height="wrap_content"
             		android:text="Events"
             		android:clickable="true"
-            		android:textColor="#fff"
-            		android:textSize="12sp" />                
+            		android:textColor="@android:color/black"
+            		android:textSize="10sp" />                
         	 </LinearLayout>
         	 
         	 <LinearLayout
@@ -73,8 +105,8 @@
             		android:layout_height="wrap_content"
             		android:text="Map"
             		android:clickable="true"
-            		android:textColor="#fff"
-            		android:textSize="12sp" />                
+            		android:textColor="@android:color/black"
+            		android:textSize="10sp" />                
         	 </LinearLayout>
         	 
         	 <LinearLayout
@@ -96,8 +128,8 @@
             		android:layout_height="wrap_content"
             		android:text="Settings"
             		android:clickable="true"
-            		android:textColor="#fff"
-            		android:textSize="12sp" />                
+            		android:textColor="@android:color/black"
+            		android:textSize="10sp" />                
         	 </LinearLayout>
         	 
     	</LinearLayout>     
@@ -106,7 +138,7 @@
     
     <LinearLayout
         android:layout_width="fill_parent"
-    	android:layout_height="wrap_content" 
+    	android:layout_height="fill_parent" 
     	android:layout_alignParentTop="true"
     	android:layout_above="@id/main_bottom"       
         android:orientation="vertical" >
