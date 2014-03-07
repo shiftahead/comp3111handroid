@@ -2,7 +2,6 @@ package com.comp3111.localendar;
 
 
 import java.util.ArrayList;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
@@ -28,6 +27,7 @@ import com.google.android.gms.maps.MapFragment;
 
 
 public class MainActivity extends Activity implements View.OnClickListener{
+	
 	public static MainActivity instance = null;
 	private ViewPager pager;	//view pager
 	private ImageView image, tab0, tab1, tab2, addView;	//tabs for list, map and settings
@@ -84,7 +84,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
         
         //initialize views for each tab
         LayoutInflater myLayout = LayoutInflater.from(this);
-        View view0 = myLayout.inflate(R.layout.tab_list, null);
+        View view0 = myLayout.inflate(R.layout.tab_calendar, null);
         View view1 = myLayout.inflate(R.layout.tab_map, null);
         View view2 = myLayout.inflate(R.layout.tab_settings, null);
         final ArrayList<View> views = new ArrayList<View>();
@@ -125,6 +125,8 @@ public class MainActivity extends Activity implements View.OnClickListener{
 		MyLocalendar = new MyGoogleMap(this);
 		MyLocalendar.setMap(((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap(), internetConnectionDetector, gpsDetector);	
 	}
+	
+	
 	/* set the pop up menu
 	 * in this menu people can set up map type
 	 */

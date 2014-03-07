@@ -1,6 +1,5 @@
 package com.comp3111.localendar;
 
-import android.R.string;
 import android.app.AlertDialog;
 import android.app.Service;
 import android.content.Context;
