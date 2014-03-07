@@ -9,7 +9,7 @@
   			android:layout_width="fill_parent"
   			android:layout_height="45dp"
   			android:id="@+id/list_title" 
-  			android:background="@drawable/title_bar"
+  			android:background="@color/holo_light"
   			android:gravity="center_vertical" >  
       		<TextView
         		android:layout_width="wrap_content" 
@@ -17,23 +17,28 @@
         		android:text="Sign in"
         		android:layout_centerInParent="true"
         		android:textSize="20sp"		
-				android:textColor="#000000" />
+				android:textColor="#000000"
+				android:textStyle="bold" />
 
-      		<Button
+      	<Button
       		    android:id="@+id/back_from_signin_to_settings"
 			    android:layout_width="80dp" 
-        		android:layout_height="wrap_content"
+        		android:layout_height="40dp"
         		android:layout_alignParentLeft="true" 
         		android:layout_centerVertical="true"
         		android:layout_marginLeft="5dp"
         		android:text="Settings"
-        		android:textColor="#fff"
+        		android:textColor="#ffffff"
         		android:textSize="15sp"
         		android:onClick="onClick"
-        		android:clickable="true"
-        		 />  <!-- android:background="@drawable/bottom_bar" -->
+        		android:clickable="true" />
+
  
 		</RelativeLayout>
+		<View
+			    android:layout_width="fill_parent"
+			    android:layout_height="2dp"
+			    android:background="@color/mid_blue"/>
 		<GridLayout
 			 android:orientation="horizontal"  
 			 android:layout_width="fill_parent"  
