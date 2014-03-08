@@ -1,22 +1,24 @@
 package com.comp3111.localendar;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.View;
-import android.view.View.OnClickListener;
+import android.view.MenuItem;
 
-public class SigninActivity extends Activity implements OnClickListener {
+public class SigninActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {	
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.sign_in);
-	}
-
-	@Override
-	public void onClick(View v) {
-		if(getResources().getResourceEntryName(v.getId()).equals("back_from_signin_to_settings")){
-			finish();
-			overridePendingTransition(R.anim.left_in, R.anim.left_out);
-		}
-	}
+		ActionBar actionBar = getActionBar();
+		actionBar.setTitle("Settings");
+		actionBar.setDisplayHomeAsUpEnabled(true);
 		
+	}
+	@Override
+	public boolean onOptionsItemSelected(MenuItem menuItem)
+	{       
+	    onBackPressed();
+	    overridePendingTransition(R.anim.left_in, R.anim.left_out);
+	    return true;
+	}
 }

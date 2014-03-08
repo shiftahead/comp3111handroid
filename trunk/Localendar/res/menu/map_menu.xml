@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-      <item android:id="@+id/mapType"
+      <item android:id="@+id/map_type"
           android:title="Type"
           android:orderInCategory="1">
           <menu>
-              <item android:id="@+id/mapNormal"
+              <item android:id="@+id/map_normal"
                     android:title="Normal"
                     android:orderInCategory="1"/>
-              <item android:id="@+id/mapSatellite"
+              <item android:id="@+id/map_satellite"
                     android:title="Satellite"
                     android:orderInCategory="2"/>
-              <item android:id="@+id/mapHybrid"
+              <item android:id="@+id/map_hybrid"
                     android:title="Hybrid"
                     android:orderInCategory = "3"/>
           </menu>   
     </item>
-     <item android:id="@+id/mapColor"
+     <item android:id="@+id/map_color"
           android:title="Color"
           android:orderInCategory="2">
           <menu>
-              <item android:id="@+id/mapRed"
+              <item android:id="@+id/map_red"
                     android:title="Red"
                     android:orderInCategory="1"/>
-              <item android:id="@+id/mapBlue"
+              <item android:id="@+id/map_blue"
                     android:title="Blue"
                     android:orderInCategory="2"/>
-              <item android:id="@+id/mapGreen"
+              <item android:id="@+id/map_green"
                     android:title="Green"
                     android:orderInCategory = "3"/>
           </menu>   
