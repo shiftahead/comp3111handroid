@@ -5,7 +5,7 @@
     android:layout_height="fill_parent"
     android:scrollbarStyle="outsideOverlay" >
 
-   	<LinearLayout
+ 	<LinearLayout
    	    android:id="@+id/add_event_dialog_layout"
    	    android:layout_width="match_parent"
    	    android:layout_height="wrap_content"
@@ -111,47 +111,53 @@
 		    android:padding="8dp"
    	        android:textColor="#000"
    	        android:textSize="18sp"
+   	        android:entries="@array/transportation"
 		    android:spinnerMode="dropdown" />
-   	    
+   	    <TextView
+   	        android:layout_width="fill_parent"
+   	        android:layout_height="10dp" />
    	    <CheckBox
    	        android:id="@+id/check_compulsory"
    	        android:layout_width="wrap_content"
    	        android:layout_height="wrap_content"
    	        android:textSize="18sp"
    	        android:text="Compulsory" />
+   	    <TextView
+   	        android:layout_width="fill_parent"
+   	        android:layout_height="50dp" />
 
-   	    <RelativeLayout
-   	        android:layout_width="match_parent"
+   	    <GridLayout
+   	        android:layout_width="fill_parent"
    	        android:layout_height="wrap_content"
-   	        android:layout_weight="4.37" >
+   	        android:columnCount="2"
+    		android:rowCount="1"
+    		android:orientation="horizontal" >
 
    	        <Button
    	            android:id="@+id/cancel_add"
-   	            android:layout_width="wrap_content"
+   	            android:layout_width="100sp"
    	            android:layout_height="wrap_content"
-   	            android:layout_alignParentTop="true"
-   	            android:layout_centerInParent="false"
-   	            android:layout_marginLeft="50dp"
+   	            android:layout_marginLeft="30dp"
    	            android:onClick="onClick"
         		android:clickable="true"
-   	            android:gravity="center_vertical|center_horizontal|left"
    	            android:text="Cancel"
    	            android:textColor="@color/cancel_button"  />
 
    	        <Button
    	            android:id="@+id/confirm_add"
-   	            android:layout_width="wrap_content"
+   	            android:layout_width="100sp"
    	            android:layout_height="wrap_content"
-   	            android:layout_alignParentTop="true"
-   	            android:layout_marginLeft="50dp"
-   	            android:layout_toRightOf="@+id/cancel_add"
+   	            android:layout_marginLeft="30dp"
    	            android:onClick="onClick"
         		android:clickable="true"
-   	            android:gravity="center_vertical|center_horizontal|left"
    	            android:text="Confirm"
    	            android:textColor="@color/confirm_button" />
 
-   	    </RelativeLayout>
+   	    </GridLayout>
+   	    
+   	    <TextView
+   	        android:layout_width="fill_parent"
+   	        android:layout_height="100dp" />
 
    	</LinearLayout>
 

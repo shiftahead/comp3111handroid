@@ -2,10 +2,18 @@ package com.comp3111.localendar;
 
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Vector;
+
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
@@ -29,6 +37,7 @@ import com.google.android.gms.maps.MapFragment;
 public class MainActivity extends Activity implements View.OnClickListener{
 	
 	public static MainActivity instance = null;
+	private ActionBar actionBar;
 	private ViewPager pager;	//view pager
 	private ImageView image, tab0, tab1, tab2, addView;	//tabs for list, map and settings
 	private TextView text0, text1, text2, addText;	//text tabs for list, map and settings
@@ -37,6 +46,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
 	private int screenWidth;
 	
 	// MyLocalendar is map object
+	
 	MyGoogleMap MyLocalendar;
 	ConnectionDetector internetConnectionDetector;
 	GPSTracker gpsDetector;
@@ -46,15 +56,21 @@ public class MainActivity extends Activity implements View.OnClickListener{
 		
 		// map activities  
 		super.onCreate(savedInstanceState);
+		//set action bar
+        actionBar = getActionBar();
+        actionBar.show();
+        actionBar.setTitle("Map");
 		setContentView(R.layout.activity_main);
 		
 		//hide the keyboard
 		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN); 
         instance = this;
         
+        
         //initialize pager and tabs
         pager = (ViewPager)findViewById(R.id.tabpager);
         pager.setOnPageChangeListener(new MyOnPageChangeListener());
+        
         tab0 = (ImageView) findViewById(R.id.img_list);
         tab1 = (ImageView) findViewById(R.id.img_map);
         tab2 = (ImageView) findViewById(R.id.img_settings);
@@ -81,6 +97,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
         screenWidth = metrics.widthPixels;
         animationShiftOneScale = screenWidth / 3;
         animationShiftTwoScale = animationShiftOneScale * 2;
+        
         
         //initialize views for each tab
         LayoutInflater myLayout = LayoutInflater.from(this);
@@ -130,28 +147,40 @@ public class MainActivity extends Activity implements View.OnClickListener{
 	/* set the pop up menu
 	 * in this menu people can set up map type
 	 */
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		
 		// Inflate the menu; this adds items to the action bar if it is present.
-		MenuInflater inflater = getMenuInflater(); 
-		inflater.inflate(R.menu.main, menu); 
+		getMenuInflater().inflate(R.menu.map_menu, menu);
 		return true;
 	}
+	
+	@Override
+	public boolean onPrepareOptionsMenu(Menu menu) {
+	    menu.clear();
+	    if(currentTabIndex == 1) {
+	    	getMenuInflater().inflate(R.menu.map_menu, menu);
+	    }
+	    
+	    return super.onPrepareOptionsMenu(menu);
+	}
+	
 	public boolean onOptionsItemSelected(MenuItem item){
 		switch (item.getItemId()) {
-		case R.id.mapNormal :
+		case R.id.map_normal :
 			MyLocalendar.getMyGoogleMap().setMapType(GoogleMap.MAP_TYPE_NORMAL);
 			return true;
-		case R.id.mapSatellite :
+		case R.id.map_satellite :
 			MyLocalendar.getMyGoogleMap().setMapType(GoogleMap.MAP_TYPE_SATELLITE);
 			return true;
-		case R.id.mapHybrid :
+		case R.id.map_hybrid :
 			MyLocalendar.getMyGoogleMap().setMapType(GoogleMap.MAP_TYPE_HYBRID);
 			return true;
 		}
 		return false;
 	}
+	
 	
 	@Override
 	public void onClick(View v) {
@@ -184,9 +213,9 @@ public class MainActivity extends Activity implements View.OnClickListener{
 	}
 	
 	/* Class to be defined
-	 * 1. MyOnClickListener (for pager index)
-	 * 2. MyOnPageChangeListener (for tab change)
-	 * 3. MyOnTouchListener (for add event button)
+	 * 1. MyOnClickListener (change pager index)
+	 * 2. MyOnPageChangeListener (tab change)
+	 * 3. MyOnTouchListener (add event button)
 	 */
 	public class MyOnClickListener implements View.OnClickListener {
 		private int index = 0;
@@ -204,8 +233,10 @@ public class MainActivity extends Activity implements View.OnClickListener{
 		@Override
 		public void onPageSelected(int index) {
 			Animation animation = null;
+			invalidateOptionsMenu();
 			switch (index) {
 			case 0:
+				actionBar.setTitle("Calendar");
 				tab0.setImageDrawable(getResources().getDrawable(R.drawable.tab_list_pressed));
 				text0.setTextColor(Color.parseColor("#3399FF"));
 				if (currentTabIndex == 1) {
@@ -219,6 +250,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
 				}
 				break;
 			case 1:
+				actionBar.setTitle("Map");
 				tab1.setImageDrawable(getResources().getDrawable(R.drawable.tab_map_pressed));
 				text1.setTextColor(Color.parseColor("#3399FF"));
 				if (currentTabIndex == 0) {
@@ -232,6 +264,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
 				}
 				break;
 			case 2:
+				actionBar.setTitle("Settings");
 				tab2.setImageDrawable(getResources().getDrawable(R.drawable.tab_settings_pressed));
 				text2.setTextColor(Color.parseColor("#3399FF"));
 				if (currentTabIndex == 0) {
