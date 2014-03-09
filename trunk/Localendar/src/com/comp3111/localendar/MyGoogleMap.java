@@ -5,7 +5,11 @@ import android.content.Context;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
+import android.os.Bundle;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesClient;
+import com.google.android.gms.location.LocationClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener;
@@ -17,7 +21,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class MyGoogleMap{
+public class MyGoogleMap {
 	/* User Defined variable
 	 *  1. localendarMap
 	 *  2. Marker
@@ -48,18 +52,21 @@ public class MyGoogleMap{
         localenderMap.setMyLocationEnabled(true);
         
         //Zoom to my current location
-        
+       
         LocationManager locationmanager = (LocationManager) mContext.getSystemService(Context.LOCATION_SERVICE);;
-        //String provider = LocationManager.GPS_PROVIDER;
-        //Location myLocation = locationmanager.getLastKnownLocation(provider);
         
-        Criteria cri= new Criteria();
-        String provider = locationmanager.getBestProvider(cri, true);
-        Location myLocation = locationmanager.getLastKnownLocation(provider);
-        double latitude= myLocation.getLatitude();
-        double longtitude = myLocation.getLongitude();
-        LatLng ll = new LatLng(latitude, longtitude);
-        localenderMap.animateCamera(CameraUpdateFactory.newLatLngZoom(ll, 15));
+        try {
+	        Criteria cri= new Criteria();
+	        String provider = locationmanager.getBestProvider(cri, true);
+	        Location myLocation = locationmanager.getLastKnownLocation(provider);
+	        double latitude= myLocation.getLatitude();
+	        double longtitude = myLocation.getLongitude();
+	        LatLng ll = new LatLng(latitude, longtitude);
+	        localenderMap.animateCamera(CameraUpdateFactory.newLatLngZoom(ll, 15));
+        } catch (Exception e){
+        	
+        }
+        
         
         //get my location 
         localenderMap.setOnMyLocationButtonClickListener(new OnMyLocationButtonClickListener() {
