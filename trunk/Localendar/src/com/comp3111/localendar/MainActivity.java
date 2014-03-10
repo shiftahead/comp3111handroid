@@ -2,14 +2,20 @@ package com.comp3111.localendar;
 
 
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Vector;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.ContentUris;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.CalendarContract;
+import android.provider.CalendarContract.Calendars;
+import android.provider.CalendarContract.Events;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -50,7 +56,19 @@ public class MainActivity extends Activity implements View.OnClickListener{
 	MyGoogleMap MyLocalendar;
 	ConnectionDetector internetConnectionDetector;
 	GPSTracker gpsDetector;
-	
+	// Parameters for quering the calendar
+	// Projection array. Creating indices for this array instead of doing
+	// dynamic lookups improves performance.
+	public static final String[] EVENT_PROJECTION = new String[] {
+		Calendars._ID, // 0
+		Calendars.ACCOUNT_NAME, // 1
+		Calendars.CALENDAR_DISPLAY_NAME // 2
+	};
+
+	// The indices for the projection array above.
+	private static final int PROJECTION_ID_INDEX = 0;
+	private static final int PROJECTION_ACCOUNT_NAME_INDEX = 1;
+	private static final int PROJECTION_DISPLAY_NAME_INDEX = 2;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		
@@ -199,12 +217,35 @@ public class MainActivity extends Activity implements View.OnClickListener{
 			overridePendingTransition(R.anim.right_in, R.anim.right_out);
 		}
 		break;
-		case R.id.add_event_button:
-		case R.id.add_event_text: {
-			Intent intent = new Intent (MainActivity.this, AddEventActivity.class);			
+		case R.id.add_event_button:{
+			Intent intent = new Intent(Intent.ACTION_INSERT);
+			intent.setType("vnd.android.cursor.item/event");
+			intent.putExtra(Events.TITLE, "");
+			intent.putExtra(Events.EVENT_LOCATION, "");
+			intent.putExtra(Events.DESCRIPTION, "");
+
+			// Setting dates
+			GregorianCalendar calDate = new GregorianCalendar(2014, 3, 10);
+			intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME,calDate.getTimeInMillis());
+			intent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME,calDate.getTimeInMillis());
+
+			// Make it a full day event
+			intent.putExtra(CalendarContract.EXTRA_EVENT_ALL_DAY, false);
+
+			// Make it a recurring Event
+			//intent.putExtra(Events.RRULE,"FREQ=WEEKLY;COUNT=11;WKST=SU;BYDAY=TU,TH");
+
+			// Making it private and shown as busy
+			intent.putExtra(Events.ACCESS_LEVEL, Events.ACCESS_PRIVATE);
+			intent.putExtra(Events.AVAILABILITY, Events.AVAILABILITY_BUSY);
+
 			startActivity(intent);
+			break;
 		}
-		break;
+		case R.id.add_event_text: {
+		
+	    	  break;
+		   }
 		}
 	}
 	
@@ -225,7 +266,19 @@ public class MainActivity extends Activity implements View.OnClickListener{
 		}
 		@Override
 		public void onClick(View v) {
+			if(index!=0)
 			pager.setCurrentItem(index);
+			else{
+				  long startMillis ;
+		    	  GregorianCalendar calDate = new GregorianCalendar(2014, 2, 9);
+		    	  startMillis = calDate.getTimeInMillis();
+		    	  Uri.Builder builder = CalendarContract.CONTENT_URI.buildUpon();
+		    	  builder.appendPath("time");
+		    	  ContentUris.appendId(builder, startMillis);
+		    	  Intent intent = new Intent(Intent.ACTION_VIEW);
+		    	  intent.setData(builder.build());
+		    	  startActivity(intent);
+			}
 		}
 	}
 	
