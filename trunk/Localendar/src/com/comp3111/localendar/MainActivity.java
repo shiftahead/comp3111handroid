@@ -217,6 +217,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
 			overridePendingTransition(R.anim.right_in, R.anim.right_out);
 		}
 		break;
+		case R.id.add_event_text: 
 		case R.id.add_event_button:{
 			Intent intent = new Intent(Intent.ACTION_INSERT);
 			intent.setType("vnd.android.cursor.item/event");
@@ -242,10 +243,6 @@ public class MainActivity extends Activity implements View.OnClickListener{
 			startActivity(intent);
 			break;
 		}
-		case R.id.add_event_text: {
-		
-	    	  break;
-		   }
 		}
 	}
 	
