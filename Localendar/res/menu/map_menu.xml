@@ -30,4 +30,11 @@
                     android:orderInCategory = "3"/>
           </menu>   
     </item>
+    
+    <item android:id="@+id/search"
+          android:title="@string/map_search_title"
+          android:icon="@android:drawable/ic_menu_search"
+          android:showAsAction="collapseActionView|ifRoom"
+          android:actionViewClass="android.widget.SearchView" />
+     
 </menu>
