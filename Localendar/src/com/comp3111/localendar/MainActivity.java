@@ -3,9 +3,6 @@ package com.comp3111.localendar;
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
-import java.util.List;
-import java.util.Vector;
-
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.ContentUris;
@@ -16,17 +13,12 @@ import android.os.Bundle;
 import android.provider.CalendarContract;
 import android.provider.CalendarContract.Calendars;
 import android.provider.CalendarContract.Events;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -44,7 +36,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
 	
 	public static MainActivity instance = null;
 	private ActionBar actionBar;
-	private ViewPager pager;	//view pager
+	private NonSwipeableViewPager pager;	//view pager
 	private ImageView image, tab0, tab1, tab2, addView;	//tabs for list, map and settings
 	private TextView text0, text1, text2, addText;	//text tabs for list, map and settings
 	private int currentTabIndex;	//tab index, maps is set default 
@@ -86,7 +78,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
         
         
         //initialize pager and tabs
-        pager = (ViewPager)findViewById(R.id.tabpager);
+        pager = (NonSwipeableViewPager)findViewById(R.id.tabpager);
         pager.setOnPageChangeListener(new MyOnPageChangeListener());
         
         tab0 = (ImageView) findViewById(R.id.img_list);
@@ -255,6 +247,9 @@ public class MainActivity extends Activity implements View.OnClickListener{
 	 * 2. MyOnPageChangeListener (tab change)
 	 * 3. MyOnTouchListener (add event button)
 	 */
+	
+
+	
 	public class MyOnClickListener implements View.OnClickListener {
 		private int index = 0;
 
@@ -343,6 +338,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
 		@Override
 		public void onPageScrollStateChanged(int arg0) {
 		}
+		
 	}
 	
 	public class MyOnTouchListener implements View.OnTouchListener {
