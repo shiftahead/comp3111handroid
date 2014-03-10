@@ -231,10 +231,10 @@ public class MainActivity extends Activity implements View.OnClickListener{
 			// Making it private and shown as busy
 			intent.putExtra(Events.ACCESS_LEVEL, Events.ACCESS_PRIVATE);
 			intent.putExtra(Events.AVAILABILITY, Events.AVAILABILITY_BUSY);
-
 			startActivity(intent);
-			break;
+			overridePendingTransition(R.anim.left_in, R.anim.left_out);
 		}
+		break;
 		}
 	}
 	
@@ -258,8 +258,8 @@ public class MainActivity extends Activity implements View.OnClickListener{
 		}
 		@Override
 		public void onClick(View v) {
-			if(index!=0)
-			pager.setCurrentItem(index);
+			if(index != 0)
+				pager.setCurrentItem(index);
 			else{
 				  long startMillis ;
 		    	  GregorianCalendar calDate = new GregorianCalendar(2014, 2, 9);
@@ -270,6 +270,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
 		    	  Intent intent = new Intent(Intent.ACTION_VIEW);
 		    	  intent.setData(builder.build());
 		    	  startActivity(intent);
+		    	  overridePendingTransition(R.anim.left_in, R.anim.left_out);
 			}
 		}
 	}
