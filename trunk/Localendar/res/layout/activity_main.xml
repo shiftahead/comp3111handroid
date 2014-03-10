@@ -153,12 +153,12 @@
     	android:layout_above="@id/main_bottom"       
         android:orientation="vertical" >
         
-        <android.support.v4.view.ViewPager
+        <com.comp3111.localendar.NonSwipeableViewPager
         	android:id="@+id/tabpager"
         	android:layout_width="match_parent"
         	android:layout_height="match_parent"
         	android:layout_gravity="center" > 
-        </android.support.v4.view.ViewPager>  
+        </com.comp3111.localendar.NonSwipeableViewPager>  
     </LinearLayout>
 
 </RelativeLayout>
