@@ -2,12 +2,12 @@
 
 = Meeting Minutes of Feb. 26=
 ----
-|| Date || Feb. 26, 2014 ||
-|| Time || 8:00pm - 10:00pm ||
-|| Place || LC-14, LG1, Library, HKUST ||
+|| Date || Mar. 10, 2014 ||
+|| Time || 9:05pm - 10:00pm ||
+|| Place || LC-01, LG1, Library, HKUST ||
 || Attendance || TAM Shih Lung, WANG Ding, YANG Ji, ZENG Xiong, ZHANG Tian ||
 || Absence || -- ||
-|| Recorder ||  Zhang Tian ||
+|| Recorder ||  WANG Ding ||
 
 ----
 
@@ -17,44 +17,35 @@ The minutes of the last meeting were approved without amendment.
 
 == 2. Report on Progress ==
 
-|| Zhang Tian || Finish google map finding location and map UI setting. ||
-|| Wang Ding  ||  ||
-|| Yang Ji       || Complete main page UI design  ||
-|| Zeng Xiong  ||  ||
-|| TAM Shih Lung ||  ||
+|| Zhang Tian || Google Calender API. ||
+|| Wang Ding  || Internet Detector & GPS Detector implementation ||
+|| Yang Ji       || UI ||
+|| Zeng Xiong  || UI + Logo ||
+|| TAM Shih Lung || Event Class implementation ||
  
 
 == 3. Discussion Items ==
 
-=== 3.1 Synthesis of individual code ===
+1. Search + Auto-complete (*) 16号
 
-*3.1.1* embedded map to Android UI
+2. Query location information --- ZT (*) 16号
 
-*3.1.2* Apply google API key individually
+3. Sign-in with Google (自带的google没有sign-in) 
 
-*3.1.3* Debugging and code optimization
+4. UI improvement ()
+
+5. Test case (*) --- YJ 16号
+
+6. Show path (*) --- Raymond 16号
+
+7. Based Locationed reminder (*) --- ZX 16号
 
 
-=== 3.2 System Requirement === 
-
-*3.2.1* set up system requirement page
-
-*3.2.2* work distribution and deadline setting 
-
-== 4. Goals for coming week ==
-
-*4.1* implement search function on map
-
-*4.2* Changing of map type
-
-*4.3* Event Function 
-
-*4.4* Android lite SQL to store event
 
 == 5. Meeting adjournment and next meeting ==
 
 The meeting lasts for 2 hours and no adjournment.
 
-The next meeting is scheduled on March.4 2014, 8:00 pm - 10:00 pm.
+The next meeting is scheduled on March.17 2014, 8:00 pm - 10:00 pm.
 
-The location is same,  LC-14,LG1,Library,HKUST.
+The location is same,  LC-01,LG1,Library,HKUST.
