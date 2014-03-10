@@ -99,7 +99,7 @@ public class MyGoogleMap {
             @Override
             public boolean onMarkerClick(Marker arg0) {
                     // 
-                    if(arg0.equals(testMarker) && mapConnectionDetector.isConnectingToInternet() && mapGpsTracker.canGetLocation()){
+                    if(arg0.equals(testMarker)){
                         arg0.setVisible(false);
                         return true;
                     }
