@@ -17,28 +17,23 @@ The minutes of the last meeting were approved without amendment.
 
 == 2. Report on Progress ==
 
-|| Zhang Tian || Google Calender API. ||
+|| Zhang Tian || Google Calendar API. ||
 || Wang Ding  || Internet Detector & GPS Detector implementation ||
-|| Yang Ji       || UI ||
-|| Zeng Xiong  || UI + Logo ||
+|| Yang Ji       || Main user interface ||
+|| Zeng Xiong  || User interface & Logo ||
 || TAM Shih Lung || Event Class implementation ||
  
 
 == 3. Discussion Items ==
 
-1. Search + Auto-complete (*) 16号
-
-2. Query location information --- ZT (*) 16号
-
-3. Sign-in with Google (自带的google没有sign-in) 
-
-4. UI improvement ()
-
-5. Test case (*) --- YJ 16号
-
-6. Show path (*) --- Raymond 16号
-
-7. Based Locationed reminder (*) --- ZX 16号
+|| *No.* || *Task* || *Assigned to* || *Deadline* ||
+|| 1. || Search + Auto-complete || WANG Ding||Mar. 16 ||
+|| 2. || Query location information || ZHANG Tian || Mar. 16 ||
+|| 3. || Sign-in with Google || Later  || Later ||
+|| 4. || UI improvement || Later || Later  ||
+|| 5. || Test case || YANG Ji || Mar. 16 ||
+|| 6. || Show path || TAM Shih Lung || Mar. 16 ||
+|| 7. || Location based reminder || ZENG Xiong || Mar. 16 ||
 
 
 
