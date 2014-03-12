@@ -53,7 +53,7 @@
         			android:clickable="true"
         			android:onClick="onClick"
         			android:contentDescription="@string/newEvent"
-        			android:src="@drawable/add_normal" />
+        			android:src="@drawable/tab_add_normal" />
            		<TextView
                     android:id="@+id/add_event_text"
             		android:layout_width="wrap_content"
@@ -73,15 +73,15 @@
               	android:layout_weight="1">               	
                 <ImageView
             		android:id="@+id/img_list"
-        			android:layout_width="wrap_content"
+        			android:layout_width="fill_parent"
         			android:layout_height="wrap_content"   
         			android:contentDescription="@string/eventList"      	     	
         			android:scaleType="matrix"
         			android:clickable="true"
-        			android:src="@drawable/tab_list_normal" />
+        			android:src="@drawable/tab_calendar_normal" />
             	<TextView
                     android:id="@+id/text_list"
-            		android:layout_width="wrap_content"
+            		android:layout_width="fill_parent"
             		android:layout_height="wrap_content"
             		android:clickable="true"
        				android:onClick="onClick"

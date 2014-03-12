@@ -283,7 +283,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
 			switch (index) {
 			case 0:
 				actionBar.setTitle("Calendar");
-				tab0.setImageDrawable(getResources().getDrawable(R.drawable.tab_list_pressed));
+				tab0.setImageDrawable(getResources().getDrawable(R.drawable.tab_calendar_pressed));
 				text0.setTextColor(Color.parseColor("#3399FF"));
 				if (currentTabIndex == 1) {
 					animation = new TranslateAnimation(animationShiftOneScale, 0, 0, 0);
@@ -301,7 +301,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
 				text1.setTextColor(Color.parseColor("#3399FF"));
 				if (currentTabIndex == 0) {
 					animation = new TranslateAnimation(0, animationShiftOneScale, 0, 0);
-					tab0.setImageDrawable(getResources().getDrawable(R.drawable.tab_list_normal));
+					tab0.setImageDrawable(getResources().getDrawable(R.drawable.tab_calendar_normal));
 					text0.setTextColor(Color.parseColor("#000000"));
 				} else if (currentTabIndex == 2) {
 					animation = new TranslateAnimation(animationShiftTwoScale, animationShiftOneScale, 0, 0);
@@ -315,7 +315,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
 				text2.setTextColor(Color.parseColor("#3399FF"));
 				if (currentTabIndex == 0) {
 					animation = new TranslateAnimation(0, animationShiftTwoScale, 0, 0);
-					tab0.setImageDrawable(getResources().getDrawable(R.drawable.tab_list_normal));
+					tab0.setImageDrawable(getResources().getDrawable(R.drawable.tab_calendar_normal));
 					text0.setTextColor(Color.parseColor("#000000"));
 				} else if (currentTabIndex == 1) {
 					animation = new TranslateAnimation(animationShiftOneScale, animationShiftTwoScale, 0, 0);
@@ -349,11 +349,11 @@ public class MainActivity extends Activity implements View.OnClickListener{
 			switch(event.getAction())
             {
             case MotionEvent.ACTION_DOWN :
-            	addView.setImageResource(R.drawable.add_pressed);
+            	addView.setImageResource(R.drawable.tab_add_pressed);
             	addText.setTextColor(Color.parseColor("#3399FF"));
                 break;
             case MotionEvent.ACTION_UP :
-            	addView.setImageResource(R.drawable.add_normal);
+            	addView.setImageResource(R.drawable.tab_add_normal);
             	addText.setTextColor(Color.parseColor("#000000"));
                 break;
             }
