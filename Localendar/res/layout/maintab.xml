@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<TabHost android:id="@android:id/tabhost" android:layout_width="fill_parent" android:layout_height="fill_parent"  
+  xmlns:android="http://schemas.android.com/apk/res/android">  
+    <LinearLayout 
+        android:orientation="vertical" 
+        android:layout_width="fill_parent" 
+        android:layout_height="fill_parent"
+        android:background="@color/holo_light">  
+        <FrameLayout android:id="@android:id/tabcontent" 
+            android:layout_width="fill_parent" 
+            android:layout_height="0.0dip" 
+            android:layout_weight="1.0" />  
+        	<TabWidget 
+        	    android:id="@android:id/tabs" 
+        	    android:visibility="gone" 
+        	    android:layout_width="fill_parent" 
+        	    android:layout_height="wrap_content" 
+        	    android:layout_weight="0.0" />
+        	
+        	<View
+			    android:layout_width="fill_parent"
+			    android:layout_height="1dp"
+			    android:background="@color/mid_blue"/>
+        		<RadioGroup
+        		    android:id="@+id/main_radio"
+        		    android:layout_width="fill_parent"
+        		    android:layout_height="50dp"
+        		    android:layout_gravity="bottom"
+        		    android:gravity="center_vertical"
+        		    android:orientation="horizontal" >
+
+        		    <Button
+		                android:id="@+id/add_button"
+		                style="@style/main_tab_bottom"
+		                android:layout_marginTop="2.0dip"
+		                android:drawableTop="@drawable/tab_add"
+		                android:text="@string/add" />
+        		    
+		            <RadioButton
+		                android:id="@+id/calendar_button"
+		                style="@style/main_tab_bottom"
+		                android:layout_marginTop="2.0dip"
+		                android:drawableTop="@drawable/tab_calendar"
+		                android:text="@string/calendar" />
+  
+		            <RadioButton 
+		                android:id="@+id/map_button" 
+		                android:checked="true"
+		                android:layout_marginTop="2.0dip" 
+		                android:text="@string/map" 
+		                android:drawableTop="@drawable/tab_map" 
+		                style="@style/main_tab_bottom" />  
+		            <RadioButton 
+		                android:id="@+id/settings_button" 
+		                android:layout_marginTop="2.0dip" 
+		                android:text="@string/settings" 
+		                android:drawableTop="@drawable/tab_settings" 
+		                style="@style/main_tab_bottom" />  
+		            </RadioGroup>
+		            
+    	</LinearLayout>  
+</TabHost>
