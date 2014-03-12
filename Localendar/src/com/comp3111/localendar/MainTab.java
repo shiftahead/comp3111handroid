@@ -1,6 +1,10 @@
 package com.comp3111.localendar;
 
+import java.util.GregorianCalendar;
+
 import android.os.Bundle;
+import android.provider.CalendarContract;
+import android.provider.CalendarContract.Events;
 import android.app.TabActivity;
 import android.content.Intent;
 import android.view.Menu;
@@ -84,12 +88,17 @@ public class MainTab extends TabActivity implements OnCheckedChangeListener, OnC
 	public void onClick(View v) {
 		switch(v.getId()) {
 		case R.id.add_button:
+			/**
 			Intent intent = new Intent(this, AddEventActivity.class);
 			startActivity(intent);
 			overridePendingTransition(R.anim.left_in, R.anim.left_out);
+			**/
+			startEventDialog();
 			break;
 		}
 	}
+	
+	
 	
 	private void setIntetns() {
 		
@@ -114,7 +123,32 @@ public class MainTab extends TabActivity implements OnCheckedChangeListener, OnC
 	private TabHost.TabSpec buildTabSpec(String tag, int resLabel, final Intent content) {  
         //return mHost.newTabSpec(tag).setIndicator(getString(resLabel),getResources().getDrawable(resIcon)).setContent(content);  
 		return mHost.newTabSpec(tag).setIndicator(getString(resLabel)).setContent(content);
-	}	
+	}
+	
+	private void startEventDialog() {
+		Intent intent = new Intent(Intent.ACTION_INSERT);
+		intent.setType("vnd.android.cursor.item/event");
+		intent.putExtra(Events.TITLE, "");
+		intent.putExtra(Events.EVENT_LOCATION, "");
+		intent.putExtra(Events.DESCRIPTION, "");
+
+		// Setting dates
+		GregorianCalendar calDate = new GregorianCalendar(2014, 3, 10);
+		intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME,calDate.getTimeInMillis());
+		intent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME,calDate.getTimeInMillis());
+
+		// Make it a full day event
+		intent.putExtra(CalendarContract.EXTRA_EVENT_ALL_DAY, false);
+
+		// Make it a recurring Event
+		//intent.putExtra(Events.RRULE,"FREQ=WEEKLY;COUNT=11;WKST=SU;BYDAY=TU,TH");
+
+		// Making it private and shown as busy
+		intent.putExtra(Events.ACCESS_LEVEL, Events.ACCESS_PRIVATE);
+		intent.putExtra(Events.AVAILABILITY, Events.AVAILABILITY_BUSY);
+		startActivity(intent);
+		overridePendingTransition(R.anim.left_in, R.anim.left_out);
+	}
 
 }
 

@@ -25,6 +25,7 @@ public class AddEventActivity extends Activity implements OnClickListener{
 		}
 		
 		finish();
+		overridePendingTransition(R.anim.right_in, R.anim.right_out);
 	}
 		
 	

@@ -1,7 +1,13 @@
 package com.comp3111.localendar;
 
+import java.util.GregorianCalendar;
+
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.CalendarContract;
 import android.app.Activity;
+import android.content.ContentUris;
+import android.content.Intent;
 import android.view.Menu;
 
 public class CalendarActivity extends Activity {
@@ -10,6 +16,7 @@ public class CalendarActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.tab_calendar);
+		 
 	}
 
 	@Override
