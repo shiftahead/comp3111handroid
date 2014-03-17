@@ -7,7 +7,7 @@
 || Place || LC-01, LG1, Library, HKUST ||
 || Attendance || TAM Shih Lung, WANG Ding, YANG Ji, ZENG Xiong, ZHANG Tian ||
 || Absence || -- ||
-|| Recorder ||  WANG Ding ||
+|| Recorder ||  YANG Ji ||
 
 ----
 
@@ -17,17 +17,17 @@ The minutes of the last meeting were approved without amendment.
 
 == 2. Report on Progress ==
 
-|| Zhang Tian || Google Calendar API. ||
-|| Wang Ding  || Internet Detector & GPS Detector implementation ||
-|| Yang Ji       || Main user interface ||
+|| Zhang Tian || Query location information ||
+|| Wang Ding  || Search auto-complete ||
+|| Yang Ji       || User interface framework updated ||
 || Zeng Xiong  || User interface & Logo ||
-|| TAM Shih Lung || Event Class implementation ||
+|| TAM Shih Lung || Show path function ||
  
 
 == 3. Discussion Items ==
 
 || *No.* || *Task* || *Assigned to* || *Deadline* ||
-|| 1. || Search + Auto-complete || WANG Ding||Mar. 16 ||
+|| 1. || Voice recognition|| WANG Ding||Mar. 16 ||
 || 2. || Query location information || ZHANG Tian || Mar. 16 ||
 || 3. || Sign-in with Google || Later  || Later ||
 || 4. || UI improvement || Later || Later  ||
