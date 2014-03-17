@@ -30,8 +30,8 @@ public class MyGoogleMap {
 	private ConnectionDetector mapConnectionDetector;
 	private GPSTracker mapGpsTracker;
 	private Context mContext;
-	//A test Marker
 	private Marker testMarker;
+	//A test Marker
 	
 	    
 	public MyGoogleMap(Context c) {
@@ -79,9 +79,6 @@ public class MyGoogleMap {
                      });
         
         //testMarker created;
-        testMarker = localenderMap.addMarker(new MarkerOptions()
-        .position(new LatLng(22.3375, 114.2630))
-        .title("COMP3111H Lecture").snippet("Today\n15:00 - 16:30\nLT-E").draggable(true));
         
         //set Marker called;
         setMarker();
@@ -93,7 +90,16 @@ public class MyGoogleMap {
 		return localenderMap;
 	}
 	
+	public void addmarker(double lag, double lon){
+        testMarker = localenderMap.addMarker(new MarkerOptions()
+        .position(new LatLng(lag, lon))
+        .title("COMP3111H Lecture").snippet("Today\n15:00 - 16:30\nLT-E").draggable(true));
+        LatLng ll = new LatLng(lag, lon);
+        localenderMap.animateCamera(CameraUpdateFactory.newLatLngZoom(ll, 15));
+	}
+	
 	public void setMarker(){
+        
 		 localenderMap.setOnMarkerClickListener(new OnMarkerClickListener() {
             
             @Override
