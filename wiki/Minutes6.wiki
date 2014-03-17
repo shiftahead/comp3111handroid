@@ -1,13 +1,46 @@
-#summary One-sentence summary of this page.
+#summary Minutes of Meeting held on Feb. 26, 2014.
 
-= Introduction =
+= Meeting Minutes of Feb. 26=
+----
+|| Date || Mar. 10, 2014 ||
+|| Time || 9:00pm - 10:00pm ||
+|| Place || LC-01, LG1, Library, HKUST ||
+|| Attendance || TAM Shih Lung, WANG Ding, YANG Ji, ZENG Xiong, ZHANG Tian ||
+|| Absence || -- ||
+|| Recorder ||  WANG Ding ||
 
-Add your content here.
+----
+
+== 1. Approval of Minutes ==
+
+The minutes of the last meeting were approved without amendment.
+
+== 2. Report on Progress ==
+
+|| Zhang Tian || Google Calendar API. ||
+|| Wang Ding  || Internet Detector & GPS Detector implementation ||
+|| Yang Ji       || Main user interface ||
+|| Zeng Xiong  || User interface & Logo ||
+|| TAM Shih Lung || Event Class implementation ||
+ 
+
+== 3. Discussion Items ==
+
+|| *No.* || *Task* || *Assigned to* || *Deadline* ||
+|| 1. || Search + Auto-complete || WANG Ding||Mar. 16 ||
+|| 2. || Query location information || ZHANG Tian || Mar. 16 ||
+|| 3. || Sign-in with Google || Later  || Later ||
+|| 4. || UI improvement || Later || Later  ||
+|| 5. || Test case || YANG Ji || Mar. 16 ||
+|| 6. || Show path || TAM Shih Lung || Mar. 16 ||
+|| 7. || Location based reminder || ZENG Xiong || Mar. 16 ||
 
 
-= Details =
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+== 5. Meeting adjournment and next meeting ==
+
+The meeting lasts for 1 hour and no adjournment.
+
+The next meeting is scheduled on March.17 2014, 8:00 pm - 10:00 pm.
+
+The location is same,  LC-01,LG1,Library,HKUST.
