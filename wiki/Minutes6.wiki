@@ -1,9 +1,9 @@
-#summary Minutes of Meeting held on Feb. 26, 2014.
+#summary Minutes of Meeting held on Mar. 17, 2014.
 
-= Meeting Minutes of Feb. 26=
+= Meeting Minutes of Mar. 17=
 ----
-|| Date || Mar. 10, 2014 ||
-|| Time || 9:00pm - 10:00pm ||
+|| Date || Mar. 17, 2014 ||
+|| Time || 8:00pm - 10:00pm ||
 || Place || LC-01, LG1, Library, HKUST ||
 || Attendance || TAM Shih Lung, WANG Ding, YANG Ji, ZENG Xiong, ZHANG Tian ||
 || Absence || -- ||
