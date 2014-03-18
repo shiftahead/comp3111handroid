@@ -66,26 +66,6 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity
-            android:name="com.comp3111.localendar.MainTab"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.MyAppTheme"  >
-        </activity>
-        <activity
-            android:name="com.comp3111.localendar.CalendarActivity"
-            android:label="@string/title_activity_calendar"
-            android:theme="@style/Theme.MyAppTheme"  >
-        </activity>
-        <activity
-            android:name="com.comp3111.localendar.MapActivity"
-            android:label="@string/title_activity_map"
-            android:theme="@style/Theme.MyAppTheme"  >
-        </activity>
-        <activity
-            android:name="com.comp3111.localendar.SettingsActivity"
-            android:label="@string/title_activity_settings"
-            android:theme="@style/Theme.MyAppTheme"  >
-        </activity>
     </application>
 
 </manifest>

@@ -39,6 +39,43 @@
             
         	>
         	
+             <RadioGroup
+        		    android:id="@+id/main_radio"
+        		    android:layout_width="fill_parent"
+        		    android:layout_height="50dp"
+        		    android:layout_gravity="bottom"
+        		    android:gravity="center_vertical"
+        		    android:orientation="horizontal" >
+
+        		    <Button
+		                android:id="@+id/add_button"
+		                style="@style/main_tab_bottom"
+		                android:layout_marginTop="2.0dip"
+		                android:drawableTop="@drawable/tab_add"
+		                android:text="@string/add" />
+        		    
+		            <Button
+		                android:id="@+id/calendar_button"
+		                style="@style/main_tab_bottom"
+		                android:layout_marginTop="2.0dip"
+		                android:drawableTop="@drawable/tab_calendar"
+		                android:text="@string/calendar" />
+  
+		            <RadioButton 
+		                android:id="@+id/map_button" 
+		                android:checked="true"
+		                android:layout_marginTop="2.0dip" 
+		                android:text="@string/map" 
+		                android:drawableTop="@drawable/tab_map" 
+		                style="@style/main_tab_bottom" />  
+		            <RadioButton 
+		                android:id="@+id/settings_button" 
+		                android:layout_marginTop="2.0dip" 
+		                android:text="@string/settings" 
+		                android:drawableTop="@drawable/tab_settings" 
+		                style="@style/main_tab_bottom" />  
+		            </RadioGroup>
+        	<!--  
              <LinearLayout
             	android:layout_width="wrap_content"
             	android:layout_height="wrap_content"
@@ -116,6 +153,7 @@
             		android:textSize="10sp" />               
         	 </LinearLayout>
         	 
+        	 
         	 <LinearLayout
             	android:layout_width="wrap_content"
             	android:layout_height="wrap_content"
@@ -141,6 +179,7 @@
             		android:textColor="@android:color/black"
             		android:textSize="10sp" />            
         	 </LinearLayout>
+        	 -->
         	 
     	</LinearLayout>     
        
@@ -152,7 +191,7 @@
     	android:layout_alignParentTop="true"
     	android:layout_above="@id/main_bottom"       
         android:orientation="vertical" >
-        
+      
         <com.comp3111.localendar.NonSwipeableViewPager
         	android:id="@+id/tabpager"
         	android:layout_width="match_parent"
