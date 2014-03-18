@@ -66,6 +66,7 @@
         				android:scaleType="matrix"
         				android:layout_centerVertical="true"
         				android:layout_alignParentRight="true"
+        				android:onClick="onClick"  
         				android:clickable="true"
         				android:src="@drawable/submenu" />      					
       			</RelativeLayout>
