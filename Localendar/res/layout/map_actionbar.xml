@@ -1,44 +1,27 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:gravity="center_vertical" >
-	
-    <!--
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Place:"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="#000000" />
-	-->
     
-    
-    <ImageView
-		android:id="@+id/search_button"
-        android:layout_width="20dp"
-        android:layout_height="20dp" 
-        android:adjustViewBounds="true"
-		android:scaleType="centerCrop"
+	<ImageView
+        android:id="@+id/place_view"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentLeft="true"
+        android:src="@drawable/search_map"
         android:clickable="true"
-        android:src="@drawable/search_map" /> 
-     
-     <!--  
-     <Button
-		android:id="@+id/cancel_input"
-		android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/holo_light"
-        android:layout_centerVertical="true"
-        android:layout_alignParentRight="true"
-		android:drawableTop="@drawable/cancel_button"/>
-     -->
-     
+        android:onClick="onClick"
+        android:textColor="#000000" />
+	
     <com.comp3111.localendar.ClearableAutoCompleteTextView
         android:id="@+id/search_box"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
         android:ems="20"
+        android:hint="Search Map"
+        android:icon="@drawable/search_map"
+        android:showAsAction="ifRoom"
         android:textSize="20sp"
         android:imeOptions="actionSearch"
         android:inputType="textAutoComplete|textAutoCorrect"
@@ -48,4 +31,4 @@
     
      
 
-</LinearLayout>
+</RelativeLayout>

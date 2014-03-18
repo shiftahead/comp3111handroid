@@ -44,7 +44,7 @@
         </activity>
         <activity
             android:name="com.comp3111.localendar.MainActivity"
-            android:theme="@style/Theme.MyAppTheme" >
+            android:theme="@style/Theme.MyAppThemeNoIcon" >
         </activity>
         <activity
             android:name="com.comp3111.localendar.SigninActivity"
