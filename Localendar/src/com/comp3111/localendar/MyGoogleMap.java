@@ -22,27 +22,22 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MyGoogleMap {
-	/* User Defined variable
-	 *  1. localendarMap
-	 *  2. Marker
-	 */
 	private GoogleMap localenderMap;
-	private ConnectionDetector mapConnectionDetector;
-	private GPSTracker mapGpsTracker;
+	//private ConnectionDetector mapConnectionDetector;
+	//private GPSTracker mapGpsTracker;
 	private Context mContext;
-	private Marker testMarker;
-	//A test Marker
 	
-	    
+	//A test Marker
+	private Marker testMarker;
+		    
 	public MyGoogleMap(Context c) {
 		mContext = c;
 	}
 	
-	public void setMap(GoogleMap map, ConnectionDetector iDetector, GPSTracker gDetector){
+	public void setMap(GoogleMap map){
 		localenderMap = map;
-		mapConnectionDetector = iDetector;
-		mapGpsTracker = gDetector;
-				
+		
+		//Initial settings
 		UiSettings localenderMapSettings = localenderMap.getUiSettings();
         localenderMapSettings.setZoomControlsEnabled(true);
         localenderMapSettings.setCompassEnabled(true);
@@ -52,7 +47,6 @@ public class MyGoogleMap {
         localenderMap.setMyLocationEnabled(true);
         
         //Zoom to my current location
-       
         LocationManager locationmanager = (LocationManager) mContext.getSystemService(Context.LOCATION_SERVICE);;
         
         try {
@@ -67,7 +61,6 @@ public class MyGoogleMap {
         	
         }
         
-        
         //get my location 
         localenderMap.setOnMyLocationButtonClickListener(new OnMyLocationButtonClickListener() {
                         
@@ -78,11 +71,9 @@ public class MyGoogleMap {
                               }
                      });
         
-        //testMarker created;
-        
         //set Marker called;
-        setMarker();
-        setInfoWindow();
+        setMarkerListener();
+        setInfoWindowListener();
 
 	}
 	
@@ -90,29 +81,19 @@ public class MyGoogleMap {
 		return localenderMap;
 	}
 	
-	public void addmarker(double lag, double lon){
-        testMarker = localenderMap.addMarker(new MarkerOptions()
-        .position(new LatLng(lag, lon))
-        .title("COMP3111H Lecture").snippet("Today\n15:00 - 16:30\nLT-E").draggable(true));
-        LatLng ll = new LatLng(lag, lon);
-        localenderMap.animateCamera(CameraUpdateFactory.newLatLngZoom(ll, 15));
+	//The function of addmarker and zoom the camera to the added marker if boolean zoomto is set to true;
+	public void addmarker(double lag, double lon, boolean zoomto){
+		Marker m = localenderMap.addMarker(new MarkerOptions()
+        .position(new LatLng(lag, lon)).draggable(true));
+		
+		if(zoomto == true){
+			LatLng ll = new LatLng(lag, lon);
+	        localenderMap.animateCamera(CameraUpdateFactory.newLatLngZoom(ll, 15));	
+		}
 	}
 	
-	public void setMarker(){
-        
-		 localenderMap.setOnMarkerClickListener(new OnMarkerClickListener() {
-            
-            @Override
-            public boolean onMarkerClick(Marker arg0) {
-                    // 
-                    if(arg0.equals(testMarker)){
-                        arg0.setVisible(false);
-                        return true;
-                    }
-                    return false;
-            }
-    });
-    localenderMap.setOnMarkerDragListener(new OnMarkerDragListener() {
+	public void setMarkerListener(){	 
+		 localenderMap.setOnMarkerDragListener(new OnMarkerDragListener() {
              
              @Override
              public void onMarkerDragStart(Marker arg0) {
@@ -139,21 +120,13 @@ public class MyGoogleMap {
      });
   }
 
-	public void setInfoWindow(){
+	public void setInfoWindowListener(){
+		
         localenderMap.setOnInfoWindowClickListener(new OnInfoWindowClickListener() {
-			
 			@Override
 			public void onInfoWindowClick(Marker arg0) {
 				// TODO Auto-generated method stub
-				if(arg0.equals(testMarker)){
-					testMarker.setSnippet("Hello!");
-					testMarker.showInfoWindow();
-				}
-				else{
-					testMarker.setSnippet("No");
-					testMarker.showInfoWindow();
-				}
-				
+				arg0.setTitle("My InfoWindow is Clicked!");
 			}
 		});
 	}
