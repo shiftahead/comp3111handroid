@@ -20,7 +20,6 @@ import android.app.Activity;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.net.Uri;
@@ -31,18 +30,14 @@ import android.provider.CalendarContract.Events;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
-import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.view.animation.Animation;
-import android.view.animation.TranslateAnimation;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView;
@@ -71,7 +66,9 @@ public class MainActivity extends Activity implements OnClickListener, OnChecked
 	private int currentTabIndex;	//tab index, maps is set default 
 	private RadioButton mapButton, settingsButton;
 	private Button addButton, calendarButton;
-	
+	private ClearableAutoCompleteTextView searchBox;
+	private boolean searchBoxShown;
+	private ImageView searchIcon;
 	//Search result will returned as this string attribute
 	String PlaceSearch;
 	AutoCompleteTextView MapSearchAutoCompTextView;
@@ -119,46 +116,65 @@ public class MainActivity extends Activity implements OnClickListener, OnChecked
         
 		//set action bar
         actionBar = getActionBar();
-        //actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        //actionBar.setDisplayHomeAsUpEnabled(true);
+        
         actionBar.setDisplayShowCustomEnabled(true);
-        // actionBar.setDisplayShowTitleEnabled(false);
-        // actionBar.setIcon(R.drawable.ic_action_search);
+        actionBar.setDisplayShowTitleEnabled(false);
+        actionBar.setDisplayUseLogoEnabled(false);
         LayoutInflater inflator = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View actionBarView = inflator.inflate(R.layout.map_actionbar, null);
         
-        ImageView searchIcon = (ImageView) findViewById(R.id.search_button);
         actionBar.setCustomView(actionBarView);
 		//Get the AutoCompTextView
-	    ClearableAutoCompleteTextView searchBox = (ClearableAutoCompleteTextView) findViewById(R.id.search_box);
-        //AutoCompleteTextView searchBox = (AutoCompleteTextView) findViewById(R.id.search_box);
-	    
+	    searchBox = (ClearableAutoCompleteTextView) findViewById(R.id.search_box);
+	    searchIcon = (ImageView) findViewById(R.id.place_view);
+	    searchIcon.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View view) {
+				if(view.equals(searchIcon)) {
+					
+					//show the search box
+					searchBox.setVisibility(View.VISIBLE);
+					searchIcon.setVisibility(View.GONE);
+					searchBoxShown = true;
+					
+					// show the keyboard
+					InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+					imm.showSoftInput(searchBox, InputMethodManager.SHOW_IMPLICIT);
+				}
+				
+			}
+	    	
+	    });
         searchBox.setAdapter(new PlacesAutoCompleteAdapter(this, R.layout.autocomplete_result_list_item));
-	    
-		// start with the text view hidden in the action bar
-        /*
-		searchBox.setVisibility(View.INVISIBLE);
-		searchIcon.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				toggleSearch(false);
-			}
-		});
-		
-		searchBox.setOnClearListener(new OnClearListener() {
-			
-			@Override
-			public void onClear() {
-				toggleSearch(true);
-			}
-		});
-		*/
+        searchBox.setOnClearListener(new OnClearListener() {
+    		
+    		@Override
+    		public void onClear() {
+    			if(searchBox.getText().toString().equals("")) {
+    				if(searchBoxShown) {
+    					//hide the search box
+    					searchBox.setText("");
+    					searchIcon.setVisibility(View.VISIBLE);
+    					searchBox.setVisibility(View.GONE);
+    					searchBoxShown = false;
+    					
+    					// hide the keyboard
+    					InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+    					imm.hideSoftInputFromWindow(searchBox.getWindowToken(), 0);
+    				}
+    			}
+    			else {
+    				searchBox.setText("");
+    			}
+    		}
+    	});
 		searchBox.setOnItemClickListener(this);
 		
+	    searchBoxShown = true;
+	    searchBox.setVisibility(View.VISIBLE);
+	    searchIcon.setVisibility(View.GONE);
 	    
-		
-               
         //initialize pager and tab buttons
         pager = (NonSwipeableViewPager)findViewById(R.id.tabpager);
         pager.setOnPageChangeListener(new MyOnPageChangeListener());
@@ -227,31 +243,6 @@ public class MainActivity extends Activity implements OnClickListener, OnChecked
 		MyLocalendar.setMap(((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap());	
 	}
 	
-	// this toggles between the visibility of the search icon and the search box
-	// to show search icon - reset = true
-	// to show search box - reset = false
-	protected void toggleSearch(boolean reset) {
-		ClearableAutoCompleteTextView searchBox = (ClearableAutoCompleteTextView) findViewById(R.id.search_box);
-		ImageView searchIcon = (ImageView) findViewById(R.id.search_button);
-		if (reset) {
-			// hide search box and show search icon
-			searchBox.setText("");
-			searchBox.setVisibility(View.GONE);
-			searchIcon.setVisibility(View.VISIBLE);
-			// hide the keyboard
-			InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-			imm.hideSoftInputFromWindow(searchBox.getWindowToken(), 0);
-		} else {
-			// hide search icon and show search box
-			searchIcon.setVisibility(View.GONE);
-			searchBox.setVisibility(View.VISIBLE);
-			searchBox.requestFocus();
-			// show the keyboard
-			InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-			imm.showSoftInput(searchBox, InputMethodManager.SHOW_IMPLICIT);
-		}
-		
-	}
 	
 	//Click the items on the autocomplete list and the result will be allocated to the String and Doubles
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
@@ -269,6 +260,9 @@ public class MainActivity extends Activity implements OnClickListener, OnChecked
               
             case R.id.map_button: {
                 pager.setCurrentItem(1);
+                searchBoxShown = true;
+        	    searchBox.setVisibility(View.VISIBLE);
+        	    searchIcon.setVisibility(View.GONE);
                 /*
                 if (currentTabIndex == 2)
                 	overridePendingTransition(R.anim.left_in, R.anim.left_out);
@@ -280,6 +274,9 @@ public class MainActivity extends Activity implements OnClickListener, OnChecked
             }
                 break;  
             case R.id.settings_button: {
+            		searchBoxShown = false;
+        		    searchBox.setVisibility(View.INVISIBLE);
+        		    searchIcon.setVisibility(View.INVISIBLE);
             	
                 pager.setCurrentItem(2);  
                 overridePendingTransition(R.anim.right_in, R.anim.right_out);
@@ -332,24 +329,28 @@ public class MainActivity extends Activity implements OnClickListener, OnChecked
 	/* set the pop up menu
 	 * in this menu people can set up map type
 	 */
-	/*
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.map_menu, menu);
+		getMenuInflater().inflate(R.menu.main_menu, menu);
 		return true;
 	}
 	
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) {
 	    menu.clear();
-	    if(currentTabIndex == 1) {
-	    	getMenuInflater().inflate(R.menu.map_menu, menu);
-	    }
 	    
+	    if(currentTabIndex == 1) {
+	    	getMenuInflater().inflate(R.menu.main_menu, menu);
+	    }
+	    else {
+	    	getMenuInflater().inflate(R.menu.calendar, menu);
+	    }
 	    return super.onPrepareOptionsMenu(menu);
 	}
+	
 	public boolean onOptionsItemSelected(MenuItem item){
 		switch (item.getItemId()) {
 		case R.id.map_normal :
@@ -361,10 +362,12 @@ public class MainActivity extends Activity implements OnClickListener, OnChecked
 		case R.id.map_hybrid :
 			MyLocalendar.getMyGoogleMap().setMapType(GoogleMap.MAP_TYPE_HYBRID);
 			return true;
+	
 		}
+	
 		return false;
 	}
-	*/
+	
 	
 	public class MyOnPageChangeListener implements OnPageChangeListener {
 		@Override

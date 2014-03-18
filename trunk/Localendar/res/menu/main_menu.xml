@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-      <item android:id="@+id/map_type"
+	    
+	<item android:id="@+id/map_type"
           android:title="Type"
           android:orderInCategory="1">
           <menu>
@@ -31,10 +32,6 @@
           </menu>   
     </item>
     
-    <item android:id="@+id/search"
-          android:title="@string/map_search_title"
-          android:icon="@android:drawable/ic_menu_search"
-          android:showAsAction="collapseActionView|ifRoom"
-          android:actionViewClass="android.widget.SearchView" />
-     
+    
+    
 </menu>
