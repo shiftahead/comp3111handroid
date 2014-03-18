@@ -65,16 +65,20 @@ public class MainActivity extends Activity implements View.OnClickListener, OnIt
 	private int currentTabIndex;	//tab index, maps is set default 
 	private int animationShiftOneScale, animationShiftTwoScale;	//animation effect
 	private int screenWidth;
-	String query;
-	AutoCompleteTextView autoCompView;
-	Double lag;
-	Double lon;
+	
+	//Search result will returned as this string attribute
+	String PlaceSearch;
+	AutoCompleteTextView MapSearchAutoCompTextView;
+	//The place will be transferred to the 2 doulbe lag & lon
+	Double lagPlace;
+	Double lonPlace;
 	
 	// MyLocalendar is map object
-	
 	MyGoogleMap MyLocalendar;
-	ConnectionDetector internetConnectionDetector;
-	GPSTracker gpsDetector;
+	
+	//ConnectionDetector internetConnectionDetector;
+	//GPSTracker gpsDetector;
+	
 	// Parameters for quering the calendar
 	// Projection array. Creating indices for this array instead of doing
 	// dynamic lookups improves performance.
@@ -88,37 +92,42 @@ public class MainActivity extends Activity implements View.OnClickListener, OnIt
 	private static final int PROJECTION_ID_INDEX = 0;
 	private static final int PROJECTION_ACCOUNT_NAME_INDEX = 1;
 	private static final int PROJECTION_DISPLAY_NAME_INDEX = 2;
+	
+	//Attributes for the searchAutoComplete function
+    private static final String LOG_TAG = "Localendar";
+    private static final String PLACES_API_BASE = "https://maps.googleapis.com/maps/api/place";
+    private static final String TYPE_AUTOCOMPLETE = "/autocomplete";
+    private static final String OUT_JSON = "/json";
+    private static final String API_KEY = "AIzaSyAQ_VeQa3QVGxD3C7UxFAjHTF-bUsSC6Y4";
+    
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		
 		// map activities  
 		super.onCreate(savedInstanceState);
+		
 		//set action bar
         actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowCustomEnabled(true);
         // actionBar.setDisplayShowTitleEnabled(false);
         // actionBar.setIcon(R.drawable.ic_action_search);
-
         LayoutInflater inflator = (LayoutInflater) this
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View v = inflator.inflate(R.layout.map_actionbar, null);
-
         actionBar.setCustomView(v);
         
-		//new
+		//Get the AutoCompTextView
 	    AutoCompleteTextView autoCompView = (AutoCompleteTextView) findViewById(R.id.autocomplete);
-	    autoCompView.setAdapter(new PlacesAutoCompleteAdapter(this, R.layout.list_item));
+	    autoCompView.setAdapter(new PlacesAutoCompleteAdapter(this, R.layout.autocomplete_result_list_item));
         autoCompView.setOnItemClickListener(this);
-		//new
         
 		setContentView(R.layout.activity_main);
 		
 		//hide the keyboard
 		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN); 
         instance = this;
-        
-        
+               
         //initialize pager and tabs
         pager = (NonSwipeableViewPager)findViewById(R.id.tabpager);
         pager.setOnPageChangeListener(new MyOnPageChangeListener());
@@ -190,16 +199,18 @@ public class MainActivity extends Activity implements View.OnClickListener, OnIt
 		pager.setAdapter(myPagerAdapter);
 		pager.setCurrentItem(1);
 		currentTabIndex = 1;
+		
 		//Set up map
 		MyLocalendar = new MyGoogleMap(this);
-		MyLocalendar.setMap(((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap(), internetConnectionDetector, gpsDetector);	
+		MyLocalendar.setMap(((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap());	
 	}
 	
+	//Click the items on the autocomplete list and the result will be allocated to the String and Doubles
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-        query = (String) adapterView.getItemAtPosition(position);
-        getLatLongFromAddress(query);
-        MyLocalendar.addmarker(lag, lon);
-        Toast.makeText(this, query, Toast.LENGTH_SHORT).show();
+    	PlaceSearch = (String) adapterView.getItemAtPosition(position);
+        getLatLongFromAddress(PlaceSearch);
+        MyLocalendar.addmarker(lagPlace, lonPlace, true);
+        Toast.makeText(this, PlaceSearch, Toast.LENGTH_SHORT).show();
     }
     
 	/* set the pop up menu
@@ -409,6 +420,7 @@ public class MainActivity extends Activity implements View.OnClickListener, OnIt
 		
 	}
 
+	//AutoComplete adapter used for the autocompletetextview
     private class PlacesAutoCompleteAdapter extends ArrayAdapter<String> implements Filterable {
         private ArrayList<String> resultList;
 
@@ -456,14 +468,7 @@ public class MainActivity extends Activity implements View.OnClickListener, OnIt
         }
     }
 
-    private static final String LOG_TAG = "MyFirstApp";
-
-    private static final String PLACES_API_BASE = "https://maps.googleapis.com/maps/api/place";
-    private static final String TYPE_AUTOCOMPLETE = "/autocomplete";
-    private static final String OUT_JSON = "/json";
-
-    private static final String API_KEY = "AIzaSyAQ_VeQa3QVGxD3C7UxFAjHTF-bUsSC6Y4";
-    
+    //Autocomplete function, pass a input and output a Arraylist<String> of places
     private ArrayList<String> autocomplete(String input) {
         ArrayList<String> resultList = null;
 
@@ -514,6 +519,7 @@ public class MainActivity extends Activity implements View.OnClickListener, OnIt
         return resultList;
     }
 
+    //Input a string and get the place's lat&Long
     private void getLatLongFromAddress(String youraddress) {
     	Geocoder geoCoder = new Geocoder(this);
     	
@@ -521,8 +527,8 @@ public class MainActivity extends Activity implements View.OnClickListener, OnIt
             List<Address> addresses =
         geoCoder.getFromLocationName(youraddress, 1); 
             if (addresses.size() >  0) {
-            	lag = addresses.get(0).getLatitude(); 
-            	lon = addresses.get(0).getLongitude();
+            	lagPlace = addresses.get(0).getLatitude(); 
+            	lonPlace = addresses.get(0).getLongitude();
             	}
 
         } catch (IOException e) { // TODO Auto-generated catch block
