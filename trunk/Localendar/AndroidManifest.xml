@@ -27,7 +27,11 @@
     <!-- Calendar permissions -->
     <uses-permission android:name="android.permission.READ_CALENDAR" />
     <uses-permission android:name="android.permission.WRITE_CALENDAR" />
-
+    
+    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS"/> 
+    <!-- Install/Unistall shortcut permissions -->
+    <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
+	<uses-permission android:name="com.android.launcher.permission.UNINSTALL_SHORTCUT"/>
     <application
         android:allowBackup="true"
         android:icon="@drawable/localendar_logo"
@@ -38,7 +42,6 @@
             android:theme="@android:style/Theme.Black.NoTitleBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

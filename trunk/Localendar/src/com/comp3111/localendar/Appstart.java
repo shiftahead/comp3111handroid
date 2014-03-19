@@ -3,7 +3,11 @@ package com.comp3111.localendar;
 import android.os.Bundle;
 import android.os.Handler;
 import android.app.Activity;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.Intent.ShortcutIconResource;
+import android.content.pm.ApplicationInfo;
 
 public class Appstart extends Activity{
 
@@ -12,7 +16,7 @@ public class Appstart extends Activity{
 		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.appstart);
-		
+				
 		new Handler().postDelayed(new Runnable(){
 		@Override
 		public void run(){
@@ -24,5 +28,6 @@ public class Appstart extends Activity{
 	
    }
    
-		
+	
+	
 }
