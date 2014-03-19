@@ -20,10 +20,13 @@ import android.app.Activity;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.location.Address;
 import android.location.Geocoder;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.preference.PreferenceManager;
 import android.provider.CalendarContract;
 import android.provider.CalendarContract.Calendars;
 import android.provider.CalendarContract.Events;
@@ -241,6 +244,7 @@ public class MainActivity extends Activity implements OnClickListener, OnChecked
 		//Set up map
 		MyLocalendar = new MyGoogleMap(this);
 		MyLocalendar.setMap(((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap());	
+		addShortcut();
 	}
 	
 	
@@ -250,6 +254,9 @@ public class MainActivity extends Activity implements OnClickListener, OnChecked
         getLatLongFromAddress(PlaceSearch);
         MyLocalendar.addmarker(latituedPlace, longitudePlace, true);
         Toast.makeText(this, PlaceSearch, Toast.LENGTH_SHORT).show();
+        // hide the keyboard
+		InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+		imm.hideSoftInputFromWindow(searchBox.getWindowToken(), 0);
     }
     
     @Override
@@ -274,9 +281,9 @@ public class MainActivity extends Activity implements OnClickListener, OnChecked
             }
                 break;  
             case R.id.settings_button: {
-            		searchBoxShown = false;
-        		    searchBox.setVisibility(View.INVISIBLE);
-        		    searchIcon.setVisibility(View.INVISIBLE);
+            	searchBoxShown = false;
+        		searchBox.setVisibility(View.INVISIBLE);
+        		searchIcon.setVisibility(View.INVISIBLE);
             	
                 pager.setCurrentItem(2);  
                 overridePendingTransition(R.anim.right_in, R.anim.right_out);
@@ -308,18 +315,18 @@ public class MainActivity extends Activity implements OnClickListener, OnChecked
 			break;
     	
     	
-			case R.id.about_us_arrow:
-			case R.id.about_us: {
-				Intent intent = new Intent (this, AboutusActivity.class);			
-				startActivity(intent);
-				overridePendingTransition(R.anim.right_in, R.anim.right_out);
+		case R.id.about_us_arrow:
+		case R.id.about_us: {
+			Intent intent = new Intent (this, AboutusActivity.class);			
+			startActivity(intent);
+			overridePendingTransition(R.anim.right_in, R.anim.right_out);
 		}
-			break;
-			case R.id.my_account_arrow:
-			case R.id.my_account: {
-				Intent intent = new Intent (this, SigninActivity.class);			
-				startActivity(intent);
-				overridePendingTransition(R.anim.right_in, R.anim.right_out);
+		break;
+		case R.id.my_account_arrow:
+		case R.id.my_account: {
+			Intent intent = new Intent (this, SigninActivity.class);			
+			startActivity(intent);
+			overridePendingTransition(R.anim.right_in, R.anim.right_out);
 		}
 			break;
     	}
@@ -533,5 +540,24 @@ public class MainActivity extends Activity implements OnClickListener, OnChecked
 	  	intent.setData(builder.build());
 	  	startActivity(intent);
     }
+    
+    private void addShortcut()
+	{
+		Intent shortcutIntent = new Intent("com.android.launcher.action.INSTALL_SHORTCUT");
+        String title = getResources().getString(R.string.app_name); 
+        Parcelable icon = Intent.ShortcutIconResource.fromContext(getApplicationContext(), R.drawable.localendar_logo);
+        Intent intent = new Intent(getApplicationContext(), Appstart.class); 
+        intent.setAction(Intent.ACTION_MAIN);
+        //shortcutIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        //shortcutIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        shortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_NAME, title); 
+        shortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE, icon);
+        shortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, intent);  
+        shortcutIntent.putExtra("duplicate", false); 
+        getApplicationContext().sendBroadcast(shortcutIntent);
+        SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(this).edit();
+        editor.putBoolean("isShortcutCreated", true);
+        editor.commit();
+	}
 
 }
