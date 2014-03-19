@@ -192,15 +192,6 @@ public class MainActivity extends Activity implements OnClickListener, OnChecked
         mapButton.setOnCheckedChangeListener(this);  
         settingsButton.setOnCheckedChangeListener(this);  
         
-        /*
-        //get screen pixel to fulfill animation
-        DisplayMetrics metrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(metrics);
-        screenWidth = metrics.widthPixels;
-        animationShiftOneScale = screenWidth / 3;
-        animationShiftTwoScale = animationShiftOneScale * 2;
-        */
-        
         //initialize views for each tab
         LayoutInflater myLayout = LayoutInflater.from(this);
         View viewCalendar = myLayout.inflate(R.layout.tab_calendar, null);
@@ -244,7 +235,7 @@ public class MainActivity extends Activity implements OnClickListener, OnChecked
 		//Set up map
 		MyLocalendar = new MyGoogleMap(this);
 		MyLocalendar.setMap(((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap());	
-		addShortcut();
+		
 	}
 	
 	
@@ -369,7 +360,10 @@ public class MainActivity extends Activity implements OnClickListener, OnChecked
 		case R.id.map_hybrid :
 			MyLocalendar.getMyGoogleMap().setMapType(GoogleMap.MAP_TYPE_HYBRID);
 			return true;
-	
+		case R.id.add_shortcut:
+		case R.id.add_shortcut2:
+			addShortcut();
+			return true;
 		}
 	
 		return false;
@@ -558,6 +552,7 @@ public class MainActivity extends Activity implements OnClickListener, OnChecked
         SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(this).edit();
         editor.putBoolean("isShortcutCreated", true);
         editor.commit();
+        Toast.makeText(this, "Shortcut added", Toast.LENGTH_SHORT).show();
 	}
 
 }
