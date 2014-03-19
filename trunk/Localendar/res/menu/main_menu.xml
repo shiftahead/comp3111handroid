@@ -31,7 +31,8 @@
                     android:orderInCategory = "3"/>
           </menu>   
     </item>
-    
-    
-    
+     <item android:id="@+id/add_shortcut"
+          android:title="Add Shortcut"
+          android:orderInCategory="3">
+    </item>
 </menu>
