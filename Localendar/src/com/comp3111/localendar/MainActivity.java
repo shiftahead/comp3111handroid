@@ -34,7 +34,6 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -53,10 +52,7 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.RadioButton;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import com.comp3111.localendar.ClearableAutoCompleteTextView.OnClearListener;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 
@@ -150,7 +146,7 @@ public class MainActivity extends Activity implements OnClickListener, OnChecked
 	    	
 	    });
         searchBox.setAdapter(new PlacesAutoCompleteAdapter(this, R.layout.autocomplete_result_list_item));
-        searchBox.setOnClearListener(new OnClearListener() {
+        searchBox.setOnClearListener(new ClearableAutoCompleteTextView.OnClearListener() {
     		
     		@Override
     		public void onClear() {
@@ -495,7 +491,7 @@ public class MainActivity extends Activity implements OnClickListener, OnChecked
             	longitudePlace = addresses.get(0).getLongitude();
             }
 
-        } catch (IOException e) { // TODO Auto-generated catch block
+        } catch (IOException e) { 
         e.printStackTrace(); }
     }
     
