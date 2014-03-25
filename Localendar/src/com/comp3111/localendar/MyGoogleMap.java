@@ -1,11 +1,24 @@
 package com.comp3111.localendar;
 
 
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.content.Context;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient;
@@ -20,6 +33,9 @@ import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.maps.android.PolyUtil;
 
 public class MyGoogleMap {
 	private GoogleMap localenderMap;
@@ -29,6 +45,8 @@ public class MyGoogleMap {
 	
 	//A test Marker
 	private Marker testMarker;
+	//A test polyline
+	private Polyline line;
 		    
 	public MyGoogleMap(Context c) {
 		mContext = c;
@@ -70,6 +88,10 @@ public class MyGoogleMap {
                                     return false;
                               }
                      });
+        
+//        drawline();
+        drawline(path("China", "Beijing"));
+        
         
         //set Marker called;
         setMarkerListener();
@@ -130,5 +152,125 @@ public class MyGoogleMap {
 			}
 		});
 	}
+	
+	public void drawline(){
+		List<LatLng> lat = new ArrayList<LatLng>(); 
+		lat.add(new LatLng(22.3375, 114.2630));		
+		lat.add(new LatLng(22.4515, 114.0081));
+		lat.add(new LatLng(22.3184, 114.1699));
+		
+		ArrayList<LatLng> array= new ArrayList<LatLng> (lat);
+		
+////		ShowPath path1=new ShowPath();
+//		List<LatLng> list = path("Brooklyn", "Queens");
+		
+		
+		line = localenderMap.addPolyline(new PolylineOptions()
+	    .addAll(lat)
+	         .width(65)
+	    .geodesic(true));
+	}
+	
+	public void drawline(List<LatLng> list){
+		List<LatLng> lat = new ArrayList<LatLng>(); 
+		lat.add(new LatLng(22.3375, 114.2630));		
+		lat.add(new LatLng(22.4515, 114.0081));
+		lat.add(new LatLng(22.3184, 114.1699));
+		
+		ArrayList<LatLng> array= new ArrayList<LatLng> (lat);
+		
+////		ShowPath path1=new ShowPath();
+//		List<LatLng> list = path("Brooklyn", "Queens");
+		
+		
+		line = localenderMap.addPolyline(new PolylineOptions()
+	    .addAll(list)
+	         .width(15)
+	    .geodesic(true));
+	}
+	
+    private static final String LOG_TAG = "Localendar";
+    private static final String OUT_JSON = "/json";
+//    private static final String API_KEY = "AIzaSyDMyI5sg3IptPBQm31tEmFn5mPDTKSw-Ag";
+    
+	private static final String DIRECTIONS_API_BASE = "http://maps.googleapis.com/maps/api/directions";
+	private static final String API_KEY = "AIzaSyC0-Vqt6_XSDsU57zjEnP6YMtB_S5JKqj0";
+	
+	
+
+    public List<LatLng> path(String input1, String input2) {
+    	
+    String resultList = new String();
+    List<LatLng> resultcoor = new ArrayList<LatLng>();
+	
+    HttpURLConnection conn = null;
+    StringBuilder jsonResults = new StringBuilder();
+    try {
+        StringBuilder sb = new StringBuilder(DIRECTIONS_API_BASE + OUT_JSON);
+        sb.append("?origin="+input1);
+        sb.append("&destination="+input2);
+        sb.append("&sensor=false");
+        
+
+        URL url = new URL(sb.toString());
+        conn = (HttpURLConnection) url.openConnection();
+        InputStreamReader in = new InputStreamReader(conn.getInputStream());
+
+        // Load the results into a StringBuilder
+        int read;
+        char[] buff = new char[1024];
+        while ((read = in.read(buff)) != -1) {
+            jsonResults.append(buff, 0, read);
+        }
+    } catch (MalformedURLException e) {
+        Log.e(LOG_TAG, "Error processing Places API URL", e);
+        return resultcoor;
+    } catch (IOException e) {
+        Log.e(LOG_TAG, "Error connecting to Places API", e);
+        return resultcoor;
+    } finally {
+        if (conn != null) {
+            conn.disconnect();
+        }
+    }
+
+    try {
+        // Create a JSON object hierarchy from the results
+        JSONObject jsonObj = new JSONObject(jsonResults.toString());
+        
+//\
+//        if(routeArray.size() > 0) {
+//            JSONObject routes = routeArray.getJSONObject(0);
+//            JSONObject overviewPolylines = routes.getJSONObject("overview_polyline");
+//            encodedString = overviewPolylines.getString("points");
+//
+//            List<LatLng> list = decodePoly(encodedString);
+//        }
+//        
+        
+        JSONArray routesJsonArray = jsonObj.getJSONArray("routes");
+        JSONObject routes = routesJsonArray.getJSONObject(0);
+        JSONObject overviewPolylines = routes.getJSONObject("overview_polyline");
+        resultList = overviewPolylines.getString("points");
+
+     
+        // 
+//        resultList = jsonObj.getString("routes").getString("overview_polyline").getString("points");
+        
+//        resultList = new ArrayList<String>(predsJsonArray.length());
+//        for (int i = 0; i < predsJsonArray.length(); i++) {
+//            resultList.add(predsJsonArray.getJSONObject(i).getString("points"));
+//        }
+    } catch (JSONException e) {
+        Log.e(LOG_TAG, "Cannot process JSON results", e);
+    }
+
+    resultcoor = PolyUtil.decode(resultList);
+    
+	return resultcoor;
+	
+    }
+	
+	
 	
 }
