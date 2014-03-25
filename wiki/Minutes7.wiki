@@ -26,19 +26,19 @@ The minutes of the last meeting were approved without amendment.
 
 == 3. Discussion Items ==
 
-*1. Task and deadline*
+===1. Task and deadline===
 
 || *No.* || *Task* || *Assigned to* || *Deadline* ||
 || 1. || Voice recognition  || WANG Ding|| Apr. 1 ||
-|| 2. ||  || ZHANG Tian || Apr.1  ||
+|| 2. || Test case || ZHANG Tian || Apr.1  ||
 || 3. || Calendar functions || YANG Ji || Apr. 1  ||
 || 4. || Implement test cases || All team members || Apr. 1 ||
 || 5. || Show path functions || TAM Shih Lung || Apr. 1 ||
 || 6. || time based reminder & Location based reminder || ZENG Xiong || Apr. 1 ||
 
-*2. Presentation.*
+===2. Presentation===
  
-Meeting on April.6 to discuss the presentation and coverage report.
+ Meeting on April.6 to discuss the presentation and coverage report.
 
 
 == 5. Meeting adjournment and next meeting ==
