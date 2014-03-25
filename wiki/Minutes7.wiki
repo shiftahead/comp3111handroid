@@ -27,6 +27,7 @@ The minutes of the last meeting were approved without amendment.
 == 3. Discussion Items ==
 
 *1. Task and deadline*
+
 || *No.* || *Task* || *Assigned to* || *Deadline* ||
 || 1. || Voice recognition  || WANG Ding|| Apr. 1 ||
 || 2. ||  || ZHANG Tian || Apr.1  ||
