@@ -20,7 +20,7 @@ The minutes of the last meeting were approved without amendment.
 || Zhang Tian || Code maintainess ||
 || Wang Ding  || Search auto-complete, ongoing ||
 || Yang Ji       || User interface framework updated, ongoing  ||
-|| Zeng Xiong  || Location based reminder, ongoing ||
+|| Zeng Xiong  || Reminder, minor UI improvement||
 || TAM Shih Lung || Show path function, ongoing ||
  
 
