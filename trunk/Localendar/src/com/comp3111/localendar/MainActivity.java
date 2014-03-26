@@ -26,6 +26,7 @@ import android.location.Geocoder;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.os.StrictMode;
 import android.preference.PreferenceManager;
 import android.provider.CalendarContract;
 import android.provider.CalendarContract.Calendars;
@@ -53,8 +54,11 @@ import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.Toast;
+
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.maps.android.PolyUtil;
 
 
 public class MainActivity extends Activity implements OnClickListener, OnCheckedChangeListener, OnItemClickListener {
@@ -100,7 +104,9 @@ public class MainActivity extends Activity implements OnClickListener, OnChecked
     private static final String PLACES_API_BASE = "https://maps.googleapis.com/maps/api/place";
     private static final String TYPE_AUTOCOMPLETE = "/autocomplete";
     private static final String OUT_JSON = "/json";
-    private static final String API_KEY = "AIzaSyAQ_VeQa3QVGxD3C7UxFAjHTF-bUsSC6Y4";
+    private static final String API_KEY = "AIzaSyC0-Vqt6_XSDsU57zjEnP6YMtB_S5JKqj0";
+    
+   
     
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -108,6 +114,13 @@ public class MainActivity extends Activity implements OnClickListener, OnChecked
 		// map activities  
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		//bad practice, just for testing purpose
+		if (android.os.Build.VERSION.SDK_INT > 9) {
+		    StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+		    StrictMode.setThreadPolicy(policy);
+		}
+		
 		
 		//hide the keyboard
 		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN); 
@@ -231,6 +244,8 @@ public class MainActivity extends Activity implements OnClickListener, OnChecked
 		//Set up map
 		MyLocalendar = new MyGoogleMap(this);
 		MyLocalendar.setMap(((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap());	
+		
+//		MyLocalendar.drawline(path("", ""));
 		
 	}
 	
@@ -550,5 +565,11 @@ public class MainActivity extends Activity implements OnClickListener, OnChecked
         editor.commit();
         Toast.makeText(this, "Shortcut added", Toast.LENGTH_SHORT).show();
 	}
+    
+    
+    // json?origin=Toronto&destination=Montreal&sensor=false&key=API_KEY
+    
+
+    
 
 }
