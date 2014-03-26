@@ -92,6 +92,10 @@ public class MyCalendar extends Fragment {
 		@Override
 		public void onClick(View v) {
 			if(getResources().getResourceEntryName(v.getId()).equals("confirm_add")) {
+				if(eventTitle.getText().toString().equals("")) {
+					Toast.makeText(instance.getActivity(), "Please input the title", Toast.LENGTH_SHORT).show();
+					return;
+				}
 				add(); 
 				refresh();
 			}
