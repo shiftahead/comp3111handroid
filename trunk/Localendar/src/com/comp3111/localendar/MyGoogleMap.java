@@ -36,6 +36,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
+//import com.google.maps.android.PolyUtil;
+
 
 public class MyGoogleMap {
 	private GoogleMap localenderMap;
@@ -90,7 +92,7 @@ public class MyGoogleMap {
                      });
         
 //        drawline();
-        drawline(path("China", "Beijing"));
+        //drawline(path("China", "Beijing"));
         
         
         //set Marker called;
@@ -153,6 +155,7 @@ public class MyGoogleMap {
 		});
 	}
 	
+
 	public void drawline(){
 		List<LatLng> lat = new ArrayList<LatLng>(); 
 		lat.add(new LatLng(22.3375, 114.2630));		
@@ -310,5 +313,5 @@ public class MyGoogleMap {
     }
     
 	
-	
+
 }

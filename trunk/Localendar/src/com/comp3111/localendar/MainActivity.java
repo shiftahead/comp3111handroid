@@ -25,6 +25,7 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.os.Parcelable;
 import android.os.StrictMode;
 import android.preference.PreferenceManager;
@@ -52,13 +53,14 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.maps.android.PolyUtil;
+//import com.google.maps.android.PolyUtil;
 
 
 public class MainActivity extends Activity implements OnClickListener, OnCheckedChangeListener, OnItemClickListener {
@@ -67,8 +69,8 @@ public class MainActivity extends Activity implements OnClickListener, OnChecked
 	private ActionBar actionBar;
 	private NonSwipeableViewPager pager;	//view pager
 	private int currentTabIndex;	//tab index, maps is set default 
-	private RadioButton mapButton, settingsButton;
-	private Button addButton, calendarButton;
+	private RadioButton calendarButton, mapButton, settingsButton;
+	private Button addButton;
 	private ClearableAutoCompleteTextView searchBox;
 	private boolean searchBoxShown;
 	private ImageView searchIcon;
@@ -192,12 +194,12 @@ public class MainActivity extends Activity implements OnClickListener, OnChecked
         pager.setOnPageChangeListener(new MyOnPageChangeListener());
         
         addButton = (Button) findViewById(R.id.add_button);
-        calendarButton = (Button) findViewById(R.id.calendar_button);
+        calendarButton = (RadioButton) findViewById(R.id.calendar_button);
         mapButton = (RadioButton) findViewById(R.id.map_button);
         settingsButton = (RadioButton) findViewById(R.id.settings_button);
         
         addButton.setOnClickListener(this);
-        calendarButton.setOnClickListener(this);
+        calendarButton.setOnCheckedChangeListener(this);  
         mapButton.setOnCheckedChangeListener(this);  
         settingsButton.setOnCheckedChangeListener(this);  
         
@@ -244,8 +246,8 @@ public class MainActivity extends Activity implements OnClickListener, OnChecked
 		//Set up map
 		MyLocalendar = new MyGoogleMap(this);
 		MyLocalendar.setMap(((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap());	
-		
-//		MyLocalendar.drawline(path("", ""));
+	
+		MyLocalendar.drawline(MyLocalendar.path("", ""));
 		
 	}
 	
@@ -266,18 +268,27 @@ public class MainActivity extends Activity implements OnClickListener, OnChecked
 		if (isChecked) {  
 			//invalidateOptionsMenu();
             switch (buttonView.getId()) {  
-              
+            case R.id.calendar_button: {
+            	searchBoxShown = false;
+        		searchBox.setVisibility(View.INVISIBLE);
+        		searchIcon.setVisibility(View.INVISIBLE);
+            	
+                pager.setCurrentItem(0);  
+                overridePendingTransition(R.anim.left_in, R.anim.left_out);
+                currentTabIndex = 0;
+            }
+            	break;
             case R.id.map_button: {
                 pager.setCurrentItem(1);
                 searchBoxShown = true;
         	    searchBox.setVisibility(View.VISIBLE);
         	    searchIcon.setVisibility(View.GONE);
-                /*
+                
                 if (currentTabIndex == 2)
                 	overridePendingTransition(R.anim.left_in, R.anim.left_out);
                 else if (currentTabIndex == 0)
                 	overridePendingTransition(R.anim.right_in, R.anim.right_out);
-                	*/
+                	
                 overridePendingTransition(R.anim.left_in, R.anim.left_out);
                 currentTabIndex = 1;
             }
@@ -301,22 +312,23 @@ public class MainActivity extends Activity implements OnClickListener, OnChecked
 		
     	switch(v.getId()) {
 		case R.id.add_button: {
-			/*
-			Intent intent = new Intent(this, AddEventActivity.class);
+			
+			Intent intent = new Intent(this, MyCalendar.AddEventActivity.class);
 			startActivity(intent);
 			overridePendingTransition(R.anim.left_in, R.anim.left_out);
-			*/
-			startEventDialog();
+			
+			//startEventDialog();
 			overridePendingTransition(R.anim.left_in, R.anim.left_out);
 		}
 			break;
+			/*
 		case R.id.calendar_button: {
 			startCalendar();
 			overridePendingTransition(R.anim.left_in, R.anim.left_out);
 		}
 			break;
     	
-    	
+    	*/
 		case R.id.about_us_arrow:
 		case R.id.about_us: {
 			Intent intent = new Intent (this, AboutusActivity.class);			
@@ -496,7 +508,7 @@ public class MainActivity extends Activity implements OnClickListener, OnChecked
     }
 
     //Input a string and get the place's Latitude and Longtitude
-    private void getLatLongFromAddress(String youraddress) {
+    public void getLatLongFromAddress(String youraddress) {
     	Geocoder geoCoder = new Geocoder(this);
     	
     	try {
