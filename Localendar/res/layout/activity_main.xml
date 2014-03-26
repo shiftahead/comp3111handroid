@@ -54,7 +54,7 @@
 		                android:drawableTop="@drawable/tab_add"
 		                android:text="@string/add" />
         		    
-		            <Button
+		            <RadioButton
 		                android:id="@+id/calendar_button"
 		                style="@style/main_tab_bottom"
 		                android:layout_marginTop="2.0dip"
@@ -75,111 +75,6 @@
 		                android:drawableTop="@drawable/tab_settings" 
 		                style="@style/main_tab_bottom" />  
 		            </RadioGroup>
-        	<!--  
-             <LinearLayout
-            	android:layout_width="wrap_content"
-            	android:layout_height="wrap_content"
-              	android:gravity="center_horizontal"
-              	android:orientation="vertical"
-              	android:layout_weight="1">               	
-                <ImageView
-            		android:id="@+id/add_event_button"
-        			android:layout_width="wrap_content"
-        			android:layout_height="wrap_content"        	     	
-        			android:scaleType="matrix"
-        			android:clickable="true"
-        			android:onClick="onClick"
-        			android:contentDescription="@string/newEvent"
-        			android:src="@drawable/tab_add_normal" />
-           		<TextView
-                    android:id="@+id/add_event_text"
-            		android:layout_width="wrap_content"
-            		android:layout_height="wrap_content"
-            		android:clickable="true"
-            		android:onClick="onClick"
-            		android:text="Add"
-            		android:textColor="@android:color/black"
-            		android:textSize="10sp" />                
-        	 </LinearLayout>
-             
-             <LinearLayout
-            	android:layout_width="wrap_content"
-            	android:layout_height="wrap_content"
-              	android:gravity="center_horizontal"
-              	android:orientation="vertical"
-              	android:layout_weight="1">               	
-                <ImageView
-            		android:id="@+id/img_list"
-        			android:layout_width="fill_parent"
-        			android:layout_height="wrap_content"   
-        			android:contentDescription="@string/eventList"      	     	
-        			android:scaleType="matrix"
-        			android:clickable="true"
-        			android:src="@drawable/tab_calendar_normal" />
-            	<TextView
-                    android:id="@+id/text_list"
-            		android:layout_width="fill_parent"
-            		android:layout_height="wrap_content"
-            		android:clickable="true"
-       				android:onClick="onClick"
-            		android:text="Calendar"
-            		android:textColor="@android:color/black"
-            		android:textSize="10sp" />    
-        	 </LinearLayout>
-        	 
-        	 <LinearLayout
-            	android:layout_width="wrap_content"
-            	android:layout_height="wrap_content"
-              	android:gravity="center_horizontal"
-              	android:orientation="vertical"
-              	android:layout_weight="1">               	
-                <ImageView
-            		android:id="@+id/img_map"
-        			android:layout_width="wrap_content"
-        			android:layout_height="wrap_content"  
-        			android:contentDescription="@string/map"      	     	
-
-        			android:scaleType="matrix"
-        			android:clickable="true"
-        			android:src="@drawable/tab_map_normal" />
-            	<TextView
-                    android:id="@+id/text_map"
-            		android:layout_width="wrap_content"
-            		android:layout_height="wrap_content"
-            		android:clickable="true"
-            		android:onClick="onClick"
-            		android:text="Map"
-            		android:textColor="@android:color/black"
-            		android:textSize="10sp" />               
-        	 </LinearLayout>
-        	 
-        	 
-        	 <LinearLayout
-            	android:layout_width="wrap_content"
-            	android:layout_height="wrap_content"
-              	android:gravity="center_horizontal"
-              	android:orientation="vertical"
-              	android:layout_weight="1">               	
-                <ImageView
-            		android:id="@+id/img_settings"
-        			android:layout_width="wrap_content"
-        			android:layout_height="wrap_content"
-        			android:contentDescription="@string/settings"        	     	
-
-        			android:scaleType="matrix"
-        			android:clickable="true"
-        			android:src="@drawable/tab_settings_normal" />
-           		<TextView
-                    android:id="@+id/text_settings"
-            		android:layout_width="wrap_content"
-            		android:layout_height="wrap_content"
-            		android:clickable="true"
-            		android:onClick="onClick"
-            		android:text="Settings"
-            		android:textColor="@android:color/black"
-            		android:textSize="10sp" />            
-        	 </LinearLayout>
-        	 -->
         	 
     	</LinearLayout>     
        
