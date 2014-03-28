@@ -25,7 +25,7 @@
    	        android:layout_height="wrap_content"
    	        android:padding="8dp"
    	        android:textColor="#000"
-   	        android:textSize="12sp" />
+   	        android:textSize="18sp" />
 
    	    
    	    <TextView
@@ -42,7 +42,7 @@
    	        android:layout_height="wrap_content"
    	        android:padding="8dp"
    	        android:textColor="#000"
-   	        android:textSize="12sp" />
+   	        android:textSize="18sp" />
 
    	    <GridLayout
    	        android:layout_width="match_parent"
@@ -79,7 +79,55 @@
 	   	        android:scaleX="0.8"
 	   	        android:scaleY="0.8" />
    	    </GridLayout>
-
+   	    
+		<TextView
+   	        android:layout_width="wrap_content"
+   	        android:layout_height="wrap_content"
+   	        android:padding="8dp"
+   	        android:text="Duration"
+   	        android:textColor="#000"
+   	        android:textSize="18sp" />
+		
+		<GridLayout
+   	        android:layout_width="match_parent"
+   	        android:layout_height="wrap_content"
+   	        android:columnCount="4"
+    		android:rowCount="1"
+    		android:orientation="horizontal" >
+   	        <EditText
+	   	        android:id="@+id/duration_hour"
+	   	        android:layout_width="30dp"
+	   	        android:layout_height="wrap_content"
+	   	        android:padding="8dp"
+	   	        android:textColor="#000"
+	   	        android:textSize="18sp"
+	   	        android:inputType="number" />
+   	        <TextView
+	   	        android:layout_width="wrap_content"
+	   	        android:layout_height="wrap_content"
+	   	        android:padding="8dp"
+	   	        android:text="Hour"
+	   	        android:textColor="#000"
+	   	        android:textSize="18sp" />
+	   	        
+   	        <EditText
+	   	        android:id="@+id/duration_minute"
+	   	        android:layout_width="30dp"
+	   	        android:layout_height="wrap_content"
+	   	        android:padding="8dp"
+	   	        android:textColor="#000"
+	   	        android:textSize="18sp"
+	   	        android:inputType="number" />
+		    <TextView
+	   	        android:layout_width="wrap_content"
+	   	        android:layout_height="wrap_content"
+	   	        android:padding="8dp"
+	   	        android:text="Minute"
+	   	        android:textColor="#000"
+	   	        android:textSize="18sp" />
+		    
+   	    </GridLayout>
+   	        
    	    <TextView
    	        android:layout_width="wrap_content"
    	        android:layout_height="wrap_content"
@@ -94,7 +142,7 @@
    	        android:layout_height="wrap_content"
    	        android:padding="8dp"
    	        android:textColor="#000"
-   	        android:textSize="12sp" />
+   	        android:textSize="18sp" />
    	    
    	    <TextView
    	        android:layout_width="wrap_content"
