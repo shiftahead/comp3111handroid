@@ -20,17 +20,20 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.TimePicker;
 import android.widget.Toast;
 import static android.provider.BaseColumns._ID;
 import static com.comp3111.localendar.DatabaseConstants.TABLE_NAME;
 import static com.comp3111.localendar.DatabaseConstants.TITLE;
 import static com.comp3111.localendar.DatabaseConstants.DESCRIPTION;
-import static com.comp3111.localendar.DatabaseConstants.YEAR;
-import static com.comp3111.localendar.DatabaseConstants.MONTH;
-import static com.comp3111.localendar.DatabaseConstants.DAY;
+import static com.comp3111.localendar.DatabaseConstants.DATE;
+import static com.comp3111.localendar.DatabaseConstants.TIME;
+import static com.comp3111.localendar.DatabaseConstants.DURATION_HOUR;
+import static com.comp3111.localendar.DatabaseConstants.DURATION_MINUTE;
 import static com.comp3111.localendar.DatabaseConstants.TRANSPORTATION;
 import static com.comp3111.localendar.DatabaseConstants.LOCATION;
 import static com.comp3111.localendar.DatabaseConstants.COMPULSORY;
@@ -63,11 +66,11 @@ public class MyCalendar extends Fragment {
 	private static void refresh() {
 		eventList.setAdapter(null);
 		
-		String[] from = {_ID, TITLE, DESCRIPTION};
+		String[] from = {_ID, TITLE, DESCRIPTION, DATE, TIME, DURATION_HOUR, DURATION_MINUTE};
 		SQLiteDatabase db = dbhelper.getReadableDatabase();
 		cursor = db.query(TABLE_NAME, from, null, null, null, null, null);
 		
-		int[] to = {R.id.item_id, R.id.item_title, R.id.item_description};
+		int[] to = {R.id.item_id, R.id.item_title, R.id.item_description, R.id.item_date, R.id.item_time, R.id.item_dhour, R.id.item_dminute};
 		@SuppressWarnings("deprecation")
 		final SimpleCursorAdapter adapter = new SimpleCursorAdapter(instance.getActivity(), R.layout.event_listitem, cursor, from, to);
         eventList.setAdapter(adapter);
@@ -79,6 +82,16 @@ public class MyCalendar extends Fragment {
 		
 		private EditText eventTitle;
 		private EditText eventDescription;
+		private DatePicker eventDate;
+		private TimePicker eventTime;
+		private EditText eventHour;
+		private EditText eventMinute;
+		//private String eventLocation;
+		//private String eventVehicle;
+		//private boolean eventCompulsory;
+		
+		private String title, description;
+		private int year, month, day, hour, minute, dhour, dminute;
 		
 		protected void onCreate(Bundle savedInstanceState) {	
 			super.onCreate(savedInstanceState);
@@ -87,15 +100,37 @@ public class MyCalendar extends Fragment {
 			getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN); 
 			eventTitle = (EditText) findViewById(R.id.event_title);
 			eventDescription = (EditText) findViewById(R.id.event_description);
+			eventDate = (DatePicker) findViewById(R.id.date_picker);
+			eventTime = (TimePicker) findViewById(R.id.time_picker);
+			eventHour = (EditText) findViewById(R.id.duration_hour);
+			eventMinute = (EditText) findViewById(R.id.duration_minute);
 		}
 
 		@Override
 		public void onClick(View v) {
 			if(getResources().getResourceEntryName(v.getId()).equals("confirm_add")) {
-				if(eventTitle.getText().toString().equals("")) {
+				title = eventTitle.getText().toString();
+				if(title.equals("")) {	
 					Toast.makeText(instance.getActivity(), "Please input the title", Toast.LENGTH_SHORT).show();
 					return;
 				}
+				description = eventDescription.getText().toString();
+				year = eventDate.getYear();
+				month = eventDate.getMonth();
+				day = eventDate.getDayOfMonth();
+				hour = eventTime.getCurrentHour();
+				minute = eventTime.getCurrentMinute();
+				if(eventHour.getText().toString().equals("")) {
+					Toast.makeText(instance.getActivity(), "Please input the duration hour", Toast.LENGTH_SHORT).show();
+					return;
+				}
+				dhour = Integer.parseInt((eventHour.getText().toString()));
+				if(eventMinute.getText().toString().equals("")) {
+					Toast.makeText(instance.getActivity(), "Please input the duration minute", Toast.LENGTH_SHORT).show();
+					return;
+				}
+				dminute = Integer.parseInt((eventMinute.getText().toString()));
+				
 				add(); 
 				refresh();
 			}
@@ -106,9 +141,12 @@ public class MyCalendar extends Fragment {
 		private void add(){
 	        SQLiteDatabase db = dbhelper.getWritableDatabase();
 	        ContentValues values = new ContentValues();
-	        values.put(TITLE, eventTitle.getText().toString());
-	        values.put(DESCRIPTION, eventDescription.getText().toString());
-	        //values.put(LOCATION, editEmail.getText().toString());
+	        values.put(TITLE, title);
+	        values.put(DESCRIPTION, description);
+	        values.put(DATE, Integer.toString(year) + Integer.toString(month) + Integer.toString(day));
+	        values.put(TIME, Integer.toString(hour) + Integer.toString(minute));
+	        values.put(DURATION_HOUR, dhour);
+	        values.put(DURATION_MINUTE, dminute);
 	        db.insert(TABLE_NAME, null, values);
 	    }
 		

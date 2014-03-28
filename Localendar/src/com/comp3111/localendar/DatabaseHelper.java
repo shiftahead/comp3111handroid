@@ -7,9 +7,10 @@ import static android.provider.BaseColumns._ID;
 import static com.comp3111.localendar.DatabaseConstants.TABLE_NAME;
 import static com.comp3111.localendar.DatabaseConstants.TITLE;
 import static com.comp3111.localendar.DatabaseConstants.DESCRIPTION;
-import static com.comp3111.localendar.DatabaseConstants.YEAR;
-import static com.comp3111.localendar.DatabaseConstants.MONTH;
-import static com.comp3111.localendar.DatabaseConstants.DAY;
+import static com.comp3111.localendar.DatabaseConstants.DATE;
+import static com.comp3111.localendar.DatabaseConstants.TIME;
+import static com.comp3111.localendar.DatabaseConstants.DURATION_HOUR;
+import static com.comp3111.localendar.DatabaseConstants.DURATION_MINUTE;
 import static com.comp3111.localendar.DatabaseConstants.TRANSPORTATION;
 import static com.comp3111.localendar.DatabaseConstants.LOCATION;
 import static com.comp3111.localendar.DatabaseConstants.COMPULSORY;
@@ -25,22 +26,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-    	/*
+    	
         final String INIT_TABLE = "CREATE TABLE " + TABLE_NAME + " (" +
                                   _ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                                   TITLE + " TEXT, " +
                                   DESCRIPTION + " TEXT, " +
-                                  YEAR + " INTEGER, " +
-                                  MONTH + " INTEGER, " +
-                                  DAY + " DAY, " +
+                                  DATE + " TEXT, " +
+                                  TIME + " TEXT, " +
+                                  DURATION_HOUR + " INTEGER, " +
+                                  DURATION_MINUTE + " INTEGER, " +
                                   TRANSPORTATION + " TEXT, " +
                                   LOCATION + " TEXT, " +
                                   COMPULSORY + " TEXT);"; 
-                                  */
-    	final String INIT_TABLE = "CREATE TABLE " + TABLE_NAME + " (" +
-                _ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                TITLE + " TEXT, " +
-                DESCRIPTION + " TEXT); ";
+                                  
+    	
         db.execSQL(INIT_TABLE);
     }
 

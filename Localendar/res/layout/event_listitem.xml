@@ -11,7 +11,7 @@
                 android:layout_height="wrap_content"   
                 android:layout_width="fill_parent"   
                 android:id="@+id/item_title"   
-                android:textSize="30sp">  
+                android:textSize="18sp">  
         </TextView>  
         <TextView   
                 android:layout_height="wrap_content"   
@@ -22,8 +22,44 @@
         <TextView   
                 android:layout_height="wrap_content"   
                 android:layout_width="fill_parent"   
+                android:id="@+id/item_date"
+                android:textSize="12sp">  
+        </TextView>
+        <TextView   
+                android:layout_height="wrap_content"   
+                android:layout_width="fill_parent"   
+                android:id="@+id/item_time"
+                android:textSize="12sp">  
+        </TextView>
+        <TextView   
+                android:layout_height="wrap_content"   
+                android:layout_width="wrap_content"   
+                android:id="@+id/item_dhour"
+                android:textSize="12sp">  
+        </TextView> 
+        <TextView   
+                android:layout_height="wrap_content"   
+                android:layout_width="wrap_content"   
+                android:text=" Hour"
+                android:textSize="12sp">  
+        </TextView> 
+        <TextView   
+                android:layout_height="wrap_content"   
+                android:layout_width="wrap_content"   
+                android:id="@+id/item_dminute"
+                android:textSize="12sp">  
+        </TextView>
+        <TextView   
+                android:layout_height="wrap_content"   
+                android:layout_width="wrap_content"   
+                android:text=" Minute"
+                android:textSize="12sp"> 
+        </TextView>
+        <TextView   
+                android:layout_height="wrap_content"   
+                android:layout_width="wrap_content"   
                 android:id="@+id/item_id"
                 android:textSize="5sp"
-                android:textColor = "@android:color/transparent">  
-        </TextView>    
+                android:textColor="@android:color/transparent"> 
+        </TextView>
 </LinearLayout>
