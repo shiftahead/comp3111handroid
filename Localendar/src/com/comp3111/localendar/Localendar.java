@@ -116,10 +116,10 @@ public class Localendar extends Activity implements OnClickListener, OnCheckedCh
         
 		//set action bar
         actionBar = getActionBar();
-        
         actionBar.setDisplayShowCustomEnabled(true);
         actionBar.setDisplayShowTitleEnabled(false);
         actionBar.setDisplayUseLogoEnabled(false);
+        
         LayoutInflater inflator = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View actionBarView = inflator.inflate(R.layout.map_actionbar, null);
         
@@ -309,7 +309,8 @@ public class Localendar extends Activity implements OnClickListener, OnCheckedCh
 			startActivity(intent);
 			overridePendingTransition(R.anim.right_in, R.anim.right_out);
 		}
-		break;
+			break;
+			
 		case R.id.my_account_arrow:
 		case R.id.my_account: {
 			Intent intent = new Intent (this, SigninActivity.class);			
@@ -329,7 +330,7 @@ public class Localendar extends Activity implements OnClickListener, OnCheckedCh
 	public boolean onCreateOptionsMenu(Menu menu) {
 		
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main_menu, menu);
+		getMenuInflater().inflate(R.menu.map_menu, menu);
 		return true;
 	}
 	
@@ -337,11 +338,14 @@ public class Localendar extends Activity implements OnClickListener, OnCheckedCh
 	public boolean onPrepareOptionsMenu(Menu menu) {
 	    menu.clear();
 	    
-	    if(currentTabIndex == 1) {
-	    	getMenuInflater().inflate(R.menu.main_menu, menu);
+	    if(currentTabIndex == 0) {
+	    	getMenuInflater().inflate(R.menu.calendar_menu, menu);
 	    }
-	    else {
-	    	getMenuInflater().inflate(R.menu.calendar, menu);
+	    else if(currentTabIndex == 1) {
+	    	getMenuInflater().inflate(R.menu.map_menu, menu);
+	    }
+	    else if (currentTabIndex == 2) {
+	    	getMenuInflater().inflate(R.menu.settings_menu, menu);
 	    }
 	    return super.onPrepareOptionsMenu(menu);
 	}
@@ -358,7 +362,6 @@ public class Localendar extends Activity implements OnClickListener, OnCheckedCh
 			MyGoogleMap.localenderMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
 			return true;
 		case R.id.add_shortcut:
-		case R.id.add_shortcut2:
 			addShortcut();
 			return true;
 		}

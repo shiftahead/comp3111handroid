@@ -96,7 +96,7 @@
     		android:orientation="horizontal" >
    	        <EditText
 	   	        android:id="@+id/duration_hour"
-	   	        android:layout_width="30dp"
+	   	        android:layout_width="60dp"
 	   	        android:layout_height="wrap_content"
 	   	        android:padding="8dp"
 	   	        android:textColor="#000"
@@ -112,7 +112,7 @@
 	   	        
    	        <EditText
 	   	        android:id="@+id/duration_minute"
-	   	        android:layout_width="30dp"
+	   	        android:layout_width="60dp"
 	   	        android:layout_height="wrap_content"
 	   	        android:padding="8dp"
 	   	        android:textColor="#000"

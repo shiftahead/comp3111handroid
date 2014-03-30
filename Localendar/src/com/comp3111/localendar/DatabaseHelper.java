@@ -7,7 +7,9 @@ import static android.provider.BaseColumns._ID;
 import static com.comp3111.localendar.DatabaseConstants.TABLE_NAME;
 import static com.comp3111.localendar.DatabaseConstants.TITLE;
 import static com.comp3111.localendar.DatabaseConstants.DESCRIPTION;
-import static com.comp3111.localendar.DatabaseConstants.DATE;
+import static com.comp3111.localendar.DatabaseConstants.YEAR;
+import static com.comp3111.localendar.DatabaseConstants.MONTH;
+import static com.comp3111.localendar.DatabaseConstants.DAY;
 import static com.comp3111.localendar.DatabaseConstants.HOUR;
 import static com.comp3111.localendar.DatabaseConstants.MINUTE;
 import static com.comp3111.localendar.DatabaseConstants.DURATION_HOUR;
@@ -32,11 +34,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                                   _ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                                   TITLE + " TEXT, " +
                                   DESCRIPTION + " TEXT, " +
-                                  DATE + " TEXT, " +
-                                  HOUR + " INTEGER, " +
-                                  MINUTE + " INTEGER, " +
-                                  DURATION_HOUR + " INTEGER, " +
-                                  DURATION_MINUTE + " INTEGER, " +
+                                  YEAR + " TEXT, " +
+                                  MONTH + " TEXT, " +
+                                  DAY + " TEXT, " +
+                                  HOUR + " TEXT, " +
+                                  MINUTE + " TEXT, " +
+                                  DURATION_HOUR + " TEXT, " +
+                                  DURATION_MINUTE + " TEXT, " +
                                   TRANSPORTATION + " TEXT, " +
                                   LOCATION + " TEXT, " +
                                   COMPULSORY + " TEXT);"; 

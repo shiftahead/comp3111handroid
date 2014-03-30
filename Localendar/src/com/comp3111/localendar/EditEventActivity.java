@@ -40,7 +40,7 @@ import static com.comp3111.localendar.DatabaseConstants.LOCATION;
 import static com.comp3111.localendar.DatabaseConstants.COMPULSORY;
 
 
-public class AddEventActivity extends Activity implements OnClickListener{
+public class EditEventActivity extends Activity implements OnClickListener{
 	
 	private EditText eventTitle;
 	private EditText eventDescription;
@@ -52,12 +52,17 @@ public class AddEventActivity extends Activity implements OnClickListener{
 	//private String eventVehicle;
 	//private boolean eventCompulsory;
 	
+	private String id;
 	private String title, description;
 	private String year, month, day, hour, minute, dhour, dminute;
+	
+	private SQLiteDatabase db;
 	
 	protected void onCreate(Bundle savedInstanceState) {	
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.add_event_dialog);
+		Intent intent = getIntent();
+		id = intent.getExtras().getString("ID");
 		getActionBar().hide();
 		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE); 
 		eventTitle = (EditText) findViewById(R.id.event_title);
@@ -67,6 +72,34 @@ public class AddEventActivity extends Activity implements OnClickListener{
 		eventHour = (EditText) findViewById(R.id.duration_hour);
 		eventMinute = (EditText) findViewById(R.id.duration_minute);
 		eventTime.setIs24HourView(true);
+		
+		db = MyCalendar.dbhelper.getReadableDatabase();
+		Cursor cursor = db.rawQuery(
+	               "SELECT " + TITLE + ", " + DESCRIPTION + ", "
+	            		   + YEAR + ", " + MONTH + ", " + DAY +", "
+	            		   + HOUR + ", " + MINUTE + ", "
+	            		   + DURATION_HOUR + ", " + DURATION_MINUTE + 
+	               " FROM " + TABLE_NAME + " WHERE _ID=?",
+	               new String[]{id});
+		while (cursor.moveToNext()) {
+		    title = cursor.getString(0);
+		    description = cursor.getString(1);
+		    year = cursor.getString(2);
+		    month = cursor.getString(3);
+		    day = cursor.getString(4);
+		    hour = cursor.getString(5);
+		    minute = cursor.getString(6);
+		    dhour = cursor.getString(7);
+		    dminute = cursor.getString(8);
+		}
+		
+		eventTitle.setText(title);
+		eventDescription.setText(description);
+		eventDate.updateDate(Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(day));
+		eventTime.setCurrentHour(Integer.parseInt(hour));
+		eventTime.setCurrentMinute(Integer.parseInt(minute));
+		eventHour.setText(dhour);
+		eventMinute.setText(dminute);
 	}
 
 	@Override
@@ -100,15 +133,14 @@ public class AddEventActivity extends Activity implements OnClickListener{
 				return;
 			}
 			dminute = eventMinute.getText().toString();
-			
-			addEvent(); 
+			updateEvent();
 			MyCalendar.calendarInstance.refresh();
 		}
 		finish();
 		overridePendingTransition(R.anim.right_in, R.anim.right_out);
 	}
 	
-	private void addEvent(){
+	private void updateEvent(){
         SQLiteDatabase db = MyCalendar.dbhelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(TITLE, title);
@@ -120,7 +152,7 @@ public class AddEventActivity extends Activity implements OnClickListener{
         values.put(MINUTE, minute);
         values.put(DURATION_HOUR, dhour);
         values.put(DURATION_MINUTE, dminute);
-        db.insert(TABLE_NAME, null, values);
+        db.update(TABLE_NAME, values, "_ID=" +id, null);
     }
 	
 }
