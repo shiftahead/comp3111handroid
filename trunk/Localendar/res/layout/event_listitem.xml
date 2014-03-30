@@ -13,48 +13,33 @@
                 android:id="@+id/item_title"   
                 android:textSize="18sp">  
         </TextView>  
-        <TextView   
-                android:layout_height="wrap_content"   
-                android:layout_width="fill_parent"   
-                android:id="@+id/item_description"
-                android:textSize="12sp">  
-        </TextView>
-        <TextView   
-                android:layout_height="wrap_content"   
-                android:layout_width="fill_parent"   
-                android:id="@+id/item_date"
-                android:textSize="12sp">  
-        </TextView>
-        <TextView   
-                android:layout_height="wrap_content"   
-                android:layout_width="fill_parent"   
-                android:id="@+id/item_time"
-                android:textSize="12sp">  
-        </TextView>
-        <TextView   
-                android:layout_height="wrap_content"   
-                android:layout_width="wrap_content"   
-                android:id="@+id/item_dhour"
-                android:textSize="12sp">  
-        </TextView> 
-        <TextView   
-                android:layout_height="wrap_content"   
-                android:layout_width="wrap_content"   
-                android:text=" Hour"
-                android:textSize="12sp">  
-        </TextView> 
-        <TextView   
-                android:layout_height="wrap_content"   
-                android:layout_width="wrap_content"   
-                android:id="@+id/item_dminute"
-                android:textSize="12sp">  
-        </TextView>
-        <TextView   
-                android:layout_height="wrap_content"   
-                android:layout_width="wrap_content"   
-                android:text=" Minute"
-                android:textSize="12sp"> 
-        </TextView>
+        <GridLayout
+			 android:orientation="horizontal"  
+			 android:layout_width="fill_parent"  
+			 android:layout_height="wrap_content"
+			 android:columnCount="3"
+    		 android:rowCount="1" 
+			 android:gravity="center">
+	        <TextView   
+	                android:layout_height="wrap_content"   
+	                android:layout_width="wrap_content"   
+	                android:id="@+id/item_hour"
+	                android:textSize="12sp">  
+	        </TextView>
+	        <TextView   
+	                android:layout_height="wrap_content"   
+	                android:layout_width="wrap_content"
+	                android:text=":"
+	                android:textSize="12sp">  
+	        </TextView>
+	        <TextView   
+	                android:layout_height="wrap_content"   
+	                android:layout_width="wrap_content"   
+	                android:id="@+id/item_minute"
+	                android:textSize="12sp">  
+	        </TextView>
+	    </GridLayout>
+        
         <TextView   
                 android:layout_height="wrap_content"   
                 android:layout_width="wrap_content"   

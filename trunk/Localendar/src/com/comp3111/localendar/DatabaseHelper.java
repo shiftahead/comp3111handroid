@@ -8,7 +8,8 @@ import static com.comp3111.localendar.DatabaseConstants.TABLE_NAME;
 import static com.comp3111.localendar.DatabaseConstants.TITLE;
 import static com.comp3111.localendar.DatabaseConstants.DESCRIPTION;
 import static com.comp3111.localendar.DatabaseConstants.DATE;
-import static com.comp3111.localendar.DatabaseConstants.TIME;
+import static com.comp3111.localendar.DatabaseConstants.HOUR;
+import static com.comp3111.localendar.DatabaseConstants.MINUTE;
 import static com.comp3111.localendar.DatabaseConstants.DURATION_HOUR;
 import static com.comp3111.localendar.DatabaseConstants.DURATION_MINUTE;
 import static com.comp3111.localendar.DatabaseConstants.TRANSPORTATION;
@@ -32,7 +33,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                                   TITLE + " TEXT, " +
                                   DESCRIPTION + " TEXT, " +
                                   DATE + " TEXT, " +
-                                  TIME + " TEXT, " +
+                                  HOUR + " INTEGER, " +
+                                  MINUTE + " INTEGER, " +
                                   DURATION_HOUR + " INTEGER, " +
                                   DURATION_MINUTE + " INTEGER, " +
                                   TRANSPORTATION + " TEXT, " +

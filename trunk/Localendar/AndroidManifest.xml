@@ -46,7 +46,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.comp3111.localendar.MainActivity"
+            android:name="com.comp3111.localendar.Localendar"
             android:theme="@style/Theme.MyAppThemeNoIcon" >
         </activity>
         <activity
@@ -61,7 +61,10 @@
             android:name="com.comp3111.localendar.AddEventActivity"
             android:theme="@style/Theme.MyAppTheme" >
         </activity>
-
+		<activity
+            android:name="com.comp3111.localendar.EventDetailActivity"
+            android:theme="@style/Theme.MyAppTheme" >
+        </activity>
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyDXzFpt3VELu-UIGcX2UjYPKuvMnje-dqc" />
