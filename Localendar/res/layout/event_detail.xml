@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>	
+	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="#eee"
+        android:orientation="vertical" >
+        
+        <TextView
+            	android:id="@+id/detail_title"
+        		android:layout_width="wrap_content" 
+        		android:layout_height="wrap_content"
+        		android:textSize="20sp"		
+				android:textColor="#000000"
+				android:textStyle="bold" />
+		<View
+			    android:layout_width="fill_parent"
+			    android:layout_height="2dp"
+			    android:background="@color/mid_blue"/>
+		<TextView
+        		android:layout_width="wrap_content" 
+        		android:layout_height="wrap_content"
+        		android:textSize="16sp"		
+        		android:text="Description"
+				android:textColor="#000000"
+				android:textStyle="bold" />
+		<TextView
+		    	android:id="@+id/detail_description"
+        		android:layout_width="wrap_content" 
+        		android:layout_height="wrap_content"
+        		android:textSize="16sp"
+				android:textColor="#000000" />
+		<TextView
+        		android:layout_width="wrap_content" 
+        		android:layout_height="wrap_content"
+        		android:textSize="16sp"		
+        		android:text="Time"
+				android:textColor="#000000"
+				android:textStyle="bold" />
+		<TextView
+		    	android:id="@+id/detail_time"
+        		android:layout_width="wrap_content" 
+        		android:layout_height="wrap_content"
+        		android:textSize="16sp"
+				android:textColor="#000000" />
+		
+		<TextView
+        		android:layout_width="wrap_content" 
+        		android:layout_height="wrap_content"
+        		android:textSize="16sp"		
+        		android:text="Duration"
+				android:textColor="#000000"
+				android:textStyle="bold" />
+		<TextView
+		    	android:id="@+id/detail_duration"
+        		android:layout_width="wrap_content" 
+        		android:layout_height="wrap_content"
+        		android:textSize="16sp"
+				android:textColor="#000000" />
+		<Button
+		    	android:id="@+id/edit_event"
+		    	android:layout_width="wrap_content" 
+        		android:layout_height="wrap_content"
+        		android:textSize="16sp"
+        		android:text="Edit" />
+		<Button
+		    	android:id="@+id/delete_event"
+		    	android:layout_width="wrap_content" 
+        		android:layout_height="wrap_content"
+        		android:textSize="16sp"
+        		android:text="Delete" />
+		
+	</LinearLayout>

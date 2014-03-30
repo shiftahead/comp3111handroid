@@ -40,22 +40,22 @@ import com.google.android.gms.maps.model.PolylineOptions;
 
 
 public class MyGoogleMap {
-	private GoogleMap localenderMap;
+	public static MyGoogleMap mapInstance;
+	public static GoogleMap localenderMap;
 	//private ConnectionDetector mapConnectionDetector;
 	//private GPSTracker mapGpsTracker;
-	private Context mContext;
-	
+
 	//A test Marker
 	private Marker testMarker;
 	//A test polyline
 	private Polyline line;
 		    
-	public MyGoogleMap(Context c) {
-		mContext = c;
+	public MyGoogleMap(GoogleMap map) {
+		mapInstance = this;
+		localenderMap = map;
 	}
 	
-	public void setMap(GoogleMap map){
-		localenderMap = map;
+	public void setMap(){
 		
 		//Initial settings
 		UiSettings localenderMapSettings = localenderMap.getUiSettings();
@@ -67,7 +67,7 @@ public class MyGoogleMap {
         localenderMap.setMyLocationEnabled(true);
         
         //Zoom to my current location
-        LocationManager locationmanager = (LocationManager) mContext.getSystemService(Context.LOCATION_SERVICE);;
+        LocationManager locationmanager = (LocationManager) Localendar.instance.getSystemService(Context.LOCATION_SERVICE);;
         
         try {
 	        Criteria cri= new Criteria();
@@ -101,19 +101,13 @@ public class MyGoogleMap {
 
 	}
 	
-	public GoogleMap getMyGoogleMap(){
-		return localenderMap;
-	}
 	
 	//The function of addmarker and zoom the camera to the added marker if boolean zoomto is set to true;
-	public void addmarker(double lag, double lon, boolean zoomto){
-		Marker m = localenderMap.addMarker(new MarkerOptions()
-        .position(new LatLng(lag, lon)).draggable(true));
-		
-		if(zoomto == true){
-			LatLng ll = new LatLng(lag, lon);
+	public void addmarker(Place place, boolean zoomto){
+		LatLng ll = new LatLng(place.getLatitude(), place.getLongitude());
+		localenderMap.addMarker(new MarkerOptions().position(ll).draggable(true));
+		if(zoomto == true)
 	        localenderMap.animateCamera(CameraUpdateFactory.newLatLngZoom(ll, 15));	
-		}
 	}
 	
 	public void setMarkerListener(){	 

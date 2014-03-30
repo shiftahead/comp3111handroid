@@ -20,7 +20,7 @@ public class Appstart extends Activity{
 		new Handler().postDelayed(new Runnable(){
 		@Override
 		public void run(){
-			Intent intent = new Intent (Appstart.this, MainActivity.class);			
+			Intent intent = new Intent (Appstart.this, Localendar.class);			
 			startActivity(intent);
 			finish();
 		}
