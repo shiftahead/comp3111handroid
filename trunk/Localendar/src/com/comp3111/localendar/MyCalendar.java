@@ -30,15 +30,11 @@ import android.widget.Toast;
 import static android.provider.BaseColumns._ID;
 import static com.comp3111.localendar.DatabaseConstants.TABLE_NAME;
 import static com.comp3111.localendar.DatabaseConstants.TITLE;
-import static com.comp3111.localendar.DatabaseConstants.DESCRIPTION;
-import static com.comp3111.localendar.DatabaseConstants.DATE;
+import static com.comp3111.localendar.DatabaseConstants.YEAR;
+import static com.comp3111.localendar.DatabaseConstants.MONTH;
+import static com.comp3111.localendar.DatabaseConstants.DAY;
 import static com.comp3111.localendar.DatabaseConstants.HOUR;
 import static com.comp3111.localendar.DatabaseConstants.MINUTE;
-import static com.comp3111.localendar.DatabaseConstants.DURATION_HOUR;
-import static com.comp3111.localendar.DatabaseConstants.DURATION_MINUTE;
-import static com.comp3111.localendar.DatabaseConstants.TRANSPORTATION;
-import static com.comp3111.localendar.DatabaseConstants.LOCATION;
-import static com.comp3111.localendar.DatabaseConstants.COMPULSORY;
 
 public class MyCalendar extends Fragment {
 
@@ -95,9 +91,6 @@ public class MyCalendar extends Fragment {
 				intent.putExtra("ID", eventId);
 				startActivity(intent);
     		}
-			//deleteEvent(rid);
-			//refresh();
-	        //Toast.makeText(instance.getActivity(), title + " Removed", Toast.LENGTH_SHORT).show();
 		}
 		
 		

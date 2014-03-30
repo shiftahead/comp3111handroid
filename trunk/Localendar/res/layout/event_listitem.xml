@@ -11,7 +11,7 @@
                 android:layout_height="wrap_content"   
                 android:layout_width="fill_parent"   
                 android:id="@+id/item_title"   
-                android:textSize="18sp">  
+                android:textSize="30sp">  
         </TextView>  
         <GridLayout
 			 android:orientation="horizontal"  
@@ -24,19 +24,19 @@
 	                android:layout_height="wrap_content"   
 	                android:layout_width="wrap_content"   
 	                android:id="@+id/item_hour"
-	                android:textSize="12sp">  
+	                android:textSize="18sp">  
 	        </TextView>
 	        <TextView   
 	                android:layout_height="wrap_content"   
 	                android:layout_width="wrap_content"
 	                android:text=":"
-	                android:textSize="12sp">  
+	                android:textSize="18sp">  
 	        </TextView>
 	        <TextView   
 	                android:layout_height="wrap_content"   
 	                android:layout_width="wrap_content"   
 	                android:id="@+id/item_minute"
-	                android:textSize="12sp">  
+	                android:textSize="18sp">  
 	        </TextView>
 	    </GridLayout>
         
@@ -44,7 +44,7 @@
                 android:layout_height="wrap_content"   
                 android:layout_width="wrap_content"   
                 android:id="@+id/item_id"
-                android:textSize="5sp"
+                android:textSize="1sp"
                 android:textColor="@android:color/transparent"> 
         </TextView>
 </LinearLayout>

@@ -3,4 +3,5 @@
 <resources>
 <color name="mid_blue">#3399ff</color>
 <color name="holo_light">#fff3f3f3</color>
+<color name="gray">#c8c8c8</color>
 </resources>
