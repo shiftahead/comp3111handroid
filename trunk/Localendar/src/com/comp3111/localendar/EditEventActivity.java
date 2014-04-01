@@ -95,7 +95,7 @@ public class EditEventActivity extends Activity implements OnClickListener{
 		
 		eventTitle.setText(title);
 		eventDescription.setText(description);
-		eventDate.updateDate(Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(day));
+		eventDate.updateDate(Integer.parseInt(year), Integer.parseInt(month) - 1, Integer.parseInt(day));
 		eventTime.setCurrentHour(Integer.parseInt(hour));
 		eventTime.setCurrentMinute(Integer.parseInt(minute));
 		eventHour.setText(dhour);
@@ -113,7 +113,7 @@ public class EditEventActivity extends Activity implements OnClickListener{
 			description = eventDescription.getText().toString();
 			year = Integer.toString(eventDate.getYear());
 			month = Integer.toString(eventDate.getMonth());
-			day = Integer.toString(eventDate.getDayOfMonth());
+			day = Integer.toString(eventDate.getDayOfMonth() + 1);
 			hour = Integer.toString(eventTime.getCurrentHour());
 			minute = Integer.toString(eventTime.getCurrentMinute());
 			if(hour.length() == 1) hour = "0" + hour;
