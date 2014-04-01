@@ -79,7 +79,7 @@ public class AddEventActivity extends Activity implements OnClickListener{
 			}
 			description = eventDescription.getText().toString();
 			year = Integer.toString(eventDate.getYear());
-			month = Integer.toString(eventDate.getMonth());
+			month = Integer.toString(eventDate.getMonth() + 1);
 			day = Integer.toString(eventDate.getDayOfMonth());
 			hour = Integer.toString(eventTime.getCurrentHour());
 			minute = Integer.toString(eventTime.getCurrentMinute());
