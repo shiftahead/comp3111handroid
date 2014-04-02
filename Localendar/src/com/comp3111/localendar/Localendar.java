@@ -117,6 +117,7 @@ public class Localendar extends Activity implements OnClickListener, OnCheckedCh
 		//set action bar
         actionBar = getActionBar();
         actionBar.setDisplayShowCustomEnabled(true);
+        actionBar.setDisplayShowHomeEnabled(false);
         actionBar.setDisplayShowTitleEnabled(false);
         actionBar.setDisplayUseLogoEnabled(false);
         

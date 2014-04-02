@@ -19,7 +19,7 @@
    	        android:textColor="#000"
    	        android:textSize="18sp" />
 
-   	    <EditText
+   	    <com.comp3111.localendar.ClearableEditText
    	        android:id="@+id/event_title"
    	        android:layout_width="match_parent"
    	        android:layout_height="wrap_content"
@@ -36,7 +36,7 @@
    	        android:textColor="#000"
    	        android:textSize="18sp" />
 
-   	    <EditText
+   	    <com.comp3111.localendar.ClearableEditText
    	        android:id="@+id/event_description"
    	        android:layout_width="match_parent"
    	        android:layout_height="wrap_content"
@@ -135,14 +135,16 @@
    	        android:text="Location"
    	        android:textColor="#000"
    	        android:textSize="18sp" />
-
-   	    <EditText
-   	        android:id="@+id/event_location"
-   	        android:layout_width="match_parent"
-   	        android:layout_height="wrap_content"
-   	        android:padding="8dp"
-   	        android:textColor="#000"
-   	        android:textSize="18sp" />
+		
+   	    <com.comp3111.localendar.ClearableAutoCompleteTextView
+	        android:id="@+id/event_location"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:textSize="18sp"
+	        android:imeOptions="actionSearch"
+	        android:inputType="textAutoComplete|textAutoCorrect"
+	        android:textColor="#000000" >
+    	</com.comp3111.localendar.ClearableAutoCompleteTextView>
    	    
    	    <TextView
    	        android:layout_width="wrap_content"
@@ -153,7 +155,7 @@
    	        android:textSize="18sp" />
    	    
    	    <Spinner
-		    android:id="@+id/transportation_chooser"
+		    android:id="@+id/event_transportation"
 		    android:layout_width="match_parent"
 		    android:layout_height="wrap_content"
 		    android:padding="8dp"
@@ -165,7 +167,7 @@
    	        android:layout_width="fill_parent"
    	        android:layout_height="10dp" />
    	    <CheckBox
-   	        android:id="@+id/check_compulsory"
+   	        android:id="@+id/event_compulsory"
    	        android:layout_width="wrap_content"
    	        android:layout_height="wrap_content"
    	        android:textSize="18sp"
@@ -173,7 +175,7 @@
    	    <TextView
    	        android:layout_width="fill_parent"
    	        android:layout_height="50dp" />
-
+	<!--  
    	    <GridLayout
    	        android:layout_width="fill_parent"
    	        android:layout_height="wrap_content"
@@ -202,10 +204,8 @@
    	            android:textColor="@color/confirm_button" />
 
    	    </GridLayout>
-   	    
-   	    <TextView
-   	        android:layout_width="fill_parent"
-   	        android:layout_height="100dp" />
+   	    -->
+   	
 
    	</LinearLayout>
 

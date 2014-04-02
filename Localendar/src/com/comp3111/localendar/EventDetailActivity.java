@@ -29,8 +29,8 @@ import static com.comp3111.localendar.DatabaseConstants.COMPULSORY;
 
 public class EventDetailActivity extends Activity {
 	private String id;
-	private TextView titleView, descriptionView, timeView, durationView;
-	private String title, description, year, month, day, hour, minute, dhour, dminute;
+	private TextView titleView, descriptionView, timeView, durationView, locationView, transportationView, compulsoryView;
+	private String title, description, year, month, day, hour, minute, dhour, dminute, location, transportation, compulsory;
 	private SQLiteDatabase db;
 	
 	protected void onCreate(Bundle savedInstanceState) {	
@@ -51,15 +51,20 @@ public class EventDetailActivity extends Activity {
 		descriptionView = (TextView) findViewById(R.id.detail_description);
 		timeView = (TextView) findViewById(R.id.detail_time);
 		durationView = (TextView) findViewById(R.id.detail_duration);
+		locationView = (TextView) findViewById(R.id.detail_location);
+		transportationView = (TextView) findViewById(R.id.detail_transportation);
+		compulsoryView = (TextView) findViewById(R.id.detail_compulsory);
 		
 		db = MyCalendar.dbhelper.getReadableDatabase();
 		Cursor cursor = db.rawQuery(
 	               "SELECT " + TITLE + ", " + DESCRIPTION + ", "
-	            		   + YEAR + ", " + MONTH + ", " + DAY +", "
+	            		   + YEAR + ", " + MONTH + ", " + DAY + ", "
 	            		   + HOUR + ", " + MINUTE + ", "
-	            		   + DURATION_HOUR + ", " + DURATION_MINUTE + 
-	               " FROM " + TABLE_NAME + " WHERE _ID=?",
-	               new String[]{id});
+	            		   + DURATION_HOUR + ", " + DURATION_MINUTE + ", "
+	            		   + LOCATION + ", " + TRANSPORTATION + ", "
+	            		   + COMPULSORY +
+	               " FROM " + TABLE_NAME + 
+	               " WHERE _ID=?", new String[]{id});
 		while (cursor.moveToNext()) {
 		    title = cursor.getString(0);
 		    description = cursor.getString(1);
@@ -70,13 +75,18 @@ public class EventDetailActivity extends Activity {
 		    minute = cursor.getString(6);
 		    dhour = cursor.getString(7);
 		    dminute = cursor.getString(8);
+		    location = cursor.getString(9);
+		    transportation = cursor.getString(10);
+		    compulsory = cursor.getString(11);
 		}
 		
 		titleView.setText(title);
 		descriptionView.setText(description);
 		timeView.setText(month + "/" + day + "/" + year + " " + hour + ":" + minute);
 		durationView.setText(dhour + " hr " + dminute + " m");
-		
+		locationView.setText(location);
+		transportationView.setText(transportation);
+		compulsoryView.setText(compulsory);
 	}
 	
 	@Override

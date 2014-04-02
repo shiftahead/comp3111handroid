@@ -41,8 +41,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                                   MINUTE + " TEXT, " +
                                   DURATION_HOUR + " TEXT, " +
                                   DURATION_MINUTE + " TEXT, " +
-                                  TRANSPORTATION + " TEXT, " +
                                   LOCATION + " TEXT, " +
+                                  TRANSPORTATION + " TEXT, " +
                                   COMPULSORY + " TEXT);"; 
                                   
     	
