@@ -7,7 +7,7 @@
         android:id="@+id/place_view"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
         android:src="@drawable/search_map"
         android:clickable="true"
         android:onClick="onClick"
