@@ -39,6 +39,12 @@
 	                android:textSize="18sp">  
 	        </TextView>
 	    </GridLayout>
+	    <TextView   
+                android:layout_height="wrap_content"   
+                android:layout_width="fill_parent"   
+                android:id="@+id/item_location"   
+                android:textSize="18sp">  
+        </TextView> 
         
         <TextView   
                 android:layout_height="wrap_content"   
