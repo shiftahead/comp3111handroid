@@ -1,4 +1,4 @@
-package com.comp3111.localendar;
+package com.comp3111.localendar.map;
 
 
 import java.io.IOException;
@@ -20,6 +20,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.comp3111.localendar.Localendar;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient;
 import com.google.android.gms.location.LocationClient;

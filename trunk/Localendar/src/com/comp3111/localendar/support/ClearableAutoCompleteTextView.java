@@ -1,22 +1,33 @@
-package com.comp3111.localendar;
+package com.comp3111.localendar.support;
+
+import com.comp3111.localendar.R;
+import com.comp3111.localendar.R.drawable;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.EditText;
-
-public class ClearableEditText extends EditText {
-
+import android.widget.AutoCompleteTextView;
+ 
+/**
+ * sub class of {@link android.widget.AutoCompleteTextView} that includes a clear (dismiss / close) button with
+ * a OnClearListener to handle the event of clicking the button
+ * based on code from {@link http://www.gubed.net/clearableautocompletetextview}
+ * @author Michael Derazon
+ *
+ */
+public class ClearableAutoCompleteTextView extends AutoCompleteTextView {
 	// was the text just cleared?
 	boolean justCleared = false;
-		
+ 
+	// if not set otherwise, the default clear listener clears the text in the
+	// text view
 	private OnClearListener defaultClearListener = new OnClearListener() {
-		 
+ 
 		@Override
 		public void onClear() {
-			ClearableEditText et = ClearableEditText.this;
+			ClearableAutoCompleteTextView et = ClearableAutoCompleteTextView.this;
 			et.setText("");
 		}
 	};
@@ -30,21 +41,21 @@ public class ClearableEditText extends EditText {
 	public interface OnClearListener {
 		void onClear();
 	}
-	
+ 
 	/* Required methods, not used in this implementation */
-	public ClearableEditText(Context context) {
+	public ClearableAutoCompleteTextView(Context context) {
 		super(context);
 		init();
 	}
  
 	/* Required methods, not used in this implementation */
-	public ClearableEditText(Context context, AttributeSet attrs, int defStyle) {
+	public ClearableAutoCompleteTextView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 		init();
 	}
  
 	/* Required methods, not used in this implementation */
-	public ClearableEditText(Context context, AttributeSet attrs) {
+	public ClearableAutoCompleteTextView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		init();
 	}
@@ -59,7 +70,7 @@ public class ClearableEditText extends EditText {
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
  
-				ClearableEditText et = ClearableEditText.this;
+				ClearableAutoCompleteTextView et = ClearableAutoCompleteTextView.this;
  
 				if (et.getCompoundDrawables()[2] == null)
 					return false;
@@ -75,6 +86,7 @@ public class ClearableEditText extends EditText {
 			}
 		});
 	}
+ 
 	public void setImgClearButton(Drawable imgClearButton) {
 		this.imgClearButton = imgClearButton;
 	}
@@ -90,4 +102,5 @@ public class ClearableEditText extends EditText {
 	public void showClearButton() {
 		this.setCompoundDrawablesWithIntrinsicBounds(null, null, imgClearButton, null);
 	}
+ 
 }

@@ -1,7 +1,9 @@
-package com.comp3111.localendar;
+package com.comp3111.localendar.map;
 
 import java.io.IOException;
 import java.util.List;
+
+import com.comp3111.localendar.Localendar;
 
 import android.location.Address;
 import android.location.Geocoder;
