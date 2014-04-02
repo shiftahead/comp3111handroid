@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RelativeLayout	xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal" >  		
+    	<RadioGroup
+        	android:layout_width="fill_parent"
+        	android:layout_height="fill_parent"
+        	android:layout_gravity="bottom"
+        	android:gravity="center_vertical"
+        	android:orientation="horizontal" >
+    		<Button
+   	            android:id="@+id/cancel_add"
+   	            style="@style/main_tab_bottom"
+   	            android:gravity="center"
+   	            android:paddingLeft="20dp"
+   	            android:paddingRight="20dp"
+		        android:drawableLeft="@drawable/cancel_button"
+   	            android:text="CANCEL"
+   	            android:textSize="20sp"
+   	            android:textStyle="bold" />
+    		<View
+    		    android:layout_width="2dp"
+		    	android:layout_height="fill_parent"
+		    	android:background="@color/mid_blue"/>
+
+   	        <Button
+   	            android:id="@+id/confirm_add"
+   	         	style="@style/main_tab_bottom"
+   	         	android:paddingLeft="20dp"
+   	         	android:paddingRight="20dp"
+   	         	android:gravity="center"
+		        android:drawableLeft="@drawable/ok_button"
+   	            android:text="CONFIRM"
+   	            android:textSize="20sp"
+   	            android:textStyle="bold"  />
+   	    </RadioGroup>
+    
+</RelativeLayout>

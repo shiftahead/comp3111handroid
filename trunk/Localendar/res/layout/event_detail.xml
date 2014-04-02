@@ -92,6 +92,63 @@
         		android:paddingLeft="10dip"
         		android:textSize="25sp"
 				android:textColor="#000000" />
+		<View
+			    android:layout_width="fill_parent"
+			    android:layout_height="1dp"
+			    android:background="@color/gray"/>
+		<TextView
+        		android:layout_width="wrap_content" 
+        		android:layout_height="wrap_content"
+        		android:paddingLeft="10dip"
+        		android:textSize="25sp"		
+        		android:text="Location"
+				android:textColor="#000000"
+				android:textStyle="bold" />
+		<TextView
+		    	android:id="@+id/detail_location"
+        		android:layout_width="wrap_content" 
+        		android:layout_height="wrap_content"
+        		android:paddingLeft="10dip"
+        		android:textSize="25sp"
+				android:textColor="#000000" />
+		<View
+			    android:layout_width="fill_parent"
+			    android:layout_height="1dp"
+			    android:background="@color/gray"/>
+		<TextView
+        		android:layout_width="wrap_content" 
+        		android:layout_height="wrap_content"
+        		android:paddingLeft="10dip"
+        		android:textSize="25sp"		
+        		android:text="Transportation"
+				android:textColor="#000000"
+				android:textStyle="bold" />
+		<TextView
+		    	android:id="@+id/detail_transportation"
+        		android:layout_width="wrap_content" 
+        		android:layout_height="wrap_content"
+        		android:paddingLeft="10dip"
+        		android:textSize="25sp"
+				android:textColor="#000000" />
+		<View
+			    android:layout_width="fill_parent"
+			    android:layout_height="1dp"
+			    android:background="@color/gray"/>
+		<TextView
+        		android:layout_width="wrap_content" 
+        		android:layout_height="wrap_content"
+        		android:paddingLeft="10dip"
+        		android:textSize="25sp"		
+        		android:text="Complusory"
+				android:textColor="#000000"
+				android:textStyle="bold" />
+		<TextView
+		    	android:id="@+id/detail_compulsory"
+        		android:layout_width="wrap_content" 
+        		android:layout_height="wrap_content"
+        		android:paddingLeft="10dip"
+        		android:textSize="25sp"
+				android:textColor="#000000" />
 		
 	</LinearLayout>
 </ScrollView>

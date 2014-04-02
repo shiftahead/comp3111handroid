@@ -59,11 +59,11 @@
         </activity>
         <activity
             android:name="com.comp3111.localendar.AddEventActivity"
-            android:theme="@style/Theme.MyAppTheme" >
+            android:theme="@style/Theme.MyAppThemeNoIcon" >
         </activity>
         <activity
             android:name="com.comp3111.localendar.EditEventActivity"
-            android:theme="@style/Theme.MyAppTheme" >
+            android:theme="@style/Theme.MyAppThemeNoIcon" >
         </activity>
 		<activity
             android:name="com.comp3111.localendar.EventDetailActivity"
