@@ -20,6 +20,13 @@
         		android:textSize="40sp"
 				android:textColor="#000000"
 				android:textStyle="bold" />
+		<TextView   
+                android:layout_height="wrap_content"   
+                android:layout_width="wrap_content"
+                android:paddingLeft="10dip"
+                android:textSize="10sp"
+                android:textColor="@android:color/transparent"> 
+        </TextView>
 		<View
 			    android:layout_width="fill_parent"
 			    android:layout_height="2dp"
@@ -92,6 +99,13 @@
         		android:paddingLeft="10dip"
         		android:textSize="25sp"
 				android:textColor="#000000" />
+		<TextView   
+                android:layout_height="wrap_content"   
+                android:layout_width="wrap_content"
+                android:paddingLeft="10dip"
+                android:textSize="10sp"
+                android:textColor="@android:color/transparent"> 
+        </TextView>
 		<View
 			    android:layout_width="fill_parent"
 			    android:layout_height="1dp"
@@ -111,6 +125,13 @@
         		android:paddingLeft="10dip"
         		android:textSize="25sp"
 				android:textColor="#000000" />
+		<TextView   
+                android:layout_height="wrap_content"   
+                android:layout_width="wrap_content"
+                android:paddingLeft="10dip"
+                android:textSize="10sp"
+                android:textColor="@android:color/transparent"> 
+        </TextView>
 		<View
 			    android:layout_width="fill_parent"
 			    android:layout_height="1dp"
@@ -130,6 +151,13 @@
         		android:paddingLeft="10dip"
         		android:textSize="25sp"
 				android:textColor="#000000" />
+		<TextView   
+                android:layout_height="wrap_content"   
+                android:layout_width="wrap_content"
+                android:paddingLeft="10dip"
+                android:textSize="10sp"
+                android:textColor="@android:color/transparent"> 
+        </TextView>
 		<View
 			    android:layout_width="fill_parent"
 			    android:layout_height="1dp"
@@ -149,6 +177,13 @@
         		android:paddingLeft="10dip"
         		android:textSize="25sp"
 				android:textColor="#000000" />
+		<TextView   
+                android:layout_height="wrap_content"   
+                android:layout_width="wrap_content"
+                android:paddingLeft="10dip"
+                android:textSize="10sp"
+                android:textColor="@android:color/transparent"> 
+        </TextView>
 		
 	</LinearLayout>
 </ScrollView>
