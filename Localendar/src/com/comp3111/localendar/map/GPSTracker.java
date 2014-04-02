@@ -1,4 +1,4 @@
-package com.comp3111.localendar;
+package com.comp3111.localendar.map;
 
 import android.app.AlertDialog;
 import android.app.Service;

@@ -57,6 +57,12 @@ import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+import com.comp3111.localendar.calendar.AddEventActivity;
+import com.comp3111.localendar.map.MyGoogleMap;
+import com.comp3111.localendar.map.Place;
+import com.comp3111.localendar.support.ClearableAutoCompleteTextView;
+import com.comp3111.localendar.support.NonSwipeableViewPager;
+import com.comp3111.localendar.support.PlacesAutoCompleteAdapter;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.LatLng;

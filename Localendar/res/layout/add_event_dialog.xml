@@ -19,7 +19,7 @@
    	        android:textColor="#000"
    	        android:textSize="18sp" />
 
-   	    <com.comp3111.localendar.ClearableEditText
+   	    <com.comp3111.localendar.support.ClearableEditText
    	        android:id="@+id/event_title"
    	        android:layout_width="match_parent"
    	        android:layout_height="wrap_content"
@@ -36,7 +36,7 @@
    	        android:textColor="#000"
    	        android:textSize="18sp" />
 
-   	    <com.comp3111.localendar.ClearableEditText
+   	    <com.comp3111.localendar.support.ClearableEditText
    	        android:id="@+id/event_description"
    	        android:layout_width="match_parent"
    	        android:layout_height="wrap_content"
@@ -136,7 +136,7 @@
    	        android:textColor="#000"
    	        android:textSize="18sp" />
 		
-   	    <com.comp3111.localendar.ClearableAutoCompleteTextView
+   	    <com.comp3111.localendar.support.ClearableAutoCompleteTextView
 	        android:id="@+id/event_location"
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
@@ -144,7 +144,7 @@
 	        android:imeOptions="actionSearch"
 	        android:inputType="textAutoComplete|textAutoCorrect"
 	        android:textColor="#000000" >
-    	</com.comp3111.localendar.ClearableAutoCompleteTextView>
+    	</com.comp3111.localendar.support.ClearableAutoCompleteTextView>
    	    
    	    <TextView
    	        android:layout_width="wrap_content"

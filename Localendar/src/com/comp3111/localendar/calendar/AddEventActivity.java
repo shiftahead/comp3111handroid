@@ -1,4 +1,12 @@
-package com.comp3111.localendar;
+package com.comp3111.localendar.calendar;
+
+import com.comp3111.localendar.R;
+import com.comp3111.localendar.R.anim;
+import com.comp3111.localendar.R.id;
+import com.comp3111.localendar.R.layout;
+import com.comp3111.localendar.support.ClearableAutoCompleteTextView;
+import com.comp3111.localendar.support.ClearableEditText;
+import com.comp3111.localendar.support.PlacesAutoCompleteAdapter;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -31,19 +39,19 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
-import static com.comp3111.localendar.DatabaseConstants.TABLE_NAME;
-import static com.comp3111.localendar.DatabaseConstants.TITLE;
-import static com.comp3111.localendar.DatabaseConstants.DESCRIPTION;
-import static com.comp3111.localendar.DatabaseConstants.YEAR;
-import static com.comp3111.localendar.DatabaseConstants.MONTH;
-import static com.comp3111.localendar.DatabaseConstants.DAY;
-import static com.comp3111.localendar.DatabaseConstants.HOUR;
-import static com.comp3111.localendar.DatabaseConstants.MINUTE;
-import static com.comp3111.localendar.DatabaseConstants.DURATION_HOUR;
-import static com.comp3111.localendar.DatabaseConstants.DURATION_MINUTE;
-import static com.comp3111.localendar.DatabaseConstants.TRANSPORTATION;
-import static com.comp3111.localendar.DatabaseConstants.LOCATION;
-import static com.comp3111.localendar.DatabaseConstants.COMPULSORY;
+import static com.comp3111.localendar.database.DatabaseConstants.COMPULSORY;
+import static com.comp3111.localendar.database.DatabaseConstants.DAY;
+import static com.comp3111.localendar.database.DatabaseConstants.DESCRIPTION;
+import static com.comp3111.localendar.database.DatabaseConstants.DURATION_HOUR;
+import static com.comp3111.localendar.database.DatabaseConstants.DURATION_MINUTE;
+import static com.comp3111.localendar.database.DatabaseConstants.HOUR;
+import static com.comp3111.localendar.database.DatabaseConstants.LOCATION;
+import static com.comp3111.localendar.database.DatabaseConstants.MINUTE;
+import static com.comp3111.localendar.database.DatabaseConstants.MONTH;
+import static com.comp3111.localendar.database.DatabaseConstants.TABLE_NAME;
+import static com.comp3111.localendar.database.DatabaseConstants.TITLE;
+import static com.comp3111.localendar.database.DatabaseConstants.TRANSPORTATION;
+import static com.comp3111.localendar.database.DatabaseConstants.YEAR;
 
 
 public class AddEventActivity extends Activity {

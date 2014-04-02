@@ -1,22 +1,22 @@
-package com.comp3111.localendar;
+package com.comp3111.localendar.database;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import static android.provider.BaseColumns._ID;
-import static com.comp3111.localendar.DatabaseConstants.TABLE_NAME;
-import static com.comp3111.localendar.DatabaseConstants.TITLE;
-import static com.comp3111.localendar.DatabaseConstants.DESCRIPTION;
-import static com.comp3111.localendar.DatabaseConstants.YEAR;
-import static com.comp3111.localendar.DatabaseConstants.MONTH;
-import static com.comp3111.localendar.DatabaseConstants.DAY;
-import static com.comp3111.localendar.DatabaseConstants.HOUR;
-import static com.comp3111.localendar.DatabaseConstants.MINUTE;
-import static com.comp3111.localendar.DatabaseConstants.DURATION_HOUR;
-import static com.comp3111.localendar.DatabaseConstants.DURATION_MINUTE;
-import static com.comp3111.localendar.DatabaseConstants.TRANSPORTATION;
-import static com.comp3111.localendar.DatabaseConstants.LOCATION;
-import static com.comp3111.localendar.DatabaseConstants.COMPULSORY;
+import static com.comp3111.localendar.database.DatabaseConstants.COMPULSORY;
+import static com.comp3111.localendar.database.DatabaseConstants.DAY;
+import static com.comp3111.localendar.database.DatabaseConstants.DESCRIPTION;
+import static com.comp3111.localendar.database.DatabaseConstants.DURATION_HOUR;
+import static com.comp3111.localendar.database.DatabaseConstants.DURATION_MINUTE;
+import static com.comp3111.localendar.database.DatabaseConstants.HOUR;
+import static com.comp3111.localendar.database.DatabaseConstants.LOCATION;
+import static com.comp3111.localendar.database.DatabaseConstants.MINUTE;
+import static com.comp3111.localendar.database.DatabaseConstants.MONTH;
+import static com.comp3111.localendar.database.DatabaseConstants.TABLE_NAME;
+import static com.comp3111.localendar.database.DatabaseConstants.TITLE;
+import static com.comp3111.localendar.database.DatabaseConstants.TRANSPORTATION;
+import static com.comp3111.localendar.database.DatabaseConstants.YEAR;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 

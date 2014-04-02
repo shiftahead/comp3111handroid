@@ -1,4 +1,4 @@
-package com.comp3111.localendar;
+package com.comp3111.localendar.database;
 
 import android.provider.BaseColumns;
 

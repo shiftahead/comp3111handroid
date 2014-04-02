@@ -1,6 +1,11 @@
-package com.comp3111.localendar;
+package com.comp3111.localendar.calendar;
 
 import java.util.GregorianCalendar;
+
+import com.comp3111.localendar.R;
+import com.comp3111.localendar.R.id;
+import com.comp3111.localendar.R.layout;
+import com.comp3111.localendar.database.DatabaseHelper;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -28,13 +33,13 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 import static android.provider.BaseColumns._ID;
-import static com.comp3111.localendar.DatabaseConstants.TABLE_NAME;
-import static com.comp3111.localendar.DatabaseConstants.TITLE;
-import static com.comp3111.localendar.DatabaseConstants.YEAR;
-import static com.comp3111.localendar.DatabaseConstants.MONTH;
-import static com.comp3111.localendar.DatabaseConstants.DAY;
-import static com.comp3111.localendar.DatabaseConstants.HOUR;
-import static com.comp3111.localendar.DatabaseConstants.MINUTE;
+import static com.comp3111.localendar.database.DatabaseConstants.DAY;
+import static com.comp3111.localendar.database.DatabaseConstants.HOUR;
+import static com.comp3111.localendar.database.DatabaseConstants.MINUTE;
+import static com.comp3111.localendar.database.DatabaseConstants.MONTH;
+import static com.comp3111.localendar.database.DatabaseConstants.TABLE_NAME;
+import static com.comp3111.localendar.database.DatabaseConstants.TITLE;
+import static com.comp3111.localendar.database.DatabaseConstants.YEAR;
 
 public class MyCalendar extends Fragment {
 

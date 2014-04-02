@@ -87,12 +87,12 @@
     	android:layout_above="@id/main_bottom"       
         android:orientation="vertical" >
       
-        <com.comp3111.localendar.NonSwipeableViewPager
+        <com.comp3111.localendar.support.NonSwipeableViewPager
         	android:id="@+id/tabpager"
         	android:layout_width="match_parent"
         	android:layout_height="match_parent"
         	android:layout_gravity="center" > 
-        </com.comp3111.localendar.NonSwipeableViewPager>  
+        </com.comp3111.localendar.support.NonSwipeableViewPager>  
     </LinearLayout>
 
 </RelativeLayout>
