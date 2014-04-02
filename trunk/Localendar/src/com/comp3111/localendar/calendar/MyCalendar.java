@@ -40,6 +40,7 @@ import static com.comp3111.localendar.database.DatabaseConstants.MONTH;
 import static com.comp3111.localendar.database.DatabaseConstants.TABLE_NAME;
 import static com.comp3111.localendar.database.DatabaseConstants.TITLE;
 import static com.comp3111.localendar.database.DatabaseConstants.YEAR;
+import static com.comp3111.localendar.database.DatabaseConstants.LOCATION;
 
 public class MyCalendar extends Fragment {
 
@@ -69,11 +70,11 @@ public class MyCalendar extends Fragment {
 	void refresh() {
 		eventList.setAdapter(null);
 		
-		String[] from = {_ID, TITLE, HOUR, MINUTE};
+		String[] from = {_ID, TITLE, HOUR, MINUTE, LOCATION};
 		SQLiteDatabase db = dbhelper.getReadableDatabase();
 		cursor = db.query(TABLE_NAME, from, null, null, null, null, null);
 		
-		int[] to = {R.id.item_id, R.id.item_title, R.id.item_hour, R.id.item_minute};
+		int[] to = {R.id.item_id, R.id.item_title, R.id.item_hour, R.id.item_minute, R.id.item_location};
 		@SuppressWarnings("deprecation")
 		final SimpleCursorAdapter adapter = new SimpleCursorAdapter(calendarInstance.getActivity(), R.layout.event_listitem, cursor, from, to);
         eventList.setAdapter(adapter);
