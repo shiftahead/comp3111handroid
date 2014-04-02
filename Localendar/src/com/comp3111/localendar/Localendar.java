@@ -179,8 +179,8 @@ public class Localendar extends Activity implements OnClickListener, OnCheckedCh
 		searchBox.setOnItemClickListener(this);
 		
 	    searchBoxShown = true;
-	    searchBox.setVisibility(View.VISIBLE);
-	    searchIcon.setVisibility(View.GONE);
+	    searchBox.setVisibility(View.GONE);
+	    searchIcon.setVisibility(View.VISIBLE);
 	    
         //initialize pager and tab buttons
         pager = (NonSwipeableViewPager)findViewById(R.id.tabpager);
@@ -263,7 +263,6 @@ public class Localendar extends Activity implements OnClickListener, OnCheckedCh
             	searchBoxShown = false;
         		searchBox.setVisibility(View.INVISIBLE);
         		searchIcon.setVisibility(View.INVISIBLE);
-            	
                 pager.setCurrentItem(0);  
                 overridePendingTransition(R.anim.left_in, R.anim.left_out);
                 currentTabIndex = 0;
@@ -272,8 +271,8 @@ public class Localendar extends Activity implements OnClickListener, OnCheckedCh
             case R.id.map_button: {
                 pager.setCurrentItem(1);
                 searchBoxShown = true;
-        	    searchBox.setVisibility(View.VISIBLE);
-        	    searchIcon.setVisibility(View.GONE);
+        	    searchBox.setVisibility(View.GONE);
+        	    searchIcon.setVisibility(View.VISIBLE);
                 
                 if (currentTabIndex == 2)
                 	overridePendingTransition(R.anim.left_in, R.anim.left_out);
