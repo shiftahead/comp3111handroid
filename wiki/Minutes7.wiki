@@ -1,6 +1,6 @@
-#summary Minutes of Meeting held on Mar. 17, 2014.
+#summary Minutes of Meeting held on Mar. 25, 2014.
 
-= Meeting Minutes of Mar. 17=
+= Meeting Minutes of Mar. 25=
 ----
 || Date || Mar. 25, 2014 ||
 || Time || 11:00pm - 12:00pm ||
@@ -34,15 +34,15 @@ The minutes of the last meeting were approved without amendment.
 || 3. || Calendar functions || YANG Ji || Apr. 6  ||
 || 4. || Implement test cases || All team members || Apr. 6 ||
 || 5. || Show path functions || TAM Shih Lung || Apr. 6 ||
-|| 6. || time based reminder & Location based reminder || ZENG Xiong || Apr. 6 ||
-|| 7. || presentation rehearsal and ppt   || All team members || Apr. 6 ||
+|| 6. || Time based reminder & Location based reminder || ZENG Xiong || Apr. 6 ||
+|| 7. || Presentation rehearsal and ppt   || All team members || Apr. 6 ||
 
 
 
 == 4. Meeting adjournment and next meeting ==
 
-The meeting lasts for 1 hours and no adjournment.
+The meeting lasts for 1 hour and no adjournment.
 
 The next meeting is scheduled on 4.1.2014, 8:00 pm - 10:00 pm.
 
-The location is same,  LC,LG1,Library,HKUST.
+The location is same - LC, LG1, Library, HKUST.
