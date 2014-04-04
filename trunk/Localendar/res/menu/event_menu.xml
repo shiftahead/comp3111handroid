@@ -8,5 +8,8 @@
           android:title="Delete"
           android:orderInCategory="2">
     </item>
-
+    <item android:id="@+id/addmarker"
+          android:title="add Marker"
+          android:orderInCategory="3">
+    </item>
 </menu>
