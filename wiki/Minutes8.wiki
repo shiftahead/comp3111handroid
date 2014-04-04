@@ -41,11 +41,13 @@ The minutes of the last meeting were approved without amendment.
 
 ====1. Presenting slides====
 
-UML.
-develop + burndown.
-project.
-what next.
-Thank you & Q&A.
+||1. || UML. ||
+||2. || Backlog ||
+||3. || Burndown ||
+||4. || Prototype Demo ||
+||5. || what next ||
+||6. || Thank you & Q&A. || 
+
 
 ====2. Presenting Work Distribution====
 
