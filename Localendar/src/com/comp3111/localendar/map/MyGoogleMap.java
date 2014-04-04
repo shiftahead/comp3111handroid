@@ -104,7 +104,7 @@ public class MyGoogleMap {
 	
 	
 	//The function of addmarker and zoom the camera to the added marker if boolean zoomto is set to true;
-	public void addmarker(Place place, boolean zoomto){
+	public static void addmarker(Place place, boolean zoomto){
 		LatLng ll = new LatLng(place.getLatitude(), place.getLongitude());
 		localenderMap.addMarker(new MarkerOptions().position(ll).draggable(true));
 		if(zoomto == true)

@@ -5,6 +5,8 @@ import com.comp3111.localendar.R.anim;
 import com.comp3111.localendar.R.id;
 import com.comp3111.localendar.R.layout;
 import com.comp3111.localendar.R.menu;
+import com.comp3111.localendar.map.MyGoogleMap;
+import com.comp3111.localendar.map.Place;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -120,6 +122,10 @@ public class EventDetailActivity extends Activity {
 			MyCalendar.calendarInstance.refresh();
 			this.finish();
 			return true;
+	    }
+	    case R.id.addmarker:{
+	    	Place test= Place.getPlaceFromAddress(location);
+	    	MyGoogleMap.addmarker(test,true);
 	    }
 	    default: {
 	    	onBackPressed();
