@@ -37,7 +37,17 @@ The minutes of the last meeting were approved without amendment.
 || 6. || Time based reminder & Location based reminder || ZENG Xiong || Apr. 6 ||
 || 7. || Presentation rehearsal and ppt   || All team members || Apr. 6 ||
 
+===2. Presenting Materials===
 
+====1. Presenting slides====
+
+UML.
+develop + burndown.
+project.
+what next.
+Thank you & Q&A.
+
+====2. Presenting Work Distribution====
 
 == 4. Meeting adjournment and next meeting ==
 
