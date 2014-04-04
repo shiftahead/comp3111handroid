@@ -125,7 +125,9 @@ public class EventDetailActivity extends Activity {
 	    }
 	    case R.id.addmarker:{
 	    	Place test= Place.getPlaceFromAddress(location);
-	    	MyGoogleMap.addmarker(test,true);
+	    	MyGoogleMap.mapInstance.addmarker(test,true);
+			this.finish();
+	    	return true;
 	    }
 	    default: {
 	    	onBackPressed();
