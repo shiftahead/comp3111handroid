@@ -9,4 +9,5 @@
   * [Minutes5 5th meeting on Mar. 10]
   * [Minutes6 6th meeting on Mar. 17]
   * [Minutes7 7th meeting on Mar. 25]
+  * [Minutes8 8th meeting on Apr. 4]
  * [https://code.google.com/p/comp3111handroid/w/list All Wiki pages]
