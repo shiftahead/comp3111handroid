@@ -45,7 +45,7 @@ import static com.comp3111.localendar.database.DatabaseConstants.LOCATION;
 public class MyCalendar extends Fragment {
 
 	public static MyCalendar calendarInstance = null;
-	static DatabaseHelper dbhelper;
+	public static DatabaseHelper dbhelper;
 	private ListView eventList;
 	private View view;
 	static Cursor cursor;
