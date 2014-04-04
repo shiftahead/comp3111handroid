@@ -29,13 +29,13 @@ The minutes of the last meeting were approved without amendment.
 ===1. Task and deadline===
 
 || *No.* || *Task* || *Assigned to* || *Deadline* ||
-|| 1. || Voice recognition  || WANG Ding|| Apr. 6 ||
-|| 2. || Test case || ZHANG Tian || Apr.6 ||
-|| 3. || Calendar functions || YANG Ji || Apr. 6  ||
-|| 4. || Implement test cases || All team members || Apr. 6 ||
-|| 5. || Show path functions || TAM Shih Lung || Apr. 6 ||
-|| 6. || Time based reminder & Location based reminder || ZENG Xiong || Apr. 6 ||
-|| 7. || Presentation rehearsal and ppt   || All team members || Apr. 6 ||
+|| 1. || Voice recognition  || WANG Ding|| Apr. 10||
+|| 2. || Combination of map and calendar || ZHANG Tian || Apr.10 ||
+|| 3. || Calendar functions || YANG Ji || Apr. 10  ||
+|| 4. || Implement test cases || All team members || Apr. 10||
+|| 5. || Show path functions || TAM Shih Lung || Apr. 10 ||
+|| 6. || Time based reminder & Location based reminder || ZENG Xiong || Apr. 10 ||
+|| 7. || Presentation rehearsal and ppt   || All team members || Apr. 8 ||
 
 ===2. Presenting Materials===
 
@@ -52,8 +52,8 @@ The minutes of the last meeting were approved without amendment.
 
 == 4. Meeting adjournment and next meeting ==
 
-The meeting lasts for 1 hour and no adjournment.
+The meeting lasts for 3 hour and no adjournment.
 
-The next meeting is scheduled on 4.1.2014, 8:00 pm - 10:00 pm.
+The next meeting is scheduled on 4.11.2014, 8:00 pm - 10:00 pm.
 
 The location is same - LC, LG1, Library, HKUST.
