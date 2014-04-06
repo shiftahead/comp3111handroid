@@ -71,7 +71,7 @@ public class MyGoogleMap {
 	//A test Marker
 	private Marker testMarker;
 	//A test polyline
-	private Polyline line;
+	private static ArrayList<Polyline> line = new ArrayList<Polyline>();
 		    
 	public MyGoogleMap(GoogleMap map) {
 		mapInstance = this;
@@ -114,9 +114,9 @@ public class MyGoogleMap {
                               }
                      });
         
-//        drawline();
-        drawPath(path(Place.getPlaceFromAddress("Tsim Sha Tsui Station, Tsim Sha Tsui").getLatLng(), Place.getPlaceFromAddress("Central").getLatLng() ) ); 
-//        pathing();
+//        drawPath(path(Place.getPlaceFromAddress("Tsim Sha Tsui Station, Tsim Sha Tsui").getLatLng(), Place.getPlaceFromAddress("Central").getLatLng() ) ); 
+        pathing();
+        refresh();
 //        drawPath(path(Place.getPlaceFromAddress("China").getLatLng(), Place.getPlaceFromAddress("Beijing").getLatLng() ) );
         //set Marker called;
         setMarkerListener();
@@ -124,7 +124,7 @@ public class MyGoogleMap {
 
 	}
 	// have to be arranged according to time
-	public void pathing(){
+	public static void pathing(){
 
 		ArrayList <String> location = new ArrayList<String>();
 		String id;
@@ -140,14 +140,20 @@ public class MyGoogleMap {
 		
 		if(!location.isEmpty()){
 			int dummy = 0;
-			if(location.size() > dummy+1){
+			while(location.size() > dummy+1){
 				drawPath(path(Place.getPlaceFromAddress(location.get(dummy)).getLatLng(), Place.getPlaceFromAddress(location.get(dummy+1)).getLatLng() ) );
 				dummy=dummy+1;
 			}
-	        //2 possible ways to do so, 1 is by using waypointgs, -> we don't know how mnay way[popints, and as i recall waypoints gets limits
-			//another is by doing each by each
 		}
 		
+	}
+	
+	public static void refresh(){
+		for(Polyline Line: line){
+			Line.remove();
+		}
+	 	line.clear();
+	 	pathing();
 	}
 	
 	
@@ -199,7 +205,7 @@ public class MyGoogleMap {
 	}
 	
 
-	public void drawPath(){
+	public static void drawPath(){
 		List<LatLng> lat = new ArrayList<LatLng>(); 
 		lat.add(new LatLng(22.3375, 114.2630));		
 		lat.add(new LatLng(22.4515, 114.0081));
@@ -207,17 +213,17 @@ public class MyGoogleMap {
 		
 		ArrayList<LatLng> array= new ArrayList<LatLng> (lat);
 
-		line = localenderMap.addPolyline(new PolylineOptions()
+		line.add(localenderMap.addPolyline(new PolylineOptions()
 	    .addAll(lat)
 	         .width(15)
-	    .geodesic(true));
+	    .geodesic(true)));
 	}
 	
-	public void drawPath(List<LatLng> list){	
-		line = localenderMap.addPolyline(new PolylineOptions()
+	public static void drawPath(List<LatLng> list){	
+		line.add(localenderMap.addPolyline(new PolylineOptions()
 	    .addAll(list)
 	         .width(5)
-	    .geodesic(true));
+	    .geodesic(true)));
 	}
 	
     private static final String LOG_TAG = "Localendar";
@@ -225,7 +231,7 @@ public class MyGoogleMap {
 	private static final String DIRECTIONS_API_BASE = "http://maps.googleapis.com/maps/api/directions";
 	private static final String API_KEY = "AIzaSyC0-Vqt6_XSDsU57zjEnP6YMtB_S5JKqj0";
 	
-    public List<LatLng> path(String input1, String input2) {
+    public static List<LatLng> path(String input1, String input2) {
     	
     String resultList = new String();
     List<LatLng> resultcoor = new ArrayList<LatLng>();
@@ -277,7 +283,7 @@ public class MyGoogleMap {
 	
     }
     
-    public List<LatLng> path(LatLng input1, LatLng input2) {
+    public static List<LatLng> path(LatLng input1, LatLng input2) {
     	
     String resultList = new String();
     List<LatLng> resultcoor = new ArrayList<LatLng>();

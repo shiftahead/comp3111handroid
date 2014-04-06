@@ -121,6 +121,7 @@ public class EventDetailActivity extends Activity {
 	    	MyCalendar.deleteEvent(id);
 			MyCalendar.calendarInstance.refresh();
 			this.finish();
+			MyGoogleMap.refresh();
 			return true;
 	    }
 	    case R.id.addmarker:{
