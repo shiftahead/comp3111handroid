@@ -109,7 +109,7 @@ public class Localendar extends Activity implements OnClickListener, OnCheckedCh
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.mainframe);
 		
-		//bad practice, just for testing purpose
+		//Raymond: bad practice, just for testing purpose
 		if (android.os.Build.VERSION.SDK_INT > 9) {
 		    StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 		    StrictMode.setThreadPolicy(policy);
@@ -239,7 +239,7 @@ public class Localendar extends Activity implements OnClickListener, OnCheckedCh
 		//Set up map
 		MyLocalendar = new MyGoogleMap(((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap());
 		MyLocalendar.setMap();
-		MyLocalendar.drawline(MyLocalendar.path("", ""));
+      MyLocalendar.drawPath(MyGoogleMap.path(Place.getPlaceFromAddress("China").getLatLng(), Place.getPlaceFromAddress("Beijing").getLatLng() ) ); 
 		
 	}
 	
@@ -412,11 +412,6 @@ public class Localendar extends Activity implements OnClickListener, OnCheckedCh
         editor.commit();
         Toast.makeText(this, "Shortcut added", Toast.LENGTH_SHORT).show();
 	}
-    
-    
-    // json?origin=Toronto&destination=Montreal&sensor=false&key=API_KEY
-    
-
-    
+       
 
 }
