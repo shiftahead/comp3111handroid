@@ -1,6 +1,21 @@
 package com.comp3111.localendar.map;
 
 
+import static android.provider.BaseColumns._ID;
+import static com.comp3111.localendar.database.DatabaseConstants.COMPULSORY;
+import static com.comp3111.localendar.database.DatabaseConstants.DAY;
+import static com.comp3111.localendar.database.DatabaseConstants.DESCRIPTION;
+import static com.comp3111.localendar.database.DatabaseConstants.DURATION_HOUR;
+import static com.comp3111.localendar.database.DatabaseConstants.DURATION_MINUTE;
+import static com.comp3111.localendar.database.DatabaseConstants.HOUR;
+import static com.comp3111.localendar.database.DatabaseConstants.LOCATION;
+import static com.comp3111.localendar.database.DatabaseConstants.MINUTE;
+import static com.comp3111.localendar.database.DatabaseConstants.MONTH;
+import static com.comp3111.localendar.database.DatabaseConstants.TABLE_NAME;
+import static com.comp3111.localendar.database.DatabaseConstants.TITLE;
+import static com.comp3111.localendar.database.DatabaseConstants.TRANSPORTATION;
+import static com.comp3111.localendar.database.DatabaseConstants.YEAR;
+
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -14,13 +29,19 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.SimpleCursorAdapter;
 
 import com.comp3111.localendar.Localendar;
+import com.comp3111.localendar.R;
+import com.comp3111.localendar.calendar.MyCalendar;
+import com.comp3111.localendar.calendar.MyCalendar.MyOnItemClickListener;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient;
 import com.google.android.gms.location.LocationClient;
@@ -38,7 +59,8 @@ import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 //import com.google.maps.android.PolyUtil;
-
+import com.comp3111.localendar.database.*;
+import com.comp3111.localendar.calendar.*;
 
 public class MyGoogleMap {
 	public static MyGoogleMap mapInstance;
@@ -93,13 +115,39 @@ public class MyGoogleMap {
                      });
         
 //        drawline();
-        //drawline(path("China", "Beijing"));
-        
-        
+        drawPath(path(Place.getPlaceFromAddress("Tsim Sha Tsui Station, Tsim Sha Tsui").getLatLng(), Place.getPlaceFromAddress("Central").getLatLng() ) ); 
+//        pathing();
+//        drawPath(path(Place.getPlaceFromAddress("China").getLatLng(), Place.getPlaceFromAddress("Beijing").getLatLng() ) );
         //set Marker called;
         setMarkerListener();
         setInfoWindowListener();
 
+	}
+	// have to be arranged according to time
+	public void pathing(){
+
+		ArrayList <String> location = new ArrayList<String>();
+		String id;
+		Cursor cursor;
+
+		String[] from = {LOCATION};
+		SQLiteDatabase db = MyCalendar.dbhelper.getReadableDatabase();
+		cursor = db.query(TABLE_NAME, from, null, null, null, null, null);
+		
+		while(cursor.moveToNext()){
+			location.add(cursor.getString(0));
+		}
+		
+		if(!location.isEmpty()){
+			int dummy = 0;
+			if(location.size() > dummy+1){
+				drawPath(path(Place.getPlaceFromAddress(location.get(dummy)).getLatLng(), Place.getPlaceFromAddress(location.get(dummy+1)).getLatLng() ) );
+				dummy=dummy+1;
+			}
+	        //2 possible ways to do so, 1 is by using waypointgs, -> we don't know how mnay way[popints, and as i recall waypoints gets limits
+			//another is by doing each by each
+		}
+		
 	}
 	
 	
@@ -151,51 +199,32 @@ public class MyGoogleMap {
 	}
 	
 
-	public void drawline(){
+	public void drawPath(){
 		List<LatLng> lat = new ArrayList<LatLng>(); 
 		lat.add(new LatLng(22.3375, 114.2630));		
 		lat.add(new LatLng(22.4515, 114.0081));
 		lat.add(new LatLng(22.3184, 114.1699));
 		
 		ArrayList<LatLng> array= new ArrayList<LatLng> (lat);
-		
-////		ShowPath path1=new ShowPath();
-//		List<LatLng> list = path("Brooklyn", "Queens");
-		
-		
+
 		line = localenderMap.addPolyline(new PolylineOptions()
 	    .addAll(lat)
-	         .width(65)
-	    .geodesic(true));
-	}
-	
-	public void drawline(List<LatLng> list){
-		List<LatLng> lat = new ArrayList<LatLng>(); 
-		lat.add(new LatLng(22.3375, 114.2630));		
-		lat.add(new LatLng(22.4515, 114.0081));
-		lat.add(new LatLng(22.3184, 114.1699));
-		
-		ArrayList<LatLng> array= new ArrayList<LatLng> (lat);
-		
-////		ShowPath path1=new ShowPath();
-//		List<LatLng> list = path("Brooklyn", "Queens");
-		
-		
-		line = localenderMap.addPolyline(new PolylineOptions()
-	    .addAll(list)
 	         .width(15)
 	    .geodesic(true));
 	}
 	
+	public void drawPath(List<LatLng> list){	
+		line = localenderMap.addPolyline(new PolylineOptions()
+	    .addAll(list)
+	         .width(5)
+	    .geodesic(true));
+	}
+	
     private static final String LOG_TAG = "Localendar";
-    private static final String OUT_JSON = "/json";
-//    private static final String API_KEY = "AIzaSyDMyI5sg3IptPBQm31tEmFn5mPDTKSw-Ag";
-    
+    private static final String OUT_JSON = "/json"; 
 	private static final String DIRECTIONS_API_BASE = "http://maps.googleapis.com/maps/api/directions";
 	private static final String API_KEY = "AIzaSyC0-Vqt6_XSDsU57zjEnP6YMtB_S5JKqj0";
 	
-	
-
     public List<LatLng> path(String input1, String input2) {
     	
     String resultList = new String();
@@ -233,32 +262,11 @@ public class MyGoogleMap {
     }
 
     try {
-        // Create a JSON object hierarchy from the results
         JSONObject jsonObj = new JSONObject(jsonResults.toString());
-        
-//\
-//        if(routeArray.size() > 0) {
-//            JSONObject routes = routeArray.getJSONObject(0);
-//            JSONObject overviewPolylines = routes.getJSONObject("overview_polyline");
-//            encodedString = overviewPolylines.getString("points");
-//
-//            List<LatLng> list = decodePoly(encodedString);
-//        }
-//        
-        
         JSONArray routesJsonArray = jsonObj.getJSONArray("routes");
         JSONObject routes = routesJsonArray.getJSONObject(0);
         JSONObject overviewPolylines = routes.getJSONObject("overview_polyline");
         resultList = overviewPolylines.getString("points");
-
-     
-        // 
-//        resultList = jsonObj.getString("routes").getString("overview_polyline").getString("points");
-        
-//        resultList = new ArrayList<String>(predsJsonArray.length());
-//        for (int i = 0; i < predsJsonArray.length(); i++) {
-//            resultList.add(predsJsonArray.getJSONObject(i).getString("points"));
-//        }
     } catch (JSONException e) {
         Log.e(LOG_TAG, "Cannot process JSON results", e);
     }
@@ -268,6 +276,59 @@ public class MyGoogleMap {
 	return resultcoor;
 	
     }
+    
+    public List<LatLng> path(LatLng input1, LatLng input2) {
+    	
+    String resultList = new String();
+    List<LatLng> resultcoor = new ArrayList<LatLng>();
+	
+    HttpURLConnection conn = null;
+    StringBuilder jsonResults = new StringBuilder();
+    try {
+        StringBuilder sb = new StringBuilder(DIRECTIONS_API_BASE + OUT_JSON);
+        sb.append("?origin="+String.valueOf(input1.latitude)+","+String.valueOf(input1.longitude));
+        sb.append("&destination="+String.valueOf(input2.latitude)+","+String.valueOf(input2.longitude));
+        sb.append("&sensor=false");
+        
+
+        URL url = new URL(sb.toString());
+        conn = (HttpURLConnection) url.openConnection();
+        InputStreamReader in = new InputStreamReader(conn.getInputStream());
+
+        // Load the results into a StringBuilder
+        int read;
+        char[] buff = new char[1024];
+        while ((read = in.read(buff)) != -1) {
+            jsonResults.append(buff, 0, read);
+        }
+    } catch (MalformedURLException e) {
+        Log.e(LOG_TAG, "Error processing Places API URL", e);
+        return resultcoor;
+    } catch (IOException e) {
+        Log.e(LOG_TAG, "Error connecting to Places API", e);
+        return resultcoor;
+    } finally {
+        if (conn != null) {
+            conn.disconnect();
+        }
+    }
+
+    try {
+        JSONObject jsonObj = new JSONObject(jsonResults.toString());
+        JSONArray routesJsonArray = jsonObj.getJSONArray("routes");
+        JSONObject routes = routesJsonArray.getJSONObject(0);
+        JSONObject overviewPolylines = routes.getJSONObject("overview_polyline");
+        resultList = overviewPolylines.getString("points");
+    } catch (JSONException e) {
+        Log.e(LOG_TAG, "Cannot process JSON results", e);
+    }
+
+    resultcoor = decode(resultList);
+    
+	return resultcoor;
+	
+    }
+    
 	
     //Note that this functions is an extract from PolyUtil, an open-source library
     //the URL is https://github.com/googlemaps/android-maps-utils
