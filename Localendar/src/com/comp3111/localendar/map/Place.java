@@ -4,23 +4,30 @@ import java.io.IOException;
 import java.util.List;
 
 import com.comp3111.localendar.Localendar;
+import com.google.android.gms.maps.model.LatLng;
 
 import android.location.Address;
 import android.location.Geocoder;
 
 public class Place {
 	private final String name;
+	private final LatLng latlng;
 	private final double latitude;
 	private final double longitude;
 	
 	public Place(String name, double latitude, double longitude) {
 		this.name = name;
+		this.latlng = new LatLng(latitude, longitude);
 		this.latitude = latitude;
 		this.longitude = longitude;
 	}
 	
 	public String getName() {
 		return name;
+	}
+	
+	public LatLng getLatLng() {
+		return latlng;
 	}
 	
 	public double getLatitude() {
