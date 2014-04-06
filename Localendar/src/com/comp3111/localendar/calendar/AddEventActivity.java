@@ -4,6 +4,7 @@ import com.comp3111.localendar.R;
 import com.comp3111.localendar.R.anim;
 import com.comp3111.localendar.R.id;
 import com.comp3111.localendar.R.layout;
+import com.comp3111.localendar.map.MyGoogleMap;
 import com.comp3111.localendar.support.ClearableAutoCompleteTextView;
 import com.comp3111.localendar.support.ClearableEditText;
 import com.comp3111.localendar.support.PlacesAutoCompleteAdapter;
@@ -174,6 +175,7 @@ public class AddEventActivity extends Activity {
         values.put(TRANSPORTATION, transportation);
         values.put(COMPULSORY, compulsory);
         db.insert(TABLE_NAME, null, values);
+        MyGoogleMap.refresh();
         return true;
     }
 	
