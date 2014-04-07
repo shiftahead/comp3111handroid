@@ -117,7 +117,8 @@ public class MyGoogleMap {
 //        drawPath(path(Place.getPlaceFromAddress("Tsim Sha Tsui Station, Tsim Sha Tsui").getLatLng(), Place.getPlaceFromAddress("Central").getLatLng() ) ); 
         pathing();
         refresh();
-//        drawPath(path(Place.getPlaceFromAddress("China").getLatLng(), Place.getPlaceFromAddress("Beijing").getLatLng() ) );
+//        drawPath();
+//        drawPath(path("China", "Beijing" ) );
         //set Marker called;
         setMarkerListener();
         setInfoWindowListener();
@@ -127,7 +128,6 @@ public class MyGoogleMap {
 	public static void pathing(){
 
 		ArrayList <String> location = new ArrayList<String>();
-		String id;
 		Cursor cursor;
 
 		String[] from = {LOCATION};
@@ -141,7 +141,9 @@ public class MyGoogleMap {
 		if(!location.isEmpty()){
 			int dummy = 0;
 			while(location.size() > dummy+1){
-				drawPath(path(Place.getPlaceFromAddress(location.get(dummy)).getLatLng(), Place.getPlaceFromAddress(location.get(dummy+1)).getLatLng() ) );
+//				drawPath(path(Place.getPlaceFromAddress(location.get(dummy)), Place.getPlaceFromAddress(location.get(dummy+1)) ) );
+				//depricated 
+				drawPath(path(location.get(dummy), location.get(dummy+1) ) );
 				dummy=dummy+1;
 			}
 		}
@@ -204,14 +206,12 @@ public class MyGoogleMap {
 		});
 	}
 	
-
+//for testing purpose
 	public static void drawPath(){
 		List<LatLng> lat = new ArrayList<LatLng>(); 
 		lat.add(new LatLng(22.3375, 114.2630));		
 		lat.add(new LatLng(22.4515, 114.0081));
 		lat.add(new LatLng(22.3184, 114.1699));
-		
-		ArrayList<LatLng> array= new ArrayList<LatLng> (lat);
 
 		line.add(localenderMap.addPolyline(new PolylineOptions()
 	    .addAll(lat)
@@ -220,6 +220,7 @@ public class MyGoogleMap {
 	}
 	
 	public static void drawPath(List<LatLng> list){	
+//		if(!list.isEmpty())
 		line.add(localenderMap.addPolyline(new PolylineOptions()
 	    .addAll(list)
 	         .width(5)
@@ -240,15 +241,15 @@ public class MyGoogleMap {
     StringBuilder jsonResults = new StringBuilder();
     try {
         StringBuilder sb = new StringBuilder(DIRECTIONS_API_BASE + OUT_JSON);
-        sb.append("?origin="+input1);
-        sb.append("&destination="+input2);
+        sb.append("?origin="+ input1.replaceAll("\\s+",""));
+        sb.append("&destination="+input2.replaceAll("\\s+",""));
         sb.append("&sensor=false");
         
 
         URL url = new URL(sb.toString());
         conn = (HttpURLConnection) url.openConnection();
         InputStreamReader in = new InputStreamReader(conn.getInputStream());
-
+        
         // Load the results into a StringBuilder
         int read;
         char[] buff = new char[1024];
@@ -270,70 +271,74 @@ public class MyGoogleMap {
     try {
         JSONObject jsonObj = new JSONObject(jsonResults.toString());
         JSONArray routesJsonArray = jsonObj.getJSONArray("routes");
-        JSONObject routes = routesJsonArray.getJSONObject(0);
-        JSONObject overviewPolylines = routes.getJSONObject("overview_polyline");
-        resultList = overviewPolylines.getString("points");
+        if(!routesJsonArray.isNull(0)){
+        	JSONObject routes = routesJsonArray.optJSONObject(0);
+        	JSONObject overviewPolylines = routes.optJSONObject("overview_polyline");
+        	resultList = overviewPolylines.optString("points");
+        }
     } catch (JSONException e) {
         Log.e(LOG_TAG, "Cannot process JSON results", e);
     }
-
-    resultcoor = decode(resultList);
+    
+  	resultcoor = decode(resultList);
     
 	return resultcoor;
 	
     }
     
-    public static List<LatLng> path(LatLng input1, LatLng input2) {
-    	
-    String resultList = new String();
-    List<LatLng> resultcoor = new ArrayList<LatLng>();
-	
-    HttpURLConnection conn = null;
-    StringBuilder jsonResults = new StringBuilder();
-    try {
-        StringBuilder sb = new StringBuilder(DIRECTIONS_API_BASE + OUT_JSON);
-        sb.append("?origin="+String.valueOf(input1.latitude)+","+String.valueOf(input1.longitude));
-        sb.append("&destination="+String.valueOf(input2.latitude)+","+String.valueOf(input2.longitude));
-        sb.append("&sensor=false");
-        
-
-        URL url = new URL(sb.toString());
-        conn = (HttpURLConnection) url.openConnection();
-        InputStreamReader in = new InputStreamReader(conn.getInputStream());
-
-        // Load the results into a StringBuilder
-        int read;
-        char[] buff = new char[1024];
-        while ((read = in.read(buff)) != -1) {
-            jsonResults.append(buff, 0, read);
-        }
-    } catch (MalformedURLException e) {
-        Log.e(LOG_TAG, "Error processing Places API URL", e);
-        return resultcoor;
-    } catch (IOException e) {
-        Log.e(LOG_TAG, "Error connecting to Places API", e);
-        return resultcoor;
-    } finally {
-        if (conn != null) {
-            conn.disconnect();
-        }
-    }
-
-    try {
-        JSONObject jsonObj = new JSONObject(jsonResults.toString());
-        JSONArray routesJsonArray = jsonObj.getJSONArray("routes");
-        JSONObject routes = routesJsonArray.getJSONObject(0);
-        JSONObject overviewPolylines = routes.getJSONObject("overview_polyline");
-        resultList = overviewPolylines.getString("points");
-    } catch (JSONException e) {
-        Log.e(LOG_TAG, "Cannot process JSON results", e);
-    }
-
-    resultcoor = decode(resultList);
-    
-	return resultcoor;
-	
-    }
+    // to be disposed
+//    public static List<LatLng> path(Place input1, Place input2) {
+//    	
+//    String resultList = new String();
+//    List<LatLng> resultcoor = new ArrayList<LatLng>();
+//	
+//    HttpURLConnection conn = null;
+//    StringBuilder jsonResults = new StringBuilder();
+//    try {
+//        StringBuilder sb = new StringBuilder(DIRECTIONS_API_BASE + OUT_JSON);
+//        sb.append("?origin="+String.valueOf(input1.getLatitude())+","+String.valueOf(input1.getLongitude()));
+//        sb.append("&destination="+String.valueOf(input2.getLatitude())+","+String.valueOf(input2.getLongitude()));
+//        sb.append("&sensor=false");
+//        
+//
+//        URL url = new URL(sb.toString());
+//        conn = (HttpURLConnection) url.openConnection();
+//        InputStreamReader in = new InputStreamReader(conn.getInputStream());
+//
+//        // Load the results into a StringBuilder
+//        int read;
+//        char[] buff = new char[1024];
+//        while ((read = in.read(buff)) != -1) {
+//            jsonResults.append(buff, 0, read);
+//        }
+//    } catch (MalformedURLException e) {
+//        Log.e(LOG_TAG, "Error processing Places API URL", e);
+//        return resultcoor;
+//    } catch (IOException e) {
+//        Log.e(LOG_TAG, "Error connecting to Places API", e);
+//        return resultcoor;
+//    } finally {
+//        if (conn != null) {
+//            conn.disconnect();
+//        }
+//    }
+//
+//    try {
+//        JSONObject jsonObj = new JSONObject(jsonResults.toString());
+//        JSONArray routesJsonArray = jsonObj.optJSONArray("routes");
+//        JSONObject routes = routesJsonArray.optJSONObject(0);
+//        JSONObject overviewPolylines = routes.optJSONObject("overview_polyline");
+//        resultList = overviewPolylines.optString("points");
+//        
+//    } catch (JSONException e) {
+//        Log.e(LOG_TAG, "Cannot process JSON results", e);
+//    }
+//    
+//   	resultcoor = decode(resultList);
+//    
+//	return resultcoor;
+//	
+//    }
     
 	
     //Note that this functions is an extract from PolyUtil, an open-source library
