@@ -18,12 +18,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.View.OnClickListener;
+import android.widget.AbsListView.MultiChoiceModeListener;
 import android.widget.AdapterView;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -79,6 +82,74 @@ public class MyCalendar extends Fragment {
 		final SimpleCursorAdapter adapter = new SimpleCursorAdapter(calendarInstance.getActivity(), R.layout.event_listitem, cursor, from, to);
         eventList.setAdapter(adapter);
         eventList.setOnItemClickListener(new MyOnItemClickListener());
+        
+        /* Try to implement a contextual action mode */
+        eventList.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
+        eventList.setMultiChoiceModeListener(new MultiChoiceModeListener() {
+			
+        	 @Override
+        	    public void onItemCheckedStateChanged(ActionMode mode, int position,
+        	                                          long id, boolean checked) {
+        	        // Here you can do something when items are selected/de-selected,
+        	        // such as update the title in the CAB
+        		 	setSubtitle(mode);
+        	    }        	 
+        	 
+
+        	    private void setSubtitle(ActionMode mode) {
+				// TODO Auto-generated method stub
+				final int checkedCount = eventList.getCheckedItemCount();
+				switch (checkedCount) {
+					case 0:
+						mode.setTitle(null);
+						break;
+					case 1:
+						mode.setTitle("Chose 1 item");
+						break;
+					default:
+						mode.setTitle("Chose " + checkedCount + " items");
+        				break;
+				}
+			}
+
+				@Override
+        	    public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+        	        // Respond to clicks on the actions in the CAB
+        	        switch (item.getItemId()) {
+        	            case R.id.menu_delete:
+        	                deleteSelectedItems();
+        	                mode.finish(); // Action picked, so close the CAB
+        	                return true;
+        	            default:
+        	                return false;
+        	        }
+        	    }
+
+        	    private void deleteSelectedItems() {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+        	    public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+        	        // Inflate the menu for the CAB
+        	        mode.getMenuInflater().inflate(R.menu.contextual_action_bar, menu);
+        	        return true;
+        	    }
+
+        	    @Override
+        	    public void onDestroyActionMode(ActionMode mode) {
+        	        // Here you can make any necessary updates to the activity when
+        	        // the CAB is removed. By default, selected items are deselected/unchecked.
+        	    }
+
+        	    @Override
+        	    public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+        	        // Here you can perform updates to the CAB due to
+        	        // an invalidate() request
+        	        return false;
+        	    }
+		});
 	}
 	
 	static void deleteEvent(String id) {
