@@ -239,7 +239,6 @@ public class Localendar extends Activity implements OnClickListener, OnCheckedCh
 		//Set up map
 		MyLocalendar = new MyGoogleMap(((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap());
 		MyLocalendar.setMap();
-      MyLocalendar.drawPath(MyGoogleMap.path(Place.getPlaceFromAddress("China").getLatLng(), Place.getPlaceFromAddress("Beijing").getLatLng() ) ); 
 		
 	}
 	
