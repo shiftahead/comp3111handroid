@@ -112,7 +112,7 @@ public class MyCalendar extends Fragment {
 				}
 			}
 
-				@Override
+				/*@Override
         	    public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
         	        // Respond to clicks on the actions in the CAB
         	        switch (item.getItemId()) {
@@ -124,19 +124,19 @@ public class MyCalendar extends Fragment {
         	                return false;
         	        }
         	    }
-
+                */
         	    private void deleteSelectedItems() {
 					// TODO Auto-generated method stub
 					
 				}
-
+                /*
 				@Override
         	    public boolean onCreateActionMode(ActionMode mode, Menu menu) {
         	        // Inflate the menu for the CAB
         	        mode.getMenuInflater().inflate(R.menu.contextual_action_bar, menu);
         	        return true;
         	    }
-
+                */
         	    @Override
         	    public void onDestroyActionMode(ActionMode mode) {
         	        // Here you can make any necessary updates to the activity when
@@ -149,6 +149,21 @@ public class MyCalendar extends Fragment {
         	        // an invalidate() request
         	        return false;
         	    }
+
+
+				@Override
+				public boolean onActionItemClicked(ActionMode mode,
+						MenuItem item) {
+					// TODO Auto-generated method stub
+					return false;
+				}
+
+
+				@Override
+				public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+					// TODO Auto-generated method stub
+					return false;
+				}
 		});
 	}
 	
