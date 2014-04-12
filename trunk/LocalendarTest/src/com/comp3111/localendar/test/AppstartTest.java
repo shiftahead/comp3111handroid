@@ -2,14 +2,17 @@ package com.comp3111.localendar.test;
 
 import android.test.ActivityInstrumentationTestCase2;
 
-import com.comp3111.localendar.Localendar;
+import com.comp3111.localendar.Appstart;
 
 
-public class AppstartTest extends ActivityInstrumentationTestCase2<Localendar> {
+public class AppstartTest extends ActivityInstrumentationTestCase2<Appstart> {
 
-	public AppstartTest(Class<Localendar> activityClass) {
+	private Appstart app;
+	public AppstartTest(Class<Appstart> activityClass) {
 		super(activityClass);
-		// TODO Auto-generated constructor stub
 	}
-
+	
+	public void testNull() {
+		assertNotNull("Appstart  is null", app);
+	}
 }
