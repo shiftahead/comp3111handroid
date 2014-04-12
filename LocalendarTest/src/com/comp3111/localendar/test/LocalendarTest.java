@@ -2,13 +2,19 @@ package com.comp3111.localendar.test;
 
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.TouchUtils;
+import android.view.KeyEvent;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.RadioButton;
 
-import com.comp3111.localendar.*;
+import com.comp3111.localendar.Localendar;
 import com.comp3111.localendar.R;
-import com.comp3111.localendar.support.*;
+import com.comp3111.localendar.support.ClearableAutoCompleteTextView;
+import com.comp3111.localendar.support.PlacesAutoCompleteAdapter;
 
 public class LocalendarTest extends ActivityInstrumentationTestCase2<Localendar> {
 
@@ -26,6 +32,9 @@ public class LocalendarTest extends ActivityInstrumentationTestCase2<Localendar>
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
+		
+	    setActivityInitialTouchMode(false);
+	    
 		localendar = (Localendar) getActivity();
 		calendar = (RadioButton) localendar.findViewById(R.id.calendar_button);
 		map = (RadioButton) localendar.findViewById(R.id.map_button);
@@ -53,14 +62,19 @@ public class LocalendarTest extends ActivityInstrumentationTestCase2<Localendar>
 		TouchUtils.tapView(this, map);
 	}
 	
-	public void testActionBar() {
+	public void testActionBar() throws InterruptedException {
 		TouchUtils.tapView(this, map);
 		assertTrue(View.VISIBLE == searchIcon.getVisibility());
 		assertTrue(View.GONE == searchBox.getVisibility());
 		TouchUtils.tapView(this, searchIcon);
-		sendKeys("H");
-		sendKeys("o");
+		
+	    this.sendKeys(KeyEvent.KEYCODE_H);
+	    this.sendKeys(KeyEvent.KEYCODE_O);
+	    this.sendKeys(KeyEvent.KEYCODE_N);
+	    this.sendKeys(KeyEvent.KEYCODE_G);
+	    assertEquals(searchBox.getAdapter().getItem(1), "Hong Kong");
 		assertTrue(View.GONE == searchIcon.getVisibility());
 		assertTrue(View.VISIBLE == searchBox.getVisibility());
+		
 	}
 }
