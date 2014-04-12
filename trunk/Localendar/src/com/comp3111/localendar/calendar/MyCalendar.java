@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -54,7 +55,6 @@ public class MyCalendar extends Fragment {
 	private ListView eventList;
 	private View view;
 	static Cursor cursor;
-	private ArrayList<Integer> selection = new ArrayList<Integer>(); //Record the id of selected items
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
@@ -86,83 +86,10 @@ public class MyCalendar extends Fragment {
         eventList.setAdapter(adapter);
         eventList.setOnItemClickListener(new MyOnItemClickListener());
         
-        /* Try to implement a contextual action mode */
+        // Try to implement a contextual action mode 
         eventList.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
-        eventList.setMultiChoiceModeListener(new MultiChoiceModeListener() {
-			
-        	 @Override
-        	    public void onItemCheckedStateChanged(ActionMode mode, int position,
-        	                                          long id, boolean checked) {
-        	        // Here you can do something when items are selected/de-selected,
-        	        // such as update the title in the CAB
-	        		 mode.setTitle("Select item to delete");  
-	                 setSubtitle(mode);  
-	                 if (checked)
-	                	 selection.add((int) id);
-	                	 
-
-        	    }        	 
-        	 
-
-        	    private void setSubtitle(ActionMode mode) {
-				// TODO Auto-generated method stub
-				final int checkedCount = eventList.getCheckedItemCount();
-				switch (checkedCount) {
-					case 0:
-						mode.setSubtitle(null);
-						break;
-					case 1:
-						mode.setSubtitle("Selected 1 item");
-						break;
-					default:
-						mode.setSubtitle("Selected " + checkedCount + " items");
-        				break;
-				}
-			}
-
-				@Override
-        	    public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-        	        // Respond to clicks on the actions in the CAB
-        	        switch (item.getItemId()) {
-        	            case R.id.menu_delete:
-        	                deleteSelectedItems();
-                	    	MyCalendar.calendarInstance.refresh();
-        	                mode.finish(); // Action picked, so close the CAB
-                	    	MyGoogleMap.refresh();
-        	                return true;
-        	            default:
-        	                return false;
-        	        }
-        	    }
-                
-        	    private void deleteSelectedItems() {
-					// TODO Auto-generated method stub
-        	    	for (int id:selection) {
-        	    		String sid = Integer.toString(id);
-        	    		MyCalendar.deleteEvent(sid);
-        	    	}
-				}
-                
-				@Override
-        	    public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-        	        // Inflate the menu for the CAB
-        	        mode.getMenuInflater().inflate(R.menu.contextual_action_bar, menu);
-        	        return true;
-        	    }
-                
-        	    @Override
-        	    public void onDestroyActionMode(ActionMode mode) {
-        	        // Here you can make any necessary updates to the activity when
-        	        // the CAB is removed. By default, selected items are deselected/unchecked.
-        	    }
-
-        	    @Override
-        	    public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
-        	        // Here you can perform updates to the CAB due to
-        	        // an invalidate() request
-        	        return false;
-        	    }
-		});
+        eventList.setMultiChoiceModeListener(new MyMultiChoiceModeListener());
+		//eventList.setSelector(R.drawable.event_background);
 	}
 	
 	static void deleteEvent(String id) {
@@ -182,9 +109,94 @@ public class MyCalendar extends Fragment {
 				startActivity(intent);
     		}
 		}
+	}
+	
 		
-		
-    	
+   	 public class MyMultiChoiceModeListener implements MultiChoiceModeListener {
+   		 
+   		private ArrayList<String> selection = new ArrayList<String>(); //Record the id of selected items
+   		
+   		@Override
+   	    public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {
+   	        // Here you can do something when items are selected/de-selected,
+   	        // such as update the title in the CAB
+       		 mode.setTitle("Select item to delete");  
+             setSubtitle(mode);
+                if (checked) {
+               	 	if (cursor.moveToPosition(position)) {
+        				String eventId = cursor.getString(cursor.getColumnIndex(_ID));
+        				selection.add(eventId);
+               	 	}
+               	 	eventList.getChildAt(position).setBackgroundResource(R.color.gray);
+               	 }
+                else {
+               	 	if (cursor.moveToPosition(position)) {
+	         				String eventId = cursor.getString(cursor.getColumnIndex(_ID));
+	         				selection.remove(eventId);
+	                }
+               	 	eventList.getChildAt(position).setBackgroundResource(R.color.holo_light);
+               	}
+               	 
+
+   	    }        	 
+   	 
+   		
+   	    private void setSubtitle(ActionMode mode) {
+			final int checkedCount = eventList.getCheckedItemCount();
+			switch (checkedCount) {
+				case 0:
+					mode.setSubtitle(null);
+					break;
+				case 1:
+					mode.setSubtitle("Selected 1 item");
+					break;
+				default:
+					mode.setSubtitle("Selected " + checkedCount + " items");
+   				break;
+			}
+		}
+
+		@Override
+   	    public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+   	        // Respond to clicks on the actions in the CAB
+   	        switch (item.getItemId()) {
+   	            case R.id.menu_delete:
+   	                deleteSelectedItems();
+           	    	refresh();
+   	                mode.finish(); // Action picked, so close the CAB
+           	    	MyGoogleMap.refresh();
+   	                return true;
+   	            default:
+   	                return false;
+   	        }
+   	    }
+           
+   	    private void deleteSelectedItems() {
+				// TODO Auto-generated method stub
+   	    	for (String id:selection) {
+   	    		deleteEvent(id);
+   	    	}
+		}
+           
+		@Override
+   	    public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+   	        // Inflate the menu for the CAB
+   	        mode.getMenuInflater().inflate(R.menu.contextual_action_bar, menu);
+   	        return true;
+   	    }
+           
+   	    @Override
+   	    public void onDestroyActionMode(ActionMode mode) {
+   	        // Here you can make any necessary updates to the activity when
+   	        // the CAB is removed. By default, selected items are deselected/unchecked.
+   	    }
+
+   	    @Override
+   	    public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+   	        // Here you can perform updates to the CAB due to
+   	        // an invalidate() request
+   	        return false;
+   	    }
 	}
 
 }
