@@ -1,11 +1,13 @@
 package com.comp3111.localendar.calendar;
 
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 import com.comp3111.localendar.R;
 import com.comp3111.localendar.R.id;
 import com.comp3111.localendar.R.layout;
 import com.comp3111.localendar.database.DatabaseHelper;
+import com.comp3111.localendar.map.MyGoogleMap;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -52,6 +54,7 @@ public class MyCalendar extends Fragment {
 	private ListView eventList;
 	private View view;
 	static Cursor cursor;
+	private ArrayList<Integer> selection = new ArrayList<Integer>(); //Record the id of selected items
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
@@ -92,7 +95,12 @@ public class MyCalendar extends Fragment {
         	                                          long id, boolean checked) {
         	        // Here you can do something when items are selected/de-selected,
         	        // such as update the title in the CAB
-        		 	setSubtitle(mode);
+	        		 mode.setTitle("Select item to delete");  
+	                 setSubtitle(mode);  
+	                 if (checked)
+	                	 selection.add((int) id);
+	                	 
+
         	    }        	 
         	 
 
@@ -101,42 +109,47 @@ public class MyCalendar extends Fragment {
 				final int checkedCount = eventList.getCheckedItemCount();
 				switch (checkedCount) {
 					case 0:
-						mode.setTitle(null);
+						mode.setSubtitle(null);
 						break;
 					case 1:
-						mode.setTitle("Chose 1 item");
+						mode.setSubtitle("Selected 1 item");
 						break;
 					default:
-						mode.setTitle("Chose " + checkedCount + " items");
+						mode.setSubtitle("Selected " + checkedCount + " items");
         				break;
 				}
 			}
 
-				/*@Override
+				@Override
         	    public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
         	        // Respond to clicks on the actions in the CAB
         	        switch (item.getItemId()) {
         	            case R.id.menu_delete:
         	                deleteSelectedItems();
+                	    	MyCalendar.calendarInstance.refresh();
         	                mode.finish(); // Action picked, so close the CAB
+                	    	MyGoogleMap.refresh();
         	                return true;
         	            default:
         	                return false;
         	        }
         	    }
-                */
+                
         	    private void deleteSelectedItems() {
 					// TODO Auto-generated method stub
-					
+        	    	for (int id:selection) {
+        	    		String sid = Integer.toString(id);
+        	    		MyCalendar.deleteEvent(sid);
+        	    	}
 				}
-                /*
+                
 				@Override
         	    public boolean onCreateActionMode(ActionMode mode, Menu menu) {
         	        // Inflate the menu for the CAB
         	        mode.getMenuInflater().inflate(R.menu.contextual_action_bar, menu);
         	        return true;
         	    }
-                */
+                
         	    @Override
         	    public void onDestroyActionMode(ActionMode mode) {
         	        // Here you can make any necessary updates to the activity when
@@ -149,21 +162,6 @@ public class MyCalendar extends Fragment {
         	        // an invalidate() request
         	        return false;
         	    }
-
-
-				@Override
-				public boolean onActionItemClicked(ActionMode mode,
-						MenuItem item) {
-					// TODO Auto-generated method stub
-					return false;
-				}
-
-
-				@Override
-				public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-					// TODO Auto-generated method stub
-					return false;
-				}
 		});
 	}
 	
