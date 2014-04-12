@@ -26,6 +26,8 @@ public class SigninActivity extends Activity {
 	    overridePendingTransition(R.anim.left_in, R.anim.left_out);
 	    return true;
 	}
+	/*
+	 * this function may be used in optional function
 	private String[] getAccountNames() {
 	    mAccountManager = AccountManager.get(this);
 	    Account[] accounts = mAccountManager.getAccountsByType(GoogleAuthUtil.GOOGLE_ACCOUNT_TYPE);
@@ -35,4 +37,5 @@ public class SigninActivity extends Activity {
 	    }
 	    return names;
 	}
+	*/
 }
