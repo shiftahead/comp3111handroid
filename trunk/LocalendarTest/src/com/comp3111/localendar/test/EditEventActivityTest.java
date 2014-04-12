@@ -1,5 +1,7 @@
 package com.comp3111.localendar.test;
 
+import android.app.Instrumentation;
+import android.content.Intent;
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -8,6 +10,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TimePicker;
 
+import com.comp3111.localendar.Localendar;
 import com.comp3111.localendar.calendar.EditEventActivity;
 import com.comp3111.localendar.support.ClearableAutoCompleteTextView;
 import com.comp3111.localendar.support.ClearableEditText;
@@ -32,8 +35,20 @@ public class EditEventActivityTest extends ActivityInstrumentationTestCase2<Edit
 	}
 	
 	@Override
+	public EditEventActivity getActivity() {
+		Intent i = new Intent();
+		i.putExtra("ID", "1");
+		setActivityIntent(i);
+	    return super.getActivity();
+	}
+	
+	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
+		
+		Instrumentation in = new Instrumentation();
+		in.callActivityOnStart(Localendar.instance);
+		
 		setActivityInitialTouchMode(false);
 		
 		mActivity = getActivity();
