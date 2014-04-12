@@ -2,16 +2,21 @@ package com.comp3111.localendar.test;
 
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.TouchUtils;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 
 import com.comp3111.localendar.*;
+import com.comp3111.localendar.R;
+import com.comp3111.localendar.support.*;
 
 public class LocalendarTest extends ActivityInstrumentationTestCase2<Localendar> {
 
 	private Localendar localendar;
 	private RadioButton calendar, map, settings;
-	private ImageView place;
+	private ClearableAutoCompleteTextView searchBox;
+	private ImageView searchIcon;
+	
 	public LocalendarTest() {
 		super(Localendar.class);
 		// TODO Auto-generated constructor stub
@@ -22,10 +27,12 @@ public class LocalendarTest extends ActivityInstrumentationTestCase2<Localendar>
 	protected void setUp() throws Exception {
 		super.setUp();
 		localendar = (Localendar) getActivity();
-		calendar = (RadioButton) localendar.findViewById(com.comp3111.localendar.R.id.calendar_button);
-		map = (RadioButton) localendar.findViewById(com.comp3111.localendar.R.id.map_button);
-		settings = (RadioButton) localendar.findViewById(com.comp3111.localendar.R.id.settings_button);
-		place = (ImageView) localendar.findViewById(com.comp3111.localendar.R.id.place_view);
+		calendar = (RadioButton) localendar.findViewById(R.id.calendar_button);
+		map = (RadioButton) localendar.findViewById(R.id.map_button);
+		settings = (RadioButton) localendar.findViewById(R.id.settings_button);
+		searchBox = (ClearableAutoCompleteTextView) localendar.findViewById(R.id.search_box);
+	    searchIcon = (ImageView) localendar.findViewById(R.id.place_view);
+	    
 	}
 	 
 	public void testView() { 
@@ -45,8 +52,14 @@ public class LocalendarTest extends ActivityInstrumentationTestCase2<Localendar>
 		TouchUtils.tapView(this, map);
 		TouchUtils.tapView(this, calendar);
 		TouchUtils.tapView(this, map);
-		TouchUtils.tapView(this, place);
-		sendKeys("hkust");
-		
+	}
+	
+	public void testActionBar() {
+		TouchUtils.tapView(this, map);
+		assertTrue(View.VISIBLE == searchIcon.getVisibility());
+		assertTrue(View.GONE == searchBox.getVisibility());
+		TouchUtils.tapView(this, searchIcon);
+		assertTrue(View.GONE == searchIcon.getVisibility());
+		assertTrue(View.VISIBLE == searchBox.getVisibility());
 	}
 }
