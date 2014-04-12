@@ -32,8 +32,7 @@ public class LocalendarTest extends ActivityInstrumentationTestCase2<Localendar>
 		settings = (RadioButton) localendar.findViewById(R.id.settings_button);
 		searchBox = (ClearableAutoCompleteTextView) localendar.findViewById(R.id.search_box);
 	    searchIcon = (ImageView) localendar.findViewById(R.id.place_view);
-	    
-	}
+	 }
 	 
 	public void testView() { 
 		// checks if the activity is created
@@ -59,6 +58,8 @@ public class LocalendarTest extends ActivityInstrumentationTestCase2<Localendar>
 		assertTrue(View.VISIBLE == searchIcon.getVisibility());
 		assertTrue(View.GONE == searchBox.getVisibility());
 		TouchUtils.tapView(this, searchIcon);
+		sendKeys("H");
+		sendKeys("o");
 		assertTrue(View.GONE == searchIcon.getVisibility());
 		assertTrue(View.VISIBLE == searchBox.getVisibility());
 	}
