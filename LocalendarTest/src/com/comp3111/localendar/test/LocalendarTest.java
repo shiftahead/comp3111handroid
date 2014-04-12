@@ -18,7 +18,7 @@ import com.comp3111.localendar.Localendar;
 import com.comp3111.localendar.R;
 import com.comp3111.localendar.support.ClearableAutoCompleteTextView;
 import com.comp3111.localendar.support.PlacesAutoCompleteAdapter;
-import com.google.android.gms.drive.internal.am;
+
 
 public class LocalendarTest extends ActivityInstrumentationTestCase2<Localendar> {
 
@@ -63,18 +63,16 @@ public class LocalendarTest extends ActivityInstrumentationTestCase2<Localendar>
 		assertNotNull(getActivity());
 	}
 	
-	public void testRadioButtons() {
+	public void testRadioButtons() throws InterruptedException {
 		TouchUtils.tapView(this, calendar);
+	    Thread.sleep(500);
 		TouchUtils.tapView(this, map);
+	    Thread.sleep(500);
 		TouchUtils.tapView(this, settings);
+	    Thread.sleep(500);
 		TouchUtils.tapView(this, map);
+	    Thread.sleep(500);
 		TouchUtils.tapView(this, calendar);
-		TouchUtils.tapView(this, calendar);
-		TouchUtils.tapView(this, map);
-		TouchUtils.tapView(this, settings);
-		TouchUtils.tapView(this, map);
-		TouchUtils.tapView(this, calendar);
-		TouchUtils.tapView(this, map);
 	}
 	
 	public void testActionBar() throws InterruptedException {
