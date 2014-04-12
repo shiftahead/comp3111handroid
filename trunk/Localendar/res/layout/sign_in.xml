@@ -12,6 +12,7 @@
   			android:background="@color/holo_light"
   			android:gravity="center_vertical" >  
       		<TextView
+      		    android:id="@+id/signinTitle"
         		android:layout_width="wrap_content" 
         		android:layout_height="wrap_content" 
         		android:text="Sign in"
@@ -33,6 +34,7 @@
     		 android:rowCount="6" 
 			 android:gravity="center">
       		<TextView
+      		    android:id="@+id/SigninHint"
         		android:layout_width="wrap_content" 
         		android:layout_height="wrap_content" 
         		android:text="Sign in to synchronize with Google"
