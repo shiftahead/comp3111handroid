@@ -25,6 +25,7 @@ public class AboutusActivityTest extends ActivityInstrumentationTestCase2<Aboutu
     public void testPreconditions(){
     	assertNotNull("mAboutusActivity is null",mAboutusActivity);
     	assertNotNull("mTextView is null",mTextView);
+    	assertNotNull("mSecondTextView is null",mSecondTextView);
     }   
     public void testTextView_labelText() {
         String expected ="We are COMP3111 Group 'Localendar'";
