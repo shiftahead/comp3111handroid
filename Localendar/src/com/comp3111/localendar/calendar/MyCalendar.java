@@ -115,7 +115,7 @@ public class MyCalendar extends Fragment {
    	 public class MyMultiChoiceModeListener implements MultiChoiceModeListener {
    		 
    		private ArrayList<String> selection = new ArrayList<String>(); //Record the id of selected items
-   		
+   		private ArrayList<Integer> positions = new ArrayList<Integer>();
    		@Override
    	    public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {
    	        // Here you can do something when items are selected/de-selected,
@@ -126,6 +126,7 @@ public class MyCalendar extends Fragment {
                	 	if (cursor.moveToPosition(position)) {
         				String eventId = cursor.getString(cursor.getColumnIndex(_ID));
         				selection.add(eventId);
+        				positions.add((Integer)position);
                	 	}
                	 	eventList.getChildAt(position).setBackgroundResource(R.color.gray);
                	 }
@@ -133,6 +134,7 @@ public class MyCalendar extends Fragment {
                	 	if (cursor.moveToPosition(position)) {
 	         				String eventId = cursor.getString(cursor.getColumnIndex(_ID));
 	         				selection.remove(eventId);
+	         				positions.remove((Integer)position);
 	                }
                	 	eventList.getChildAt(position).setBackgroundResource(R.color.holo_light);
                	}
@@ -171,24 +173,26 @@ public class MyCalendar extends Fragment {
    	        }
    	    }
            
-   	    private void deleteSelectedItems() {
-				// TODO Auto-generated method stub
+   	    private void deleteSelectedItems() {				
    	    	for (String id:selection) {
    	    		deleteEvent(id);
    	    	}
 		}
            
+   	    private void cancelSelect() {
+   	    	for (Integer id:positions) {
+   	    		eventList.getChildAt(id).setBackgroundResource(R.color.holo_light);
+   	    	}
+   	    }
 		@Override
    	    public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-   	        // Inflate the menu for the CAB
    	        mode.getMenuInflater().inflate(R.menu.contextual_action_bar, menu);
    	        return true;
    	    }
            
    	    @Override
    	    public void onDestroyActionMode(ActionMode mode) {
-   	        // Here you can make any necessary updates to the activity when
-   	        // the CAB is removed. By default, selected items are deselected/unchecked.
+   	    	cancelSelect();
    	    }
 
    	    @Override
