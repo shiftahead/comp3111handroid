@@ -12,6 +12,7 @@
   			android:background="@color/holo_light"
   			android:gravity="center_vertical" >  
       		<TextView
+      		     android:id="@+id/aboutUsTitle"
         		android:layout_width="wrap_content" 
         		android:layout_height="wrap_content" 
         		android:text="About us"
@@ -27,6 +28,7 @@
 			    android:layout_height="2dp"
 			    android:background="@color/mid_blue"/>
 		<TextView
+		        android:id="@+id/introduction" 
         		android:layout_width="wrap_content" 
         		android:layout_height="wrap_content" 
         		android:text="We are COMP3111 Group 'Localendar'"
