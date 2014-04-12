@@ -22,6 +22,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -124,40 +126,6 @@ public class MyGoogleMap {
         setInfoWindowListener();
 
 	}
-	// have to be arranged according to time
-	public static void pathing(){
-
-		ArrayList <String> location = new ArrayList<String>();
-		Cursor cursor;
-
-		String[] from = {LOCATION};
-		SQLiteDatabase db = MyCalendar.dbhelper.getReadableDatabase();
-		cursor = db.query(TABLE_NAME, from, null, null, null, null, null);
-		
-		while(cursor.moveToNext()){
-			location.add(cursor.getString(0));
-		}
-		
-		if(!location.isEmpty()){
-			int dummy = 0;
-			while(location.size() > dummy+1){
-//				drawPath(path(Place.getPlaceFromAddress(location.get(dummy)), Place.getPlaceFromAddress(location.get(dummy+1)) ) );
-				//depricated 
-				drawPath(path(location.get(dummy), location.get(dummy+1) ) );
-				dummy=dummy+1;
-			}
-		}
-		
-	}
-	
-	public static void refresh(){
-		for(Polyline Line: line){
-			Line.remove();
-		}
-	 	line.clear();
-	 	pathing();
-	}
-	
 	
 	//The function of addmarker and zoom the camera to the added marker if boolean zoomto is set to true;
 	public static void addmarker(Place place, boolean zoomto){
@@ -204,6 +172,41 @@ public class MyGoogleMap {
 				arg0.setTitle("My InfoWindow is Clicked!");
 			}
 		});
+	}	
+	
+	
+	// have to be arranged according to time
+	public static void pathing(){
+
+		ArrayList <String> location = new ArrayList<String>();
+		Cursor cursor;
+
+		String[] from = {LOCATION};
+		SQLiteDatabase db = MyCalendar.dbhelper.getReadableDatabase();
+		cursor = db.query(TABLE_NAME, from, null, null, null, null, null);
+		
+		while(cursor.moveToNext()){
+			location.add(cursor.getString(0));
+		}
+		
+		if(!location.isEmpty()){
+			int dummy = 0;
+			while(location.size() > dummy+1){
+//				drawPath(path(Place.getPlaceFromAddress(location.get(dummy)), Place.getPlaceFromAddress(location.get(dummy+1)) ) );
+				//depricated 
+				drawPath(path(location.get(dummy), location.get(dummy+1) ) );
+				dummy=dummy+1;
+			}
+		}
+		
+	}
+	
+	public static void refresh(){
+		for(Polyline Line: line){
+			Line.remove();
+		}
+	 	line.clear();
+	 	pathing();
 	}
 	
 //for testing purpose
@@ -232,7 +235,8 @@ public class MyGoogleMap {
 	private static final String DIRECTIONS_API_BASE = "http://maps.googleapis.com/maps/api/directions";
 	private static final String API_KEY = "AIzaSyC0-Vqt6_XSDsU57zjEnP6YMtB_S5JKqj0";
 	
-    public static List<LatLng> path(String input1, String input2) {
+//    public static List<LatLng> path(String input1, String input2, String mode, String arrival_year, String arrival_month, String arrival_day, String arrival_hour, String arrival_minute) {
+    public static List<LatLng> path(String input1, String input2){
     	
     String resultList = new String();
     List<LatLng> resultcoor = new ArrayList<LatLng>();
@@ -244,7 +248,20 @@ public class MyGoogleMap {
         sb.append("?origin="+ input1.replaceAll("\\s+",""));
         sb.append("&destination="+input2.replaceAll("\\s+",""));
         sb.append("&sensor=false");
+//      sb.append("&mode="+mode);
         
+//        if(mode.contentEquals("transit"))
+//        	sb.append("arrival_time="+timeCalculation(arrival_year, arrival_month, arrival_day, arrival_hour, arrival_minute));
+        
+//      sb.append("&mode=");
+//      switch(mode)
+//      sb.append((switch())) dirving, walking, transit
+      
+//		sb.append("&departure_time="); / sb.append("&arrival_time=");
+//calculateTime(){
+        
+        //String year, String month, String day, String hour, String minute
+
 
         URL url = new URL(sb.toString());
         conn = (HttpURLConnection) url.openConnection();
@@ -379,6 +396,13 @@ public class MyGoogleMap {
         return path;
     }
     
+    private String timeCalculation(String syear, String smonth, String sday, String shour, String sminute){
+    	
+    	Calendar time = new GregorianCalendar(Integer.parseInt(syear), Integer.parseInt(smonth), 
+    								Integer.parseInt(sday), Integer.parseInt(shour), Integer.parseInt(sminute));
+    	    	
+    	return String.valueOf(time.getTimeInMillis());
+    }
 	
 
 }
