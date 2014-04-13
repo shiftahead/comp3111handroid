@@ -140,31 +140,31 @@ public class MyGoogleMap {
 	}
 	
 	public void setMarkerListener(){	 
-		 localenderMap.setOnMarkerDragListener(new OnMarkerDragListener() {
-             
-             @Override
-             public void onMarkerDragStart(Marker arg0) {
-                     // 
-                     if(arg0.equals(testMarker)){
-                             arg0.setVisible(true);
-                     }
-             }
-             
-             @Override
-             public void onMarkerDragEnd(Marker arg0) {
-                     // 
-                     if(arg0.equals(testMarker)){
-                             arg0.setVisible(true);
-                     }
-             }
-              @Override
-             public void onMarkerDrag(Marker arg0) {
-                     // 
-                     if(arg0.equals(testMarker)){
-                             arg0.setVisible(false);
-                     }
-             }
-     });
+//		 localenderMap.setOnMarkerDragListener(new OnMarkerDragListener() {
+//             
+//             @Override
+//             public void onMarkerDragStart(Marker arg0) {
+//                     // 
+//                     if(arg0.equals(testMarker)){
+//                             arg0.setVisible(true);
+//                     }
+//             }
+//             
+//             @Override
+//             public void onMarkerDragEnd(Marker arg0) {
+//                     // 
+//                     if(arg0.equals(testMarker)){
+//                             arg0.setVisible(true);
+//                     }
+//             }
+//              @Override
+//             public void onMarkerDrag(Marker arg0) {
+//                     // 
+//                     if(arg0.equals(testMarker)){
+//                             arg0.setVisible(false);
+//                     }
+//             }
+//     });
   }
 
 	public void setInfoWindowListener(){
