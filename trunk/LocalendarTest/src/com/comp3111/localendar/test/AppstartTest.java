@@ -14,5 +14,10 @@ public class AppstartTest extends ActivityInstrumentationTestCase2<Appstart> {
 	
 	public void testNull() {
 		assertNotNull("Appstart  is null", app);
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 }

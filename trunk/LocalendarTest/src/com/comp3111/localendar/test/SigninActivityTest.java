@@ -30,10 +30,20 @@ public class SigninActivityTest extends ActivityInstrumentationTestCase2<SigninA
 	        String expected ="Sign in";
 	        String actual = mTextView1.getText().toString();
 	        assertEquals(expected, actual);
+	        try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 	    }
 	 public void testTextView2_labelText() {
 	        String expected ="Sign in to synchronize with Google";
 	        String actual = mTextView2.getText().toString();
 	        assertEquals(expected, actual);
+	        try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 	    }
 }

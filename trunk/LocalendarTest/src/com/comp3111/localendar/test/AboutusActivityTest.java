@@ -31,10 +31,20 @@ public class AboutusActivityTest extends ActivityInstrumentationTestCase2<Aboutu
         String expected ="We are COMP3111 Group 'Localendar'";
         String actual = mTextView.getText().toString();
         assertEquals(expected, actual);
+        try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
     }
     public void testSecondTextView_labelText() {
         String expected ="About us";
         String actual = mSecondTextView.getText().toString();
         assertEquals(expected, actual);
+        try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
     }
 }

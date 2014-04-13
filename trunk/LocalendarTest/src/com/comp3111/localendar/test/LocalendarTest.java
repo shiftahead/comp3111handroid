@@ -1,6 +1,9 @@
 package com.comp3111.localendar.test;
 
+import android.app.Activity;
+import android.app.Instrumentation;
 import android.app.Instrumentation.ActivityMonitor;
+import android.content.Intent;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.TouchUtils;
 import android.view.KeyEvent;
@@ -10,12 +13,14 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RadioButton;
 
 import com.comp3111.localendar.Localendar;
 import com.comp3111.localendar.R;
+import com.comp3111.localendar.calendar.AddEventActivity;
 import com.comp3111.localendar.support.ClearableAutoCompleteTextView;
 import com.comp3111.localendar.support.PlacesAutoCompleteAdapter;
 
@@ -24,6 +29,7 @@ public class LocalendarTest extends ActivityInstrumentationTestCase2<Localendar>
 
 	private Localendar localendar;
 	private RadioButton calendar, map, settings;
+	private Button add;
 	private ClearableAutoCompleteTextView searchBox;
 	private ImageView searchIcon;
 	private MenuItem mi_type;
@@ -34,7 +40,6 @@ public class LocalendarTest extends ActivityInstrumentationTestCase2<Localendar>
 	
 	public LocalendarTest() {
 		super(Localendar.class);
-		// TODO Auto-generated constructor stub
 	}
 	
 
@@ -45,6 +50,7 @@ public class LocalendarTest extends ActivityInstrumentationTestCase2<Localendar>
 	    setActivityInitialTouchMode(false);
 	    
 		localendar = (Localendar) getActivity();
+		add = (Button) localendar.findViewById(R.id.add_button);
 		calendar = (RadioButton) localendar.findViewById(R.id.calendar_button);
 		map = (RadioButton) localendar.findViewById(R.id.map_button);
 		settings = (RadioButton) localendar.findViewById(R.id.settings_button);
@@ -73,6 +79,7 @@ public class LocalendarTest extends ActivityInstrumentationTestCase2<Localendar>
 		TouchUtils.tapView(this, map);
 	    Thread.sleep(500);
 		TouchUtils.tapView(this, calendar);
+		Thread.sleep(500);
 	}
 	
 	public void testActionBar() throws InterruptedException {
@@ -88,7 +95,7 @@ public class LocalendarTest extends ActivityInstrumentationTestCase2<Localendar>
 	    this.sendKeys(KeyEvent.KEYCODE_N);
 	    Thread.sleep(1000);
 	    this.sendKeys(KeyEvent.KEYCODE_G);
-	    Thread.sleep(5000);
+	    Thread.sleep(2000);
 	    assertEquals(searchBox.getAdapter().getItem(1).toString(), "Hong Kong");
 	    Thread.sleep(1000);
 		assertTrue(View.GONE == searchIcon.getVisibility());
@@ -99,6 +106,30 @@ public class LocalendarTest extends ActivityInstrumentationTestCase2<Localendar>
 		//TouchUtils.tapView(this, mi_type.getActionView());
 	    //Thread.sleep(5000);
 		
+	}
+	
+	public void testAddEvent() {
 		
+		  Instrumentation instrumentation = getInstrumentation();
+
+	      // Register we are interested in the authentication activiry...
+	      Instrumentation.ActivityMonitor monitor = instrumentation.addMonitor(AddEventActivity.class.getName(), null, false);
+
+	      // Start the authentication activity as the first activity...
+	      /*
+	      Intent intent = new Intent(Intent.ACTION_MAIN);
+	      intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+	      intent.setClassName(instrumentation.getTargetContext(), AddEventActivity.class.getName());
+	      instrumentation.startActivitySync(intent);
+	       */
+	      TouchUtils.tapView(this, add);
+	      
+	      // Wait for it to start...
+	      Activity currentActivity = getInstrumentation().waitForMonitorWithTimeout(monitor, 500);
+	      assertNotNull(currentActivity);
+	      
+	      
+	      currentActivity.finish();
+	      
 	}
 }
