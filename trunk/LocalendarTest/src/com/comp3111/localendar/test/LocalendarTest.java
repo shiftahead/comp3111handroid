@@ -108,47 +108,65 @@ public class LocalendarTest extends ActivityInstrumentationTestCase2<Localendar>
 	public void testMenu() throws InterruptedException {
 	    
 		TouchUtils.tapView(this, map);
-	    Thread.sleep(300);
+	    Thread.sleep(200);
 		solo.sendKey(Solo.MENU);
-	    Thread.sleep(300);
+	    Thread.sleep(200);
 	    solo.clickOnMenuItem("Type");
-	    Thread.sleep(300);
+	    Thread.sleep(200);
 	    solo.clickOnMenuItem("Satellite");
-	    Thread.sleep(300);
+	    Thread.sleep(200);
+	    solo.sendKey(Solo.MENU);
+	    Thread.sleep(200);
 	    solo.clickOnMenuItem("Type");
-	    Thread.sleep(300);
+	    Thread.sleep(200);
 	    solo.clickOnMenuItem("Hybrid");
-	    Thread.sleep(300);
+	    Thread.sleep(200);
+	    solo.sendKey(Solo.MENU);
+	    Thread.sleep(200);
 	    solo.clickOnMenuItem("Type");
-	    Thread.sleep(300);
+	    Thread.sleep(200);
 	    solo.clickOnMenuItem("Normal");
-	    Thread.sleep(300);
+	    Thread.sleep(200);
+	    solo.sendKey(Solo.MENU);
+	    Thread.sleep(200);
 	    solo.clickOnMenuItem("Color");
-	    Thread.sleep(300);
+	    Thread.sleep(200);
 	    solo.clickOnMenuItem("Red");
-	    Thread.sleep(300);
+	    Thread.sleep(200);
+	    solo.sendKey(Solo.MENU);
+	    Thread.sleep(200);
+	    solo.clickOnMenuItem("Color");
+	    Thread.sleep(200);
 	    solo.clickOnMenuItem("Blue");
-	    Thread.sleep(300);
+	    Thread.sleep(200);
+	    solo.sendKey(Solo.MENU);
+	    Thread.sleep(200);
+	    solo.clickOnMenuItem("Color");
+	    Thread.sleep(200);
 	    solo.clickOnMenuItem("Green");
-	    Thread.sleep(300);
+	    Thread.sleep(200);
 	    
 	    TouchUtils.tapView(this, calendar);
-	    Thread.sleep(300);
+	    Thread.sleep(200);
 	    solo.sendKey(Solo.MENU);
-	    Thread.sleep(300);
+	    Thread.sleep(200);
 	    solo.clickOnMenuItem("Day");
-	    Thread.sleep(300);
+	    Thread.sleep(200);
+	    solo.sendKey(Solo.MENU);
+	    Thread.sleep(200);
 	    solo.clickOnMenuItem("Week");
-	    Thread.sleep(300);
+	    Thread.sleep(200);
+	    solo.sendKey(Solo.MENU);
+	    Thread.sleep(200);
 	    solo.clickOnMenuItem("Month");
-	    Thread.sleep(300);
+	    Thread.sleep(200);
 	    
 	    TouchUtils.tapView(this, settings);
-	    Thread.sleep(300);
+	    Thread.sleep(200);
 	    solo.sendKey(Solo.MENU);
-	    Thread.sleep(300);
+	    Thread.sleep(200);
 	    solo.clickOnMenuItem("Add Shortcut");
-	    Thread.sleep(300);
+	    Thread.sleep(200);
 		
 	}
 	
@@ -160,7 +178,7 @@ public class LocalendarTest extends ActivityInstrumentationTestCase2<Localendar>
 	     ListView eventList = (ListView) localendar.findViewById(R.id.events_list);
 	     View child = eventList.getChildAt(0);
 	     assertNotNull(child);
-	     Thread.sleep(1000);
+	     Thread.sleep(500);
 	     solo.clickOnView(child);
 	     
 	     Activity currentActivity = getInstrumentation().waitForMonitorWithTimeout(monitor, 500);
@@ -170,7 +188,8 @@ public class LocalendarTest extends ActivityInstrumentationTestCase2<Localendar>
 	     solo.sendKey(Solo.MENU);
 		 Thread.sleep(300);
 		 solo.clickOnMenuItem("Delete");
-	     
+		 currentActivity.finish();
+		 Thread.sleep(500);
 	}
 	public void testAddEvent_labelText() throws InterruptedException {
 		  Instrumentation instrumentation = getInstrumentation();
