@@ -105,7 +105,7 @@ public class LocalendarTest extends ActivityInstrumentationTestCase2<Localendar>
 		assertTrue(View.VISIBLE == searchBox.getVisibility());
 		
 		solo.clickOnText("Hong Kong");
-	    Thread.sleep(5000);
+	    Thread.sleep(15000);
 	}
 	
 	public void testMenu() throws InterruptedException {
