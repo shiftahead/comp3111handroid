@@ -106,21 +106,49 @@ public class LocalendarTest extends ActivityInstrumentationTestCase2<Localendar>
 	}
 	
 	public void testMenu() throws InterruptedException {
-	    solo.sendKey(Solo.MENU);
-	    Thread.sleep(1000);
-	    solo.clickOnMenuItem("Type");
-	    Thread.sleep(1000);
-	    solo.clickOnMenuItem("Satellite");
-	    Thread.sleep(1000);
-	    solo.clickOnMenuItem("Type");
-	    Thread.sleep(1000);
-	    solo.clickOnMenuItem("Hybrid");
-	    Thread.sleep(1000);
-	    solo.clickOnMenuItem("Type");
-	    Thread.sleep(1000);
-	    solo.clickOnMenuItem("Normal");
-	    Thread.sleep(1000);
 	    
+		TouchUtils.tapView(this, map);
+	    Thread.sleep(300);
+		solo.sendKey(Solo.MENU);
+	    Thread.sleep(300);
+	    solo.clickOnMenuItem("Type");
+	    Thread.sleep(300);
+	    solo.clickOnMenuItem("Satellite");
+	    Thread.sleep(300);
+	    solo.clickOnMenuItem("Type");
+	    Thread.sleep(300);
+	    solo.clickOnMenuItem("Hybrid");
+	    Thread.sleep(300);
+	    solo.clickOnMenuItem("Type");
+	    Thread.sleep(300);
+	    solo.clickOnMenuItem("Normal");
+	    Thread.sleep(300);
+	    solo.clickOnMenuItem("Color");
+	    Thread.sleep(300);
+	    solo.clickOnMenuItem("Red");
+	    Thread.sleep(300);
+	    solo.clickOnMenuItem("Blue");
+	    Thread.sleep(300);
+	    solo.clickOnMenuItem("Green");
+	    Thread.sleep(300);
+	    
+	    TouchUtils.tapView(this, calendar);
+	    Thread.sleep(300);
+	    solo.sendKey(Solo.MENU);
+	    Thread.sleep(300);
+	    solo.clickOnMenuItem("Day");
+	    Thread.sleep(300);
+	    solo.clickOnMenuItem("Week");
+	    Thread.sleep(300);
+	    solo.clickOnMenuItem("Month");
+	    Thread.sleep(300);
+	    
+	    TouchUtils.tapView(this, settings);
+	    Thread.sleep(300);
+	    solo.sendKey(Solo.MENU);
+	    Thread.sleep(300);
+	    solo.clickOnMenuItem("Add Shortcut");
+	    Thread.sleep(300);
 		
 	}
 	
@@ -343,7 +371,7 @@ public class LocalendarTest extends ActivityInstrumentationTestCase2<Localendar>
 	    solo.clickOnCheckBox(0);
 	    solo.clickOnButton("CONFIRM");
 		
-	     currentActivity.finish();
+	    currentActivity.finish();
 	}
 	
 	public void testSetting_labelText1() {
