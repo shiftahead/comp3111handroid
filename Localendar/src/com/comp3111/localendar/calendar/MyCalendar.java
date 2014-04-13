@@ -163,6 +163,7 @@ public class MyCalendar extends Fragment {
    	        // Respond to clicks on the actions in the CAB
    	        switch (item.getItemId()) {
    	            case R.id.menu_delete:
+   	            	positions = null;
    	                deleteSelectedItems();
            	    	refresh();
    	                mode.finish(); // Action picked, so close the CAB
@@ -180,8 +181,10 @@ public class MyCalendar extends Fragment {
 		}
            
    	    private void cancelSelect() {
-   	    	for (Integer id:positions) {
-   	    		eventList.getChildAt(id).setBackgroundResource(R.color.holo_light);
+   	    	if(positions != null) {
+	   	    	for (Integer id:positions) {
+	   	    		eventList.getChildAt(id).setBackgroundResource(R.color.holo_light);
+	   	    	}
    	    	}
    	    }
 		@Override
