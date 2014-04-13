@@ -1,5 +1,7 @@
 package com.comp3111.localendar.test;
 
+import java.util.Calendar;
+
 import android.app.Activity;
 import android.app.Instrumentation;
 import android.graphics.Point;
@@ -20,7 +22,9 @@ import android.widget.TimePicker;
 
 import com.comp3111.localendar.Localendar;
 import com.comp3111.localendar.R;
-import com.comp3111.localendar.calendar.*;
+import com.comp3111.localendar.calendar.AddEventActivity;
+import com.comp3111.localendar.calendar.EditEventActivity;
+import com.comp3111.localendar.calendar.EventDetailActivity;
 import com.comp3111.localendar.support.ClearableAutoCompleteTextView;
 import com.comp3111.localendar.support.ClearableEditText;
 import com.robotium.solo.Solo;
@@ -318,10 +322,10 @@ public class LocalendarTest extends ActivityInstrumentationTestCase2<Localendar>
 	    solo.clearEditText(1);
 	    solo.enterText(1, test);
 	      
-	   //solo.clickOnText("Date");
-	    solo.setDatePicker(eventDate, 2099, 12, 31);
+	    solo.setDatePicker(eventDate, 2014, 11, 31);
+	   // Calendar calendar = new Calendar();
 	    
-	    //solo.clickOnText("Time");
+
 	    solo.setTimePicker(eventTime, 11, 59);
 	    
 	    solo.clearEditText(eventHour);
