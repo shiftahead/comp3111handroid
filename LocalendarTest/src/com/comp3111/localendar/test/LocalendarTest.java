@@ -2,29 +2,27 @@ package com.comp3111.localendar.test;
 
 import android.app.Activity;
 import android.app.Instrumentation;
-import android.app.Instrumentation.ActivityMonitor;
-import android.content.Intent;
+import android.graphics.Point;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.TouchUtils;
 import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.RadioButton;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import com.comp3111.localendar.Localendar;
 import com.comp3111.localendar.R;
 import com.comp3111.localendar.calendar.AddEventActivity;
 import com.comp3111.localendar.support.ClearableAutoCompleteTextView;
-import com.comp3111.localendar.support.PlacesAutoCompleteAdapter;
-import com.robotium.solo.*;
+import com.comp3111.localendar.support.ClearableEditText;
+import com.robotium.solo.Solo;
 
 
 public class LocalendarTest extends ActivityInstrumentationTestCase2<Localendar> {
@@ -121,7 +119,7 @@ public class LocalendarTest extends ActivityInstrumentationTestCase2<Localendar>
 		
 	}
 	
-	public void testAddEvent() {
+	public void testAddEvent() throws InterruptedException {
 		
 		  Instrumentation instrumentation = getInstrumentation();
 	      Instrumentation.ActivityMonitor monitor = instrumentation.addMonitor(AddEventActivity.class.getName(), null, false);
@@ -138,10 +136,100 @@ public class LocalendarTest extends ActivityInstrumentationTestCase2<Localendar>
 	      // Wait for it to start...
 	      Activity currentActivity = getInstrumentation().waitForMonitorWithTimeout(monitor, 500);
 	      assertNotNull(currentActivity);
+	      //currentActivity.finish();
+	      
+	      ClearableEditText eventTitle = (ClearableEditText) currentActivity.findViewById(R.id.event_title);
+	      ClearableEditText eventDescription = (ClearableEditText) currentActivity.findViewById(R.id.event_description);
+	      DatePicker eventDate = (DatePicker) currentActivity.findViewById(R.id.date_picker);
+	      TimePicker eventTime = (TimePicker) currentActivity.findViewById(R.id.time_picker);
+	      EditText eventHour = (EditText) currentActivity.findViewById(R.id.duration_hour);
+	      EditText eventMinute = (EditText) currentActivity.findViewById(R.id.duration_minute);
+	      ClearableAutoCompleteTextView eventLocation = (ClearableAutoCompleteTextView) currentActivity.findViewById(R.id.event_location);
+	      Spinner eventTransportation = (Spinner) currentActivity.findViewById(R.id.event_transportation);
+	      CheckBox eventCompulsory = (CheckBox) currentActivity.findViewById(R.id.event_compulsory);
+	      Button confirmAdd = (Button) currentActivity.findViewById(R.id.confirm_add);
+	      Button cancelAdd = (Button) currentActivity.findViewById(R.id.cancel_add);
+	      
+	      Point size = new Point();
+	      currentActivity.getWindowManager().getDefaultDisplay().getSize(size);
+	      
+	      assertTrue(View.VISIBLE == eventTitle.getVisibility());
+	      
+	      TouchUtils.tapView(this, eventTitle);
+	      Thread.sleep(500);
+	      sendKeys("A B C ENTER");
+	      Thread.sleep(500);
+	      
+	      TouchUtils.tapView(this, eventDescription);
+	      Thread.sleep(500);
+	      sendKeys("A B C ENTER");
+	      Thread.sleep(500);
+	      
+	      //Drag screen
+	      TouchUtils.drag(this, 0, 0, size.y/4, size.y/20, 100);
+	      Thread.sleep(500);
+	      
+	      //6 lines of code modify Date
+	      TouchUtils.drag(this, size.x/5, 2*size.x/5, size.y/5, 0, 20);
+	      Thread.sleep(500);
+	      
+	      TouchUtils.drag(this, size.x/2, size.x/2, size.y/5, 0, 20);
+	      Thread.sleep(500);
+	      
+	      TouchUtils.drag(this, 2*size.x/3, 2*size.x/3, size.y/5, 0, 20);
+	      Thread.sleep(500);
+	      
+	      //Drag screen
+	      TouchUtils.drag(this, 0, 0, size.y/4, size.y/16, 100);
+	      Thread.sleep(500);
+	      
+	      //4 lines of code modify Time
+	      TouchUtils.drag(this, size.x/5, 2*size.x/5, size.y/5, 0, 20);
+	      Thread.sleep(500);
+	      
+	      TouchUtils.drag(this, size.x/2, size.x/2, size.y/5, 0, 20);
+	      Thread.sleep(500);
+	      
+	      //Drag screen
+	      TouchUtils.drag(this, 0, 0, size.y/4, size.y/16, 100);
+	      Thread.sleep(500);
+	      
+	      TouchUtils.tapView(this, eventHour);
+	      Thread.sleep(500);
+	      sendKeys("1");
+	      Thread.sleep(500);	    
+	      
+	      TouchUtils.tapView(this, eventMinute);
+	      Thread.sleep(500);
+	      sendKeys("1 0");
+	      Thread.sleep(500);
+	      
+	      TouchUtils.tapView(this, eventLocation);
+	      this.sendKeys("H ENTER");
+	      Thread.sleep(5000);
+	      this.sendKeys("O ENTER");
+	      Thread.sleep(5000);
+	      this.sendKeys("N ENTER");
+	      Thread.sleep(5000);
+	      this.sendKeys("G ENTER");
+	      Thread.sleep(5000);
+	      assertEquals(eventLocation.getAdapter().getItem(1).toString(), "Hong Kong");
+	      Thread.sleep(5000);
+	      TouchUtils.tapView(this, eventLocation);
+	         
+	      //Drag screen
+	      TouchUtils.drag(this, 0, 0, size.y/4, size.y/16, 100);
+	      Thread.sleep(500);
+	      
+	      TouchUtils.tapView(this, eventTransportation);
+	      TouchUtils.tapView(this, eventCompulsory);
+	      
+	      TouchUtils.tapView(this, confirmAdd);
+	      
 	      currentActivity.finish();
 	      
-	      
 	}
+	
 	public void testSetting_labelText1() {
         String expected ="My Account";
         String actual = projectSettingView1.getText().toString();
