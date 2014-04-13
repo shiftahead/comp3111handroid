@@ -37,8 +37,8 @@ public class LocalendarTest extends ActivityInstrumentationTestCase2<Localendar>
 	private ImageView searchIcon;
 	
 	private TextView projectSettingView1; 
-	private TextView projectSettingView2; 
-	
+	private TextView projectSettingView2;
+
 	public LocalendarTest() {
 		super(Localendar.class);
 	}
@@ -179,7 +179,6 @@ public class LocalendarTest extends ActivityInstrumentationTestCase2<Localendar>
 	      // Wait for it to start...
 	      Activity currentActivity = getInstrumentation().waitForMonitorWithTimeout(monitor, 500);
 	      assertNotNull(currentActivity);
-	      //currentActivity.finish();
 	      
 	      ClearableEditText eventTitle = (ClearableEditText) currentActivity.findViewById(R.id.event_title);
 	      ClearableEditText eventDescription = (ClearableEditText) currentActivity.findViewById(R.id.event_description);
@@ -269,7 +268,78 @@ public class LocalendarTest extends ActivityInstrumentationTestCase2<Localendar>
 	      TouchUtils.tapView(this, confirmAdd);
 	      
 	      currentActivity.finish();
+	}
+	
+	
+	public void testEditEvent() throws InterruptedException{
+		
+		Instrumentation ins = getInstrumentation();
+		Instrumentation.ActivityMonitor am = ins.addMonitor(EditEventActivity.class.getName(), null, false);
+		
+		TouchUtils.tapView(this, calendar);
+		Thread.sleep(500);
+		ListView eventList = (ListView) localendar.findViewById(R.id.events_list);
+		View child = eventList.getChildAt(0);
+	    assertNotNull(child);
+	    Thread.sleep(500);
+	    solo.clickOnView(child);
+		solo.sendKey(Solo.MENU);
+	    solo.clickOnMenuItem("Edit");
+	    Thread.sleep(500);
+	    
+	
+		Activity currentActivity = getInstrumentation().waitForMonitorWithTimeout(am, 500);
+		assertNotNull(currentActivity);
+		
+		ClearableEditText eventTitle = (ClearableEditText) currentActivity.findViewById(R.id.event_title);
+	    ClearableEditText eventDescription = (ClearableEditText) currentActivity.findViewById(R.id.event_description);
+	    DatePicker eventDate = (DatePicker) currentActivity.findViewById(R.id.date_picker);
+	    TimePicker eventTime = (TimePicker) currentActivity.findViewById(R.id.time_picker);
+	    EditText eventHour = (EditText) currentActivity.findViewById(R.id.duration_hour);
+	    EditText eventMinute = (EditText) currentActivity.findViewById(R.id.duration_minute);
+	    ClearableAutoCompleteTextView eventLocation = (ClearableAutoCompleteTextView) currentActivity.findViewById(R.id.event_location);
+	    Spinner eventTransportation = (Spinner) currentActivity.findViewById(R.id.event_transportation);
+	    CheckBox eventCompulsory = (CheckBox) currentActivity.findViewById(R.id.event_compulsory);
+	    Button confirmAdd = (Button) currentActivity.findViewById(R.id.confirm_add);
+	    Button cancelAdd = (Button) currentActivity.findViewById(R.id.cancel_add);
+	    
+	    Point size = new Point();
+	    currentActivity.getWindowManager().getDefaultDisplay().getSize(size);
 	      
+	    assertTrue(View.VISIBLE == eventTitle.getVisibility());
+	      
+	    solo.clickOnEditText(0);
+	    solo.clearEditText(0);
+	    String test = "def";
+	    solo.enterText(0, test);
+	    
+	    
+	    solo.clickOnEditText(1);
+	    solo.clearEditText(1);
+	    solo.enterText(1, test);
+	      
+	   //solo.clickOnText("Date");
+	    solo.setDatePicker(eventDate, 2099, 12, 31);
+	    
+	    //solo.clickOnText("Time");
+	    solo.setTimePicker(eventTime, 11, 59);
+	    
+	    solo.clearEditText(eventHour);
+	    solo.enterText(eventHour, "0");
+	    solo.clearEditText(eventMinute);
+	    solo.enterText(eventMinute, "1");
+	    
+	    solo.clearEditText(eventLocation);
+	    solo.enterText(eventLocation, "hkust");
+	    
+	    solo.pressSpinnerItem(0, 2);
+	    boolean actual = solo.isSpinnerTextSelected("On foot");
+	    assertEquals("On foot is not selected",true, actual);
+	    
+	    solo.clickOnCheckBox(0);
+	    solo.clickOnButton("CONFIRM");
+		
+	     currentActivity.finish();
 	}
 	
 	public void testSetting_labelText1() {
