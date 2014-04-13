@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RadioButton;
+import android.widget.TextView;
 
 import com.comp3111.localendar.Localendar;
 import com.comp3111.localendar.R;
@@ -37,6 +38,9 @@ public class LocalendarTest extends ActivityInstrumentationTestCase2<Localendar>
 	private MenuItem mi_normal;
 	private MenuItem mi_satellite;
 	private MenuItem mi_hybrid;
+	
+	private TextView projectSettingView1; 
+	private TextView projectSettingView2; 
 	
 	public LocalendarTest() {
 		super(Localendar.class);
@@ -62,6 +66,8 @@ public class LocalendarTest extends ActivityInstrumentationTestCase2<Localendar>
 	    mi_satellite = (MenuItem) localendar.findViewById(R.id.map_satellite);
 	    mi_hybrid = (MenuItem) localendar.findViewById(R.id.map_hybrid);
 	    
+	    projectSettingView1= (TextView)localendar.findViewById(R.id.my_account);
+	    projectSettingView2= (TextView)localendar.findViewById(R.id.about_us);
 	}
 	 
 	public void testView() { 
@@ -132,4 +138,14 @@ public class LocalendarTest extends ActivityInstrumentationTestCase2<Localendar>
 	      currentActivity.finish();
 	      
 	}
+	public void testSetting_labelText1() {
+        String expected ="My Account";
+        String actual = projectSettingView1.getText().toString();
+        assertEquals(expected, actual);
+    }
+	public void testSetting_labelText2() {
+        String expected ="About us";
+        String actual = projectSettingView2.getText().toString();
+        assertEquals(expected, actual);
+    }
 }
