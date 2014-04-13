@@ -98,11 +98,14 @@ public class LocalendarTest extends ActivityInstrumentationTestCase2<Localendar>
 	    this.sendKeys(KeyEvent.KEYCODE_N);
 	    Thread.sleep(300);
 	    this.sendKeys(KeyEvent.KEYCODE_G);
-	    Thread.sleep(300);
+	    Thread.sleep(5000);
 	    assertEquals(searchBox.getAdapter().getItem(1).toString(), "Hong Kong");
 	    Thread.sleep(300);
 		assertTrue(View.GONE == searchIcon.getVisibility());
 		assertTrue(View.VISIBLE == searchBox.getVisibility());
+		
+		solo.clickOnText("Hong Kong");
+	    Thread.sleep(5000);
 	}
 	
 	public void testMenu() throws InterruptedException {
