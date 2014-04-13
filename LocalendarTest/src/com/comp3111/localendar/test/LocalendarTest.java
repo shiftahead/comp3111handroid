@@ -172,6 +172,33 @@ public class LocalendarTest extends ActivityInstrumentationTestCase2<Localendar>
 		 solo.clickOnMenuItem("Delete");
 	     
 	}
+	public void testAddEvent_labelText() throws InterruptedException {
+		  Instrumentation instrumentation = getInstrumentation();
+	      Instrumentation.ActivityMonitor monitor = instrumentation.addMonitor(AddEventActivity.class.getName(), null, false);
+
+	      // Start another activity...
+	      /*
+	      Intent intent = new Intent(Intent.ACTION_MAIN);
+	      intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+	      intent.setClassName(instrumentation.getTargetContext(), AddEventActivity.class.getName());
+	      instrumentation.startActivitySync(intent);
+	       */
+	      TouchUtils.tapView(this, add);
+	      
+	      // Wait for it to start...
+	      Activity currentActivity = getInstrumentation().waitForMonitorWithTimeout(monitor, 500);
+	      assertNotNull(currentActivity);
+	      
+	      TextView titleTextView = (TextView)currentActivity.findViewById(R.id.addEventTitle);
+	      String expectedTitle = "Title";
+	      String actualTitle = titleTextView.getText().toString();
+	      assertEquals(expectedTitle, actualTitle);
+	      
+	      TextView descriptionTextView =(TextView) currentActivity.findViewById(R.id.addEventDescription);
+	      String expectedDescription = "Description";
+	      String actualDescription = descriptionTextView.getText().toString();
+	      assertEquals(expectedTitle, actualTitle);
+	}
 	
 	public void testAddEvent() throws InterruptedException {
 		
