@@ -48,13 +48,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     	
         db.execSQL(INIT_TABLE);
     }
-
+    
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         final String DROP_TABLE = "DROP TABLE IF EXISTS " + TABLE_NAME;
         db.execSQL(DROP_TABLE);
         onCreate(db);
     }
-
+	
 	
 }
