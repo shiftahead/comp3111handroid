@@ -92,15 +92,15 @@ public class LocalendarTest extends ActivityInstrumentationTestCase2<Localendar>
 		TouchUtils.tapView(this, searchIcon);
 		
 	    this.sendKeys(KeyEvent.KEYCODE_H);
-	    Thread.sleep(1000);
+	    Thread.sleep(300);
 	    this.sendKeys(KeyEvent.KEYCODE_O);
-	    Thread.sleep(1000);
+	    Thread.sleep(300);
 	    this.sendKeys(KeyEvent.KEYCODE_N);
-	    Thread.sleep(1000);
+	    Thread.sleep(300);
 	    this.sendKeys(KeyEvent.KEYCODE_G);
-	    Thread.sleep(2000);
+	    Thread.sleep(300);
 	    assertEquals(searchBox.getAdapter().getItem(1).toString(), "Hong Kong");
-	    Thread.sleep(1000);
+	    Thread.sleep(300);
 		assertTrue(View.GONE == searchIcon.getVisibility());
 		assertTrue(View.VISIBLE == searchBox.getVisibility());
 	}
@@ -217,6 +217,8 @@ public class LocalendarTest extends ActivityInstrumentationTestCase2<Localendar>
 	      String expectedDescription = "Description";
 	      String actualDescription = descriptionTextView.getText().toString();
 	      assertEquals(expectedTitle, actualTitle);
+	      currentActivity.finish();
+	      Thread.sleep(300);
 	}
 	
 	public void testAddEvent() throws InterruptedException {
