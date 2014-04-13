@@ -24,10 +24,13 @@ import com.comp3111.localendar.R;
 import com.comp3111.localendar.calendar.AddEventActivity;
 import com.comp3111.localendar.support.ClearableAutoCompleteTextView;
 import com.comp3111.localendar.support.PlacesAutoCompleteAdapter;
+import com.robotium.solo.*;
 
 
 public class LocalendarTest extends ActivityInstrumentationTestCase2<Localendar> {
 
+	Solo solo;
+	
 	private Localendar localendar;
 	private RadioButton calendar, map, settings;
 	private Button add;
@@ -50,9 +53,9 @@ public class LocalendarTest extends ActivityInstrumentationTestCase2<Localendar>
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		
 	    setActivityInitialTouchMode(false);
 	    
+	    solo = new Solo(getInstrumentation(), getActivity());
 		localendar = (Localendar) getActivity();
 		add = (Button) localendar.findViewById(R.id.add_button);
 		calendar = (RadioButton) localendar.findViewById(R.id.calendar_button);
@@ -90,6 +93,7 @@ public class LocalendarTest extends ActivityInstrumentationTestCase2<Localendar>
 	
 	public void testActionBar() throws InterruptedException {
 		TouchUtils.tapView(this, map);
+		
 		assertTrue(View.VISIBLE == searchIcon.getVisibility());
 		assertTrue(View.GONE == searchBox.getVisibility());
 		TouchUtils.tapView(this, searchIcon);
@@ -107,7 +111,19 @@ public class LocalendarTest extends ActivityInstrumentationTestCase2<Localendar>
 		assertTrue(View.GONE == searchIcon.getVisibility());
 		assertTrue(View.VISIBLE == searchBox.getVisibility());
 		
-		this.sendKeys(KeyEvent.KEYCODE_MENU);
+	    solo.sendKey(Solo.MENU);
+	    Thread.sleep(1000);
+	    solo.clickOnMenuItem("Type");
+	    Thread.sleep(1000);
+	    solo.clickOnMenuItem("Satellite");
+	    Thread.sleep(1000);
+	    solo.clickOnMenuItem("Type");
+	    Thread.sleep(1000);
+	    solo.clickOnMenuItem("Normal");
+	    Thread.sleep(1000);
+	    
+		//TouchUtils.tapView(this, mi_satellite.getActionView());
+	    //Thread.sleep(1000);
 		//assertTrue(View.VISIBLE == mi_type.getActionView().getVisibility());
 		//TouchUtils.tapView(this, mi_type.getActionView());
 	    //Thread.sleep(5000);
@@ -117,11 +133,9 @@ public class LocalendarTest extends ActivityInstrumentationTestCase2<Localendar>
 	public void testAddEvent() {
 		
 		  Instrumentation instrumentation = getInstrumentation();
-
-	      // Register we are interested in the authentication activiry...
 	      Instrumentation.ActivityMonitor monitor = instrumentation.addMonitor(AddEventActivity.class.getName(), null, false);
 
-	      // Start the authentication activity as the first activity...
+	      // Start another activity...
 	      /*
 	      Intent intent = new Intent(Intent.ACTION_MAIN);
 	      intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -133,9 +147,8 @@ public class LocalendarTest extends ActivityInstrumentationTestCase2<Localendar>
 	      // Wait for it to start...
 	      Activity currentActivity = getInstrumentation().waitForMonitorWithTimeout(monitor, 500);
 	      assertNotNull(currentActivity);
-	      
-	      
 	      currentActivity.finish();
+	      
 	      
 	}
 	public void testSetting_labelText1() {
