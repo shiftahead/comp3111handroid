@@ -36,11 +36,6 @@ public class LocalendarTest extends ActivityInstrumentationTestCase2<Localendar>
 	private Button add;
 	private ClearableAutoCompleteTextView searchBox;
 	private ImageView searchIcon;
-	private MenuItem mi_type;
-	private MenuItem mi_color;
-	private MenuItem mi_normal;
-	private MenuItem mi_satellite;
-	private MenuItem mi_hybrid;
 	
 	private TextView projectSettingView1; 
 	private TextView projectSettingView2; 
@@ -63,11 +58,6 @@ public class LocalendarTest extends ActivityInstrumentationTestCase2<Localendar>
 		settings = (RadioButton) localendar.findViewById(R.id.settings_button);
 		searchBox = (ClearableAutoCompleteTextView) localendar.findViewById(R.id.search_box);
 	    searchIcon = (ImageView) localendar.findViewById(R.id.place_view);
-	    mi_type = (MenuItem) localendar.findViewById(R.id.map_type);
-	    mi_color = (MenuItem) localendar.findViewById(R.id.map_color);
-	    mi_normal = (MenuItem) localendar.findViewById(R.id.map_normal);
-	    mi_satellite = (MenuItem) localendar.findViewById(R.id.map_satellite);
-	    mi_hybrid = (MenuItem) localendar.findViewById(R.id.map_hybrid);
 	    
 	    projectSettingView1= (TextView)localendar.findViewById(R.id.my_account);
 	    projectSettingView2= (TextView)localendar.findViewById(R.id.about_us);
@@ -121,12 +111,6 @@ public class LocalendarTest extends ActivityInstrumentationTestCase2<Localendar>
 	    Thread.sleep(1000);
 	    solo.clickOnMenuItem("Normal");
 	    Thread.sleep(1000);
-	    
-		//TouchUtils.tapView(this, mi_satellite.getActionView());
-	    //Thread.sleep(1000);
-		//assertTrue(View.VISIBLE == mi_type.getActionView().getVisibility());
-		//TouchUtils.tapView(this, mi_type.getActionView());
-	    //Thread.sleep(5000);
 		
 	}
 	
