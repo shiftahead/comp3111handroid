@@ -128,11 +128,15 @@ public class MyGoogleMap {
 	}
 	
 	//The function of addmarker and zoom the camera to the added marker if boolean zoomto is set to true;
-	public static void addmarker(Place place, boolean zoomto){
-		LatLng ll = new LatLng(place.getLatitude(), place.getLongitude());
-		localenderMap.addMarker(new MarkerOptions().position(ll).draggable(true));
+	public static Marker addmarker(Place place, boolean zoomto){
+		Marker marker;
+//		if(place!=NULL){
+			LatLng ll = new LatLng(place.getLatitude(), place.getLongitude());
+			marker = localenderMap.addMarker(new MarkerOptions().position(ll).draggable(true));
+//		}
 		if(zoomto == true)
-	        localenderMap.animateCamera(CameraUpdateFactory.newLatLngZoom(ll, 15));	
+	        localenderMap.animateCamera(CameraUpdateFactory.newLatLngZoom(ll, 15));
+		return marker;
 	}
 	
 	public void setMarkerListener(){	 
@@ -210,17 +214,17 @@ public class MyGoogleMap {
 	}
 	
 //for testing purpose
-	public static void drawPath(){
-		List<LatLng> lat = new ArrayList<LatLng>(); 
-		lat.add(new LatLng(22.3375, 114.2630));		
-		lat.add(new LatLng(22.4515, 114.0081));
-		lat.add(new LatLng(22.3184, 114.1699));
-
-		line.add(localenderMap.addPolyline(new PolylineOptions()
-	    .addAll(lat)
-	         .width(15)
-	    .geodesic(true)));
-	}
+//	public static void drawPath(){
+//		List<LatLng> lat = new ArrayList<LatLng>(); 
+//		lat.add(new LatLng(22.3375, 114.2630));		
+//		lat.add(new LatLng(22.4515, 114.0081));
+//		lat.add(new LatLng(22.3184, 114.1699));
+//
+//		line.add(localenderMap.addPolyline(new PolylineOptions()
+//	    .addAll(lat)
+//	         .width(15)
+//	    .geodesic(true)));
+//	}
 	
 	public static void drawPath(List<LatLng> list){	
 //		if(!list.isEmpty())
@@ -396,13 +400,15 @@ public class MyGoogleMap {
         return path;
     }
     
-    private String timeCalculation(String syear, String smonth, String sday, String shour, String sminute){
-    	
-    	Calendar time = new GregorianCalendar(Integer.parseInt(syear), Integer.parseInt(smonth), 
-    								Integer.parseInt(sday), Integer.parseInt(shour), Integer.parseInt(sminute));
-    	    	
-    	return String.valueOf(time.getTimeInMillis());
-    }
+//    private String timeCalculation(String syear, String smonth, String sday, String shour, String sminute){
+//    	
+//    	Calendar time = new GregorianCalendar(Integer.parseInt(syear), Integer.parseInt(smonth), 
+//    								Integer.parseInt(sday), Integer.parseInt(shour), Integer.parseInt(sminute));
+//    	    	
+//    	return String.valueOf(time.getTimeInMillis());
+//    }
+    
+    
 	
 
 }
