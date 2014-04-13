@@ -16,4 +16,19 @@
                     android:orderInCategory = "3"/>
           </menu>   
     </item>
+     <item android:id="@+id/map_color"
+          android:title="Color"
+          android:orderInCategory="2">
+          <menu>
+              <item android:id="@+id/map_red"
+                    android:title="Red"
+                    android:orderInCategory="1"/>
+              <item android:id="@+id/map_blue"
+                    android:title="Blue"
+                    android:orderInCategory="2"/>
+              <item android:id="@+id/map_green"
+                    android:title="Green"
+                    android:orderInCategory = "3"/>
+          </menu>   
+    </item>
 </menu>
