@@ -206,15 +206,15 @@ public class LocalendarTest extends ActivityInstrumentationTestCase2<Localendar>
 	      
 	      TouchUtils.tapView(this, eventLocation);
 	      this.sendKeys("H ENTER");
-	      Thread.sleep(5000);
+	      Thread.sleep(1000);
 	      this.sendKeys("O ENTER");
-	      Thread.sleep(5000);
+	      Thread.sleep(1000);
 	      this.sendKeys("N ENTER");
-	      Thread.sleep(5000);
+	      Thread.sleep(1000);
 	      this.sendKeys("G ENTER");
-	      Thread.sleep(5000);
+	      Thread.sleep(1000);
 	      assertEquals(eventLocation.getAdapter().getItem(1).toString(), "Hong Kong");
-	      Thread.sleep(5000);
+	      Thread.sleep(1000);
 	      TouchUtils.tapView(this, eventLocation);
 	         
 	      //Drag screen
