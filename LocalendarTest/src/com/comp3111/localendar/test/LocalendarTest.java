@@ -12,6 +12,7 @@ import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -19,7 +20,7 @@ import android.widget.TimePicker;
 
 import com.comp3111.localendar.Localendar;
 import com.comp3111.localendar.R;
-import com.comp3111.localendar.calendar.AddEventActivity;
+import com.comp3111.localendar.calendar.*;
 import com.comp3111.localendar.support.ClearableAutoCompleteTextView;
 import com.comp3111.localendar.support.ClearableEditText;
 import com.robotium.solo.Solo;
@@ -117,6 +118,48 @@ public class LocalendarTest extends ActivityInstrumentationTestCase2<Localendar>
 	    Thread.sleep(1000);
 	    
 		
+	}
+	
+	public void testEventDetail() throws InterruptedException {
+		 Instrumentation instrumentation = getInstrumentation();
+	     Instrumentation.ActivityMonitor monitor = instrumentation.addMonitor(EventDetailActivity.class.getName(), null, false);
+	     TouchUtils.tapView(this, calendar);
+	     ListView eventList = (ListView) localendar.findViewById(R.id.events_list);
+	     View child = eventList.getChildAt(0);
+	     assertNotNull(child);
+	     Thread.sleep(1000);
+	     solo.clickOnView(child);
+	     
+	     Activity currentActivity = getInstrumentation().waitForMonitorWithTimeout(monitor, 500);
+	     assertNotNull(currentActivity);
+	     monitor = instrumentation.addMonitor(EditEventActivity.class.getName(), null, false);
+	     
+	     solo.sendKey(Solo.MENU);
+		 Thread.sleep(1000);
+		 solo.clickOnMenuItem("Edit");
+		 currentActivity = getInstrumentation().waitForMonitorWithTimeout(monitor, 500);
+		 Thread.sleep(1000);
+	     assertNotNull(currentActivity);
+		 Button cancel = (Button) currentActivity.findViewById(R.id.cancel_add);
+		 solo.clickOnView(cancel);
+		 Thread.sleep(1000);
+		 
+		 monitor = instrumentation.addMonitor(EventDetailActivity.class.getName(), null, false);
+		 solo.clickOnView(child);
+		 currentActivity = getInstrumentation().waitForMonitorWithTimeout(monitor, 500);
+	     assertNotNull(currentActivity);
+	     
+	     monitor = instrumentation.addMonitor(EditEventActivity.class.getName(), null, false);
+	     solo.sendKey(Solo.MENU);
+		 Thread.sleep(1000);
+		 solo.clickOnMenuItem("Edit");
+		 currentActivity = getInstrumentation().waitForMonitorWithTimeout(monitor, 500);
+		 Thread.sleep(1000);
+	     assertNotNull(currentActivity);
+		 Button confirm = (Button) currentActivity.findViewById(R.id.confirm_add);
+		 solo.clickOnView(confirm);
+		 Thread.sleep(1000);
+	     
 	}
 	
 	public void testAddEvent() throws InterruptedException {
@@ -223,7 +266,6 @@ public class LocalendarTest extends ActivityInstrumentationTestCase2<Localendar>
 	      
 	      TouchUtils.tapView(this, eventTransportation);
 	      TouchUtils.tapView(this, eventCompulsory);
-	      
 	      TouchUtils.tapView(this, confirmAdd);
 	      
 	      currentActivity.finish();
