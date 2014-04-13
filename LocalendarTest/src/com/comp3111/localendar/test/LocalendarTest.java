@@ -100,7 +100,9 @@ public class LocalendarTest extends ActivityInstrumentationTestCase2<Localendar>
 	    Thread.sleep(1000);
 		assertTrue(View.GONE == searchIcon.getVisibility());
 		assertTrue(View.VISIBLE == searchBox.getVisibility());
-		
+	}
+	
+	public void testMenu() throws InterruptedException {
 	    solo.sendKey(Solo.MENU);
 	    Thread.sleep(1000);
 	    solo.clickOnMenuItem("Type");
@@ -109,8 +111,13 @@ public class LocalendarTest extends ActivityInstrumentationTestCase2<Localendar>
 	    Thread.sleep(1000);
 	    solo.clickOnMenuItem("Type");
 	    Thread.sleep(1000);
+	    solo.clickOnMenuItem("Hybrid");
+	    Thread.sleep(1000);
+	    solo.clickOnMenuItem("Type");
+	    Thread.sleep(1000);
 	    solo.clickOnMenuItem("Normal");
 	    Thread.sleep(1000);
+	    
 		
 	}
 	
