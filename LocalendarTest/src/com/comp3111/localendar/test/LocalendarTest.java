@@ -153,6 +153,7 @@ public class LocalendarTest extends ActivityInstrumentationTestCase2<Localendar>
 	}
 	
 	public void testEventDetail() throws InterruptedException {
+		
 		 Instrumentation instrumentation = getInstrumentation();
 	     Instrumentation.ActivityMonitor monitor = instrumentation.addMonitor(EventDetailActivity.class.getName(), null, false);
 	     TouchUtils.tapView(this, calendar);
@@ -167,30 +168,8 @@ public class LocalendarTest extends ActivityInstrumentationTestCase2<Localendar>
 	     monitor = instrumentation.addMonitor(EditEventActivity.class.getName(), null, false);
 	     
 	     solo.sendKey(Solo.MENU);
-		 Thread.sleep(1000);
-		 solo.clickOnMenuItem("Edit");
-		 currentActivity = getInstrumentation().waitForMonitorWithTimeout(monitor, 500);
-		 Thread.sleep(1000);
-	     assertNotNull(currentActivity);
-		 Button cancel = (Button) currentActivity.findViewById(R.id.cancel_add);
-		 solo.clickOnView(cancel);
-		 Thread.sleep(1000);
-		 
-		 monitor = instrumentation.addMonitor(EventDetailActivity.class.getName(), null, false);
-		 solo.clickOnView(child);
-		 currentActivity = getInstrumentation().waitForMonitorWithTimeout(monitor, 500);
-	     assertNotNull(currentActivity);
-	     
-	     monitor = instrumentation.addMonitor(EditEventActivity.class.getName(), null, false);
-	     solo.sendKey(Solo.MENU);
-		 Thread.sleep(1000);
-		 solo.clickOnMenuItem("Edit");
-		 currentActivity = getInstrumentation().waitForMonitorWithTimeout(monitor, 500);
-		 Thread.sleep(1000);
-	     assertNotNull(currentActivity);
-		 Button confirm = (Button) currentActivity.findViewById(R.id.confirm_add);
-		 solo.clickOnView(confirm);
-		 Thread.sleep(1000);
+		 Thread.sleep(300);
+		 solo.clickOnMenuItem("Delete");
 	     
 	}
 	
