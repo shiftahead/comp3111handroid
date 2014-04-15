@@ -39,6 +39,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.SimpleCursorAdapter;
+import android.widget.Toast;
 
 import com.comp3111.localendar.Localendar;
 import com.comp3111.localendar.R;
@@ -78,6 +79,7 @@ public class MyGoogleMap {
 	public MyGoogleMap(GoogleMap map) {
 		mapInstance = this;
 		localenderMap = map;
+		setMap();
 	}
 	
 	public void setMap(){
@@ -128,15 +130,19 @@ public class MyGoogleMap {
 	}
 	
 	//The function of addmarker and zoom the camera to the added marker if boolean zoomto is set to true;
-	public static Marker addmarker(Place place, boolean zoomto){
-		Marker marker;
-//		if(place!=NULL){
-			LatLng ll = new LatLng(place.getLatitude(), place.getLongitude());
+	public static boolean addmarker(Place place, boolean zoomto){
+		Marker marker = null;
+		LatLng ll = null;
+		try{
+			ll = new LatLng(place.getLatitude(), place.getLongitude());
 			marker = localenderMap.addMarker(new MarkerOptions().position(ll).draggable(true));
-//		}
+		} catch(Exception e){
+			Toast.makeText(Localendar.instance, "The place cannot be shown on the map", Toast.LENGTH_SHORT).show();
+			return false;
+		}
 		if(zoomto == true)
 	        localenderMap.animateCamera(CameraUpdateFactory.newLatLngZoom(ll, 15));
-		return marker;
+		return true;
 	}
 	
 	public void setMarkerListener(){	 
