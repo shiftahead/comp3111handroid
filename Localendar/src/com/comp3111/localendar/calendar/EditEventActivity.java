@@ -152,6 +152,7 @@ public class EditEventActivity extends Activity {
 			public void onClick(View view) {
 				if(updateEvent()) {
 					MyCalendar.calendarInstance.refresh();
+			        MyGoogleMap.refresh();
 					finish();
 					overridePendingTransition(R.anim.right_in, R.anim.right_out);
 				}
@@ -178,8 +179,8 @@ public class EditEventActivity extends Activity {
 		}
 		description = eventDescription.getText().toString();
 		year = Integer.toString(eventDate.getYear());
-		month = Integer.toString(eventDate.getMonth());
-		day = Integer.toString(eventDate.getDayOfMonth() + 1);
+		month = Integer.toString(eventDate.getMonth() + 1);
+		day = Integer.toString(eventDate.getDayOfMonth());
 		hour = Integer.toString(eventTime.getCurrentHour());
 		minute = Integer.toString(eventTime.getCurrentMinute());
 		if(hour.length() == 1) hour = "0" + hour;
@@ -220,7 +221,6 @@ public class EditEventActivity extends Activity {
         values.put(TRANSPORTATION, transportation);
         values.put(COMPULSORY, compulsory);
         db.update(TABLE_NAME, values, "_ID=" +id, null);
-        MyGoogleMap.refresh();
         return true;
     }
 	
