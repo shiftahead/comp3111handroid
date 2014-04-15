@@ -2,7 +2,7 @@
 
 = Meeting Minutes of Apr. 4=
 ----
-|| Date || Apr. 4, 2014 ||
+|| Date || Apr. 15, 2014 ||
 || Time || 8:30pm - 12:00pm ||
 || Place || LC-02, LG1, Library, HKUST ||
 || Attendance || TAM Shih Lung, WANG Ding, YANG Ji, ZENG Xiong, ZHANG Tian ||
@@ -17,11 +17,11 @@ The minutes of the last meeting were approved without amendment.
 
 == 2. Report on Progress ==
 
-|| Zhang Tian || Code maintenance ||
-|| Wang Ding  || Search auto-complete ||
-|| Yang Ji       || User interface (Search function & shortcut)  ||
-|| Zeng Xiong  || Reminder, minor UI improvement||
-|| TAM Shih Lung || Show path function, ongoing ||
+|| Zhang Tian || Test case and server testing   ||
+|| Wang Ding  || test case and local coverage report ||
+|| Yang Ji       || test case and solo test  ||
+|| Zeng Xiong  || Test case||
+|| TAM Shih Lung || Test case ||
  
 
 == 3. Discussion Items ==
@@ -29,20 +29,20 @@ The minutes of the last meeting were approved without amendment.
 ===1. Task and deadline===
 
 || *No.* || *Task* || *Assigned to* || *Deadline* ||
-|| 1. || Voice recognition  || WANG Ding|| Apr. 10||
-|| 2. || Combination of map and calendar || ZHANG Tian || Apr.10 ||
-|| 3. || Calendar functions || YANG Ji || Apr. 10  ||
-|| 4. || Implement test cases || All team members || Apr. 10||
-|| 5. || Show path functions || TAM Shih Lung || Apr. 10 ||
-|| 6. || Time based reminder & Location based reminder || ZENG Xiong || Apr. 10 ||
-|| 7. || Presentation rehearsal and ppt   || All team members || Apr. 8 ||
+|| 1. || Voice recognition &&  Marker list  || WANG Ding|| Apr. 21||
+|| 2. || Search in event list|| ZHANG Tian || Apr.21 ||
+|| 3. || Calendar UI || YANG Ji || Apr. 10  ||
+|| 4. || Implement test cases || All team members || Apr. 21||
+|| 5. || google sign in && share social media || TAM Shih Lung || Apr. 21 ||
+|| 6. || Time based reminder & Location based reminder || ZENG Xiong || Apr. 21||
+
 
 
 
 == 4. Meeting adjournment and next meeting ==
 
-The meeting lasts for 3 hour and no adjournment.
+The meeting lasts for 1 hour and no adjournment.
 
-The next meeting is scheduled on 4.11.2014, 8:00 pm - 10:00 pm.
+The next meeting is scheduled on 4.21.2014, 8:00 pm - 10:00 pm.
 
 The location is same - LC, LG1, Library, HKUST.
