@@ -22,7 +22,7 @@
     		<View
     		    android:layout_width="2dp"
 		    	android:layout_height="fill_parent"
-		    	android:background="@color/mid_blue"/>
+		    	android:background="@color/gray"/>
 
    	        <Button
    	            android:id="@+id/confirm_add"

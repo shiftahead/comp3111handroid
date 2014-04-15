@@ -3,6 +3,7 @@ package com.comp3111.localendar.calendar;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
+import com.comp3111.localendar.Localendar;
 import com.comp3111.localendar.R;
 import com.comp3111.localendar.R.id;
 import com.comp3111.localendar.R.layout;
@@ -21,10 +22,12 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -85,23 +88,22 @@ public class MyCalendar extends Fragment {
 		final SimpleCursorAdapter adapter = new SimpleCursorAdapter(calendarInstance.getActivity(), R.layout.event_listitem, cursor, from, to);
         eventList.setAdapter(adapter);
         eventList.setOnItemClickListener(new MyOnItemClickListener());
+        eventList.setOnTouchListener(new MyOnTouchListener());
         
         // Try to implement a contextual action mode 
         eventList.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
         eventList.setMultiChoiceModeListener(new MyMultiChoiceModeListener());
-		//eventList.setSelector(R.drawable.event_background);
 	}
 	
 	static void deleteEvent(String id) {
 		SQLiteDatabase db = dbhelper.getWritableDatabase();
         db.delete(TABLE_NAME, _ID + "=" + id, null);
 	}	
-	
-	public class MyOnItemClickListener implements AdapterView.OnItemClickListener {
+
+	private class MyOnItemClickListener implements AdapterView.OnItemClickListener {
 
 		@Override
-		public void onItemClick(AdapterView<?> parent, View view, int position,
-				long id) {
+		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 			if (cursor.moveToPosition(position)) {
 				String eventId = cursor.getString(cursor.getColumnIndex(_ID));
 				Intent intent = new Intent (calendarInstance.getActivity(), EventDetailActivity.class);	
@@ -109,10 +111,35 @@ public class MyCalendar extends Fragment {
 				startActivity(intent);
     		}
 		}
+		
 	}
 	
+	
+	private class MyOnTouchListener implements View.OnTouchListener {
 		
-   	 public class MyMultiChoiceModeListener implements MultiChoiceModeListener {
+		private int downY;
+		private long time = 0;
+		
+		@Override
+		public boolean onTouch(View v, MotionEvent event) {
+			switch(event.getAction()) {
+			case MotionEvent.ACTION_DOWN:
+				downY = (int) event.getY();
+				eventList.getChildAt(downY/200).setBackgroundResource(R.color.gray);
+				time = System.currentTimeMillis();
+				break;
+			case MotionEvent.ACTION_CANCEL:
+			case MotionEvent.ACTION_UP:
+				if(System.currentTimeMillis() - time < 800)
+					eventList.getChildAt(downY/200).setBackgroundResource(R.color.light_gray);
+				break;
+			}
+			return false;
+		}
+		
+	}
+		
+   	 private class MyMultiChoiceModeListener implements MultiChoiceModeListener {
    		 
    		private ArrayList<String> selection = new ArrayList<String>(); //Record the id of selected items
    		private ArrayList<Integer> positions = new ArrayList<Integer>();
@@ -136,10 +163,8 @@ public class MyCalendar extends Fragment {
 	         				selection.remove(eventId);
 	         				positions.remove((Integer)position);
 	                }
-               	 	eventList.getChildAt(position).setBackgroundResource(R.color.holo_light);
+               	 	eventList.getChildAt(position).setBackgroundResource(R.color.light_gray);
                	}
-               	 
-
    	    }        	 
    	 
    		
@@ -183,7 +208,7 @@ public class MyCalendar extends Fragment {
    	    private void cancelSelect() {
    	    	if(positions != null) {
 	   	    	for (Integer id:positions) {
-	   	    		eventList.getChildAt(id).setBackgroundResource(R.color.holo_light);
+	   	    		eventList.getChildAt(id).setBackgroundResource(R.color.light_gray);;
 	   	    	}
    	    	}
    	    }
