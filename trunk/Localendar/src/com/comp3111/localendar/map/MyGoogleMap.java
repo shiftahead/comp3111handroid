@@ -44,7 +44,6 @@ import android.widget.Toast;
 import com.comp3111.localendar.Localendar;
 import com.comp3111.localendar.R;
 import com.comp3111.localendar.calendar.MyCalendar;
-import com.comp3111.localendar.calendar.MyCalendar.MyOnItemClickListener;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient;
 import com.google.android.gms.location.LocationClient;
