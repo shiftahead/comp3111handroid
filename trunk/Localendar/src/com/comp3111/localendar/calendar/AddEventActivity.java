@@ -108,6 +108,7 @@ public class AddEventActivity extends Activity {
 			public void onClick(View view) {
 				if(addEvent()) {
 					MyCalendar.calendarInstance.refresh();
+			        MyGoogleMap.refresh();
 					finish();
 					overridePendingTransition(R.anim.right_in, R.anim.right_out);
 				}
@@ -122,8 +123,6 @@ public class AddEventActivity extends Activity {
 			}
 		});
 	}
-	
-
 	
 	private boolean addEvent(){
 		
@@ -159,6 +158,10 @@ public class AddEventActivity extends Activity {
 		}
 		dminute = eventMinute.getText().toString();
 		location = eventLocation.getText().toString();
+		if(location.equals("")) {
+			Toast.makeText(this, "Please input the location", Toast.LENGTH_SHORT).show();
+			return false;
+		}
 		transportation = eventTransportation.getSelectedItem().toString();
 		compulsory = eventCompulsory.isChecked()? "YES" : "NO";
 		
@@ -175,7 +178,6 @@ public class AddEventActivity extends Activity {
         values.put(TRANSPORTATION, transportation);
         values.put(COMPULSORY, compulsory);
         db.insert(TABLE_NAME, null, values);
-        MyGoogleMap.refresh();
         return true;
     }
 	
