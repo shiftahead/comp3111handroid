@@ -1,6 +1,6 @@
-#summary Minutes of Meeting held on Apr. 4, 2014.
+#summary Minutes of Meeting held on Apr. 15, 2014.
 
-= Meeting Minutes of Apr. 4=
+= Meeting Minutes of Apr. 15=
 ----
 || Date || Apr. 15, 2014 ||
 || Time || 8:30pm - 12:00pm ||
