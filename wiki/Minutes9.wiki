@@ -30,7 +30,7 @@ The minutes of the last meeting were approved without amendment.
 
 || *No.* || *Task* || *Assigned to* || *Deadline* ||
 || 1. || Reminder time based and location based  || WANG Ding|| Apr. 21||
-|| 2. || Search in event list|| ZHANG Tian || Apr.21 ||
+|| 2. || Search in event list|| ZHANG Tian || Apr. 21 ||
 || 3. || Calendar UI  and event sorting|| YANG Ji || Apr. 21||
 || 4. || Implement test cases || All team members || Apr. 21||
 || 5. || Marker list || TAM Shih Lung || Apr. 21 ||
@@ -45,4 +45,4 @@ The meeting lasts for 1 hour and no adjournment.
 
 The next meeting is scheduled on 4.23.2014, 8:00 pm .
 
-The location is same - LC05, LG1, Library, HKUST.
+The location is LC05, LG1, Library, HKUST.
