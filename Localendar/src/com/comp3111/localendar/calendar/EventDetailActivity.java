@@ -1,5 +1,6 @@
 package com.comp3111.localendar.calendar;
 
+import com.comp3111.localendar.Localendar;
 import com.comp3111.localendar.R;
 import com.comp3111.localendar.R.anim;
 import com.comp3111.localendar.R.id;
@@ -126,9 +127,14 @@ public class EventDetailActivity extends Activity {
 	    }
 	    case R.id.addmarker:{
 	    	Place test= Place.getPlaceFromAddress(location);
-	    	MyGoogleMap.mapInstance.addmarker(test,true);
-			this.finish();
-	    	return true;
+	    	if(MyGoogleMap.addmarker(test, true)) {
+	    		Localendar.instance.setPagerIndex(1);
+				this.finish();
+				overridePendingTransition(R.anim.right_in, R.anim.right_out);
+				return true;
+	    	}
+	    	else
+	    		return false;
 	    }
 	    default: {
 	    	onBackPressed();

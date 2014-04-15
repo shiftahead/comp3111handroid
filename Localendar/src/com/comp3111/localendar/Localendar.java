@@ -82,7 +82,7 @@ public class Localendar extends Activity implements OnClickListener, OnCheckedCh
 	private ImageView searchIcon;
 
 	// MyLocalendar is map object
-	MyGoogleMap MyLocalendar;
+	MyGoogleMap myGoogleMap;
 	
 	//ConnectionDetector internetConnectionDetector;
 	//GPSTracker gpsDetector;
@@ -236,9 +236,8 @@ public class Localendar extends Activity implements OnClickListener, OnCheckedCh
 		pager.setCurrentItem(1);
 		currentTabIndex = 1;
 		
-		//Set up map
-		MyLocalendar = new MyGoogleMap(((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap());
-		MyLocalendar.setMap();
+		//Initialize map
+		myGoogleMap = new MyGoogleMap(((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap());
 		
 	}
 	
@@ -246,7 +245,7 @@ public class Localendar extends Activity implements OnClickListener, OnCheckedCh
 	//Click the items on the autocomplete list and the result will be allocated to the String and Doubles
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
     	String placeSearch = (String) adapterView.getItemAtPosition(position);
-        MyLocalendar.addmarker(Place.getPlaceFromAddress(placeSearch), true);
+        myGoogleMap.addmarker(Place.getPlaceFromAddress(placeSearch), true);
         Toast.makeText(this, placeSearch, Toast.LENGTH_SHORT).show();
         // hide the keyboard
 		InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -390,7 +389,11 @@ public class Localendar extends Activity implements OnClickListener, OnCheckedCh
 		
 	}
 	
-  
+	public void setPagerIndex(int i) {
+		pager.setCurrentItem(i);
+		currentTabIndex = i;
+		mapButton.setChecked(true);
+	}
     
     private void addShortcut()
 	{
