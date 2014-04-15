@@ -389,10 +389,23 @@ public class Localendar extends Activity implements OnClickListener, OnCheckedCh
 		
 	}
 	
-	public void setPagerIndex(int i) {
-		pager.setCurrentItem(i);
-		currentTabIndex = i;
-		mapButton.setChecked(true);
+	public void setPagerIndex(int index) {
+		pager.setCurrentItem(index);
+		currentTabIndex = index;
+		switch(index){
+		case 0:
+			calendarButton.setChecked(true);
+			break;
+		case 1:
+			mapButton.setChecked(true);
+			break;
+		case 2:
+			settingsButton.setChecked(true);
+			break;
+		default:
+			break;
+		}
+		
 	}
     
     private void addShortcut()
