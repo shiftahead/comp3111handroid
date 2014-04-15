@@ -7,9 +7,12 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Locale;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -55,6 +58,7 @@ import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.comp3111.localendar.calendar.AddEventActivity;
@@ -72,6 +76,7 @@ import com.google.android.gms.maps.model.LatLng;
 public class Localendar extends Activity implements OnClickListener, OnCheckedChangeListener, OnItemClickListener {
 	
 	public static Localendar instance = null;
+	public static Calendar calendar = null;
 	private ActionBar actionBar;
 	private NonSwipeableViewPager pager;	//view pager
 	private int currentTabIndex;	//tab index, maps is set default 
@@ -80,7 +85,9 @@ public class Localendar extends Activity implements OnClickListener, OnCheckedCh
 	private ClearableAutoCompleteTextView searchBox;
 	private boolean searchBoxShown;
 	private ImageView searchIcon;
-
+	private static TextView calendarTitle;
+	
+	
 	// MyLocalendar is map object
 	MyGoogleMap myGoogleMap;
 	
@@ -128,9 +135,11 @@ public class Localendar extends Activity implements OnClickListener, OnCheckedCh
         actionBar.setDisplayUseLogoEnabled(false);
         
         LayoutInflater inflator = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View actionBarView = inflator.inflate(R.layout.map_actionbar, null);
+        View actionBarView = inflator.inflate(R.layout.main_actionbar, null);
         
         actionBar.setCustomView(actionBarView);
+        calendarTitle = (TextView) findViewById(R.id.calendar_title);
+        
 		//Get the AutoCompTextView
 	    searchBox = (ClearableAutoCompleteTextView) findViewById(R.id.search_box);
 	    searchIcon = (ImageView) findViewById(R.id.place_view);
@@ -181,6 +190,10 @@ public class Localendar extends Activity implements OnClickListener, OnCheckedCh
 	    searchBoxShown = true;
 	    searchBox.setVisibility(View.GONE);
 	    searchIcon.setVisibility(View.VISIBLE);
+	    
+	    calendar = Calendar.getInstance();
+	    setCalendarTitle();
+	    calendarTitle.setVisibility(View.GONE);
 	    
         //initialize pager and tab buttons
         pager = (NonSwipeableViewPager)findViewById(R.id.tabpager);
@@ -259,8 +272,9 @@ public class Localendar extends Activity implements OnClickListener, OnCheckedCh
             switch (buttonView.getId()) {  
             case R.id.calendar_button: {
             	searchBoxShown = false;
-        		searchBox.setVisibility(View.INVISIBLE);
-        		searchIcon.setVisibility(View.INVISIBLE);
+        		searchBox.setVisibility(View.GONE);
+        		searchIcon.setVisibility(View.GONE);
+        		calendarTitle.setVisibility(View.VISIBLE);
                 pager.setCurrentItem(0);  
                 overridePendingTransition(R.anim.left_in, R.anim.left_out);
                 currentTabIndex = 0;
@@ -270,6 +284,7 @@ public class Localendar extends Activity implements OnClickListener, OnCheckedCh
                 pager.setCurrentItem(1);
                 searchBoxShown = true;
         	    searchBox.setVisibility(View.GONE);
+        		calendarTitle.setVisibility(View.GONE);
         	    searchIcon.setVisibility(View.VISIBLE);
                 
                 if (currentTabIndex == 2)
@@ -285,6 +300,7 @@ public class Localendar extends Activity implements OnClickListener, OnCheckedCh
             	searchBoxShown = false;
         		searchBox.setVisibility(View.INVISIBLE);
         		searchIcon.setVisibility(View.INVISIBLE);
+        		calendarTitle.setVisibility(View.INVISIBLE);
             	
                 pager.setCurrentItem(2);  
                 overridePendingTransition(R.anim.right_in, R.anim.right_out);
@@ -407,9 +423,14 @@ public class Localendar extends Activity implements OnClickListener, OnCheckedCh
 		}
 		
 	}
+	
+	public static void setCalendarTitle() {
+		SimpleDateFormat sdf = new SimpleDateFormat("d MMM, yyyy");
+		String currentDate = sdf.format(calendar.getTime());
+		calendarTitle.setText(" " + currentDate);
+	}
     
-    private void addShortcut()
-	{
+    private void addShortcut() {
 		Intent shortcutIntent = new Intent("com.android.launcher.action.INSTALL_SHORTCUT");
         String title = getResources().getString(R.string.app_name); 
         Parcelable icon = Intent.ShortcutIconResource.fromContext(getApplicationContext(), R.drawable.localendar_logo);
