@@ -1,6 +1,7 @@
 package com.comp3111.localendar.calendar;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import com.comp3111.localendar.Localendar;
@@ -53,6 +54,7 @@ import static com.comp3111.localendar.database.DatabaseConstants.LOCATION;
 
 public class MyCalendar extends Fragment {
 
+	public static long DAY_IN_MILLISECOND = 1000 * 3600 * 24;
 	public static MyCalendar calendarInstance = null;
 	public static DatabaseHelper dbhelper;
 	private ListView eventList;
@@ -71,20 +73,25 @@ public class MyCalendar extends Fragment {
 		view = inflater.inflate(R.layout.day_fragment, container, false); 
 		dbhelper = new DatabaseHelper(this.getActivity());
 		eventList = (ListView) view.findViewById(R.id.events_list);
-		
+		view.setOnTouchListener(new SwipeListener());
 		refresh();
         return view;
     }  
 	
+	@SuppressWarnings("deprecation")
 	void refresh() {
 		eventList.setAdapter(null);
 		
 		String[] from = {_ID, TITLE, HOUR, MINUTE, LOCATION};
+		String selection = YEAR + " = " + (Localendar.calendar.getTime().getYear() + 1900) + " AND " +
+							MONTH + " = "  + (Localendar.calendar.getTime().getMonth() + 1) + " AND " +
+							DAY + " = " + Localendar.calendar.getTime().getDate();
+		
 		SQLiteDatabase db = dbhelper.getReadableDatabase();
-		cursor = db.query(TABLE_NAME, from, null, null, null, null, null);
+		cursor = db.query(TABLE_NAME, from, selection, null, null, null, null);
 		
 		int[] to = {R.id.item_id, R.id.item_title, R.id.item_hour, R.id.item_minute, R.id.item_location};
-		@SuppressWarnings("deprecation")
+		
 		final SimpleCursorAdapter adapter = new SimpleCursorAdapter(calendarInstance.getActivity(), R.layout.event_listitem, cursor, from, to);
         eventList.setAdapter(adapter);
         eventList.setOnItemClickListener(new MyOnItemClickListener());
@@ -111,10 +118,38 @@ public class MyCalendar extends Fragment {
 				startActivity(intent);
     		}
 		}
-		
 	}
 	
-	
+	private class SwipeListener implements View.OnTouchListener {
+		
+		private float downX, downY, upX, upY;
+		
+		@Override
+		public boolean onTouch(View v, MotionEvent event) {
+			switch(event.getAction()) {
+			case MotionEvent.ACTION_DOWN:
+				downX = event.getX();
+				downY = event.getY();
+				return true;
+			case MotionEvent.ACTION_UP:
+				upX = event.getX();
+				upY = event.getY();
+				if(upX - downX > 200 && Math.abs(downY-upY) < 200) {
+					Localendar.calendar.setTimeInMillis(Localendar.calendar.getTimeInMillis() - DAY_IN_MILLISECOND);
+					Localendar.setCalendarTitle();
+					refresh();
+				}
+				else if(upX - downX < -200 && Math.abs(downY-upY) < 200) {
+					Localendar.calendar.setTimeInMillis(Localendar.calendar.getTimeInMillis() + DAY_IN_MILLISECOND);
+					Localendar.setCalendarTitle();
+					refresh();
+				}
+				return false;
+			}
+			return false;
+		}
+		
+	}
 	private class MyOnTouchListener implements View.OnTouchListener {
 		
 		private int downY;
@@ -127,12 +162,12 @@ public class MyCalendar extends Fragment {
 				downY = (int) event.getY();
 				eventList.getChildAt(downY/200).setBackgroundResource(R.color.gray);
 				time = System.currentTimeMillis();
-				break;
+				return false;
 			case MotionEvent.ACTION_CANCEL:
 			case MotionEvent.ACTION_UP:
 				if(System.currentTimeMillis() - time < 800)
 					eventList.getChildAt(downY/200).setBackgroundResource(R.color.light_gray);
-				break;
+				return false;
 			}
 			return false;
 		}
