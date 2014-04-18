@@ -41,7 +41,7 @@ The minutes of the last meeting were approved without amendment.
 
 ====1. Presenting slides====
 
-||1. || UML. || Yang ji ||
+||1. || UML. || Yang Ji ||
 ||2. || Backlog || Zhang Tian ||
 ||3. || Burndown || Zhang Tian ||
 ||4. || Prototype Demo || Wang Ding, Zeng Xiong ||
