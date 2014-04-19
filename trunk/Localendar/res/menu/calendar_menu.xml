@@ -4,10 +4,10 @@
               <item android:id="@+id/day_view"
                     android:title="Day"
                     android:orderInCategory="1"/>
-              <item android:id="@+id/week_view"
-                    android:title="Week"
-                    android:orderInCategory="2"/>
               <item android:id="@+id/month_view"
                     android:title="Month"
-                    android:orderInCategory = "3"/>
+                    android:orderInCategory="2"/>
+              <item android:id="@+id/go_to_today"
+                    android:title="Go to Today"
+                    android:orderInCategory="3"/>
 </menu>

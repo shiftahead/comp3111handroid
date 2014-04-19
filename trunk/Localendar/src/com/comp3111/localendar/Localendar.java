@@ -62,6 +62,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.comp3111.localendar.calendar.AddEventActivity;
+import com.comp3111.localendar.calendar.MyCalendar;
 import com.comp3111.localendar.map.MyGoogleMap;
 import com.comp3111.localendar.map.Place;
 import com.comp3111.localendar.support.ClearableAutoCompleteTextView;
@@ -372,6 +373,22 @@ public class Localendar extends Activity implements OnClickListener, OnCheckedCh
 	
 	public boolean onOptionsItemSelected(MenuItem item){
 		switch (item.getItemId()) {
+		case R.id.day_view :
+			MyCalendar.setViewModeToMonth(false);
+			setCalendarTitle();
+			return true;
+		case R.id.month_view :
+			MyCalendar.setViewModeToMonth(true);
+			MyCalendar.setTimeInMillis(calendar.getTimeInMillis());
+			setCalendarTitle();
+			return true;
+		case R.id.go_to_today :
+			calendar = Calendar.getInstance();
+			MyCalendar.calendarInstance.refresh();
+			MyCalendar.setTimeInMillis(calendar.getTimeInMillis());
+			MyCalendar.setViewModeToMonth(false);
+			setCalendarTitle();
+			return true;
 		case R.id.map_normal :
 			MyGoogleMap.localenderMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 			return true;
@@ -424,10 +441,13 @@ public class Localendar extends Activity implements OnClickListener, OnCheckedCh
 		
 	}
 	
-	public static void setCalendarTitle() {
+	public void setCalendarTitle() {
 		SimpleDateFormat sdf = new SimpleDateFormat("d MMM, yyyy");
 		String currentDate = sdf.format(calendar.getTime());
-		calendarTitle.setText(" " + currentDate);
+		if(MyCalendar.viewMode == MyCalendar.DAY_VIEW)
+			calendarTitle.setText(" " + currentDate);
+		else if(MyCalendar.viewMode == MyCalendar.MONTH_VIEW)
+			calendarTitle.setText(" " + MyCalendar.calendarInstance.getCurrentMonth());
 	}
     
     private void addShortcut() {
@@ -436,8 +456,6 @@ public class Localendar extends Activity implements OnClickListener, OnCheckedCh
         Parcelable icon = Intent.ShortcutIconResource.fromContext(getApplicationContext(), R.drawable.localendar_logo);
         Intent intent = new Intent(getApplicationContext(), Appstart.class); 
         intent.setAction(Intent.ACTION_MAIN);
-        //shortcutIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        //shortcutIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         shortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_NAME, title); 
         shortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE, icon);
         shortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, intent);  
