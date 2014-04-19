@@ -303,7 +303,7 @@ public class MyCalendar extends Fragment {
    	                deleteSelectedItems();
            	    	refresh();
    	                mode.finish(); // Action picked, so close the CAB
-           	    	MyGoogleMap.refresh();
+           	    	MyGoogleMap.refresh("");
    	                return true;
    	            default:
    	                return false;

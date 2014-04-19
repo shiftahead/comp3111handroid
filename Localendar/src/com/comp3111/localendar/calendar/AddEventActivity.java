@@ -108,7 +108,7 @@ public class AddEventActivity extends Activity {
 			public void onClick(View view) {
 				if(addEvent()) {
 					MyCalendar.calendarInstance.refresh();
-			        MyGoogleMap.refresh();
+			        MyGoogleMap.refresh("");
 					finish();
 					overridePendingTransition(R.anim.right_in, R.anim.right_out);
 				}

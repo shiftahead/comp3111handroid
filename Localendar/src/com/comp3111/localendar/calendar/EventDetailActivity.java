@@ -116,18 +116,20 @@ public class EventDetailActivity extends Activity {
 			startActivity(intent);
 			this.finish();
 			overridePendingTransition(R.anim.left_in, R.anim.left_out);
+//			MyGoogleMap.refresh();
 			return true;
 	    }
 	    case R.id.delete_event: {
 	    	MyCalendar.deleteEvent(id);
 			MyCalendar.calendarInstance.refresh();
+			MyGoogleMap.refresh(id);
 			this.finish();
-			MyGoogleMap.refresh();
 			return true;
 	    }
 	    case R.id.addmarker:{
-	    	Place test= Place.getPlaceFromAddress(location);
-	    	if(MyGoogleMap.addmarker(test, true)) {
+	    	Place mlocation= Place.getPlaceFromAddress(location);
+//	    	if(MyGoogleMap.addmarker(mlocation, true)) {
+		    if(MyGoogleMap.addmarker(mlocation, true, new String(id + "." + title), new String(hour + ":" + minute))) {
 	    		Localendar.instance.setPagerIndex(1);
 				this.finish();
 				overridePendingTransition(R.anim.right_in, R.anim.right_out);
