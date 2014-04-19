@@ -148,7 +148,7 @@ public class MyGoogleMap {
 				
 		try{
 			ll = new LatLng(place.getLatitude(), place.getLongitude());
-			newMarker = localenderMap.addMarker(new MarkerOptions().position(ll).draggable(true).title(title).snippet(id));
+			newMarker = localenderMap.addMarker(new MarkerOptions().position(ll).draggable(true).title(title).snippet(time));
 		} catch(Exception e){
 			Toast.makeText(Localendar.instance, "The place cannot be shown on the map", Toast.LENGTH_SHORT).show();
 			return false;

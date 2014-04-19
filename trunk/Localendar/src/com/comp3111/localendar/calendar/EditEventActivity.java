@@ -152,7 +152,7 @@ public class EditEventActivity extends Activity {
 			public void onClick(View view) {
 				if(updateEvent()) {
 					MyCalendar.calendarInstance.refresh();
-			        MyGoogleMap.refresh();
+			        MyGoogleMap.refresh(id);
 					finish();
 					overridePendingTransition(R.anim.right_in, R.anim.right_out);
 				}
