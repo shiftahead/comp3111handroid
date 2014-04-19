@@ -74,6 +74,8 @@ public class MyGoogleMap {
 	private Marker testMarker;
 	//A test polyline
 	private static ArrayList<Polyline> line = new ArrayList<Polyline>();
+	private static ArrayList<Marker> marker = new ArrayList<Marker>();
+	private static ArrayList<String> marker_id = new ArrayList<String>();
 		    
 	public MyGoogleMap(GoogleMap map) {
 		mapInstance = this;
@@ -117,9 +119,12 @@ public class MyGoogleMap {
                               }
                      });
         
-//        drawPath(path(Place.getPlaceFromAddress("Tsim Sha Tsui Station, Tsim Sha Tsui").getLatLng(), Place.getPlaceFromAddress("Central").getLatLng() ) ); 
+//        drawPath(path(Place.getPlaceFromAddress("Tsim Sha Tsui Station, Tsim Sha Tsui").getLatLng(), Place.getPlaceFromAddress("Central").getLatLng() ) );
+        
+//        addmarker(Place.getPlaceFromAddress("HKUST (South), Clear Water Bay".replaceAll("\\s+","")), true);
+        
         pathing();
-        refresh();
+        refresh("");
 //        drawPath();
 //        drawPath(path("China", "Beijing" ) );
         //set Marker called;
@@ -129,56 +134,80 @@ public class MyGoogleMap {
 	}
 	
 	//The function of addmarker and zoom the camera to the added marker if boolean zoomto is set to true;
-	public static boolean addmarker(Place place, boolean zoomto){
-		Marker marker = null;
+//	public static boolean addmarker(Place place, boolean zoomto){
+	public static boolean addmarker(Place place, boolean zoomto, String title, String time){
+		Marker newMarker = null;
 		LatLng ll = null;
+		
+		int dummy = title.indexOf(".");
+		String id = title.substring(0, dummy);
+		title = title.substring(dummy+1);
+		
+		if(marker_id.contains(id))
+			return true;
+				
 		try{
 			ll = new LatLng(place.getLatitude(), place.getLongitude());
-			marker = localenderMap.addMarker(new MarkerOptions().position(ll).draggable(true));
+			newMarker = localenderMap.addMarker(new MarkerOptions().position(ll).draggable(true).title(title).snippet(id));
 		} catch(Exception e){
 			Toast.makeText(Localendar.instance, "The place cannot be shown on the map", Toast.LENGTH_SHORT).show();
 			return false;
 		}
 		if(zoomto == true)
 	        localenderMap.animateCamera(CameraUpdateFactory.newLatLngZoom(ll, 15));
+		newMarker.showInfoWindow();
+		marker.add(newMarker);
+		marker_id.add(id);
 		return true;
 	}
 	
-	public void setMarkerListener(){	 
-//		 localenderMap.setOnMarkerDragListener(new OnMarkerDragListener() {
-//             
-//             @Override
-//             public void onMarkerDragStart(Marker arg0) {
-//                     // 
-//                     if(arg0.equals(testMarker)){
-//                             arg0.setVisible(true);
-//                     }
-//             }
-//             
-//             @Override
-//             public void onMarkerDragEnd(Marker arg0) {
-//                     // 
-//                     if(arg0.equals(testMarker)){
-//                             arg0.setVisible(true);
-//                     }
-//             }
-//              @Override
-//             public void onMarkerDrag(Marker arg0) {
-//                     // 
-//                     if(arg0.equals(testMarker)){
-//                             arg0.setVisible(false);
-//                     }
-//             }
-//     });
+	public void setMarkerListener(){	
+		localenderMap.setOnMarkerClickListener(new OnMarkerClickListener(){
+			@Override
+			public boolean onMarkerClick(Marker arg0) {
+				// TODO Auto-generated method stub
+//				arg0.remove();
+				return false;
+			}
+			
+		});
+		
+		
+		
+		 localenderMap.setOnMarkerDragListener(new OnMarkerDragListener() {
+             
+             @Override
+             public void onMarkerDragStart(Marker arg0) {
+                     // 
+                     if(arg0.equals(testMarker)){
+                             arg0.setVisible(true);
+                     }
+             }
+             
+             @Override
+             public void onMarkerDragEnd(Marker arg0) {
+                     // 
+                     if(arg0.equals(testMarker)){
+                             arg0.setVisible(true);
+                     }
+             }
+              @Override
+             public void onMarkerDrag(Marker arg0) {
+                     // 
+                     if(arg0.equals(testMarker)){
+                             arg0.setVisible(false);
+                     }
+             }
+     });
   }
 
 	public void setInfoWindowListener(){
 		
         localenderMap.setOnInfoWindowClickListener(new OnInfoWindowClickListener() {
 			@Override
-			public void onInfoWindowClick(Marker arg0) {
+			public void onInfoWindowClick(Marker testMarker) {
 				// TODO Auto-generated method stub
-				arg0.setTitle("My InfoWindow is Clicked!");
+				testMarker.setTitle("My InfoWindow is Clicked!");
 			}
 		});
 	}	
@@ -187,15 +216,24 @@ public class MyGoogleMap {
 	// have to be arranged according to time
 	public static void pathing(){
 
-		ArrayList <String> location = new ArrayList<String>();
+		ArrayList <String> location = new ArrayList<String>(), year = new ArrayList<String>()
+				, month = new ArrayList<String>(), day = new ArrayList<String>()
+				, hour = new ArrayList<String>(), minute = new ArrayList<String>()
+				, transportation = new ArrayList<String>();		
 		Cursor cursor;
 
-		String[] from = {LOCATION};
+		String[] from = {LOCATION, YEAR, MONTH, DAY, HOUR, MINUTE, TRANSPORTATION};
 		SQLiteDatabase db = MyCalendar.dbhelper.getReadableDatabase();
 		cursor = db.query(TABLE_NAME, from, null, null, null, null, null);
-		
+				
 		while(cursor.moveToNext()){
 			location.add(cursor.getString(0));
+			year.add(cursor.getString(1));
+			month.add(cursor.getString(2));
+			day.add(cursor.getString(3));
+			hour.add(cursor.getString(4));
+			minute.add(cursor.getString(5));
+			transportation.add(cursor.getString(6));
 		}
 		
 		if(!location.isEmpty()){
@@ -203,49 +241,72 @@ public class MyGoogleMap {
 			while(location.size() > dummy+1){
 //				drawPath(path(Place.getPlaceFromAddress(location.get(dummy)), Place.getPlaceFromAddress(location.get(dummy+1)) ) );
 				//depricated 
-				drawPath(path(location.get(dummy), location.get(dummy+1) ) );
+				drawPath(findingPath(location.get(dummy), location.get(dummy+1), transportation.get(dummy+1)
+						, year.get(dummy+1), month.get(dummy+1), day.get(dummy+1), hour.get(dummy+1), minute.get(dummy+1)) );
+				
 				dummy=dummy+1;
 			}
 		}
 		
 	}
 	
-	public static void refresh(){
+//	public static void refresh(){
+	public static void refresh(String id){
+		// refresh Marker
+		if(!id.isEmpty()){ //edit or delete events occur
+			if(marker_id.contains(id)){
+				Cursor cursor;
+
+				String[] from = {_ID, TITLE, LOCATION, HOUR, MINUTE};
+				SQLiteDatabase db = MyCalendar.dbhelper.getReadableDatabase();
+				cursor = db.query(TABLE_NAME, from, null, null, null, null, null);
+				Boolean found = false;
+				ArrayList<String> locationl = new ArrayList<String>();
+							
+				while(cursor.moveToNext()){
+					locationl.add(cursor.getString(2));
+					if(cursor.getString(0).contentEquals(id)){ //edit events
+						String title = cursor.getString(1), location = cursor.getString(2)
+								, hour = cursor.getString(3), minute = cursor.getString(4);
+						
+						Marker erasedmarker = marker.get(marker_id.indexOf(id));
+						erasedmarker.remove();
+						
+						addmarker(Place.getPlaceFromAddress(location), true, id + "." + title, new String(hour + ":" + minute));
+						
+						found = true;
+						break;
+					}
+				}
+				if(!found){//delete event
+					for(int i=0 ; i<marker_id.size() ; i++){
+						if(!locationl.contains(marker_id.get(i))){
+							Marker erasedmarker = marker.get(i);
+							erasedmarker.remove();
+							marker.remove(i);
+							marker_id.remove(i);
+							break;
+						}
+					}
+				}
+			}
+		}
+		//refresh Polyline (path)
 		for(Polyline Line: line){
 			Line.remove();
 		}
 	 	line.clear();
 	 	pathing();
 	}
-	
-//for testing purpose
-//	public static void drawPath(){
-//		List<LatLng> lat = new ArrayList<LatLng>(); 
-//		lat.add(new LatLng(22.3375, 114.2630));		
-//		lat.add(new LatLng(22.4515, 114.0081));
-//		lat.add(new LatLng(22.3184, 114.1699));
-//
-//		line.add(localenderMap.addPolyline(new PolylineOptions()
-//	    .addAll(lat)
-//	         .width(15)
-//	    .geodesic(true)));
-//	}
-	
-	public static void drawPath(List<LatLng> list){	
-//		if(!list.isEmpty())
-		line.add(localenderMap.addPolyline(new PolylineOptions()
-	    .addAll(list)
-	         .width(5)
-	    .geodesic(true)));
-	}
-	
+		
     private static final String LOG_TAG = "Localendar";
     private static final String OUT_JSON = "/json"; 
 	private static final String DIRECTIONS_API_BASE = "http://maps.googleapis.com/maps/api/directions";
 	private static final String API_KEY = "AIzaSyC0-Vqt6_XSDsU57zjEnP6YMtB_S5JKqj0";
 	
-//    public static List<LatLng> path(String input1, String input2, String mode, String arrival_year, String arrival_month, String arrival_day, String arrival_hour, String arrival_minute) {
-    public static List<LatLng> path(String input1, String input2){
+    public static List<LatLng> findingPath(String input1, String input2, String mode, 
+    		String arrival_year, String arrival_month, String arrival_day, String arrival_hour, String arrival_minute) {
+//    public static List<LatLng> findingPath(String input1, String input2){
     	
     String resultList = new String();
     List<LatLng> resultcoor = new ArrayList<LatLng>();
@@ -257,10 +318,17 @@ public class MyGoogleMap {
         sb.append("?origin="+ input1.replaceAll("\\s+",""));
         sb.append("&destination="+input2.replaceAll("\\s+",""));
         sb.append("&sensor=false");
-//      sb.append("&mode="+mode);
         
-//        if(mode.contentEquals("transit"))
-//        	sb.append("arrival_time="+timeCalculation(arrival_year, arrival_month, arrival_day, arrival_hour, arrival_minute));
+        if(!mode.contentEquals("Drive")){  //default is drive
+        	sb.append("&mode=");
+        	if(mode.contentEquals("On foot"))
+        		sb.append("walking");
+        	if(mode.contentEquals("Public transportation")){
+        		sb.append("&arrival_time="+timeCalculation(arrival_year, arrival_month, arrival_day, arrival_hour, arrival_minute));
+        		sb.append("transit");
+        	}
+        }
+        
         
 //      sb.append("&mode=");
 //      switch(mode)
@@ -269,8 +337,11 @@ public class MyGoogleMap {
 //		sb.append("&departure_time="); / sb.append("&arrival_time=");
 //calculateTime(){
         
-        //String year, String month, String day, String hour, String minute
-
+//      <string-array name="transportation">
+//      <item>Drive</item>
+//      <item>Public transportation</item>
+//      <item>On foot</item>
+//</string-array>
 
         URL url = new URL(sb.toString());
         conn = (HttpURLConnection) url.openConnection();
@@ -310,9 +381,9 @@ public class MyGoogleMap {
     
 	return resultcoor;
 	
-    }
+}
     
-    // to be disposed
+// to be disposed
 //    public static List<LatLng> path(Place input1, Place input2) {
 //    	
 //    String resultList = new String();
@@ -366,6 +437,14 @@ public class MyGoogleMap {
 //	
 //    }
     
+    private static String timeCalculation(String syear, String smonth, String sday, String shour, String sminute){
+    	
+    	Calendar time = new GregorianCalendar(Integer.parseInt(syear), Integer.parseInt(smonth), 
+    								Integer.parseInt(sday), Integer.parseInt(shour), Integer.parseInt(sminute));
+    	    	
+    	return String.valueOf(time.getTimeInMillis());
+    }
+    
 	
     //Note that this functions is an extract from PolyUtil, an open-source library
     //the URL is https://github.com/googlemaps/android-maps-utils
@@ -404,15 +483,27 @@ public class MyGoogleMap {
 
         return path;
     }
-    
-//    private String timeCalculation(String syear, String smonth, String sday, String shour, String sminute){
-//    	
-//    	Calendar time = new GregorianCalendar(Integer.parseInt(syear), Integer.parseInt(smonth), 
-//    								Integer.parseInt(sday), Integer.parseInt(shour), Integer.parseInt(sminute));
-//    	    	
-//    	return String.valueOf(time.getTimeInMillis());
-//    }
-    
+   
+  //for testing purpose
+//	public static void drawPath(){
+//		List<LatLng> lat = new ArrayList<LatLng>(); 
+//		lat.add(new LatLng(22.3375, 114.2630));		
+//		lat.add(new LatLng(22.4515, 114.0081));
+//		lat.add(new LatLng(22.3184, 114.1699));
+//
+//		line.add(localenderMap.addPolyline(new PolylineOptions()
+//	    .addAll(lat)
+//	         .width(15)
+//	    .geodesic(true)));
+//	}
+	
+	public static void drawPath(List<LatLng> list){	
+//		if(!list.isEmpty())
+		line.add(localenderMap.addPolyline(new PolylineOptions()
+	    .addAll(list)
+	         .width(5)
+	    .geodesic(true)));
+	}
     
 	
 
