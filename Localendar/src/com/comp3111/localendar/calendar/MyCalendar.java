@@ -24,6 +24,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.util.Log;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -54,12 +55,17 @@ import static com.comp3111.localendar.database.DatabaseConstants.LOCATION;
 
 public class MyCalendar extends Fragment {
 
-	public static long DAY_IN_MILLISECOND = 1000 * 3600 * 24;
+	private static long DAY_IN_MILLISECOND = 1000 * 3600 * 24;
+	public static int DAY_VIEW = 0;
+	public static int MONTH_VIEW = 1;
+	public static int viewMode = 0;
+	
 	public static MyCalendar calendarInstance = null;
-	public static DatabaseHelper dbhelper;
-	private ListView eventList;
-	private View view;
-	static Cursor cursor;
+	public static DatabaseHelper dbhelper = null;
+	private static ListView eventList = null;
+	private static CalendarView monthView = null;
+	private static View calendarFragment = null;
+	private static Cursor cursor = null;
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
@@ -70,16 +76,21 @@ public class MyCalendar extends Fragment {
 	@Override  
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) { 
 		calendarInstance = this;
-		view = inflater.inflate(R.layout.day_fragment, container, false); 
+		calendarFragment = inflater.inflate(R.layout.calendar_fragment, container, false); 
 		dbhelper = new DatabaseHelper(this.getActivity());
-		eventList = (ListView) view.findViewById(R.id.events_list);
-		view.setOnTouchListener(new SwipeListener());
+		eventList = (ListView) calendarFragment.findViewById(R.id.events_list);
+		monthView = (CalendarView) calendarFragment.findViewById(R.id.calendar_monthview);
+		eventList.setVisibility(View.VISIBLE);
+		monthView.setVisibility(View.GONE);
+		viewMode = DAY_VIEW;
+		calendarFragment.setOnTouchListener(new SwipeListener());
+		monthView.setOnTouchListener(new MyOnTouchListener());
 		refresh();
-        return view;
+        return calendarFragment;
     }  
 	
 	@SuppressWarnings("deprecation")
-	void refresh() {
+	public void refresh() {
 		eventList.setAdapter(null);
 		
 		String[] from = {_ID, TITLE, HOUR, MINUTE, LOCATION};
@@ -88,7 +99,7 @@ public class MyCalendar extends Fragment {
 							DAY + " = " + Localendar.calendar.getTime().getDate();
 		
 		SQLiteDatabase db = dbhelper.getReadableDatabase();
-		cursor = db.query(TABLE_NAME, from, selection, null, null, null, null);
+		cursor = db.query(TABLE_NAME, from, selection, null, null, null, HOUR + ", " + MINUTE);
 		
 		int[] to = {R.id.item_id, R.id.item_title, R.id.item_hour, R.id.item_minute, R.id.item_location};
 		
@@ -102,10 +113,31 @@ public class MyCalendar extends Fragment {
         eventList.setMultiChoiceModeListener(new MyMultiChoiceModeListener());
 	}
 	
+	public static void setTimeInMillis(long milliseconds) {
+		monthView.setTimeInMillis(milliseconds);
+	}
+	
 	static void deleteEvent(String id) {
 		SQLiteDatabase db = dbhelper.getWritableDatabase();
         db.delete(TABLE_NAME, _ID + "=" + id, null);
 	}	
+	
+	public static void setViewModeToMonth(boolean setMonth) {
+		if(setMonth) {
+			viewMode = MONTH_VIEW;
+			eventList.setVisibility(View.GONE);
+			monthView.setVisibility(View.VISIBLE);
+		}
+		else {
+			viewMode = DAY_VIEW;
+			eventList.setVisibility(View.VISIBLE);
+			monthView.setVisibility(View.GONE);
+		}
+	}
+	
+	public String getCurrentMonth() {
+		return monthView.getMonthView();
+	}
 
 	private class MyOnItemClickListener implements AdapterView.OnItemClickListener {
 
@@ -126,49 +158,93 @@ public class MyCalendar extends Fragment {
 		
 		@Override
 		public boolean onTouch(View v, MotionEvent event) {
-			switch(event.getAction()) {
-			case MotionEvent.ACTION_DOWN:
-				downX = event.getX();
-				downY = event.getY();
-				return true;
-			case MotionEvent.ACTION_UP:
-				upX = event.getX();
-				upY = event.getY();
-				if(upX - downX > 200 && Math.abs(downY-upY) < 200) {
-					Localendar.calendar.setTimeInMillis(Localendar.calendar.getTimeInMillis() - DAY_IN_MILLISECOND);
-					Localendar.setCalendarTitle();
-					refresh();
+			if(viewMode == DAY_VIEW) {
+				switch(event.getAction()) {
+				case MotionEvent.ACTION_DOWN:
+					downX = event.getX();
+					downY = event.getY();
+					return true;
+				case MotionEvent.ACTION_UP:
+					upX = event.getX();
+					upY = event.getY();
+					if(upX - downX > 200 && Math.abs(downY-upY) < 200) {
+						Localendar.calendar.setTimeInMillis(Localendar.calendar.getTimeInMillis() - DAY_IN_MILLISECOND);
+						Localendar.instance.setCalendarTitle();
+						refresh();
+					}
+					else if(upX - downX < -200 && Math.abs(downY-upY) < 200) {
+						Localendar.calendar.setTimeInMillis(Localendar.calendar.getTimeInMillis() + DAY_IN_MILLISECOND);
+						Localendar.instance.setCalendarTitle();
+						refresh();
+					}
+					return false;
 				}
-				else if(upX - downX < -200 && Math.abs(downY-upY) < 200) {
-					Localendar.calendar.setTimeInMillis(Localendar.calendar.getTimeInMillis() + DAY_IN_MILLISECOND);
-					Localendar.setCalendarTitle();
-					refresh();
-				}
-				return false;
 			}
+			else if(viewMode == MONTH_VIEW) {
+				switch(event.getAction()) {
+				case MotionEvent.ACTION_DOWN:
+					downX = event.getX();
+					downY = event.getY();
+					return true;
+				case MotionEvent.ACTION_UP:
+					upX = event.getX();
+					upY = event.getY();
+					if(upX - downX > 200 && Math.abs(downY-upY) < 200) {
+						monthView.previousMonth();
+						Localendar.instance.setCalendarTitle();
+					}
+					else if(upX - downX < -200 && Math.abs(downY-upY) < 200) {
+						monthView.nextMonth();
+						Localendar.instance.setCalendarTitle();
+					}
+					return false;
+				}
+			}
+			
 			return false;
 		}
 		
 	}
 	private class MyOnTouchListener implements View.OnTouchListener {
 		
-		private int downY;
+		private float downX, downY;
 		private long time = 0;
 		
 		@Override
 		public boolean onTouch(View v, MotionEvent event) {
-			switch(event.getAction()) {
-			case MotionEvent.ACTION_DOWN:
-				downY = (int) event.getY();
-				eventList.getChildAt(downY/200).setBackgroundResource(R.color.gray);
-				time = System.currentTimeMillis();
-				return false;
-			case MotionEvent.ACTION_CANCEL:
-			case MotionEvent.ACTION_UP:
-				if(System.currentTimeMillis() - time < 800)
-					eventList.getChildAt(downY/200).setBackgroundResource(R.color.light_gray);
-				return false;
+			if(viewMode == DAY_VIEW) {
+				switch(event.getAction()) {
+				case MotionEvent.ACTION_DOWN:
+					downY = event.getY();
+					eventList.getChildAt((int) downY/200).setBackgroundResource(R.color.gray);
+					time = System.currentTimeMillis();
+					return false;
+				case MotionEvent.ACTION_CANCEL:
+				case MotionEvent.ACTION_UP:
+					if(System.currentTimeMillis() - time < 800)
+						eventList.getChildAt((int) downY/200).setBackgroundResource(R.color.light_gray);
+					return false;
+				}
 			}
+			else if(viewMode == MONTH_VIEW) {
+				switch(event.getAction()) {
+				case MotionEvent.ACTION_DOWN:
+					downX = event.getX();
+					downY = event.getY();
+					int myViewSize = monthView.getWidth() < monthView.getHeight()?monthView.getWidth():monthView.getHeight();
+					int x = (int) downX * 7 / myViewSize;
+					int y = (int) downY * 7 / myViewSize;
+					
+					if(y < 1 || y > 6 || x > 6) return false;
+					Localendar.calendar.setTimeInMillis(monthView.getDate(y-1, x).getTimeInMillis());
+					setViewModeToMonth(false);
+					Localendar.instance.setCalendarTitle();
+					refresh();
+					return true;
+				
+				}
+			}
+			 
 			return false;
 		}
 		
