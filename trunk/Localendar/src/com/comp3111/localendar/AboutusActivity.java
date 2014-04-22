@@ -19,7 +19,7 @@ public class AboutusActivity extends Activity {
 	public boolean onOptionsItemSelected(MenuItem menuItem)
 	{       
 	    onBackPressed();
-	    overridePendingTransition(R.anim.left_in, R.anim.left_out);
+	    overridePendingTransition(R.anim.left_in, R.anim.right_out);
 	    return true;
 	}
 }

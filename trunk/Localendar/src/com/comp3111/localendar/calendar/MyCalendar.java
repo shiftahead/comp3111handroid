@@ -34,6 +34,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.View.OnClickListener;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.AnimationUtils;
+import android.view.animation.TranslateAnimation;
 import android.widget.AbsListView.MultiChoiceModeListener;
 import android.widget.AdapterView;
 import android.widget.DatePicker;
@@ -66,7 +70,7 @@ public class MyCalendar extends Fragment {
 	private static CalendarView monthView = null;
 	private static View calendarFragment = null;
 	private static Cursor cursor = null;
-	
+	private static boolean checkMode = false;
 	@Override
     public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -105,7 +109,6 @@ public class MyCalendar extends Fragment {
 		
 		final SimpleCursorAdapter adapter = new SimpleCursorAdapter(calendarInstance.getActivity(), R.layout.event_listitem, cursor, from, to);
         eventList.setAdapter(adapter);
-        eventList.setOnItemClickListener(new MyOnItemClickListener());
         eventList.setOnTouchListener(new MyOnTouchListener());
         
         // Try to implement a contextual action mode 
@@ -139,19 +142,6 @@ public class MyCalendar extends Fragment {
 		return monthView.getMonthView();
 	}
 
-	private class MyOnItemClickListener implements AdapterView.OnItemClickListener {
-
-		@Override
-		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-			if (cursor.moveToPosition(position)) {
-				String eventId = cursor.getString(cursor.getColumnIndex(_ID));
-				Intent intent = new Intent (calendarInstance.getActivity(), EventDetailActivity.class);	
-				intent.putExtra("ID", eventId);
-				startActivity(intent);
-    		}
-		}
-	}
-	
 	private class SwipeListener implements View.OnTouchListener {
 		
 		private float downX, downY, upX, upY;
@@ -167,12 +157,12 @@ public class MyCalendar extends Fragment {
 				case MotionEvent.ACTION_UP:
 					upX = event.getX();
 					upY = event.getY();
-					if(upX - downX > 200 && Math.abs(downY-upY) < 200) {
+					if(upY - downY > 200 && Math.abs(downX-upX) < 200) {
 						Localendar.calendar.setTimeInMillis(Localendar.calendar.getTimeInMillis() - DAY_IN_MILLISECOND);
 						Localendar.instance.setCalendarTitle();
 						refresh();
 					}
-					else if(upX - downX < -200 && Math.abs(downY-upY) < 200) {
+					else if(upY - downY < -200 && Math.abs(downX-upX) < 200) {
 						Localendar.calendar.setTimeInMillis(Localendar.calendar.getTimeInMillis() + DAY_IN_MILLISECOND);
 						Localendar.instance.setCalendarTitle();
 						refresh();
@@ -189,11 +179,11 @@ public class MyCalendar extends Fragment {
 				case MotionEvent.ACTION_UP:
 					upX = event.getX();
 					upY = event.getY();
-					if(upX - downX > 200 && Math.abs(downY-upY) < 200) {
+					if(upY - downY > 100 && Math.abs(downX-upX) < 100) {
 						monthView.previousMonth();
 						Localendar.instance.setCalendarTitle();
 					}
-					else if(upX - downX < -200 && Math.abs(downY-upY) < 200) {
+					else if(upY - downY < -100 && Math.abs(downX-upX) < 100) {
 						monthView.nextMonth();
 						Localendar.instance.setCalendarTitle();
 					}
@@ -207,23 +197,47 @@ public class MyCalendar extends Fragment {
 	}
 	private class MyOnTouchListener implements View.OnTouchListener {
 		
-		private float downX, downY;
+		private float downX, downY, upX, upY;
 		private long time = 0;
 		
 		@Override
 		public boolean onTouch(View v, MotionEvent event) {
 			if(viewMode == DAY_VIEW) {
-				switch(event.getAction()) {
-				case MotionEvent.ACTION_DOWN:
-					downY = event.getY();
-					eventList.getChildAt((int) downY/200).setBackgroundResource(R.color.gray);
-					time = System.currentTimeMillis();
-					return false;
-				case MotionEvent.ACTION_CANCEL:
-				case MotionEvent.ACTION_UP:
-					if(System.currentTimeMillis() - time < 800)
+				if(!checkMode) {
+					switch(event.getAction()) {
+					case MotionEvent.ACTION_DOWN:
+						downX = event.getX();
+						downY = event.getY();
+						eventList.getChildAt((int) downY/200).setBackgroundResource(R.color.gray);
+						time = System.currentTimeMillis();
+						return false;
+					case MotionEvent.ACTION_CANCEL:
+					case MotionEvent.ACTION_UP:
 						eventList.getChildAt((int) downY/200).setBackgroundResource(R.color.light_gray);
-					return false;
+						upX = event.getX();
+						upY = event.getY();
+						if(Math.abs(downX-upX) < 10 && Math.abs(downY-upY) < 10 && System.currentTimeMillis() - time < 800) {
+							if (cursor.moveToPosition((int) downY/200)) {
+								
+								String eventId = cursor.getString(cursor.getColumnIndex(_ID));
+								Intent intent = new Intent (calendarInstance.getActivity(), EventDetailActivity.class);	
+								intent.putExtra("ID", eventId);
+								startActivity(intent);
+								return false;
+				    		}
+						}
+						else if(Math.abs(downX-upX) < 200 && upY-downY > 200) {
+							Localendar.calendar.setTimeInMillis(Localendar.calendar.getTimeInMillis() - DAY_IN_MILLISECOND);
+							Localendar.instance.setCalendarTitle();
+							refresh();
+						}
+						else if(Math.abs(downX-upX) < 200 && upY-downY < -200) {
+							Localendar.calendar.setTimeInMillis(Localendar.calendar.getTimeInMillis() + DAY_IN_MILLISECOND);
+							Localendar.instance.setCalendarTitle();
+							refresh();
+						}
+						return false;
+					}
 				}
 			}
 			else if(viewMode == MONTH_VIEW) {
@@ -231,17 +245,40 @@ public class MyCalendar extends Fragment {
 				case MotionEvent.ACTION_DOWN:
 					downX = event.getX();
 					downY = event.getY();
+					return true;
+				case MotionEvent.ACTION_UP:
+					upX = event.getX();
+					upY = event.getY();
 					int myViewSize = monthView.getWidth() < monthView.getHeight()?monthView.getWidth():monthView.getHeight();
 					int x = (int) downX * 7 / myViewSize;
 					int y = (int) downY * 7 / myViewSize;
-					
-					if(y < 1 || y > 6 || x > 6) return false;
-					Localendar.calendar.setTimeInMillis(monthView.getDate(y-1, x).getTimeInMillis());
-					setViewModeToMonth(false);
-					Localendar.instance.setCalendarTitle();
-					refresh();
-					return true;
-				
+					if(upY - downY > 200 && Math.abs(downX-upX) < 200) {
+						Animation am1 = AnimationUtils.loadAnimation(Localendar.instance,R.anim.down_out);
+						Animation am2 = AnimationUtils.loadAnimation(Localendar.instance,R.anim.up_in);
+						AnimationSet ams = new AnimationSet(false);
+						ams.addAnimation(am1);
+						ams.addAnimation(am2);
+						monthView.startAnimation(ams);
+						monthView.previousMonth();					
+						Localendar.instance.setCalendarTitle();
+						return false;
+					}
+					else if(upY - downY < -200 && Math.abs(downX-upX) < 200) {
+						Animation am = AnimationUtils.loadAnimation(Localendar.instance,R.anim.up_out);
+						monthView.startAnimation(am);
+						monthView.nextMonth();
+						Localendar.instance.setCalendarTitle();
+						return false;
+					}
+					else if(y < 1 || y > 6 || x > 6) 
+						return true;
+					else if(Math.abs(downX-upX)<10 && Math.abs(downY-upY)<10) {
+						Localendar.calendar.setTimeInMillis(monthView.getDate(y-1, x).getTimeInMillis());
+						setViewModeToMonth(false);
+						Localendar.instance.setCalendarTitle();
+						refresh();
+						return true;
+					}
 				}
 			}
 			 
@@ -326,12 +363,14 @@ public class MyCalendar extends Fragment {
 		@Override
    	    public boolean onCreateActionMode(ActionMode mode, Menu menu) {
    	        mode.getMenuInflater().inflate(R.menu.contextual_action_bar, menu);
+   	        checkMode = true;
    	        return true;
    	    }
            
    	    @Override
    	    public void onDestroyActionMode(ActionMode mode) {
    	    	cancelSelect();
+   	    	checkMode = false;
    	    }
 
    	    @Override

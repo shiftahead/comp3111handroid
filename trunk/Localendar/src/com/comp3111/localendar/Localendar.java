@@ -277,7 +277,7 @@ public class Localendar extends Activity implements OnClickListener, OnCheckedCh
         		searchIcon.setVisibility(View.GONE);
         		calendarTitle.setVisibility(View.VISIBLE);
                 pager.setCurrentItem(0);  
-                overridePendingTransition(R.anim.left_in, R.anim.left_out);
+                overridePendingTransition(R.anim.left_in, R.anim.right_out);
                 currentTabIndex = 0;
             }
             	break;
@@ -289,11 +289,11 @@ public class Localendar extends Activity implements OnClickListener, OnCheckedCh
         	    searchIcon.setVisibility(View.VISIBLE);
                 
                 if (currentTabIndex == 2)
-                	overridePendingTransition(R.anim.left_in, R.anim.left_out);
+                	overridePendingTransition(R.anim.left_in, R.anim.right_out);
                 else if (currentTabIndex == 0)
-                	overridePendingTransition(R.anim.right_in, R.anim.right_out);
+                	overridePendingTransition(R.anim.right_in, R.anim.left_out);
                 	
-                overridePendingTransition(R.anim.left_in, R.anim.left_out);
+                overridePendingTransition(R.anim.left_in, R.anim.right_out);
                 currentTabIndex = 1;
             }
                 break;  
@@ -304,7 +304,7 @@ public class Localendar extends Activity implements OnClickListener, OnCheckedCh
         		calendarTitle.setVisibility(View.INVISIBLE);
             	
                 pager.setCurrentItem(2);  
-                overridePendingTransition(R.anim.right_in, R.anim.right_out);
+                overridePendingTransition(R.anim.right_in, R.anim.left_out);
                 currentTabIndex = 2;
             }
                 break;  
@@ -320,7 +320,7 @@ public class Localendar extends Activity implements OnClickListener, OnCheckedCh
 			
 			Intent intent = new Intent(this, AddEventActivity.class);
 			startActivity(intent);
-			overridePendingTransition(R.anim.left_in, R.anim.left_out);
+			overridePendingTransition(R.anim.left_in, R.anim.right_out);
 		}
 			break;
 		
@@ -328,7 +328,7 @@ public class Localendar extends Activity implements OnClickListener, OnCheckedCh
 		case R.id.about_us: {
 			Intent intent = new Intent (this, AboutusActivity.class);			
 			startActivity(intent);
-			overridePendingTransition(R.anim.right_in, R.anim.right_out);
+			overridePendingTransition(R.anim.right_in, R.anim.left_out);
 		}
 			break;
 			
@@ -336,7 +336,7 @@ public class Localendar extends Activity implements OnClickListener, OnCheckedCh
 		case R.id.my_account: {
 			Intent intent = new Intent (this, SigninActivity.class);			
 			startActivity(intent);
-			overridePendingTransition(R.anim.right_in, R.anim.right_out);
+			overridePendingTransition(R.anim.right_in, R.anim.left_out);
 		}
 			break;
     	}
