@@ -115,7 +115,7 @@ public class EventDetailActivity extends Activity {
 			intent.putExtra("ID", id);
 			startActivity(intent);
 			this.finish();
-			overridePendingTransition(R.anim.left_in, R.anim.left_out);
+			overridePendingTransition(R.anim.left_in, R.anim.right_out);
 //			MyGoogleMap.refresh();
 			return true;
 	    }
@@ -132,7 +132,7 @@ public class EventDetailActivity extends Activity {
 		    if(MyGoogleMap.addmarker(mlocation, true, new String(id + "." + title), new String(hour + ":" + minute))) {
 	    		Localendar.instance.setPagerIndex(1);
 				this.finish();
-				overridePendingTransition(R.anim.right_in, R.anim.right_out);
+				overridePendingTransition(R.anim.right_in, R.anim.left_out);
 				return true;
 	    	}
 	    	else

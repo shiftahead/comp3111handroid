@@ -110,7 +110,7 @@ public class AddEventActivity extends Activity {
 					MyCalendar.calendarInstance.refresh();
 			        MyGoogleMap.refresh("");
 					finish();
-					overridePendingTransition(R.anim.right_in, R.anim.right_out);
+					overridePendingTransition(R.anim.right_in, R.anim.left_out);
 				}
 			}
 		});
@@ -118,7 +118,7 @@ public class AddEventActivity extends Activity {
 			@Override
 			public void onClick(View view) {
 				finish();
-				overridePendingTransition(R.anim.right_in, R.anim.right_out);
+				overridePendingTransition(R.anim.right_in, R.anim.left_out);
 				
 			}
 		});
