@@ -4,7 +4,7 @@
 ----
 || Date || Apr. 23, 2014 ||
 || Time || 9:30pm - 11:30pm ||
-|| Place || LC-05, LG1, Library, HKUST ||
+|| Place || LC-01, LG1, Library, HKUST ||
 || Attendance || TAM Shih Lung, WANG Ding, YANG Ji, ZENG Xiong, ZHANG Tian ||
 || Absence || -- ||
 || Recorder ||  Zhang Tian ||
@@ -19,7 +19,7 @@ The minutes of the last meeting were approved without amendment.
 
 || Zhang Tian || Test case and server testing   ||
 || Wang Ding  || test case and local coverage report ||
-|| Yang Ji       || test case and solo test  ||
+|| Yang Ji       || Calendar UI, month view & swipe animation  ||
 || Zeng Xiong  || Test case||
 || TAM Shih Lung || Test case ||
  
