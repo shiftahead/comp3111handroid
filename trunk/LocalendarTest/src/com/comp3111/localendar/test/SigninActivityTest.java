@@ -18,32 +18,5 @@ public class SigninActivityTest extends ActivityInstrumentationTestCase2<SigninA
 	 protected void setUp() throws Exception {
 	        super.setUp();
 	        mSigninActivity = getActivity();
-	        mTextView1 = (TextView) mSigninActivity.findViewById (R.id.signinTitle);
-	        mTextView2 = (TextView) mSigninActivity.findViewById(R.id.SigninHint);
-	    }
-	 public void testPreconditions(){
-	    	assertNotNull("mSigninActivity  is null",mSigninActivity);
-	    	assertNotNull("mTextView1 is null",mTextView1);
-	    	assertNotNull("mTextView2 is null",mTextView2);
-	    }
-	 public void testTextView1_labelText() {
-	        String expected ="Sign in";
-	        String actual = mTextView1.getText().toString();
-	        assertEquals(expected, actual);
-	        try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-	    }
-	 public void testTextView2_labelText() {
-	        String expected ="Sign in to synchronize with Google";
-	        String actual = mTextView2.getText().toString();
-	        assertEquals(expected, actual);
-	        try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
 	    }
 }
