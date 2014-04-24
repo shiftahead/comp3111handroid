@@ -195,7 +195,7 @@ public class MyCalendar extends Fragment {
 		}
 		
 	}
-	private class MyOnTouchListener implements View.OnTouchListener {
+	private class MyOnTouchListener implements View.OnTouchListener  {
 		
 		private float downX, downY, upX, upY;
 		private long time = 0;
@@ -208,12 +208,21 @@ public class MyCalendar extends Fragment {
 					case MotionEvent.ACTION_DOWN:
 						downX = event.getX();
 						downY = event.getY();
-						eventList.getChildAt((int) downY/200).setBackgroundResource(R.color.gray);
+						try {
+							eventList.getChildAt((int) downY/200).setBackgroundResource(R.color.gray);
+						} catch (Exception e) {
+							
+						}
+						
 						time = System.currentTimeMillis();
 						return false;
 					case MotionEvent.ACTION_CANCEL:
 					case MotionEvent.ACTION_UP:
-						eventList.getChildAt((int) downY/200).setBackgroundResource(R.color.light_gray);
+						try {
+							eventList.getChildAt((int) downY/200).setBackgroundResource(R.color.light_gray);
+						} catch(Exception e) {
+							
+						}
 						upX = event.getX();
 						upY = event.getY();
 						if(Math.abs(downX-upX) < 10 && Math.abs(downY-upY) < 10 && System.currentTimeMillis() - time < 800) {
