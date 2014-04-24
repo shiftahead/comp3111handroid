@@ -1,10 +1,14 @@
 package com.comp3111.localendar.calendar;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 import com.comp3111.localendar.R;
 import com.comp3111.localendar.R.anim;
 import com.comp3111.localendar.R.id;
 import com.comp3111.localendar.R.layout;
 import com.comp3111.localendar.map.MyGoogleMap;
+import com.comp3111.localendar.map.Place;
 import com.comp3111.localendar.support.ClearableAutoCompleteTextView;
 import com.comp3111.localendar.support.ClearableEditText;
 import com.comp3111.localendar.support.PlacesAutoCompleteAdapter;
@@ -14,7 +18,9 @@ import android.os.Bundle;
 import android.provider.CalendarContract;
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.app.Fragment;
+import android.app.PendingIntent;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
@@ -164,6 +170,9 @@ public class AddEventActivity extends Activity {
 		}
 		transportation = eventTransportation.getSelectedItem().toString();
 		compulsory = eventCompulsory.isChecked()? "YES" : "NO";
+		if(eventCompulsory.isChecked()){
+			scheduleAlarm();
+		}
 		
         values.put(TITLE, title);
         values.put(DESCRIPTION, description);
@@ -179,6 +188,29 @@ public class AddEventActivity extends Activity {
         values.put(COMPULSORY, compulsory);
         db.insert(TABLE_NAME, null, values);
         return true;
+    }
+	
+    public void scheduleAlarm()
+    {
+    	Calendar cal=Calendar.getInstance();
+    	cal.set(Calendar.YEAR,eventDate.getYear());
+    	cal.set(Calendar.MONTH,eventDate.getMonth());
+    	cal.set(Calendar.DAY_OF_MONTH,eventDate.getDayOfMonth());
+    	
+    	//TODO: Need to be modified according to the user's another input (remind xx h xx m before)
+    	cal.set(Calendar.HOUR_OF_DAY,eventTime.getCurrentHour());
+    	cal.set(Calendar.MINUTE,eventTime.getCurrentMinute());
+    	    	    	
+    	// create an Intent and set the class which will execute when Alarm triggers
+    	Intent intentAlarm = new Intent(this, AlarmReceiverActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this,
+                12345, intentAlarm, PendingIntent.FLAG_CANCEL_CURRENT);
+    	
+    	// create the object
+    	AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+    	
+    	//set the alarm for particular time
+    	alarmManager.set(AlarmManager.RTC_WAKEUP,cal.getTimeInMillis(), pendingIntent);
     }
 	
 }
