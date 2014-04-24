@@ -302,7 +302,6 @@ public class MyGoogleMap {
     private static final String LOG_TAG = "Localendar";
     private static final String OUT_JSON = "/json"; 
 	private static final String DIRECTIONS_API_BASE = "http://maps.googleapis.com/maps/api/directions";
-	private static final String API_KEY = "AIzaSyC0-Vqt6_XSDsU57zjEnP6YMtB_S5JKqj0";
 	
     public static List<LatLng> findingPath(String input1, String input2, String mode, 
     		String arrival_year, String arrival_month, String arrival_day, String arrival_hour, String arrival_minute) {
