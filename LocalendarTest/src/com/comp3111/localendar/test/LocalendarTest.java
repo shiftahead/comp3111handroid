@@ -83,13 +83,13 @@ public class LocalendarTest extends ActivityInstrumentationTestCase2<Localendar>
 		TouchUtils.tapView(this, calendar);
 		Thread.sleep(500);
 	}
-	
 	public void testActionBar() throws InterruptedException {
 		TouchUtils.tapView(this, map);
-		
+		Thread.sleep(300);
 		assertTrue(View.VISIBLE == searchIcon.getVisibility());
 		assertTrue(View.GONE == searchBox.getVisibility());
 		TouchUtils.tapView(this, searchIcon);
+		TouchUtils.tapView(this, searchBox);
 		
 	    this.sendKeys(KeyEvent.KEYCODE_H);
 	    Thread.sleep(300);
@@ -98,15 +98,20 @@ public class LocalendarTest extends ActivityInstrumentationTestCase2<Localendar>
 	    this.sendKeys(KeyEvent.KEYCODE_N);
 	    Thread.sleep(300);
 	    this.sendKeys(KeyEvent.KEYCODE_G);
-	    Thread.sleep(5000);
+	    Thread.sleep(300);
+	    this.sendKeys(KeyEvent.KEYCODE_ENTER);
+	    Thread.sleep(3000);
 	    assertEquals(searchBox.getAdapter().getItem(1).toString(), "Hong Kong");
 	    Thread.sleep(300);
+	   
+	    
 		assertTrue(View.GONE == searchIcon.getVisibility());
 		assertTrue(View.VISIBLE == searchBox.getVisibility());
 		
 		solo.clickOnText("Hong Kong");
-	    Thread.sleep(15000);
+	    Thread.sleep(5000);
 	}
+	
 	
 	public void testMenu() throws InterruptedException {
 	    
@@ -157,8 +162,8 @@ public class LocalendarTest extends ActivityInstrumentationTestCase2<Localendar>
 	    Thread.sleep(200);
 	    solo.sendKey(Solo.MENU);
 	    Thread.sleep(200);
-	    solo.clickOnMenuItem("Week");
-	    Thread.sleep(200);
+	    //solo.clickOnMenuItem("Week");
+	    //Thread.sleep(200);
 	    solo.sendKey(Solo.MENU);
 	    Thread.sleep(200);
 	    solo.clickOnMenuItem("Month");
@@ -275,6 +280,7 @@ public class LocalendarTest extends ActivityInstrumentationTestCase2<Localendar>
 	      Thread.sleep(500);
 	      
 	      //6 lines of code modify Date
+	      /*
 	      TouchUtils.drag(this, size.x/5, 2*size.x/5, size.y/5, 0, 20);
 	      Thread.sleep(500);
 	      
@@ -283,7 +289,7 @@ public class LocalendarTest extends ActivityInstrumentationTestCase2<Localendar>
 	      
 	      TouchUtils.drag(this, 2*size.x/3, 2*size.x/3, size.y/5, 0, 20);
 	      Thread.sleep(500);
-	      
+	      */
 	      //Drag screen
 	      TouchUtils.drag(this, 0, 0, size.y/4, size.y/16, 100);
 	      Thread.sleep(500);
@@ -380,7 +386,7 @@ public class LocalendarTest extends ActivityInstrumentationTestCase2<Localendar>
 	    solo.clearEditText(1);
 	    solo.enterText(1, test);
 	      
-	    solo.setDatePicker(eventDate, 2014, 11, 31);
+	    //solo.setDatePicker(eventDate, 2014, 11, 31);
 	    solo.setTimePicker(eventTime, 11, 59);
 	  
 	    solo.clearEditText(eventHour);
@@ -399,6 +405,7 @@ public class LocalendarTest extends ActivityInstrumentationTestCase2<Localendar>
 	    solo.clickOnCheckBox(0);
 	    solo.clickOnButton("CONFIRM");
 	    
+	    Thread.sleep(5000);
 	    am = ins.addMonitor(EventDetailActivity.class.getName(), null, false);
 	    currentActivity = getInstrumentation().waitForMonitorWithTimeout(am, 500);
 	    //Test cancel
@@ -413,6 +420,7 @@ public class LocalendarTest extends ActivityInstrumentationTestCase2<Localendar>
 	    solo.clickOnMenuItem("Edit");
 	    Thread.sleep(500);
 	    solo.clickOnButton("CANCEL");
+	    Thread.sleep(5000);
 	}
 	
 	public void testSetting_labelText1() {

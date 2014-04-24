@@ -11,7 +11,6 @@ public class AppstartTest extends ActivityInstrumentationTestCase2<Appstart> {
 	public AppstartTest(Class<Appstart> activityClass) {
 		super(activityClass);
 	}
-	
 	public void testNull() {
 		assertNotNull("Appstart  is null", app);
 		try {
