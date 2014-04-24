@@ -34,7 +34,7 @@ The minutes of the last meeting were approved without amendment.
 || 3. || Calendar UI enhancement & facebook share|| YANG Ji || Apr. 29||
 || 4. || Implement test cases || All team members || Apr. 29||
 || 5. || Marker function enhancement || TAM Shih Lung || Apr. 29 ||
-|| 6. || settings & alarm notice || ZENG Xiong || Apr. 29||
+|| 6. || Settings & alarm notice || ZENG Xiong || Apr. 29||
 
 
 
