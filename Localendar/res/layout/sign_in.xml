@@ -1,56 +1,73 @@
-<?xml version="1.0" encoding="utf-8"?>	
-	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:background="#eee"
-        android:orientation="vertical" >
-        
-        <RelativeLayout 
-  			android:layout_width="fill_parent"
-  			android:layout_height="45dp"
-  			android:id="@+id/list_title" 
-  			android:background="@color/holo_light"
-  			android:gravity="center_vertical" >  
-      		<TextView
-      		    android:id="@+id/signinTitle"
-        		android:layout_width="wrap_content" 
-        		android:layout_height="wrap_content" 
-        		android:text="Sign in"
-        		android:layout_centerInParent="true"
-        		android:textSize="20sp"		
-				android:textColor="#000000"
-				android:textStyle="bold" />
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2012 The Android Open Source Project
 
-		</RelativeLayout>
-		<View
-			    android:layout_width="fill_parent"
-			    android:layout_height="2dp"
-			    android:background="@color/mid_blue"/>
-		<GridLayout
-			 android:orientation="horizontal"  
-			 android:layout_width="fill_parent"  
-			 android:layout_height="fill_parent"
-			 android:columnCount="1"
-    		 android:rowCount="6" 
-			 android:gravity="center">
-      		<TextView
-      		    android:id="@+id/SigninHint"
-        		android:layout_width="wrap_content" 
-        		android:layout_height="wrap_content" 
-        		android:text="Sign in to synchronize with Google"
-        		android:textSize="25sp"		
-				android:textColor="#000" />
-      		<ImageView
-        			android:layout_width="wrap_content"
-        			android:layout_height="wrap_content"        	     	
-        			android:adjustViewBounds="true"  
-					android:maxWidth="200dp"  
-					android:maxHeight="100dp"  
-					android:scaleType="fitCenter" 
-        			android:src="@drawable/google_calendar" />
-		    
-			 
-		    
-		</GridLayout>
-	</LinearLayout>
-	
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dip">
+    <LinearLayout
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      android:padding="2dip">
+       <com.google.android.gms.common.SignInButton
+          android:id="@+id/sign_in_button"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginBottom="30dip"
+          android:enabled="false" />
+       <Button
+          android:id="@+id/sign_out_button"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/sign_out_button_name"
+          android:enabled="false" />
+       <Button
+          android:id="@+id/revoke_access_button"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/revoke_access_button_name"
+          android:enabled="false" />
+     
+      
+    </LinearLayout>
+     <Button
+          android:id="@+id/share_button"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Share on Google+"
+       />
+     <TextView
+        android:id="@+id/sign_in_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dip"
+        android:text="@string/status_signed_out" />
+    
+    <TextView
+        android:id="@+id/circles_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/circles_title" />
+    
+    <ListView
+      android:id="@+id/circles_list"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      android:padding="0dip" />
+</LinearLayout>
