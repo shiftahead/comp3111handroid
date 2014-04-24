@@ -34,9 +34,14 @@
     <!-- Install/Unistall shortcut permissions -->
     <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
 	<uses-permission android:name="com.android.launcher.permission.UNINSTALL_SHORTCUT"/>
-   <!-- To access google + API -->
+   	<!-- To access google + API -->
 	<uses-permission android:name="android.permission.GET_ACCOUNTS" />
 	<uses-permission android:name="android.permission.USE_CREDENTIALS" />
+	
+	<!-- permission required to use Alarm Manager -->
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM"/>
+    
+    
     <application
         android:allowBackup="true"
         android:icon="@drawable/localendar_logo"
@@ -64,6 +69,10 @@
         </activity>
         <activity
             android:name="com.comp3111.localendar.calendar.AddEventActivity"
+            android:theme="@style/Theme.MyAppThemeNoIcon" >
+        </activity>
+        <activity
+            android:name="com.comp3111.localendar.calendar.AlarmReceiverActivity"
             android:theme="@style/Theme.MyAppThemeNoIcon" >
         </activity>
         <activity
