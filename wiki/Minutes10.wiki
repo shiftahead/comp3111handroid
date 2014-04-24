@@ -17,10 +17,10 @@ The minutes of the last meeting were approved without amendment.
 
 == 2. Report on Progress ==
 
-|| Zhang Tian || Test case and server testing   ||
-|| Wang Ding  || test case and local coverage report ||
+|| Zhang Tian || Test case and server testing google+ setting   ||
+|| Wang Ding  ||  Reminder setting ||
 || Yang Ji       || Calendar UI, month view & swipe animation  ||
-|| Zeng Xiong  || Test case||
+|| Zeng Xiong  || Test case ||
 || TAM Shih Lung || Test case ||
  
 
