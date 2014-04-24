@@ -6,12 +6,14 @@ import com.comp3111.localendar.R;
 import com.comp3111.localendar.R.*;
 
 import android.app.Activity;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.NotificationCompat;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
@@ -26,7 +28,9 @@ public class AlarmReceiverActivity extends Activity{
 	private Float distance; // the tolerate final distance between user and destination
 	private Place destination; // the destination place
 	private float[] actual_distance;
-    private MediaPlayer mMediaPlayer; 
+    private MediaPlayer mMediaPlayer;
+	private int numMessages = 0;
+	private NotificationManager myNotificationManager; 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -35,7 +39,9 @@ public class AlarmReceiverActivity extends Activity{
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND,
                 WindowManager.LayoutParams.FLAG_DIM_BEHIND);
         setContentView(R.layout.alarm);
-
+        
+        displayNotification();
+        
         Button stopAlarm = (Button) findViewById(R.id.stopAlarm);
         stopAlarm.setOnTouchListener(new OnTouchListener() {
             public boolean onTouch(View arg0, MotionEvent arg1) {
@@ -48,7 +54,45 @@ public class AlarmReceiverActivity extends Activity{
         playSound(this, getAlarmUri());
     }
 
-    private void playSound(Context context, Uri alert) {
+    private void displayNotification() {
+		// TODO Auto-generated method stub
+        String eventTitle = getIntent().getStringExtra("title");
+        String eventYear = getIntent().getStringExtra("year");
+        String eventMonth = getIntent().getStringExtra("month");
+        String eventDay = getIntent().getStringExtra("day");
+        String eventHour = getIntent().getStringExtra("hour");
+        String eventMinute = getIntent().getStringExtra("minute");
+        String eventVenue = getIntent().getStringExtra("venue");
+
+    	NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this);
+		
+		mBuilder.setContentTitle("New alarm");
+		mBuilder.setContentText("Time's up for " + eventTitle + " !");
+		mBuilder.setTicker("New alarm!");
+		mBuilder.setSmallIcon(R.drawable.small_logo);
+		
+		NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
+		
+		String[] events = new String[3];
+		events[0] = eventTitle;
+		events[1] = eventYear + '/' + eventMonth + '/' + eventDay + "  " + eventHour + ":" + eventMinute;
+		events[2] = eventVenue;
+		
+		inboxStyle.setBigContentTitle("Details");
+		for (int i = 0; i < events.length; ++i)
+			inboxStyle.addLine(events[i]);
+		mBuilder.setStyle(inboxStyle);
+		
+		mBuilder.setNumber(numMessages);
+		mBuilder.setAutoCancel(true);
+		
+		myNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+	      // pass the Notification object to the system 
+	    myNotificationManager.notify(111, mBuilder.build());
+	}
+
+	private void playSound(Context context, Uri alert) {
         mMediaPlayer = new MediaPlayer();
         try {
             mMediaPlayer.setDataSource(context, alert);

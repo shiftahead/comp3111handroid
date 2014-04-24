@@ -16,10 +16,12 @@ import com.comp3111.localendar.support.PlacesAutoCompleteAdapter;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.CalendarContract;
+import android.support.v4.app.NotificationCompat;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.Fragment;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.ContentUris;
 import android.content.ContentValues;
@@ -119,6 +121,8 @@ public class AddEventActivity extends Activity {
 					overridePendingTransition(R.anim.right_in, R.anim.left_out);
 				}
 			}
+
+			
 		});
 		cancelAdd.setOnClickListener(new OnClickListener() {
 			@Override
@@ -203,8 +207,15 @@ public class AddEventActivity extends Activity {
     	    	    	
     	// create an Intent and set the class which will execute when Alarm triggers
     	Intent intentAlarm = new Intent(this, AlarmReceiverActivity.class);
+    	intentAlarm.putExtra("title", title);
+    	intentAlarm.putExtra("year", year);
+    	intentAlarm.putExtra("month", month);
+    	intentAlarm.putExtra("day", day);
+    	intentAlarm.putExtra("hour", hour);
+    	intentAlarm.putExtra("minute", minute);
+    	intentAlarm.putExtra("venue", location);
         PendingIntent pendingIntent = PendingIntent.getActivity(this,
-                12345, intentAlarm, PendingIntent.FLAG_CANCEL_CURRENT);
+                1, intentAlarm, PendingIntent.FLAG_CANCEL_CURRENT);
     	
     	// create the object
     	AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
