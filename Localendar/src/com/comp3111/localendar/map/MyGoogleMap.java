@@ -132,7 +132,12 @@ public class MyGoogleMap {
         setInfoWindowListener();
 
 	}
-	
+// move camera to corresponding place
+	public void  moveCamera(Place place) {
+		LatLng ll = null;
+    	ll = new LatLng(place.getLatitude(), place.getLongitude());
+    	localenderMap.animateCamera(CameraUpdateFactory.newLatLngZoom(ll, 15));
+	}
 	//The function of addmarker and zoom the camera to the added marker if boolean zoomto is set to true;
 //	public static boolean addmarker(Place place, boolean zoomto){
 	public static boolean addmarker(Place place, boolean zoomto, String title, String time){
