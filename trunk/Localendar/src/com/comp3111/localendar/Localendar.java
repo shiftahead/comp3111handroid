@@ -68,6 +68,7 @@ import com.comp3111.localendar.map.Place;
 import com.comp3111.localendar.support.ClearableAutoCompleteTextView;
 import com.comp3111.localendar.support.NonSwipeableViewPager;
 import com.comp3111.localendar.support.PlacesAutoCompleteAdapter;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.LatLng;
@@ -259,8 +260,9 @@ public class Localendar extends Activity implements OnClickListener, OnCheckedCh
 	//Click the items on the autocomplete list and the result will be allocated to the String and Doubles
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
     	String placeSearch = (String) adapterView.getItemAtPosition(position);
-//        myGoogleMap.addmarker(Place.getPlaceFromAddress(placeSearch), true);
-        Toast.makeText(this, placeSearch, Toast.LENGTH_SHORT).show();
+    	//myGoogleMap.addmarker(Place.getPlaceFromAddress(placeSearch), true, placeSearch, placeSearch);
+        myGoogleMap.moveCamera(Place.getPlaceFromAddress(placeSearch));
+    	Toast.makeText(this, placeSearch, Toast.LENGTH_SHORT).show();
         // hide the keyboard
 		InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 		imm.hideSoftInputFromWindow(searchBox.getWindowToken(), 0);
