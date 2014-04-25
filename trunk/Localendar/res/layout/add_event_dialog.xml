@@ -165,48 +165,50 @@
    	        android:textSize="18sp"
    	        android:entries="@array/transportation"
 		    android:spinnerMode="dropdown" />
+   	    
    	    <TextView
    	        android:layout_width="fill_parent"
    	        android:layout_height="10dp" />
+   	    
    	    <CheckBox
    	        android:id="@+id/event_compulsory"
    	        android:layout_width="wrap_content"
    	        android:layout_height="wrap_content"
    	        android:textSize="18sp"
    	        android:text="Compulsory" />
+   	    
    	    <TextView
    	        android:layout_width="fill_parent"
-   	        android:layout_height="50dp" />
-	<!--  
-   	    <GridLayout
-   	        android:layout_width="fill_parent"
+   	        android:layout_height="10dp" />
+   	    
+   	  	<GridLayout
+   	        android:layout_width="match_parent"
    	        android:layout_height="wrap_content"
    	        android:columnCount="2"
     		android:rowCount="1"
     		android:orientation="horizontal" >
-
-   	        <Button
-   	            android:id="@+id/cancel_add"
-   	            android:layout_width="100sp"
-   	            android:layout_height="wrap_content"
-   	            android:layout_marginLeft="30dp"
-   	            android:onClick="onClick"
-        		android:clickable="true"
-   	            android:text="Cancel"
-   	            android:textColor="@color/cancel_button"  />
-
-   	        <Button
-   	            android:id="@+id/confirm_add"
-   	            android:layout_width="100sp"
-   	            android:layout_height="wrap_content"
-   	            android:layout_marginLeft="30dp"
-   	            android:onClick="onClick"
-        		android:clickable="true"
-   	            android:text="Confirm"
-   	            android:textColor="@color/confirm_button" />
-
+	   	    <TextView
+	   	        android:layout_width="wrap_content"
+	   	        android:layout_height="wrap_content"
+	   	        android:padding="8dp"
+	   	        android:text="Remind me"
+	   	        android:textColor="#000"
+	   	        android:textSize="18sp" />
+	   	    <Spinner
+			    android:id="@+id/remind_time"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:padding="8dp"
+	   	        android:textColor="#000"
+	   	        android:textSize="18sp"
+	   	        android:entries="@array/time_selection"
+			    android:spinnerMode="dialog" /> 
    	    </GridLayout>
-   	    -->
+   	    
+   	    <TextView
+   	        android:layout_width="fill_parent"
+   	        android:layout_height="50dp" />
+   	    
    	
 
    	</LinearLayout>

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+import com.comp3111.localendar.Appstart;
 import com.comp3111.localendar.Localendar;
 import com.comp3111.localendar.R;
 import com.comp3111.localendar.R.id;
@@ -13,6 +14,7 @@ import com.comp3111.localendar.map.MyGoogleMap;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.CalendarContract;
 import android.app.Activity;
 import android.app.Fragment;
@@ -127,14 +129,26 @@ public class MyCalendar extends Fragment {
 	
 	public static void setViewModeToMonth(boolean setMonth) {
 		if(setMonth) {
-			viewMode = MONTH_VIEW;
-			eventList.setVisibility(View.GONE);
-			monthView.setVisibility(View.VISIBLE);
+			if(viewMode != MONTH_VIEW) {
+				Animation am1 = AnimationUtils.loadAnimation(Localendar.instance,R.anim.right_out);
+				Animation am2 = AnimationUtils.loadAnimation(Localendar.instance,R.anim.left_in);
+				eventList.startAnimation(am1);
+				eventList.setVisibility(View.GONE);
+				monthView.startAnimation(am2);
+				monthView.setVisibility(View.VISIBLE);
+				viewMode = MONTH_VIEW;
+			}
 		}
 		else {
-			viewMode = DAY_VIEW;
-			eventList.setVisibility(View.VISIBLE);
-			monthView.setVisibility(View.GONE);
+			if(viewMode != DAY_VIEW) {
+				Animation am1 = AnimationUtils.loadAnimation(Localendar.instance,R.anim.left_out);
+				Animation am2 = AnimationUtils.loadAnimation(Localendar.instance,R.anim.right_in);
+				monthView.setAnimation(am1);
+				monthView.setVisibility(View.GONE);
+				eventList.startAnimation(am2);
+				eventList.setVisibility(View.VISIBLE);
+				viewMode = DAY_VIEW;
+			}
 		}
 	}
 	
@@ -158,39 +172,46 @@ public class MyCalendar extends Fragment {
 					upX = event.getX();
 					upY = event.getY();
 					if(upY - downY > 200 && Math.abs(downX-upX) < 200) {
-						Localendar.calendar.setTimeInMillis(Localendar.calendar.getTimeInMillis() - DAY_IN_MILLISECOND);
-						Localendar.instance.setCalendarTitle();
-						refresh();
+						new Handler().postDelayed(new Runnable(){
+							@Override
+							public void run(){
+								Animation am1 = AnimationUtils.loadAnimation(Localendar.instance,R.anim.down_out);
+								eventList.startAnimation(am1);
+							}
+						}, 0);
+						new Handler().postDelayed(new Runnable(){
+							@Override
+							public void run(){
+								Localendar.calendar.setTimeInMillis(Localendar.calendar.getTimeInMillis() - DAY_IN_MILLISECOND);
+								Localendar.instance.setCalendarTitle();
+								refresh();
+								Animation am2 = AnimationUtils.loadAnimation(Localendar.instance,R.anim.up_in);
+								eventList.startAnimation(am2);
+							}
+						}, 200);
 					}
 					else if(upY - downY < -200 && Math.abs(downX-upX) < 200) {
-						Localendar.calendar.setTimeInMillis(Localendar.calendar.getTimeInMillis() + DAY_IN_MILLISECOND);
-						Localendar.instance.setCalendarTitle();
-						refresh();
+						new Handler().postDelayed(new Runnable(){
+							@Override
+							public void run(){
+								Animation am1 = AnimationUtils.loadAnimation(Localendar.instance,R.anim.up_out);
+								eventList.startAnimation(am1);
+							}
+						}, 0);
+						new Handler().postDelayed(new Runnable(){
+							@Override
+							public void run(){
+								Localendar.calendar.setTimeInMillis(Localendar.calendar.getTimeInMillis() + DAY_IN_MILLISECOND);
+								Localendar.instance.setCalendarTitle();
+								refresh();
+								Animation am2 = AnimationUtils.loadAnimation(Localendar.instance,R.anim.down_in);
+								eventList.startAnimation(am2);
+							}
+						}, 200);
 					}
 					return false;
 				}
 			}
-			else if(viewMode == MONTH_VIEW) {
-				switch(event.getAction()) {
-				case MotionEvent.ACTION_DOWN:
-					downX = event.getX();
-					downY = event.getY();
-					return true;
-				case MotionEvent.ACTION_UP:
-					upX = event.getX();
-					upY = event.getY();
-					if(upY - downY > 100 && Math.abs(downX-upX) < 100) {
-						monthView.previousMonth();
-						Localendar.instance.setCalendarTitle();
-					}
-					else if(upY - downY < -100 && Math.abs(downX-upX) < 100) {
-						monthView.nextMonth();
-						Localendar.instance.setCalendarTitle();
-					}
-					return false;
-				}
-			}
-			
 			return false;
 		}
 		
@@ -235,15 +256,43 @@ public class MyCalendar extends Fragment {
 								return false;
 				    		}
 						}
-						else if(Math.abs(downX-upX) < 200 && upY-downY > 200) {
-							Localendar.calendar.setTimeInMillis(Localendar.calendar.getTimeInMillis() - DAY_IN_MILLISECOND);
-							Localendar.instance.setCalendarTitle();
-							refresh();
+						else if(Math.abs(downX-upX) < 200 && upY-downY > 400) {
+							new Handler().postDelayed(new Runnable(){
+								@Override
+								public void run(){
+									Animation am1 = AnimationUtils.loadAnimation(Localendar.instance,R.anim.down_out);
+									eventList.startAnimation(am1);
+								}
+							}, 0);
+							new Handler().postDelayed(new Runnable(){
+								@Override
+								public void run(){
+									Localendar.calendar.setTimeInMillis(Localendar.calendar.getTimeInMillis() - DAY_IN_MILLISECOND);
+									Localendar.instance.setCalendarTitle();
+									refresh();
+									Animation am2 = AnimationUtils.loadAnimation(Localendar.instance,R.anim.up_in);
+									eventList.startAnimation(am2);
+								}
+							}, 200);
 						}
-						else if(Math.abs(downX-upX) < 200 && upY-downY < -200) {
-							Localendar.calendar.setTimeInMillis(Localendar.calendar.getTimeInMillis() + DAY_IN_MILLISECOND);
-							Localendar.instance.setCalendarTitle();
-							refresh();
+						else if(Math.abs(downX-upX) < 200 && upY-downY < -400) {
+							new Handler().postDelayed(new Runnable(){
+								@Override
+								public void run(){
+									Animation am1 = AnimationUtils.loadAnimation(Localendar.instance,R.anim.up_out);
+									eventList.startAnimation(am1);
+								}
+							}, 0);
+							new Handler().postDelayed(new Runnable(){
+								@Override
+								public void run(){
+									Localendar.calendar.setTimeInMillis(Localendar.calendar.getTimeInMillis() + DAY_IN_MILLISECOND);
+									Localendar.instance.setCalendarTitle();
+									refresh();
+									Animation am2 = AnimationUtils.loadAnimation(Localendar.instance,R.anim.down_in);
+									eventList.startAnimation(am2);
+								}
+							}, 200);
 						}
 						return false;
 					}
@@ -262,21 +311,43 @@ public class MyCalendar extends Fragment {
 					int x = (int) downX * 7 / myViewSize;
 					int y = (int) downY * 7 / myViewSize;
 					if(upY - downY > 200 && Math.abs(downX-upX) < 200) {
-						Animation am1 = AnimationUtils.loadAnimation(Localendar.instance,R.anim.down_out);
-						Animation am2 = AnimationUtils.loadAnimation(Localendar.instance,R.anim.up_in);
-						AnimationSet ams = new AnimationSet(false);
-						ams.addAnimation(am1);
-						ams.addAnimation(am2);
-						monthView.startAnimation(ams);
-						monthView.previousMonth();					
-						Localendar.instance.setCalendarTitle();
+						new Handler().postDelayed(new Runnable(){
+							@Override
+							public void run(){
+								Animation am1 = AnimationUtils.loadAnimation(Localendar.instance,R.anim.down_out);
+								monthView.startAnimation(am1);
+							}
+						}, 0);
+						
+						new Handler().postDelayed(new Runnable(){
+							@Override
+							public void run(){
+								monthView.previousMonth();	
+								Localendar.instance.setCalendarTitle();
+								Animation am2 = AnimationUtils.loadAnimation(Localendar.instance,R.anim.up_in);
+								monthView.startAnimation(am2);
+							}
+						}, 200);
 						return false;
 					}
 					else if(upY - downY < -200 && Math.abs(downX-upX) < 200) {
-						Animation am = AnimationUtils.loadAnimation(Localendar.instance,R.anim.up_out);
-						monthView.startAnimation(am);
-						monthView.nextMonth();
-						Localendar.instance.setCalendarTitle();
+						new Handler().postDelayed(new Runnable(){
+							@Override
+							public void run(){
+								Animation am1 = AnimationUtils.loadAnimation(Localendar.instance,R.anim.up_out);
+								monthView.startAnimation(am1);
+							}
+						}, 0);
+						
+						new Handler().postDelayed(new Runnable(){
+							@Override
+							public void run(){	
+								monthView.nextMonth();
+								Localendar.instance.setCalendarTitle();
+								Animation am2 = AnimationUtils.loadAnimation(Localendar.instance,R.anim.down_in);
+								monthView.startAnimation(am2);
+							}
+						}, 200);
 						return false;
 					}
 					else if(y < 1 || y > 6 || x > 6) 

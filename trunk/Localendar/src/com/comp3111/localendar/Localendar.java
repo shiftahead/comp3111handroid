@@ -114,7 +114,6 @@ public class Localendar extends Activity implements OnClickListener, OnCheckedCh
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		
-		// map activities  
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.mainframe);
 		
