@@ -17,6 +17,16 @@
         <item>Public transportation</item>
         <item>On foot</item>
     </string-array>
+    
+     <string-array name="time_selection">
+        <item>Never</item>
+        <item>5 minutes ahead</item>
+        <item>10 minutes ahead</item>
+        <item>30 minutes ahead</item>
+        <item>1 hour ahead</item>
+        <item>1.5 hours ahead</item>
+        <item>2 hours ahead</item>
+        </string-array>
 
     <string name="title_activity_main_tab">Main</string>
     <string name="title_activity_calendar">Calendar</string>
