@@ -56,4 +56,20 @@ public class Place {
     	
     	return myPlace;
     }
+    
+    public static Place getPlaceFromCoordinate(double latitude, double longitude){
+    	Geocoder geoCoder = new Geocoder(Localendar.instance);
+    	Place requiredPlace = null;
+    	
+    	try {
+            List<Address> addresses = geoCoder.getFromLocation(latitude, longitude, 1); 
+            if (addresses.size() >  0) {
+            	requiredPlace = new Place(addresses.get(0).getAddressLine(0), latitude, longitude);
+            }
+
+        } catch (IOException e) { 
+        e.printStackTrace(); }
+    	
+    	return requiredPlace;
+    }
 }

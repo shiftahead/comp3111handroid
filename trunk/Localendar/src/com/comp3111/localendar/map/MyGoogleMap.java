@@ -30,19 +30,31 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Point;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 
 import com.comp3111.localendar.Localendar;
 import com.comp3111.localendar.R;
+import com.comp3111.localendar.calendar.AddEventActivity;
 import com.comp3111.localendar.calendar.MyCalendar;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient;
@@ -50,6 +62,7 @@ import com.google.android.gms.location.LocationClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener;
+import com.google.android.gms.maps.GoogleMap.OnMapLongClickListener;
 import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 import com.google.android.gms.maps.GoogleMap.OnMarkerDragListener;
 import com.google.android.gms.maps.GoogleMap.OnMyLocationButtonClickListener;
@@ -62,37 +75,41 @@ import com.google.android.gms.maps.model.PolylineOptions;
 
 //import com.google.maps.android.PolyUtil;
 import com.comp3111.localendar.database.*;
+import com.comp3111.localendar.support.ClearableAutoCompleteTextView;
+import com.comp3111.localendar.support.PlacesAutoCompleteAdapter;
 import com.comp3111.localendar.calendar.*;
 
+import android.view.View;
 public class MyGoogleMap {
 	public static MyGoogleMap mapInstance;
-	public static GoogleMap localenderMap;
+	public static GoogleMap localendarMap;
 	//private ConnectionDetector mapConnectionDetector;
 	//private GPSTracker mapGpsTracker;
 
-	//A test Marker
-	private Marker testMarker;
-	//A test polyline
-	private static ArrayList<Polyline> line = new ArrayList<Polyline>();
-	private static ArrayList<Marker> marker = new ArrayList<Marker>();
-	private static ArrayList<String> marker_id = new ArrayList<String>();
+	private static ArrayList<Polyline> line = null; 
+	private static ArrayList<Marker> marker = null;
+	private static ArrayList<String> marker_id = null;
 		    
 	public MyGoogleMap(GoogleMap map) {
 		mapInstance = this;
-		localenderMap = map;
+		localendarMap = map;
 		setMap();
 	}
 	
 	public void setMap(){
 		
 		//Initial settings
-		UiSettings localenderMapSettings = localenderMap.getUiSettings();
+		UiSettings localenderMapSettings = localendarMap.getUiSettings();
         localenderMapSettings.setZoomControlsEnabled(true);
         localenderMapSettings.setCompassEnabled(true);
         localenderMapSettings.setMyLocationButtonEnabled(true);
         localenderMapSettings.setScrollGesturesEnabled(true);
         localenderMapSettings.setRotateGesturesEnabled(true);
-        localenderMap.setMyLocationEnabled(true);
+        localendarMap.setMyLocationEnabled(true);
+        
+        line = new ArrayList<Polyline>();
+    	marker = new ArrayList<Marker>();
+    	marker_id = new ArrayList<String>();
         
         //Zoom to my current location
         LocationManager locationmanager = (LocationManager) Localendar.instance.getSystemService(Context.LOCATION_SERVICE);;
@@ -104,13 +121,13 @@ public class MyGoogleMap {
 	        double latitude= myLocation.getLatitude();
 	        double longtitude = myLocation.getLongitude();
 	        LatLng ll = new LatLng(latitude, longtitude);
-	        localenderMap.animateCamera(CameraUpdateFactory.newLatLngZoom(ll, 15));
+	        localendarMap.animateCamera(CameraUpdateFactory.newLatLngZoom(ll, 15));
         } catch (Exception e){
         	
         }
         
         //get my location 
-        localenderMap.setOnMyLocationButtonClickListener(new OnMyLocationButtonClickListener() {
+        localendarMap.setOnMyLocationButtonClickListener(new OnMyLocationButtonClickListener() {
                         
                            @Override
                               public boolean onMyLocationButtonClick() {
@@ -130,14 +147,31 @@ public class MyGoogleMap {
         //set Marker called;
         setMarkerListener();
         setInfoWindowListener();
+        setMapListener();
 
 	}
 // move camera to corresponding place
 	public void  moveCamera(Place place) {
 		LatLng ll = null;
     	ll = new LatLng(place.getLatitude(), place.getLongitude());
-    	localenderMap.animateCamera(CameraUpdateFactory.newLatLngZoom(ll, 15));
+    	localendarMap.animateCamera(CameraUpdateFactory.newLatLngZoom(ll, 15));
 	}
+	
+	public void setMapListener(){
+		localendarMap.setOnMapLongClickListener(new OnMapLongClickListener() {
+
+	             @Override
+	             public void onMapLongClick(LatLng arg0) {
+	                 // TODO Auto-generated method stub
+	                 Log.d("arg0", arg0.latitude + "-" + arg0.longitude);
+	                 Place place;
+	                 place = Place.getPlaceFromCoordinate(arg0.latitude, arg0.longitude);
+	         		Toast.makeText(Localendar.instance, place.getName(), Toast.LENGTH_SHORT).show();
+//	             	addmarker(Place.getPlaceFromAddress(placeSearch), true, placeSearch, "Click to add a event");
+	             }
+	         });
+	}
+	
 	//The function of addmarker and zoom the camera to the added marker if boolean zoomto is set to true;
 //	public static boolean addmarker(Place place, boolean zoomto){
 	public static boolean addmarker(Place place, boolean zoomto, String title, String time){
@@ -145,29 +179,34 @@ public class MyGoogleMap {
 		LatLng ll = null;
 		
 		int dummy = title.indexOf(".");
-		String id = title.substring(0, dummy);
-		title = title.substring(dummy+1);
+		String id = new String(); 
+		if(dummy>0){
+			id = title.substring(0, dummy);
+			title = title.substring(dummy+1);
+		}
 		
-		if(marker_id.contains(id))
+		if(!id.isEmpty() && marker_id.contains(id)){
+			Toast.makeText(Localendar.instance, "The marker has already be added on the map", Toast.LENGTH_SHORT).show();
 			return true;
-				
+		}
 		try{
 			ll = new LatLng(place.getLatitude(), place.getLongitude());
-			newMarker = localenderMap.addMarker(new MarkerOptions().position(ll).draggable(true).title(title).snippet(time));
+			newMarker = localendarMap.addMarker(new MarkerOptions().position(ll).draggable(true).title(title).snippet(time));
 		} catch(Exception e){
 			Toast.makeText(Localendar.instance, "The place cannot be shown on the map", Toast.LENGTH_SHORT).show();
 			return false;
 		}
 		if(zoomto == true)
-	        localenderMap.animateCamera(CameraUpdateFactory.newLatLngZoom(ll, 15));
+	        localendarMap.animateCamera(CameraUpdateFactory.newLatLngZoom(ll, 15));
 		newMarker.showInfoWindow();
-		marker.add(newMarker);
-		marker_id.add(id);
+		if(!id.isEmpty())   //event exists for that marker
+			marker.add(newMarker);
+			marker_id.add(id);
 		return true;
 	}
 	
 	public void setMarkerListener(){	
-		localenderMap.setOnMarkerClickListener(new OnMarkerClickListener(){
+		localendarMap.setOnMarkerClickListener(new OnMarkerClickListener(){
 			@Override
 			public boolean onMarkerClick(Marker arg0) {
 				// TODO Auto-generated method stub
@@ -176,43 +215,84 @@ public class MyGoogleMap {
 			}
 			
 		});
+
 		
-		
-		
-		 localenderMap.setOnMarkerDragListener(new OnMarkerDragListener() {
-             
+		 localendarMap.setOnMarkerDragListener(new OnMarkerDragListener() {
+			 
+//        	 final ImageView deleteMarker = (Localendar.instance).deleteMarker;
+//        	 final RadioGroup radio = (Localendar.instance).mainRadio;
+			 
+			 LatLng origMarkerPosition;
+			 
              @Override
              public void onMarkerDragStart(Marker arg0) {
-                     // 
-                     if(arg0.equals(testMarker)){
-                             arg0.setVisible(true);
-                     }
+            	 Localendar.instance.mainRadio.setVisibility(View.GONE);
+            	 Localendar.instance.deleteMarker.setVisibility(View.VISIBLE);
+            	 origMarkerPosition = arg0.getPosition();
              }
+             
+             @Override
+            public void onMarkerDrag(Marker arg0) {
+            	 final ImageView trashBin = Localendar.instance.deleteMarker;
+            	 Point markerScreenPosition = localendarMap.getProjection().toScreenLocation(arg0.getPosition());
+         	    if (overlap(markerScreenPosition, trashBin)) {
+         	        trashBin.setImageResource(R.drawable.cancel_button_pressed);
+        	    } else
+        	    	trashBin.setImageResource(R.drawable.cancel_button_normal);
+
+            }
              
              @Override
              public void onMarkerDragEnd(Marker arg0) {
-                     // 
-                     if(arg0.equals(testMarker)){
-                             arg0.setVisible(true);
-                     }
+            	 Localendar.instance.mainRadio.setVisibility(View.VISIBLE);
+            	 Localendar.instance.deleteMarker.setVisibility(View.GONE);
+            	 
+            	 final ImageView trashBin = Localendar.instance.deleteMarker;
+            	 Point markerScreenPosition = localendarMap.getProjection().toScreenLocation(arg0.getPosition());
+            	 
+            	 if (overlap(markerScreenPosition, trashBin)) {
+            	   	if(marker.contains(arg0)){
+            	   		marker_id.remove(marker.indexOf(arg0));
+            	   		marker.remove(marker.indexOf(arg0));
+            	   	}
+            	     arg0.remove();
+            	 } else
+            		 arg0.setPosition(origMarkerPosition);
+         			
              }
-              @Override
-             public void onMarkerDrag(Marker arg0) {
-                     // 
-                     if(arg0.equals(testMarker)){
-                             arg0.setVisible(false);
-                     }
+             
+             Boolean overlap(Point mkrScnPosition, ImageView trashBin){
+            	 	int[] imgCoords = new int[2];
+            	 	trashBin.getLocationOnScreen(imgCoords);
+//            	    Log.e(TAG, " ****** Img x:" + imgCoords[0] + " y:" + imgCoords[1] + "    Point x:" + point.x + "  y:" + point.y + " Width:" + imgview.getWidth() + " Height:" + imgview.getHeight());
+//            	    boolean overlapX = mkrScnPosition.x < imgCoords[0] + imgview.getWidth() && point.x > imgCoords[0] - imgview.getWidth();
+            	    boolean overlapY = mkrScnPosition.y > imgCoords[1] - 2*trashBin.getHeight();
+//            	    return overlapX && overlapY;
+//            	    Toast.makeText(Localendar.instance, mkrScnPosition.toString() + "VS " + String.valueOf(imgCoords[1]) +"," + trashBin.getHeight() , Toast.LENGTH_SHORT).show();
+            	    return overlapY;
+//            	 return true;
              }
+
      });
   }
 
 	public void setInfoWindowListener(){
 		
-        localenderMap.setOnInfoWindowClickListener(new OnInfoWindowClickListener() {
+        localendarMap.setOnInfoWindowClickListener(new OnInfoWindowClickListener() {
 			@Override
-			public void onInfoWindowClick(Marker testMarker) {
-				// TODO Auto-generated method stub
-				testMarker.setTitle("My InfoWindow is Clicked!");
+			public void onInfoWindowClick(Marker arg0) {
+				if(!marker.contains(arg0)){
+					Toast.makeText(Localendar.instance, "Adding Events!", Toast.LENGTH_SHORT).show();
+					Intent intent = new Intent(Localendar.instance, AddEventActivity.class);
+					Localendar.instance.startActivity(intent);
+					Localendar.instance.overridePendingTransition(R.anim.left_in, R.anim.right_out);
+				}
+				else{
+					Toast.makeText(Localendar.instance, "Jumping to details page", Toast.LENGTH_SHORT).show();
+					Intent intent = new Intent(Localendar.instance, EventDetailActivity.class);
+					intent.putExtra("ID", marker_id.get(marker.indexOf(arg0)));
+					Localendar.instance.startActivity(intent);
+				}
 			}
 		});
 	}	
@@ -503,7 +583,7 @@ public class MyGoogleMap {
 	
 	public static void drawPath(List<LatLng> list){	
 //		if(!list.isEmpty())
-		line.add(localenderMap.addPolyline(new PolylineOptions()
+		line.add(localendarMap.addPolyline(new PolylineOptions()
 	    .addAll(list)
 	         .width(5)
 	    .geodesic(true)));
