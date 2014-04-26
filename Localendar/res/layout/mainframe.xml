@@ -60,6 +60,8 @@
 		                android:layout_marginTop="2.0dip"
 		                android:drawableTop="@drawable/tab_calendar"
 		                android:text="@string/calendar" />
+
+
   
 		            <RadioButton 
 		                android:id="@+id/map_button" 
@@ -75,6 +77,13 @@
 		                android:drawableTop="@drawable/tab_settings" 
 		                style="@style/main_tab_bottom" />  
 		     </RadioGroup>
+		     
+ 			            <ImageButton
+		                android:id="@+id/deleteMarker"
+		                android:layout_width="wrap_content"
+		                android:layout_height="wrap_content"
+		                 android:visibility="gone"
+		                android:src="@drawable/cancel_button_normal" />
         	 
     	</LinearLayout>     
        

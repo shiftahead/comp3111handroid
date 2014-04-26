@@ -55,9 +55,11 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -88,6 +90,10 @@ public class Localendar extends Activity implements OnClickListener, OnCheckedCh
 	private boolean searchBoxShown;
 	private ImageView searchIcon;
 	private static TextView calendarTitle;
+	
+    public ImageButton deleteMarker;  
+    public RadioGroup mainRadio;
+
 	
 	
 	// MyLocalendar is map object
@@ -192,6 +198,9 @@ public class Localendar extends Activity implements OnClickListener, OnCheckedCh
 	    searchBox.setVisibility(View.GONE);
 	    searchIcon.setVisibility(View.VISIBLE);
 	    
+	    deleteMarker = (ImageButton) findViewById(R.id.deleteMarker);
+	    mainRadio = (RadioGroup) findViewById(R.id.main_radio);
+	    
 	    calendar = Calendar.getInstance();
 	    setCalendarTitle();
 	    calendarTitle.setVisibility(View.GONE);
@@ -259,8 +268,8 @@ public class Localendar extends Activity implements OnClickListener, OnCheckedCh
 	//Click the items on the autocomplete list and the result will be allocated to the String and Doubles
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
     	String placeSearch = (String) adapterView.getItemAtPosition(position);
-    	//myGoogleMap.addmarker(Place.getPlaceFromAddress(placeSearch), true, placeSearch, placeSearch);
-        myGoogleMap.moveCamera(Place.getPlaceFromAddress(placeSearch));
+    	myGoogleMap.addmarker(Place.getPlaceFromAddress(placeSearch), true, placeSearch, "Click to add a event");
+//        myGoogleMap.moveCamera(Place.getPlaceFromAddress(placeSearch));
     	Toast.makeText(this, placeSearch, Toast.LENGTH_SHORT).show();
         // hide the keyboard
 		InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -391,13 +400,13 @@ public class Localendar extends Activity implements OnClickListener, OnCheckedCh
 			setCalendarTitle();
 			return true;
 		case R.id.map_normal :
-			MyGoogleMap.localenderMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+			MyGoogleMap.localendarMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 			return true;
 		case R.id.map_satellite :
-			MyGoogleMap.localenderMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+			MyGoogleMap.localendarMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
 			return true;
 		case R.id.map_hybrid :
-			MyGoogleMap.localenderMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+			MyGoogleMap.localendarMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
 			return true;
 		case R.id.add_shortcut:
 			addShortcut();
