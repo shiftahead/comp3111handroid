@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+	<PreferenceCategory 
+	    android:title="Others">
+       <Preference 
+           android:title="Sign in with Google+">
+           <intent
+               android:action="android.intent.action.VIEW"
+               android:targetPackage="com.comp3111.localendar"
+               android:targetClass="com.comp3111.localendar.SigninActivity"
+           />
+       </Preference>
+       
+       <Preference 
+           android:title="About us">
+           <intent
+               android:action="android.intent.action.VIEW"
+               android:targetPackage="com.comp3111.localendar"
+               android:targetClass="com.comp3111.localendar.AboutusActivity"
+           />
+       </Preference>
+	</PreferenceCategory>
+</PreferenceScreen>

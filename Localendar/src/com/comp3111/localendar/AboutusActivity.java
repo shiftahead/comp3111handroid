@@ -11,7 +11,7 @@ public class AboutusActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.about_us);
 		ActionBar actionBar = getActionBar();
-		actionBar.setTitle("Settings");
+		actionBar.setTitle("About us");
 		actionBar.setDisplayHomeAsUpEnabled(true);
 		
 	}
