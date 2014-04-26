@@ -1,13 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
 	<PreferenceCategory 
-	    android:title="Others">
+	    android:title="">
        <Preference 
            android:title="Sign in with Google+">
            <intent
                android:action="android.intent.action.VIEW"
                android:targetPackage="com.comp3111.localendar"
                android:targetClass="com.comp3111.localendar.SigninActivity"
+           />
+       </Preference>
+       
+       <Preference 
+           android:title="Facebook">
+           <intent
+               android:action="android.intent.action.VIEW"
+               android:targetPackage="com.comp3111.localendar"
+               android:targetClass="com.comp3111.localendar.facebook.FacebookLogin"
            />
        </Preference>
        

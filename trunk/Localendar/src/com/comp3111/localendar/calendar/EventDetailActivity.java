@@ -6,8 +6,14 @@ import com.comp3111.localendar.R.anim;
 import com.comp3111.localendar.R.id;
 import com.comp3111.localendar.R.layout;
 import com.comp3111.localendar.R.menu;
+import com.comp3111.localendar.facebook.FacebookLogin;
 import com.comp3111.localendar.map.MyGoogleMap;
 import com.comp3111.localendar.map.Place;
+import com.facebook.FacebookException;
+import com.facebook.FacebookOperationCanceledException;
+import com.facebook.Session;
+import com.facebook.widget.WebDialog;
+import com.facebook.widget.WebDialog.OnCompleteListener;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -15,12 +21,14 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 import static com.comp3111.localendar.database.DatabaseConstants.COMPULSORY;
 import static com.comp3111.localendar.database.DatabaseConstants.DAY;
 import static com.comp3111.localendar.database.DatabaseConstants.DESCRIPTION;
@@ -37,6 +45,7 @@ import static com.comp3111.localendar.database.DatabaseConstants.YEAR;
 
 
 public class EventDetailActivity extends Activity {
+	private static String TAG = "EventDetail";
 	private String id;
 	private TextView titleView, descriptionView, timeView, durationView, locationView, transportationView, compulsoryView;
 	private String title, description, year, month, day, hour, minute, dhour, dminute, location, transportation, compulsory;
@@ -127,6 +136,7 @@ public class EventDetailActivity extends Activity {
 			return true;
 	    }
 	    case R.id.addmarker:{
+	    	
 	    	Place mlocation= Place.getPlaceFromAddress(location);
 //	    	if(MyGoogleMap.addmarker(mlocation, true)) {
 		    if(MyGoogleMap.addmarker(mlocation, true, new String(id + "." + title), new String(hour + ":" + minute))) {
@@ -138,10 +148,20 @@ public class EventDetailActivity extends Activity {
 	    	else
 	    		return false;
 	    }
+	    case R.id.share_to_fb:{
+	    	Intent intent = new Intent(this, FacebookLogin.class);
+	    	intent.putExtra("TITLE", title);
+	    	intent.putExtra("DESCRIPTION", description);
+	    	intent.putExtra("TIME", month + "/" + day + "/" + year + " " + hour + ":" + minute);
+	    	intent.putExtra("LOCATION", location);
+	    	startActivity(intent);
+	    	return true;
+	    }
 	    default: {
 	    	onBackPressed();
 		    return true;
 	    }
 	    }
 	}
+
 }

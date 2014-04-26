@@ -11,6 +11,7 @@
     <string name="map_search_title">Search</string>
     <string name="calendar">Calendar</string>
 	<string name="add">Add</string>
+	<string name="app_id">628942917174007</string>
 
     <string-array name="transportation">
         <item>Drive</item>
