@@ -278,6 +278,7 @@ public class Localendar extends Activity implements OnClickListener, OnCheckedCh
     
     @Override
 	public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+    	
 		if (isChecked) {  
 			//invalidateOptionsMenu();
             switch (buttonView.getId()) {  
@@ -307,31 +308,6 @@ public class Localendar extends Activity implements OnClickListener, OnCheckedCh
                 currentTabIndex = 1;
             }
                 break;  
-                /*case R.id.settings_button: {
-            	searchBoxShown = false;
-        		searchBox.setVisibility(View.INVISIBLE);
-        		searchIcon.setVisibility(View.INVISIBLE);
-        		calendarTitle.setVisibility(View.INVISIBLE);
-            	
-                pager.setCurrentItem(2);
-                overridePendingTransition(R.anim.right_in, R.anim.left_out);
-                currentTabIndex = 2;
-            	int currentItem = pager.getCurrentItem();
-            	
-                Intent settings = new Intent (this, SettingsActivity.class);
-                startActivity(settings);
-                settingsButton.setChecked(false);
-                switch (currentTabIndex) {
-                case 0:
-                	calendarButton.setChecked(true);
-                	break;
-                case 1:
-                	mapButton.setChecked(true);
-                	break;
-                }
-                pager.setCurrentItem(currentItem);
-            }
-                break;*/  
             }  
         }  
 	}
@@ -347,31 +323,15 @@ public class Localendar extends Activity implements OnClickListener, OnCheckedCh
 			overridePendingTransition(R.anim.left_in, R.anim.right_out);
 		}
 			break;
-		
-		case R.id.about_us_arrow:
-		case R.id.about_us: {
-			Intent intent = new Intent (this, AboutusActivity.class);			
-			startActivity(intent);
-			overridePendingTransition(R.anim.right_in, R.anim.left_out);
-		}
-			break;
-			
-		case R.id.my_account_arrow:
-		case R.id.my_account: {
-			Intent intent = new Intent (this, SigninActivity.class);			
-			startActivity(intent);
-			overridePendingTransition(R.anim.right_in, R.anim.left_out);
-		}
-			break;
 			
 		case R.id.settings_button: {
 			Intent settings = new Intent (this, SettingsActivity.class);
-            startActivity(settings);
+			startActivity(settings);
             overridePendingTransition(R.anim.right_in, R.anim.left_out);
 		}
 			break;
+
     	}
-		
 	}
     
 	/* set the pop up menu
@@ -396,9 +356,6 @@ public class Localendar extends Activity implements OnClickListener, OnCheckedCh
 	    else if(currentTabIndex == 1) {
 	    	getMenuInflater().inflate(R.menu.map_menu, menu);
 	    }
-	    /*else if (currentTabIndex == 2) {
-	    	getMenuInflater().inflate(R.menu.settings_menu, menu);
-	    }*/
 	    return super.onPrepareOptionsMenu(menu);
 	}
 	
@@ -428,9 +385,6 @@ public class Localendar extends Activity implements OnClickListener, OnCheckedCh
 			return true;
 		case R.id.map_hybrid :
 			MyGoogleMap.localendarMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
-			return true;
-		case R.id.add_shortcut:
-			addShortcut();
 			return true;
 		}
 	
@@ -463,9 +417,6 @@ public class Localendar extends Activity implements OnClickListener, OnCheckedCh
 		case 1:
 			mapButton.setChecked(true);
 			break;
-		/*case 2:
-			settingsButton.setChecked(true);
-			break;*/
 		default:
 			break;
 		}
@@ -480,23 +431,7 @@ public class Localendar extends Activity implements OnClickListener, OnCheckedCh
 		else if(MyCalendar.viewMode == MyCalendar.MONTH_VIEW)
 			calendarTitle.setText(" " + MyCalendar.calendarInstance.getCurrentMonth());
 	}
-    
-    private void addShortcut() {
-		Intent shortcutIntent = new Intent("com.android.launcher.action.INSTALL_SHORTCUT");
-        String title = getResources().getString(R.string.app_name); 
-        Parcelable icon = Intent.ShortcutIconResource.fromContext(getApplicationContext(), R.drawable.localendar_logo);
-        Intent intent = new Intent(getApplicationContext(), Appstart.class); 
-        intent.setAction(Intent.ACTION_MAIN);
-        shortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_NAME, title); 
-        shortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE, icon);
-        shortcutIntent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, intent);  
-        shortcutIntent.putExtra("duplicate", false); 
-        getApplicationContext().sendBroadcast(shortcutIntent);
-        SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(this).edit();
-        editor.putBoolean("isShortcutCreated", true);
-        editor.commit();
-        Toast.makeText(this, "Shortcut added", Toast.LENGTH_SHORT).show();
-	}
+
        
 
 }

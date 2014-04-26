@@ -34,13 +34,13 @@
     <!-- Install/Unistall shortcut permissions -->
     <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
 	<uses-permission android:name="com.android.launcher.permission.UNINSTALL_SHORTCUT"/>
-   	<!-- To access google + API -->
+	
+	<!-- To access google + API -->
 	<uses-permission android:name="android.permission.GET_ACCOUNTS" />
 	<uses-permission android:name="android.permission.USE_CREDENTIALS" />
 	
 	<!-- permission required to use Alarm Manager -->
     <uses-permission android:name="com.android.alarm.permission.SET_ALARM"/>
-    
     
     <application
         android:allowBackup="true"
@@ -72,11 +72,11 @@
             android:theme="@style/Theme.MyAppThemeNoIcon" >
         </activity>
         <activity
-            android:name="com.comp3111.localendar.calendar.AddEventActivity"
+            android:name="com.comp3111.localendar.calendar.AlarmReceiverActivity"
             android:theme="@style/Theme.MyAppThemeNoIcon" >
         </activity>
         <activity
-            android:name="com.comp3111.localendar.calendar.AlarmReceiverActivity"
+            android:name="com.comp3111.localendar.calendar.AddEventActivity"
             android:theme="@style/Theme.MyAppThemeNoIcon" >
         </activity>
         <activity
@@ -87,16 +87,26 @@
             android:name="com.comp3111.localendar.calendar.EventDetailActivity"
             android:theme="@style/Theme.MyAppThemeNoIcon" >
         </activity>
+        <activity
+            android:name="com.comp3111.localendar.facebook.FacebookLogin"
+            android:theme="@style/Theme.MyAppThemeNoIcon" >
+        </activity>
+        <activity android:name="com.facebook.LoginActivity"
+                  android:theme="@android:style/Theme.Translucent.NoTitleBar"
+                  android:label="@string/app_name" />
         <activity 
             android:name="com.comp3111.localendar.SettingsActivity"
             android:theme="@style/Theme.MyAppTheme" >
         </activity>
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyCBkL7iCOQIsAyhPFGC4Baowxe19u61qs0" />
+            android:value="AIzaSyDXzFpt3VELu-UIGcX2UjYPKuvMnje-dqc" />
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+        <meta-data 
+            android:name="com.facebook.sdk.ApplicationId" 
+            android:value="@string/app_id" />
 
     </application>
 

@@ -52,6 +52,34 @@
             			android:gravity="center_vertical"
             			android:clickable="true" >
             			<TextView
+            			    android:id="@+id/facebook_login"
+        					android:layout_width="fill_parent" 
+        					android:layout_height="wrap_content"
+        					android:padding="8dp" 
+        					android:text="Facebook"
+        					android:textSize="16sp"		
+							android:textColor="@color/text_view_settings"
+							android:background="@drawable/text_background"
+							android:onClick="onClick"                
+       						android:clickable="true"/> 
+						<ImageView
+						    android:id="@+id/facebook_login_arrow"
+            				android:layout_width="wrap_content"
+        					android:layout_height="wrap_content"        	     	
+        					android:scaleType="matrix"
+        					android:layout_centerVertical="true"
+        					android:layout_alignParentRight="true"
+        					android:onClick="onClick"                
+       						android:clickable="true"
+        					android:src="@drawable/submenu" />      					
+      			</RelativeLayout>
+      			<RelativeLayout      				    
+            			android:layout_width="fill_parent"
+            			android:layout_height="wrap_content"
+            			android:layout_marginTop="14dp"
+            			android:gravity="center_vertical"
+            			android:clickable="true" >
+            			<TextView
             			    android:id="@+id/about_us"
         					android:layout_width="fill_parent" 
         					android:layout_height="wrap_content"
