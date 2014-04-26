@@ -84,8 +84,8 @@ public class Localendar extends Activity implements OnClickListener, OnCheckedCh
 	private ActionBar actionBar;
 	private NonSwipeableViewPager pager;	//view pager
 	private int currentTabIndex;	//tab index, maps is set default 
-	private RadioButton calendarButton, mapButton, settingsButton;
-	private Button addButton;
+	private RadioButton calendarButton, mapButton;
+	private Button addButton, settingsButton;
 	private ClearableAutoCompleteTextView searchBox;
 	private boolean searchBoxShown;
 	private ImageView searchIcon;
@@ -212,22 +212,22 @@ public class Localendar extends Activity implements OnClickListener, OnCheckedCh
         addButton = (Button) findViewById(R.id.add_button);
         calendarButton = (RadioButton) findViewById(R.id.calendar_button);
         mapButton = (RadioButton) findViewById(R.id.map_button);
-        settingsButton = (RadioButton) findViewById(R.id.settings_button);
+        settingsButton = (Button) findViewById(R.id.settings_button);
         
         addButton.setOnClickListener(this);
         calendarButton.setOnCheckedChangeListener(this);  
         mapButton.setOnCheckedChangeListener(this);  
-        settingsButton.setOnCheckedChangeListener(this);  
+        settingsButton.setOnClickListener(this);  
         
         //initialize views for each tab
         LayoutInflater myLayout = LayoutInflater.from(this);
         View viewCalendar = myLayout.inflate(R.layout.tab_calendar, null);
         View viewMap = myLayout.inflate(R.layout.tab_map, null);
-        View viewSettings = myLayout.inflate(R.layout.tab_settings, null);
+        //View viewSettings = myLayout.inflate(R.layout.tab_settings, null);
         final ArrayList<View> views = new ArrayList<View>();
         views.add(viewCalendar);
         views.add(viewMap);
-        views.add(viewSettings);
+        //views.add(viewSettings);
         
         //initialize the pager adapter
         PagerAdapter myPagerAdapter = new PagerAdapter() {
@@ -307,17 +307,31 @@ public class Localendar extends Activity implements OnClickListener, OnCheckedCh
                 currentTabIndex = 1;
             }
                 break;  
-            case R.id.settings_button: {
+                /*case R.id.settings_button: {
             	searchBoxShown = false;
         		searchBox.setVisibility(View.INVISIBLE);
         		searchIcon.setVisibility(View.INVISIBLE);
         		calendarTitle.setVisibility(View.INVISIBLE);
             	
-                pager.setCurrentItem(2);  
+                pager.setCurrentItem(2);
                 overridePendingTransition(R.anim.right_in, R.anim.left_out);
                 currentTabIndex = 2;
+            	int currentItem = pager.getCurrentItem();
+            	
+                Intent settings = new Intent (this, SettingsActivity.class);
+                startActivity(settings);
+                settingsButton.setChecked(false);
+                switch (currentTabIndex) {
+                case 0:
+                	calendarButton.setChecked(true);
+                	break;
+                case 1:
+                	mapButton.setChecked(true);
+                	break;
+                }
+                pager.setCurrentItem(currentItem);
             }
-                break;  
+                break;*/  
             }  
         }  
 	}
@@ -349,6 +363,13 @@ public class Localendar extends Activity implements OnClickListener, OnCheckedCh
 			overridePendingTransition(R.anim.right_in, R.anim.left_out);
 		}
 			break;
+			
+		case R.id.settings_button: {
+			Intent settings = new Intent (this, SettingsActivity.class);
+            startActivity(settings);
+            overridePendingTransition(R.anim.right_in, R.anim.left_out);
+		}
+			break;
     	}
 		
 	}
@@ -375,9 +396,9 @@ public class Localendar extends Activity implements OnClickListener, OnCheckedCh
 	    else if(currentTabIndex == 1) {
 	    	getMenuInflater().inflate(R.menu.map_menu, menu);
 	    }
-	    else if (currentTabIndex == 2) {
+	    /*else if (currentTabIndex == 2) {
 	    	getMenuInflater().inflate(R.menu.settings_menu, menu);
-	    }
+	    }*/
 	    return super.onPrepareOptionsMenu(menu);
 	}
 	
@@ -442,9 +463,9 @@ public class Localendar extends Activity implements OnClickListener, OnCheckedCh
 		case 1:
 			mapButton.setChecked(true);
 			break;
-		case 2:
+		/*case 2:
 			settingsButton.setChecked(true);
-			break;
+			break;*/
 		default:
 			break;
 		}

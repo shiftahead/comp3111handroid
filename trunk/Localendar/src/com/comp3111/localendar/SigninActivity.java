@@ -79,7 +79,7 @@ ResultCallback<People.LoadPeopleResult>, View.OnClickListener{
 	    setContentView(R.layout.sign_in);
 	    
 	    ActionBar actionBar = getActionBar();
-        actionBar.setTitle("Settings");
+        actionBar.setTitle("Sign in");
         actionBar.setDisplayHomeAsUpEnabled(true);
 	  
         mSignInButton = (SignInButton) findViewById(R.id.sign_in_button);
@@ -112,7 +112,7 @@ ResultCallback<People.LoadPeopleResult>, View.OnClickListener{
       public boolean onOptionsItemSelected(MenuItem menuItem)
       {       
           onBackPressed();
-          overridePendingTransition(R.anim.left_in, R.anim.left_out);
+          overridePendingTransition(R.anim.left_in, R.anim.right_out);
           return true;
       }
 	  private GoogleApiClient buildGoogleApiClient() {

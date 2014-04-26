@@ -15,24 +15,48 @@
       		     android:id="@+id/aboutUsTitle"
         		android:layout_width="wrap_content" 
         		android:layout_height="wrap_content" 
-        		android:text="About us"
+        		android:gravity="center"
+        		android:text="@string/about_version"
         		android:layout_centerInParent="true"
-        		android:textSize="20sp"		
+        		android:textSize="15sp"		
 				android:textColor="#000000"
-				android:textStyle="bold" />
+			/>
 
 		</RelativeLayout>
       		
 		<View
 			    android:layout_width="fill_parent"
 			    android:layout_height="2dp"
-			    android:background="@color/mid_blue"/>
+			    android:background="@color/gray"/>
+
 		<TextView
-		        android:id="@+id/introduction" 
-        		android:layout_width="wrap_content" 
-        		android:layout_height="wrap_content" 
-        		android:text="We are COMP3111 Group 'Localendar'"
-        		android:textSize="18sp"		
-				android:textColor="#000" />
+		    android:id="@+id/introduction"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:text="@string/about_us"
+		    android:layout_marginTop="15sp"
+		    android:layout_marginLeft="15sp"
+		    android:textColor="#000"
+		    android:layout_gravity="center_vertical"
+		    android:textSize="14sp" />
+		<TextView
+		    android:id="@+id/link"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:text="@string/link"
+		    android:layout_marginTop="15sp"
+		    android:layout_marginLeft="15sp"
+		    android:autoLink="web"
+		    android:textColor="#000"
+		    android:layout_gravity="center_vertical"
+		    android:textSize="13sp" />
+
+		<ImageView
+		    android:id="@+id/imageView1"
+		    android:layout_width="118dp"
+		    android:layout_height="112dp"
+		    android:layout_gravity="center_horizontal"
+		    android:src="@drawable/localendar_logo" />
+
 	</LinearLayout>
 	

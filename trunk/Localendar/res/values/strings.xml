@@ -51,5 +51,8 @@
     <string name="play_services_error">Google Play services is not available.  This application will close.</string>
     <string name="close">Close</string>
     <string name="profile_picture">User\'s profile picture.</string>
+    <string name="about_version">Version 20140426 \n ©2014 COMP3111 Localendar</string>
+    <string name="about_us">Put location and calendar together. That\'s how we think we can make your life easier. You can find out more on</string>
+    <string name="link"><a href="https://code.google.com/p/comp3111handroid/">https://code.google.com/p/comp3111handroid/</a> \n \n </string>
 
 </resources>
