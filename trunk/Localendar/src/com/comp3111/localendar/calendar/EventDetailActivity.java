@@ -160,7 +160,7 @@ public class EventDetailActivity extends Activity {
 	    }
 	}
     public void shareToGooglePlus() {
-    	String shareTextString = title + description;
+    	String shareTextString = title +" happens at"+ description;
     	PlusShare.Builder share = new PlusShare.Builder(this);
     	share.setText(shareTextString);
     	share.setContentUrl(Uri.parse("https://plus.google.com/"));
