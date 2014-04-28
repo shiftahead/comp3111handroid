@@ -20,6 +20,7 @@ import android.view.View.OnTouchListener;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.comp3111.localendar.map.Place;
 
@@ -31,11 +32,13 @@ public class AlarmReceiverActivity extends Activity{
     private MediaPlayer mMediaPlayer;
 	private int numMessages = 0;
 	private NotificationManager myNotificationManager; 
+	private TextView textView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND,
                 WindowManager.LayoutParams.FLAG_DIM_BEHIND);
         setContentView(R.layout.alarm);
@@ -50,7 +53,6 @@ public class AlarmReceiverActivity extends Activity{
                 return false;
             }
         });
-
         playSound(this, getAlarmUri());
     }
 
@@ -63,6 +65,9 @@ public class AlarmReceiverActivity extends Activity{
         String eventHour = getIntent().getStringExtra("hour");
         String eventMinute = getIntent().getStringExtra("minute");
         String eventVenue = getIntent().getStringExtra("venue");
+        
+        textView= (TextView) findViewById(R.id.EventDetailAlarm);
+        textView.setText("Time is up for"+eventTitle);
 
     	NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this);
 		
