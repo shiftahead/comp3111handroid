@@ -67,7 +67,6 @@ ResultCallback<People.LoadPeopleResult>, View.OnClickListener{
 	  private SignInButton mSignInButton;
 	  private Button mSignOutButton;
 	  private Button mRevokeButton;
-	  private Button shareButton;
 	  private TextView mStatus;
 	  private ListView mCirclesListView;
 	  private ArrayAdapter<String> mCirclesAdapter;
@@ -103,10 +102,6 @@ ResultCallback<People.LoadPeopleResult>, View.OnClickListener{
 	    }
 	    
 	    mGoogleApiClient = buildGoogleApiClient();
-	    
-	    Button shareButton = (Button) findViewById(R.id.share_button);
-	    
-	    
 	  }
 	  @Override
       public boolean onOptionsItemSelected(MenuItem menuItem)
@@ -177,16 +172,6 @@ ResultCallback<People.LoadPeopleResult>, View.OnClickListener{
 	            mGoogleApiClient = buildGoogleApiClient();
 	            mGoogleApiClient.connect();
 	            break;
-	          case R.id.share_button :
-	              // Launch the Google+ share dialog with attribution to your app.
-	              Intent shareIntent = new PlusShare.Builder(this)
-	                  .setType("text/plain")
-	                  .setText("We are group Comp3111 Localendar")
-	                  .setContentUrl(Uri.parse("https://developers.google.com/+/"))
-	                  .getIntent();
-
-	              startActivityForResult(shareIntent, 0);
-	              break;
 	      }
 	    }
 	  }
