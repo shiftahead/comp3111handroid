@@ -1,34 +1,5 @@
 package com.comp3111.localendar.calendar;
 
-import com.comp3111.localendar.Localendar;
-import com.comp3111.localendar.R;
-import com.comp3111.localendar.R.anim;
-import com.comp3111.localendar.R.id;
-import com.comp3111.localendar.R.layout;
-import com.comp3111.localendar.R.menu;
-import com.comp3111.localendar.facebook.FacebookLogin;
-import com.comp3111.localendar.map.MyGoogleMap;
-import com.comp3111.localendar.map.Place;
-import com.facebook.FacebookException;
-import com.facebook.FacebookOperationCanceledException;
-import com.facebook.Session;
-import com.facebook.widget.WebDialog;
-import com.facebook.widget.WebDialog.OnCompleteListener;
-
-import android.app.ActionBar;
-import android.app.Activity;
-import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
 import static com.comp3111.localendar.database.DatabaseConstants.COMPULSORY;
 import static com.comp3111.localendar.database.DatabaseConstants.DAY;
 import static com.comp3111.localendar.database.DatabaseConstants.DESCRIPTION;
@@ -42,6 +13,28 @@ import static com.comp3111.localendar.database.DatabaseConstants.TABLE_NAME;
 import static com.comp3111.localendar.database.DatabaseConstants.TITLE;
 import static com.comp3111.localendar.database.DatabaseConstants.TRANSPORTATION;
 import static com.comp3111.localendar.database.DatabaseConstants.YEAR;
+
+import java.util.GregorianCalendar;
+
+import android.app.ActionBar;
+import android.app.Activity;
+import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
+import android.os.Bundle;
+import android.provider.CalendarContract;
+import android.provider.CalendarContract.Events;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.TextView;
+
+import com.comp3111.localendar.Localendar;
+import com.comp3111.localendar.R;
+import com.comp3111.localendar.facebook.FacebookLogin;
+import com.comp3111.localendar.map.MyGoogleMap;
+import com.comp3111.localendar.map.Place;
+import com.google.android.gms.plus.PlusShare;
 
 
 public class EventDetailActivity extends Activity {
@@ -157,11 +150,45 @@ public class EventDetailActivity extends Activity {
 	    	startActivity(intent);
 	    	return true;
 	    }
+	    case R.id.share_to_googlePlus :{
+	         shareToGooglePlus();	
+	    }
 	    default: {
 	    	onBackPressed();
 		    return true;
 	    }
 	    }
 	}
+    public void shareToGooglePlus() {
+    	String shareTextString = title + description;
+    	PlusShare.Builder share = new PlusShare.Builder(this);
+    	share.setText(shareTextString);
+    	share.setContentUrl(Uri.parse("https://plus.google.com/"));
+    	share.setType("text/plain");
+    	startActivityForResult(share.getIntent(), 0);
+	}
+    public void addeventInGooglecalendar() {
+    	Intent intent = new Intent(Intent.ACTION_INSERT);
+		intent.setType("vnd.android.cursor.item/event");
+		intent.putExtra(Events.TITLE, title);
+		intent.putExtra(Events.EVENT_LOCATION, location);
+		intent.putExtra(Events.DESCRIPTION, description);
 
+		// Setting dates
+		GregorianCalendar calDate = new GregorianCalendar(2014, 3, 10);
+		intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME,calDate.getTimeInMillis());
+		intent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME,calDate.getTimeInMillis());
+
+		// Make it a full day event
+		intent.putExtra(CalendarContract.EXTRA_EVENT_ALL_DAY, false);
+
+		// Make it a recurring Event
+		//intent.putExtra(Events.RRULE,"FREQ=WEEKLY;COUNT=11;WKST=SU;BYDAY=TU,TH");
+
+		// Making it private and shown as busy
+		intent.putExtra(Events.ACCESS_LEVEL, Events.ACCESS_PRIVATE);
+		intent.putExtra(Events.AVAILABILITY, Events.AVAILABILITY_BUSY);
+
+		startActivity(intent);
+	}
 }
