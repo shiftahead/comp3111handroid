@@ -16,4 +16,8 @@
           android:title="Share to Facebook"
           android:orderInCategory="4">
     </item>
+    <item android:id="@+id/share_to_googlePlus"
+          android:title="Share to Google+"
+          android:orderInCategory="5">
+    </item>
 </menu>
