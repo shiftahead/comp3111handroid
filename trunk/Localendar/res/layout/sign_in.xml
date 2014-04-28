@@ -45,12 +45,6 @@
      
       
     </LinearLayout>
-     <Button
-          android:id="@+id/share_button"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:text="Share on Google+"
-       />
      <TextView
         android:id="@+id/sign_in_status"
         android:layout_width="wrap_content"
