@@ -76,6 +76,10 @@
             android:theme="@android:style/Theme.Dialog">
         </activity>
         <activity
+            android:name="com.comp3111.localendar.calendar.CalendarSearch"
+            android:theme="@android:style/Theme.Dialog">
+        </activity>
+        <activity
             android:name="com.comp3111.localendar.calendar.AddEventActivity"
             android:theme="@style/Theme.MyAppThemeNoIcon" >
         </activity>
