@@ -1,10 +1,10 @@
-#summary Minutes of Meeting held on Apr. 23, 2014.
+#summary Minutes of Meeting held on Apr. 29, 2014.
 
-= Meeting Minutes of Apr. 23=
+= Meeting Minutes of Apr. 29=
 ----
-|| Date || Apr. 23, 2014 ||
-|| Time || 9:30pm - 11:30pm ||
-|| Place || LC-01, LG1, Library, HKUST ||
+|| Date || Apr. 29, 2014 ||
+|| Time || 8:00pm - 10:00pm ||
+|| Place || LC-08, LG1, Library, HKUST ||
 || Attendance || TAM Shih Lung, WANG Ding, YANG Ji, ZENG Xiong, ZHANG Tian ||
 || Absence || -- ||
 || Recorder ||  Yang Ji ||
@@ -43,6 +43,6 @@ The minutes of the last meeting were approved without amendment.
 
 The meeting lasts for 2 hours and no adjournment.
 
-The next meeting is scheduled on 4.29.2014, 8:00 pm .
+The next meeting is scheduled on .2014, 8:00 pm .
 
-The location is LC08, LG1, Library, HKUST.
+The location is LG1, Library, HKUST.
