@@ -76,7 +76,7 @@ public class CalendarSearch extends Activity{
 			 Description = cursor.getString(cursor.getColumnIndex(DESCRIPTION));
 			 title = cursor.getString(cursor.getColumnIndex(TITLE));
 			// Toast.makeText(this, title, Toast.LENGTH_SHORT).show();
-			if(ambigiousSearch(input, location) || ambigiousSearch(input, Description) || ambigiousSearch(input, title)){
+			if(input==null || ambigiousSearch(input, location) || ambigiousSearch(input, Description) || ambigiousSearch(input, title)){
 				i++;
 				matchList.add(id);
 				matchListTitle.add(title);
