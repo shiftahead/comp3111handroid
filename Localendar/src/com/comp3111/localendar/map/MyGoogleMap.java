@@ -39,7 +39,9 @@ import android.graphics.Point;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -86,9 +88,11 @@ public class MyGoogleMap {
 	//private ConnectionDetector mapConnectionDetector;
 	//private GPSTracker mapGpsTracker;
 
-	private static ArrayList<Polyline> line = null; 
-	private static ArrayList<Marker> marker = null;
+	private static ArrayList<Polyline> pathList = null; 
+	private static ArrayList<Marker> markerList = null;
 	private static ArrayList<String> marker_id = null;
+	
+	private static DrawingPath path = null;
 		    
 	public MyGoogleMap(GoogleMap map) {
 		mapInstance = this;
@@ -107,8 +111,8 @@ public class MyGoogleMap {
         localenderMapSettings.setRotateGesturesEnabled(true);
         localendarMap.setMyLocationEnabled(true);
         
-        line = new ArrayList<Polyline>();
-    	marker = new ArrayList<Marker>();
+        pathList = new ArrayList<Polyline>();
+    	markerList = new ArrayList<Marker>();
     	marker_id = new ArrayList<String>();
         
         //Zoom to my current location
@@ -200,7 +204,7 @@ public class MyGoogleMap {
 	        localendarMap.animateCamera(CameraUpdateFactory.newLatLngZoom(ll, 15));
 		newMarker.showInfoWindow();
 		if(!id.isEmpty())   //event exists for that marker
-			marker.add(newMarker);
+			markerList.add(newMarker);
 			marker_id.add(id);
 		return true;
 	}
@@ -211,6 +215,8 @@ public class MyGoogleMap {
 			public boolean onMarkerClick(Marker arg0) {
 				// TODO Auto-generated method stub
 //				arg0.remove();
+				Calendar today = Calendar.getInstance();
+				Toast.makeText(Localendar.instance, String.valueOf(today.get(Calendar.MONTH)), Toast.LENGTH_SHORT).show();
 				return false;
 			}
 			
@@ -251,9 +257,9 @@ public class MyGoogleMap {
             	 Point markerScreenPosition = localendarMap.getProjection().toScreenLocation(arg0.getPosition());
             	 
             	 if (overlap(markerScreenPosition, trashBin)) {
-            	   	if(marker.contains(arg0)){
-            	   		marker_id.remove(marker.indexOf(arg0));
-            	   		marker.remove(marker.indexOf(arg0));
+            	   	if(markerList.contains(arg0)){
+            	   		marker_id.remove(markerList.indexOf(arg0));
+            	   		markerList.remove(markerList.indexOf(arg0));
             	   	}
             	     arg0.remove();
             	 } else
@@ -281,7 +287,7 @@ public class MyGoogleMap {
         localendarMap.setOnInfoWindowClickListener(new OnInfoWindowClickListener() {
 			@Override
 			public void onInfoWindowClick(Marker arg0) {
-				if(!marker.contains(arg0)){
+				if(!markerList.contains(arg0)){
 					Toast.makeText(Localendar.instance, "Adding Events!", Toast.LENGTH_SHORT).show();
 					Intent intent = new Intent(Localendar.instance, AddEventActivity.class);
 					Localendar.instance.startActivity(intent);
@@ -290,7 +296,7 @@ public class MyGoogleMap {
 				else{
 					Toast.makeText(Localendar.instance, "Jumping to details page", Toast.LENGTH_SHORT).show();
 					Intent intent = new Intent(Localendar.instance, EventDetailActivity.class);
-					intent.putExtra("ID", marker_id.get(marker.indexOf(arg0)));
+					intent.putExtra("ID", marker_id.get(markerList.indexOf(arg0)));
 					Localendar.instance.startActivity(intent);
 				}
 			}
@@ -306,10 +312,18 @@ public class MyGoogleMap {
 				, hour = new ArrayList<String>(), minute = new ArrayList<String>()
 				, transportation = new ArrayList<String>();		
 		Cursor cursor;
-
+		
+		Calendar today = Calendar.getInstance();
+		
 		String[] from = {LOCATION, YEAR, MONTH, DAY, HOUR, MINUTE, TRANSPORTATION};
 		SQLiteDatabase db = MyCalendar.dbhelper.getReadableDatabase();
-		cursor = db.query(TABLE_NAME, from, null, null, null, null, null);
+		String selection = YEAR + " = " + (Localendar.calendar.getTime().getYear() + 1900) + " AND " +
+				MONTH + " = "  + (Localendar.calendar.getTime().getMonth() + 1) + " AND " +
+				DAY + " = " + Localendar.calendar.getTime().getDate();
+//		cursor = db.query(TABLE_NAME, from, null, null, null, null, null);
+		cursor = db.query(TABLE_NAME, from, selection, null, null, null, HOUR + ", " + MINUTE);
+		
+
 				
 		while(cursor.moveToNext()){
 			location.add(cursor.getString(0));
@@ -323,14 +337,21 @@ public class MyGoogleMap {
 		
 		if(!location.isEmpty()){
 			int dummy = 0;
+			List<String> url= new ArrayList<String>();
 			while(location.size() > dummy+1){
 //				drawPath(path(Place.getPlaceFromAddress(location.get(dummy)), Place.getPlaceFromAddress(location.get(dummy+1)) ) );
 				//depricated 
-				drawPath(findingPath(location.get(dummy), location.get(dummy+1), transportation.get(dummy+1)
-						, year.get(dummy+1), month.get(dummy+1), day.get(dummy+1), hour.get(dummy+1), minute.get(dummy+1)) );
+//				url.add(URLformation(location.get(dummy), location.get(dummy+1), transportation.get(dummy+1)
+//						, year.get(dummy+1), month.get(dummy+1), day.get(dummy+1), hour.get(dummy+1), minute.get(dummy+1)));
+//				drawPath(findingPath(location.get(dummy), location.get(dummy+1), transportation.get(dummy+1)
+//								, year.get(dummy+1), month.get(dummy+1), day.get(dummy+1), hour.get(dummy+1), minute.get(dummy+1)) );
 				
+				new DrawingPath().execute(URLformation(location.get(dummy), location.get(dummy+1), transportation.get(dummy+1)
+								, year.get(dummy+1), month.get(dummy+1), day.get(dummy+1), hour.get(dummy+1), minute.get(dummy+1)));
+
 				dummy=dummy+1;
 			}
+			
 		}
 		
 	}
@@ -354,7 +375,7 @@ public class MyGoogleMap {
 						String title = cursor.getString(1), location = cursor.getString(2)
 								, hour = cursor.getString(3), minute = cursor.getString(4);
 						
-						Marker erasedmarker = marker.get(marker_id.indexOf(id));
+						Marker erasedmarker = markerList.get(marker_id.indexOf(id));
 						erasedmarker.remove();
 						
 						addmarker(Place.getPlaceFromAddress(location), true, id + "." + title, new String(hour + ":" + minute));
@@ -366,9 +387,9 @@ public class MyGoogleMap {
 				if(!found){//delete event
 					for(int i=0 ; i<marker_id.size() ; i++){
 						if(!locationl.contains(marker_id.get(i))){
-							Marker erasedmarker = marker.get(i);
+							Marker erasedmarker = markerList.get(i);
 							erasedmarker.remove();
-							marker.remove(i);
+							markerList.remove(i);
 							marker_id.remove(i);
 							break;
 						}
@@ -377,11 +398,105 @@ public class MyGoogleMap {
 			}
 		}
 		//refresh Polyline (path)
-		for(Polyline Line: line){
+		for(Polyline Line: pathList){
 			Line.remove();
 		}
-	 	line.clear();
+	 	pathList.clear();
 	 	pathing();
+	}
+	
+	static String URLformation(String input1, String input2, String mode, 
+    		String arrival_year, String arrival_month, String arrival_day, String arrival_hour, String arrival_minute){
+        StringBuilder sb = new StringBuilder(DIRECTIONS_API_BASE + OUT_JSON);
+        sb.append("?origin="+ input1.replaceAll("\\s+",""));
+        sb.append("&destination="+input2.replaceAll("\\s+",""));
+        sb.append("&sensor=false");
+        
+        if(!mode.contentEquals("Drive")){  //default is drive
+        	sb.append("&mode=");
+        	if(mode.contentEquals("On foot"))
+        		sb.append("walking");
+        	if(mode.contentEquals("Public transportation")){
+        		sb.append("&arrival_time="+timeCalculation(arrival_year, arrival_month, arrival_day, arrival_hour, arrival_minute));
+        		sb.append("transit");
+        	}
+        }
+        return sb.toString();
+	}
+	
+	public static class DrawingPath extends AsyncTask<String, Void, String>{
+		@Override
+	    protected String doInBackground(String... urlString) {
+	        // TODO Auto-generated method stub
+
+			HttpURLConnection conn = null;
+			StringBuilder jsonResults = new StringBuilder();
+			
+		try{
+	        URL url = new URL(urlString[0]);
+	        conn = (HttpURLConnection) url.openConnection();
+	        InputStreamReader in = new InputStreamReader(conn.getInputStream());
+	        
+	        // Load the results into a StringBuilder
+	        int read;
+	        char[] buff = new char[1024];
+	        while ((read = in.read(buff)) != -1) {
+	            jsonResults.append(buff, 0, read);
+	        }
+	    } catch (MalformedURLException e) {
+	        Log.e(LOG_TAG, "Error processing Places API URL", e);
+	        return "";
+	    } catch (IOException e) {
+	        Log.e(LOG_TAG, "Error connecting to Places API", e);
+	        return "";
+	    } finally {
+	        if (conn != null) {
+	            conn.disconnect();
+	        }
+	    }
+			
+			return jsonResults.toString();
+	    }
+	 
+	    @Override
+	    protected void onPreExecute() {
+	    }
+	 
+	    @Override
+	    protected void onProgressUpdate(Void... values) {
+	        // TODO Auto-generated method stub
+	        super.onProgressUpdate();
+	        
+			Toast.makeText(Localendar.instance, "Updating Map...", Toast.LENGTH_SHORT).show();
+	    }
+	   
+	    @Override
+	    protected void onPostExecute(String jsonResults) {
+	        // TODO Auto-generated method stub
+	        super.onPostExecute(jsonResults);
+	        
+	        String resultList = new String();
+	        List<LatLng> resultcoor = new ArrayList<LatLng>();
+	        try {
+	            JSONObject jsonObj = new JSONObject(jsonResults.toString());
+	            JSONArray routesJsonArray = jsonObj.getJSONArray("routes");
+	            if(!routesJsonArray.isNull(0)){
+	            	JSONObject routes = routesJsonArray.optJSONObject(0);
+	            	JSONObject overviewPolylines = routes.optJSONObject("overview_polyline");
+	            	resultList = overviewPolylines.optString("points");
+	            }
+	        } catch (JSONException e) {
+	            Log.e(LOG_TAG, "Cannot process JSON results", e);
+	        }
+	      	resultcoor = decode(resultList);	      	
+	      	drawPath(resultcoor);
+	      	
+//			Toast.makeText(Localendar.instance, "Map Updated!", Toast.LENGTH_SHORT).show();
+	    }
+	 
+	    @Override
+	    protected void onCancelled() {
+	    }
 	}
 		
     private static final String LOG_TAG = "Localendar";
@@ -398,6 +513,7 @@ public class MyGoogleMap {
     HttpURLConnection conn = null;
     StringBuilder jsonResults = new StringBuilder();
     try {
+    	//forming URL
         StringBuilder sb = new StringBuilder(DIRECTIONS_API_BASE + OUT_JSON);
         sb.append("?origin="+ input1.replaceAll("\\s+",""));
         sb.append("&destination="+input2.replaceAll("\\s+",""));
@@ -413,20 +529,6 @@ public class MyGoogleMap {
         	}
         }
         
-        
-//      sb.append("&mode=");
-//      switch(mode)
-//      sb.append((switch())) dirving, walking, transit
-      
-//		sb.append("&departure_time="); / sb.append("&arrival_time=");
-//calculateTime(){
-        
-//      <string-array name="transportation">
-//      <item>Drive</item>
-//      <item>Public transportation</item>
-//      <item>On foot</item>
-//</string-array>
-
         URL url = new URL(sb.toString());
         conn = (HttpURLConnection) url.openConnection();
         InputStreamReader in = new InputStreamReader(conn.getInputStream());
@@ -448,7 +550,7 @@ public class MyGoogleMap {
             conn.disconnect();
         }
     }
-
+    //getting encoded path
     try {
         JSONObject jsonObj = new JSONObject(jsonResults.toString());
         JSONArray routesJsonArray = jsonObj.getJSONArray("routes");
@@ -460,7 +562,7 @@ public class MyGoogleMap {
     } catch (JSONException e) {
         Log.e(LOG_TAG, "Cannot process JSON results", e);
     }
-    
+   //decode the path
   	resultcoor = decode(resultList);
     
 	return resultcoor;
@@ -583,12 +685,86 @@ public class MyGoogleMap {
 	
 	public static void drawPath(List<LatLng> list){	
 //		if(!list.isEmpty())
-		line.add(localendarMap.addPolyline(new PolylineOptions()
+		pathList.add(localendarMap.addPolyline(new PolylineOptions()
 	    .addAll(list)
 	         .width(5)
 	    .geodesic(true)));
 	}
     
+	public static class LocaitonReminder extends AsyncTask<String, Void, String>{
+		@Override
+	    protected String doInBackground(String... urlString) {
+	        // TODO Auto-generated method stub
+
+			HttpURLConnection conn = null;
+			StringBuilder jsonResults = new StringBuilder();
+			
+		try{
+	        URL url = new URL(urlString[0]);
+	        conn = (HttpURLConnection) url.openConnection();
+	        InputStreamReader in = new InputStreamReader(conn.getInputStream());
+	        
+	        // Load the results into a StringBuilder
+	        int read;
+	        char[] buff = new char[1024];
+	        while ((read = in.read(buff)) != -1) {
+	            jsonResults.append(buff, 0, read);
+	        }
+	    } catch (MalformedURLException e) {
+	        Log.e(LOG_TAG, "Error processing Places API URL", e);
+	        return "";
+	    } catch (IOException e) {
+	        Log.e(LOG_TAG, "Error connecting to Places API", e);
+	        return "";
+	    } finally {
+	        if (conn != null) {
+	            conn.disconnect();
+	        }
+	    }
+			
+			return jsonResults.toString();
+	    }
+	 
+	    @Override
+	    protected void onPreExecute() {
+	    }
+	 
+	    @Override
+	    protected void onProgressUpdate(Void... values) {
+	        // TODO Auto-generated method stub
+	        super.onProgressUpdate();
+	        
+			Toast.makeText(Localendar.instance, "Updating Map...", Toast.LENGTH_SHORT).show();
+	    }
+	   
+	    @Override
+	    protected void onPostExecute(String jsonResults) {
+	        // TODO Auto-generated method stub
+	        super.onPostExecute(jsonResults);
+	        
+	        String resultList = new String();
+	        List<LatLng> resultcoor = new ArrayList<LatLng>();
+	        try {
+	            JSONObject jsonObj = new JSONObject(jsonResults.toString());
+	            JSONArray routesJsonArray = jsonObj.getJSONArray("routes");
+	            if(!routesJsonArray.isNull(0)){
+	            	JSONObject routes = routesJsonArray.optJSONObject(0);
+	            	JSONObject overviewPolylines = routes.optJSONObject("overview_polyline");
+	            	resultList = overviewPolylines.optString("points");
+	            }
+	        } catch (JSONException e) {
+	            Log.e(LOG_TAG, "Cannot process JSON results", e);
+	        }
+	      	resultcoor = decode(resultList);	      	
+	      	drawPath(resultcoor);
+	      	
+//			Toast.makeText(Localendar.instance, "Map Updated!", Toast.LENGTH_SHORT).show();
+	    }
+	 
+	    @Override
+	    protected void onCancelled() {
+	    }
+	}
 	
 
 }
