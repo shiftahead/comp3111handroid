@@ -1,19 +1,37 @@
 package com.comp3111.localendar.calendar;
 
+import static android.provider.BaseColumns._ID;
+import static com.comp3111.localendar.database.DatabaseConstants.HOUR;
+import static com.comp3111.localendar.database.DatabaseConstants.LOCATION;
+import static com.comp3111.localendar.database.DatabaseConstants.MINUTE;
+import static com.comp3111.localendar.database.DatabaseConstants.TABLE_NAME;
+import static com.comp3111.localendar.database.DatabaseConstants.TITLE;
+import static com.comp3111.localendar.database.DatabaseConstants.DESCRIPTION;
+
+import java.util.ArrayList;
+
 import android.app.Activity;
+import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.EventLogTags.Description;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.comp3111.localendar.Localendar;
 import com.comp3111.localendar.R;
 
 public class CalendarSearch extends Activity{
 	private Button findButton;
 	private Button cancelButton;
 	private EditText searchEditText;
+	private Cursor cursor = null;
+	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +59,37 @@ public class CalendarSearch extends Activity{
 		});
         searchEditText = (EditText) findViewById(R.id.etSearch);
       }
-	public String searchEvent(String input) {
-		return input;
+	public void searchEvent(String input) {
+		ArrayList<String> matchList = new ArrayList<String>();
+		String[] from = {_ID, TITLE, DESCRIPTION, LOCATION,};
+		SQLiteDatabase db = MyCalendar.dbhelper.getReadableDatabase();
+		cursor = db.query(TABLE_NAME, from, null, null, null, null, null);
+		if(cursor!=null)
+			cursor.moveToFirst();
+		int i = 0;
+		while(cursor.moveToNext()){
+			String id = cursor.getString(cursor.getColumnIndex(_ID));
+			String location = cursor.getString(cursor.getColumnIndex(LOCATION));
+			String Description = cursor.getString(cursor.getColumnIndex(DESCRIPTION));
+			String title = cursor.getString(cursor.getColumnIndex(TITLE));
+			if(ambigiousSearch(input, location) || ambigiousSearch(input, Description) || ambigiousSearch(input, title)){
+				i++;
+				matchList.add(id);
+			}
+		}
+		if(i!=0){
+			String eventId = cursor.getString(cursor.getColumnIndex(_ID));
+			Intent intent = new Intent (this,EventDetailActivity.class);	
+			intent.putExtra("ID", eventId);
+			startActivity(intent);
+			finish();
+		}
+		else{
+			Toast.makeText(this, "no result", Toast.LENGTH_SHORT).show();
+		}
+	}
+	public Boolean ambigiousSearch(String input, String compare) {
+		compare.toLowerCase().contains(input.toLowerCase());
+		return false;
 	}
 }
