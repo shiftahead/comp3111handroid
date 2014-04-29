@@ -236,9 +236,10 @@ public class MyGoogleMap {
 			 
              @Override
              public void onMarkerDragStart(Marker arg0) {
+            	 origMarkerPosition = arg0.getPosition();
             	 Localendar.instance.mainRadio.setVisibility(View.GONE);
             	 Localendar.instance.deleteMarker.setVisibility(View.VISIBLE);
-            	 origMarkerPosition = arg0.getPosition();
+            	 
              }
              
              @Override
@@ -694,10 +695,10 @@ public class MyGoogleMap {
 	         .width(5)
 	    .geodesic(true)));
 	}
-	private static int time;
+	private static long time;
 	
 	// locaiton1 for orign, locaiton 2 for destincation
-	public int travelingTime(String location1, String location2, String transportation
+	public static long travelingTime(String location1, String location2, String transportation
 			, String year, String month, String day, String hour, String minute){ 
 		new LocaitonReminder().execute(URLformation(location1, location2, transportation
 				, year, month, day, hour, minute));
