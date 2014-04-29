@@ -26,7 +26,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -460,5 +462,11 @@ public class MyCalendar extends Fragment {
    	        return false;
    	    }
 	}
+   	 
+   	//convert dip to pixel 
+   	public static float dipToPixels(Context context, float dipValue) {
+   	    DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+   	    return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dipValue, metrics);
+   	}
 
 }
