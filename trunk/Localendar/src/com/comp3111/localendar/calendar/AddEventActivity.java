@@ -73,6 +73,7 @@ public class AddEventActivity extends Activity {
 	private EditText eventMinute;
 	private ClearableAutoCompleteTextView eventLocation;
 	private Spinner eventTransportation;
+	private Spinner eventReminderTime;
 	private CheckBox eventCompulsory;
 	private ActionBar actionBar;
 	private Button confirmAdd, cancelAdd;
@@ -103,6 +104,7 @@ public class AddEventActivity extends Activity {
 		eventMinute = (EditText) findViewById(R.id.duration_minute);
 		eventLocation = (ClearableAutoCompleteTextView) findViewById(R.id.event_location);
 		eventTransportation = (Spinner) findViewById(R.id.event_transportation);
+		eventReminderTime = (Spinner) findViewById(R.id.remind_time);
 		eventCompulsory = (CheckBox) findViewById(R.id.event_compulsory);
 		
 		eventTime.setIs24HourView(true);
@@ -173,9 +175,15 @@ public class AddEventActivity extends Activity {
 			return false;
 		}
 		transportation = eventTransportation.getSelectedItem().toString();
-		compulsory = eventCompulsory.isChecked()? "YES" : "NO";
+		compulsory = eventCompulsory.isChecked()? "YES" : "NO";		
 		if(eventCompulsory.isChecked()){
-			scheduleAlarm();
+			if(eventReminderTime.getSelectedItemPosition() == 0){
+				Toast.makeText(this, "Compulsory event must be reminded", Toast.LENGTH_SHORT).show();
+				return false;
+			}
+			else {
+				scheduleAlarm();				
+			}
 		}
 		
         values.put(TITLE, title);
