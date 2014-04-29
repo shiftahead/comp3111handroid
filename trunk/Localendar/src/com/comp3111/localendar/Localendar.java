@@ -64,7 +64,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.comp3111.localendar.calendar.AddEventActivity;
+import com.comp3111.localendar.calendar.CalendarSearch;
 import com.comp3111.localendar.calendar.MyCalendar;
+import com.comp3111.localendar.facebook.FacebookLogin;
 import com.comp3111.localendar.map.MyGoogleMap;
 import com.comp3111.localendar.map.Place;
 import com.comp3111.localendar.support.ClearableAutoCompleteTextView;
@@ -376,6 +378,10 @@ public class Localendar extends Activity implements OnClickListener, OnCheckedCh
 			MyCalendar.setTimeInMillis(calendar.getTimeInMillis());
 			MyCalendar.setViewModeToMonth(false);
 			setCalendarTitle();
+			return true;
+		case R.id.eventSearch : 
+			Intent intent = new Intent(this, CalendarSearch.class);
+	    	startActivity(intent);
 			return true;
 		case R.id.map_normal :
 			MyGoogleMap.localendarMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
