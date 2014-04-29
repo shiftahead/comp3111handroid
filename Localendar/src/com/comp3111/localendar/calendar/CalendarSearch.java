@@ -63,6 +63,7 @@ public class CalendarSearch extends Activity{
 	public void searchEvent(String input) {
 		String id,location,Description,title;
 		ArrayList<String> matchList = new ArrayList<String>();
+		ArrayList<String> matchListTitle = new ArrayList<String>();
 		String[] from = {_ID, TITLE, DESCRIPTION, LOCATION,};
 		SQLiteDatabase db = MyCalendar.dbhelper.getReadableDatabase();
 		cursor = db.query(TABLE_NAME, from, null, null, null, null, null);
@@ -74,27 +75,33 @@ public class CalendarSearch extends Activity{
 			 location = cursor.getString(cursor.getColumnIndex(LOCATION));
 			 Description = cursor.getString(cursor.getColumnIndex(DESCRIPTION));
 			 title = cursor.getString(cursor.getColumnIndex(TITLE));
+			// Toast.makeText(this, title, Toast.LENGTH_SHORT).show();
 			if(ambigiousSearch(input, location) || ambigiousSearch(input, Description) || ambigiousSearch(input, title)){
 				i++;
 				matchList.add(id);
+				matchListTitle.add(title);
 			}
 		}
 		if(i!=0){
-			Intent intent = new Intent (this,EventDetailActivity.class);
+			Intent intent = new Intent (this,SearchResult.class);
 			intent.putExtra("numbers", Integer.toString(i));
             for(int j=0;j<i;j++){
             	String index = matchList.get(j); 
             	intent.putExtra("ID"+Integer.toString(j), index);
+            	String event = matchListTitle.get(j); 
+            	intent.putExtra("TITLE"+Integer.toString(j), event);
             }
 			startActivity(intent);
 			finish();
 		}
 		else{
 			Toast.makeText(this, "no result", Toast.LENGTH_SHORT).show();
+			searchEditText.setText(" ");
 		}
 	}
 	public Boolean ambigiousSearch(String input, String compare) {
-		compare.toLowerCase().contains(input.toLowerCase());
+		if(compare.toLowerCase().contains(input.toLowerCase()))
+			return true;
 		return false;
 	}
 }
