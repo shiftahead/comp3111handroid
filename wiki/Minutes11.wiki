@@ -17,11 +17,11 @@ The minutes of the last meeting were approved without amendment.
 
 == 2. Report on Progress ==
 
-|| Zhang Tian || Test case and server testing google+ setting   ||
-|| Wang Ding  ||  Reminder setting ||
-|| Yang Ji       || Calendar UI, month view & swipe animation  ||
-|| Zeng Xiong  ||  Reminder and application setting||
-|| TAM Shih Lung ||  Marker functions||
+|| Zhang Tian || Test & event search   ||
+|| Wang Ding  || Time based reminder ||
+|| Yang Ji       || Calendar UI & Facebook share  ||
+|| Zeng Xiong  ||  Reminder notice  & application setting||
+|| TAM Shih Lung ||  Marker & path functions||
  
 
 == 3. Discussion Items ==
