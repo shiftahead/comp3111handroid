@@ -35,8 +35,8 @@ public class LocalendarTest extends ActivityInstrumentationTestCase2<Localendar>
 	Solo solo;
 	
 	private Localendar localendar;
-	private RadioButton calendar, map, settings;
-	private Button add;
+	private RadioButton calendar, map;
+	private Button add,settings;
 	private ClearableAutoCompleteTextView searchBox;
 	private ImageView searchIcon;
 	
@@ -58,7 +58,7 @@ public class LocalendarTest extends ActivityInstrumentationTestCase2<Localendar>
 		add = (Button) localendar.findViewById(R.id.add_button);
 		calendar = (RadioButton) localendar.findViewById(R.id.calendar_button);
 		map = (RadioButton) localendar.findViewById(R.id.map_button);
-		settings = (RadioButton) localendar.findViewById(R.id.settings_button);
+		settings = (Button) localendar.findViewById(R.id.settings_button);
 		searchBox = (ClearableAutoCompleteTextView) localendar.findViewById(R.id.search_box);
 	    searchIcon = (ImageView) localendar.findViewById(R.id.place_view);
 	    
@@ -76,19 +76,19 @@ public class LocalendarTest extends ActivityInstrumentationTestCase2<Localendar>
 	    Thread.sleep(500);
 		TouchUtils.tapView(this, map);
 	    Thread.sleep(500);
-		TouchUtils.tapView(this, settings);
-	    Thread.sleep(500);
 		TouchUtils.tapView(this, map);
 	    Thread.sleep(500);
 		TouchUtils.tapView(this, calendar);
 		Thread.sleep(500);
 	}
 	public void testActionBar() throws InterruptedException {
+		
 		TouchUtils.tapView(this, map);
 		Thread.sleep(300);
 		assertTrue(View.VISIBLE == searchIcon.getVisibility());
 		assertTrue(View.GONE == searchBox.getVisibility());
 		TouchUtils.tapView(this, searchIcon);
+		
 		TouchUtils.tapView(this, searchBox);
 		
 	    this.sendKeys(KeyEvent.KEYCODE_H);
