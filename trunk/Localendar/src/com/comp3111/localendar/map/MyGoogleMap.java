@@ -116,20 +116,11 @@ public class MyGoogleMap {
     	marker_id = new ArrayList<String>();
         
         //Zoom to my current location
-        LocationManager locationmanager = (LocationManager) Localendar.instance.getSystemService(Context.LOCATION_SERVICE);;
-        
-        try {
-	        Criteria cri= new Criteria();
-	        String provider = locationmanager.getBestProvider(cri, true);
-	        Location myLocation = locationmanager.getLastKnownLocation(provider);
-	        double latitude= myLocation.getLatitude();
-	        double longtitude = myLocation.getLongitude();
-	        LatLng ll = new LatLng(latitude, longtitude);
-	        localendarMap.animateCamera(CameraUpdateFactory.newLatLngZoom(ll, 15));
-        } catch (Exception e){
-        	
-        }
-        
+        Location myLocation = getMyLocation();
+		LatLng ll = new LatLng(myLocation.getLatitude(), myLocation.getLongitude());
+    	localendarMap.animateCamera(CameraUpdateFactory.newLatLngZoom(ll, 15));
+    	
+    	
         //get my location 
         localendarMap.setOnMyLocationButtonClickListener(new OnMyLocationButtonClickListener() {
                         
@@ -156,6 +147,20 @@ public class MyGoogleMap {
         setInfoWindowListener();
         setMapListener();
 
+	}
+
+	public static Location getMyLocation() {
+		LocationManager locationmanager = (LocationManager) Localendar.instance.getSystemService(Context.LOCATION_SERVICE);;
+        
+        try {
+	        Criteria cri= new Criteria();
+	        String provider = locationmanager.getBestProvider(cri, true);
+	        Location myLocation = locationmanager.getLastKnownLocation(provider);
+	        return myLocation;
+        } catch (Exception e){
+        	
+        }
+		return null;
 	}
 // move camera to corresponding place
 	public void  moveCamera(Place place) {
