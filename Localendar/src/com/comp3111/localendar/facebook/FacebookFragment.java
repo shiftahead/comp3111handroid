@@ -1,8 +1,10 @@
 package com.comp3111.localendar.facebook;
 
 import java.util.Arrays;
+import java.util.List;
 
 import com.comp3111.localendar.R;
+import com.facebook.LoggingBehavior;
 import com.facebook.Session;
 import com.facebook.SessionState;
 import com.facebook.UiLifecycleHelper;
@@ -21,6 +23,7 @@ public class FacebookFragment extends Fragment {
 
 	
 	private static final String TAG = "FacebookFragment";
+	private static final List<String> PERMISSIONS = Arrays.asList("publish_actions");
 	private UiLifecycleHelper uiHelper;
 	private Session.StatusCallback callback = new Session.StatusCallback() {
 	    @Override
@@ -35,7 +38,7 @@ public class FacebookFragment extends Fragment {
 	    LoginButton authButton = (LoginButton) view.findViewById(R.id.fb_auth_button);
 	    Button shareButton = (Button) view.findViewById(R.id.fb_share_button);
 	    authButton.setFragment(this); 
-	    authButton.setPublishPermissions(Arrays.asList("publish_actions"));
+	    //authButton.setPublishPermissions(Arrays.asList("publish_actions"));
 	    shareButton.setOnClickListener(new View.OnClickListener() {   	
 			@Override
 			public void onClick(View v) {
@@ -48,8 +51,37 @@ public class FacebookFragment extends Fragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
+
+		   
 	    uiHelper = new UiLifecycleHelper(getActivity(), callback);
 	    uiHelper.onCreate(savedInstanceState);
+
+	    //Settings.addLoggingBehavior(LoggingBehavior.INCLUDE_ACCESS_TOKENS);
+	    Session session = Session.getActiveSession();
+        if (session == null) {
+            if (savedInstanceState != null) 
+                session = Session.restoreSession(getActivity(), null, callback, savedInstanceState);
+            
+            else
+                session = new Session(getActivity());
+            
+            Session.setActiveSession(session);
+            if (session.getState().equals(SessionState.CREATED_TOKEN_LOADED)) {
+                session.openForRead(new Session.OpenRequest(this).setCallback(callback));
+                //List<String> permissions = session.getPermissions();
+
+    	        
+    	            Session.NewPermissionsRequest newPermissionsRequest = new Session
+    	                    .NewPermissionsRequest(this, PERMISSIONS);
+    	            session.requestNewPublishPermissions(newPermissionsRequest);
+    	           
+    	        
+            }
+        }
+        
+        
+	    //uiHelper = new UiLifecycleHelper(getActivity(), callback);
+	    //uiHelper.onCreate(savedInstanceState);
 	}
 	
 	@Override

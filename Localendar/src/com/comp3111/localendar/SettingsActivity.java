@@ -19,6 +19,7 @@ public class SettingsActivity extends Activity {
 	        super.onCreate(savedInstanceState);
 	        ActionBar actionBar = getActionBar();
 	        actionBar.setDisplayHomeAsUpEnabled(true);
+	        actionBar.setTitle("Settings");
 	        // Display the fragment as the main content.
 	        getFragmentManager().beginTransaction()
 	                .replace(android.R.id.content, new SettingsFragment())
@@ -42,7 +43,14 @@ public class SettingsActivity extends Activity {
 		    MenuInflater inflater = getMenuInflater();
 		    inflater.inflate(R.menu.settings_menu, menu);
 		    return super.onCreateOptionsMenu(menu);
-		}
+	 }
+	 
+	 @Override
+	 public void startActivity(Intent intent) {
+		 super.startActivity(intent);
+		 overridePendingTransition(R.anim.right_in,R.anim.left_out);	 
+	 }
+	 
 	 
 	 private void addShortcut() {
 			Intent shortcutIntent = new Intent("com.android.launcher.action.INSTALL_SHORTCUT");

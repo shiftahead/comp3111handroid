@@ -85,7 +85,6 @@ public class FacebookLogin extends FragmentActivity {
           return true;
       }
 	  
-	  
 	  static void publishLoginDialog() {
 		  try{
 			  Bundle params = new Bundle();
