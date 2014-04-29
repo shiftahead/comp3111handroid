@@ -230,7 +230,7 @@ public class MyCalendar extends Fragment {
 						downX = event.getX();
 						downY = event.getY();
 						try {
-							eventList.getChildAt((int) downY/200).setBackgroundResource(R.color.gray);
+							eventList.getChildAt((int) downY/300).setBackgroundResource(R.color.gray);
 						} catch (Exception e) {
 							
 						}
@@ -240,14 +240,14 @@ public class MyCalendar extends Fragment {
 					case MotionEvent.ACTION_CANCEL:
 					case MotionEvent.ACTION_UP:
 						try {
-							eventList.getChildAt((int) downY/200).setBackgroundResource(R.color.light_gray);
+							eventList.getChildAt((int) downY/300).setBackgroundResource(R.color.light_gray);
 						} catch(Exception e) {
 							
 						}
 						upX = event.getX();
 						upY = event.getY();
 						if(Math.abs(downX-upX) < 10 && Math.abs(downY-upY) < 10 && System.currentTimeMillis() - time < 800) {
-							if (cursor.moveToPosition((int) downY/200)) {
+							if (cursor.moveToPosition((int) downY/300)) {
 								
 								String eventId = cursor.getString(cursor.getColumnIndex(_ID));
 								Intent intent = new Intent (calendarInstance.getActivity(), EventDetailActivity.class);	
