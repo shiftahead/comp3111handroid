@@ -20,7 +20,7 @@ The minutes of the last meeting were approved without amendment.
 || Zhang Tian || Test case and server testing google+ setting   ||
 || Wang Ding  ||  Reminder setting ||
 || Yang Ji       || Calendar UI, month view & swipe animation  ||
-|| Zeng Xiong  ||  Reminder ||
+|| Zeng Xiong  ||  Reminder and application setting||
 || TAM Shih Lung ||  Marker functions||
  
 
@@ -29,20 +29,21 @@ The minutes of the last meeting were approved without amendment.
 ===1. Task and deadline===
 
 || *No.* || *Task* || *Assigned to* || *Deadline* ||
-|| 1. || Reminder time based and location based   || WANG Ding|| Apr. 29||
-|| 2. || Search in event list|| ZHANG Tian || Apr. 29 ||
-|| 3. || Calendar UI enhancement & facebook share|| YANG Ji || Apr. 29||
-|| 4. || Implement test cases || All team members || Apr. 29||
-|| 5. || Marker function enhancement || TAM Shih Lung || Apr. 29 ||
-|| 6. || Settings & alarm notice || ZENG Xiong || Apr. 29||
-
-
+|| 1. || Reminder time based and location based   || WANG Ding|| May ,4 ||
+|| 2. || Search in event list|| ZHANG Tian || May,5 ||
+|| 3. || Facebook share|| YANG Ji || May, 4||
+|| 4. || Implement test cases || All team members || May,4||
+|| 5. || Find Bugs and fix bugs || All team members || May,4||
+|| 6. || Marker color || TAM Shih Lung || May,4 ||
+|| 7. || Application Settings || ZENG Xiong || May,4||
 
 
 == 4. Meeting adjournment and next meeting ==
 
 The meeting lasts for 2 hours and no adjournment.
 
-The next meeting is scheduled on .2014, 8:00 pm .
+The next meeting is scheduled on 04/05/2014 7:00 pm .
+The next next meeting is scheduled on 06/05/2014 8:00 pm .
+The rehearsal is scheduled on 07/05/2014 9:30 pm .
 
 The location is LG1, Library, HKUST.
