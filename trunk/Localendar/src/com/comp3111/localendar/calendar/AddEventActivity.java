@@ -176,14 +176,15 @@ public class AddEventActivity extends Activity {
 		}
 		transportation = eventTransportation.getSelectedItem().toString();
 		compulsory = eventCompulsory.isChecked()? "YES" : "NO";		
-		if(eventCompulsory.isChecked()){
-			if(eventReminderTime.getSelectedItemPosition() == 0){
-				Toast.makeText(this, "Compulsory event must be reminded", Toast.LENGTH_SHORT).show();
-				return false;
-			}
-			else {
-				scheduleAlarm();				
-			}
+		
+		if(eventCompulsory.isChecked() && eventReminderTime.getSelectedItemPosition() == 0){
+			Toast.makeText(this, "Compulsory event must be reminded", Toast.LENGTH_SHORT).show();
+			return false;			
+		}
+
+		if(eventReminderTime.getSelectedItemPosition() != 0){
+			long remindtime = getRemindTime(eventReminderTime.getSelectedItemPosition());
+			scheduleAlarm(remindtime);
 		}
 		
         values.put(TITLE, title);
@@ -202,14 +203,36 @@ public class AddEventActivity extends Activity {
         return true;
     }
 	
-    public void scheduleAlarm()
+    private static final float Min_to_Millis = 60000;
+    private static final float Hour_to_Millis = 3600000; 
+
+    private long getRemindTime(int id) {
+		// TODO Auto-generated method stub
+    	switch (id) {
+		case 1:
+			return (long) (5 * Min_to_Millis);
+		case 2:
+			return (long) (10 * Min_to_Millis);
+		case 3:
+			return (long) (30 * Min_to_Millis);
+		case 4:
+			return (long) (1 * Hour_to_Millis);
+		case 5:
+			return (long) (1.5 * Hour_to_Millis);
+		case 6:
+			return (long) (2 * Hour_to_Millis);			
+		default:
+			break;
+		}
+		return 0;
+	}
+
+	public void scheduleAlarm(long rt)
     {
     	Calendar cal=Calendar.getInstance();
     	cal.set(Calendar.YEAR,eventDate.getYear());
     	cal.set(Calendar.MONTH,eventDate.getMonth());
     	cal.set(Calendar.DAY_OF_MONTH,eventDate.getDayOfMonth());
-    	
-    	//TODO: Need to be modified according to the user's another input (remind xx h xx m before)
     	cal.set(Calendar.HOUR_OF_DAY,eventTime.getCurrentHour());
     	cal.set(Calendar.MINUTE,eventTime.getCurrentMinute());
     	    	    	
@@ -229,7 +252,7 @@ public class AddEventActivity extends Activity {
     	AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
     	
     	//set the alarm for particular time
-    	alarmManager.set(AlarmManager.RTC_WAKEUP,cal.getTimeInMillis(), pendingIntent);
+    	alarmManager.set(AlarmManager.RTC_WAKEUP,cal.getTimeInMillis() - rt, pendingIntent);
     }
 	
 }
