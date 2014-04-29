@@ -146,6 +146,9 @@ public class MyGoogleMap {
         
         pathing();
         refresh("");
+       
+		
+        
 //        drawPath();
 //        drawPath(path("China", "Beijing" ) );
         //set Marker called;
@@ -215,8 +218,9 @@ public class MyGoogleMap {
 			public boolean onMarkerClick(Marker arg0) {
 				// TODO Auto-generated method stub
 //				arg0.remove();
-				Calendar today = Calendar.getInstance();
-				Toast.makeText(Localendar.instance, String.valueOf(today.get(Calendar.MONTH)), Toast.LENGTH_SHORT).show();
+				//for testing
+				time = travelingTime("Tin Shui Wai", "Yuen Long", "Drive", "", "", "", "", "");
+				Toast.makeText(Localendar.instance, String.valueOf(time), Toast.LENGTH_SHORT).show();
 				return false;
 			}
 			
@@ -348,7 +352,7 @@ public class MyGoogleMap {
 				
 				new DrawingPath().execute(URLformation(location.get(dummy), location.get(dummy+1), transportation.get(dummy+1)
 								, year.get(dummy+1), month.get(dummy+1), day.get(dummy+1), hour.get(dummy+1), minute.get(dummy+1)));
-
+				
 				dummy=dummy+1;
 			}
 			
@@ -406,7 +410,7 @@ public class MyGoogleMap {
 	}
 	
 	static String URLformation(String input1, String input2, String mode, 
-    		String arrival_year, String arrival_month, String arrival_day, String arrival_hour, String arrival_minute){
+    	String arrival_year, String arrival_month, String arrival_day, String arrival_hour, String arrival_minute){
         StringBuilder sb = new StringBuilder(DIRECTIONS_API_BASE + OUT_JSON);
         sb.append("?origin="+ input1.replaceAll("\\s+",""));
         sb.append("&destination="+input2.replaceAll("\\s+",""));
@@ -690,6 +694,15 @@ public class MyGoogleMap {
 	         .width(5)
 	    .geodesic(true)));
 	}
+	private static int time;
+	
+	// locaiton1 for orign, locaiton 2 for destincation
+	public int travelingTime(String location1, String location2, String transportation
+			, String year, String month, String day, String hour, String minute){ 
+		new LocaitonReminder().execute(URLformation(location1, location2, transportation
+				, year, month, day, hour, minute));
+		return time;
+	}
     
 	public static class LocaitonReminder extends AsyncTask<String, Void, String>{
 		@Override
@@ -721,7 +734,6 @@ public class MyGoogleMap {
 	            conn.disconnect();
 	        }
 	    }
-			
 			return jsonResults.toString();
 	    }
 	 
@@ -731,10 +743,6 @@ public class MyGoogleMap {
 	 
 	    @Override
 	    protected void onProgressUpdate(Void... values) {
-	        // TODO Auto-generated method stub
-	        super.onProgressUpdate();
-	        
-			Toast.makeText(Localendar.instance, "Updating Map...", Toast.LENGTH_SHORT).show();
 	    }
 	   
 	    @Override
@@ -742,23 +750,33 @@ public class MyGoogleMap {
 	        // TODO Auto-generated method stub
 	        super.onPostExecute(jsonResults);
 	        
-	        String resultList = new String();
+	        String value = new String();
 	        List<LatLng> resultcoor = new ArrayList<LatLng>();
 	        try {
 	            JSONObject jsonObj = new JSONObject(jsonResults.toString());
 	            JSONArray routesJsonArray = jsonObj.getJSONArray("routes");
 	            if(!routesJsonArray.isNull(0)){
 	            	JSONObject routes = routesJsonArray.optJSONObject(0);
-	            	JSONObject overviewPolylines = routes.optJSONObject("overview_polyline");
-	            	resultList = overviewPolylines.optString("points");
+	            	JSONArray legs = routes.optJSONArray("legs");
+	            	JSONObject legsobj = legs.optJSONObject(0);
+	            	JSONObject duration = legsobj.optJSONObject("duration");
+	            	value = duration.optString("value");
 	            }
+//	            
+//	            JSONObject jsonObj = new JSONObject(jsonResults.toString());
+//	            JSONArray routesJsonArray = jsonObj.getJSONArray("routes");
+//	            if(!routesJsonArray.isNull(0)){
+//	            	JSONObject routes = routesJsonArray.optJSONObject(0);
+//	            	JSONObject overviewPolylines = routes.optJSONObject("overview_polyline");
+//	            	resultList = overviewPolylines.optString("points");
+//	            }
+	            
+	            
 	        } catch (JSONException e) {
 	            Log.e(LOG_TAG, "Cannot process JSON results", e);
 	        }
-	      	resultcoor = decode(resultList);	      	
-	      	drawPath(resultcoor);
-	      	
-//			Toast.makeText(Localendar.instance, "Map Updated!", Toast.LENGTH_SHORT).show();
+	      		time = Integer.valueOf(value);
+//			Toast.makeText(Localendar.instance, time, Toast.LENGTH_SHORT).show();
 	    }
 	 
 	    @Override
