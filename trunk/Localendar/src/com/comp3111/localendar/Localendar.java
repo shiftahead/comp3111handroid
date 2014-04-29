@@ -379,7 +379,7 @@ public class Localendar extends Activity implements OnClickListener, OnCheckedCh
 			MyCalendar.setViewModeToMonth(false);
 			setCalendarTitle();
 			return true;
-		case R.id.eventSearch : 
+		case R.id.event_search : 
 			Intent intent = new Intent(this, CalendarSearch.class);
 	    	startActivity(intent);
 			return true;

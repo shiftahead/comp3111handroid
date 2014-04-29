@@ -10,4 +10,7 @@
               <item android:id="@+id/go_to_today"
                     android:title="Go to Today"
                     android:orderInCategory="3"/>
+              <item android:id="@+id/event_search"
+                    android:title="Search Event"
+                    android:orderInCategory="4"/>
 </menu>

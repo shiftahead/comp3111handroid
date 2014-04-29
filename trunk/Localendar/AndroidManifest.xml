@@ -49,7 +49,8 @@
         <activity
             android:name="com.comp3111.localendar.Appstart"
             android:label="@string/app_name"
-            android:theme="@android:style/Theme.Black.NoTitleBar" >
+            android:theme="@android:style/Theme.Black.NoTitleBar"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -57,11 +58,13 @@
         </activity>
         <activity
             android:name="com.comp3111.localendar.Localendar"
-            android:theme="@style/Theme.MyAppThemeNoIcon" >
+            android:theme="@style/Theme.MyAppThemeNoIcon"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.comp3111.localendar.SigninActivity"
-            android:theme="@style/Theme.MyAppThemeNoIcon" >
+            android:theme="@style/Theme.MyAppThemeNoIcon"
+            android:screenOrientation="portrait" >
             <intent-filter >
                 <action android:name="com.comp3111.localendar.SigninActivity"> </action>
                 <category android:name="android.intent.category.DEFAULT"> </category>
@@ -69,42 +72,57 @@
         </activity>
         <activity
             android:name="com.comp3111.localendar.AboutusActivity"
-            android:theme="@style/Theme.MyAppThemeNoIcon" >
+            android:theme="@style/Theme.MyAppThemeNoIcon"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.comp3111.localendar.calendar.AlarmReceiverActivity"
-            android:theme="@android:style/Theme.Dialog">
+            android:theme="@android:style/Theme.Dialog"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name="com.comp3111.localendar.calendar.CalendarSearch"
-            android:theme="@android:style/Theme.Dialog">
+            android:theme="@android:style/Theme.Dialog"
+            android:screenOrientation="portrait">
+
         </activity>
         <activity
             android:name="com.comp3111.localendar.calendar.AddEventActivity"
-            android:theme="@style/Theme.MyAppThemeNoIcon" >
+            android:theme="@style/Theme.MyAppThemeNoIcon"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.comp3111.localendar.calendar.EditEventActivity"
-            android:theme="@style/Theme.MyAppThemeNoIcon" >
+            android:theme="@style/Theme.MyAppThemeNoIcon"
+            android:screenOrientation="portrait" >
         </activity>
 		<activity
             android:name="com.comp3111.localendar.calendar.EventDetailActivity"
-            android:theme="@style/Theme.MyAppThemeNoIcon" >
+            android:theme="@style/Theme.MyAppThemeNoIcon"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.comp3111.localendar.facebook.FacebookLogin"
-            android:theme="@style/Theme.MyAppThemeNoIcon" >
+            android:theme="@style/Theme.MyAppThemeNoIcon"
+            android:screenOrientation="portrait" >
+             <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter> 
         </activity>
+        
         <activity android:name="com.facebook.LoginActivity"
                   android:theme="@android:style/Theme.Translucent.NoTitleBar"
-                  android:label="@string/app_name" />
+                  android:label="@string/app_name"
+                  android:screenOrientation="portrait" />    
         <activity 
             android:name="com.comp3111.localendar.SettingsActivity"
-            android:theme="@style/Theme.MyAppTheme" >
+            android:theme="@style/Theme.MyAppThemeNoIcon"
+            android:screenOrientation="portrait" >
         </activity>
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyCcZ3-AwBu8X_y8zNQro_lJi0tCCq1yzEM" />
+            android:value="AIzaSyDXzFpt3VELu-UIGcX2UjYPKuvMnje-dqc" />
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
