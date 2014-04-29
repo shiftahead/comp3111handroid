@@ -10,6 +10,7 @@ import static com.comp3111.localendar.database.DatabaseConstants.DESCRIPTION;
 
 import java.util.ArrayList;
 
+import android.R.integer;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
@@ -60,6 +61,7 @@ public class CalendarSearch extends Activity{
         searchEditText = (EditText) findViewById(R.id.etSearch);
       }
 	public void searchEvent(String input) {
+		String id,location,Description,title;
 		ArrayList<String> matchList = new ArrayList<String>();
 		String[] from = {_ID, TITLE, DESCRIPTION, LOCATION,};
 		SQLiteDatabase db = MyCalendar.dbhelper.getReadableDatabase();
@@ -68,19 +70,22 @@ public class CalendarSearch extends Activity{
 			cursor.moveToFirst();
 		int i = 0;
 		while(cursor.moveToNext()){
-			String id = cursor.getString(cursor.getColumnIndex(_ID));
-			String location = cursor.getString(cursor.getColumnIndex(LOCATION));
-			String Description = cursor.getString(cursor.getColumnIndex(DESCRIPTION));
-			String title = cursor.getString(cursor.getColumnIndex(TITLE));
+			 id = cursor.getString(cursor.getColumnIndex(_ID));
+			 location = cursor.getString(cursor.getColumnIndex(LOCATION));
+			 Description = cursor.getString(cursor.getColumnIndex(DESCRIPTION));
+			 title = cursor.getString(cursor.getColumnIndex(TITLE));
 			if(ambigiousSearch(input, location) || ambigiousSearch(input, Description) || ambigiousSearch(input, title)){
 				i++;
 				matchList.add(id);
 			}
 		}
 		if(i!=0){
-			String eventId = cursor.getString(cursor.getColumnIndex(_ID));
-			Intent intent = new Intent (this,EventDetailActivity.class);	
-			intent.putExtra("ID", eventId);
+			Intent intent = new Intent (this,EventDetailActivity.class);
+			intent.putExtra("numbers", Integer.toString(i));
+            for(int j=0;j<i;j++){
+            	String index = matchList.get(j); 
+            	intent.putExtra("ID"+Integer.toString(j), index);
+            }
 			startActivity(intent);
 			finish();
 		}
