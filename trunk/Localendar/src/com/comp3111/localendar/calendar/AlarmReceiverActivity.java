@@ -2,12 +2,16 @@ package com.comp3111.localendar.calendar;
 
 import java.io.IOException;
 
+import com.comp3111.localendar.Localendar;
 import com.comp3111.localendar.R;
 import com.comp3111.localendar.R.*;
 
 import android.app.Activity;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationManager;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.RingtoneManager;
@@ -21,8 +25,12 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.comp3111.localendar.map.MyGoogleMap;
 import com.comp3111.localendar.map.Place;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.model.LatLng;
 
 public class AlarmReceiverActivity extends Activity{
 
@@ -43,6 +51,8 @@ public class AlarmReceiverActivity extends Activity{
                 WindowManager.LayoutParams.FLAG_DIM_BEHIND);
         setContentView(R.layout.alarm);
         
+
+		Toast.makeText(this, Double.toString(MyGoogleMap.mapInstance.getMyLocation().getLatitude()), Toast.LENGTH_SHORT).show();
         displayNotification();
         
         Button stopAlarm = (Button) findViewById(R.id.stopAlarm);
@@ -54,6 +64,7 @@ public class AlarmReceiverActivity extends Activity{
             }
         });
         playSound(this, getAlarmUri());
+        
     }
 
     private void displayNotification() {
