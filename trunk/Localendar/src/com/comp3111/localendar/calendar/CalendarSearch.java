@@ -81,9 +81,6 @@ public class CalendarSearch extends Activity{
 			 year= cursor.getString(cursor.getColumnIndex(YEAR));
 			 month= cursor.getString(cursor.getColumnIndex(MONTH));
 			 day= cursor.getString(cursor.getColumnIndex(DAY));
-			 int fakeMonth = Integer.parseInt(month); 
-			 int realMonth=fakeMonth-1;
-			 month=Integer.toString(realMonth);
 			 date=year+"/"+month+"/"+day;
 			// Toast.makeText(this, title, Toast.LENGTH_SHORT).show();
 			if(input==null || ambigiousSearch(input, location) || ambigiousSearch(input, Description) || ambigiousSearch(input, title)){
