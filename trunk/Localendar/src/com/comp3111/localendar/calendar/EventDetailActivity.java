@@ -167,7 +167,9 @@ public class EventDetailActivity extends Activity {
     	share.setType("text/plain");
     	startActivityForResult(share.getIntent(), 0);
 	}
+    
     public void addeventInGooglecalendar() {
+    	
     	Intent intent = new Intent(Intent.ACTION_INSERT);
 		intent.setType("vnd.android.cursor.item/event");
 		intent.putExtra(Events.TITLE, title);

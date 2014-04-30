@@ -2,6 +2,7 @@ package com.comp3111.localendar.calendar;
 
 import java.util.ArrayList;
 
+import android.R.integer;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import com.comp3111.localendar.R;
 public class SearchResult extends Activity{
 	private ArrayList<String> eventID = new ArrayList<String>();
 	private ArrayList<String> eventTitle = new ArrayList<String>();
+	private ArrayList<String> eventDate = new ArrayList<String>();
 	private String number;
 	private ListView listView;
 	
@@ -30,10 +32,27 @@ public class SearchResult extends Activity{
         for(int j = 0 ; j<i;j++){
         	String id = intent.getExtras().getString("ID"+Integer.toString(j));  
         	String title = intent.getExtras().getString("TITLE"+Integer.toString(j));  
+        	String time = intent.getExtras().getString("DATE"+Integer.toString(j));
         	eventID.add(id);
         	eventTitle.add(title);
+        	eventDate.add(time);
         }
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,eventTitle);
+        ArrayList<String> showView = new ArrayList<String>();
+        int max1=0,max2=0;
+        for(int k=0;k<i;k++){
+        	if(eventTitle.get(k).length()>max1) max1=eventTitle.get(k).length();
+        	if(eventDate.get(k).length()>max2) max2=eventDate.get(k).length();
+        }
+        for(int k=0;k<i;k++){
+        	int space = max1+max2-eventTitle.get(k).length()-eventDate.get(k).length();
+        	String spareString = createSpace(space);
+        	String finaString = eventTitle.get(k)+spareString+eventDate.get(k);
+        	showView.add(finaString);
+        }
+        
+        
+        
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,showView);
         listView.setAdapter(adapter);
         
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -53,5 +72,14 @@ public class SearchResult extends Activity{
 			}
 
           });
+	}
+	public String createSpace(int i) {
+		String number="     ";
+		while(i>0){
+			i--;
+			number+=" ";
+		}
+		
+		return number;
 	}
 }
