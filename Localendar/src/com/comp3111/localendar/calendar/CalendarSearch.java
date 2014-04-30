@@ -1,12 +1,14 @@
 package com.comp3111.localendar.calendar;
 
 import static android.provider.BaseColumns._ID;
-import static com.comp3111.localendar.database.DatabaseConstants.HOUR;
+import static com.comp3111.localendar.database.DatabaseConstants.YEAR;
 import static com.comp3111.localendar.database.DatabaseConstants.LOCATION;
-import static com.comp3111.localendar.database.DatabaseConstants.MINUTE;
+import static com.comp3111.localendar.database.DatabaseConstants.MONTH;
+import static com.comp3111.localendar.database.DatabaseConstants.DAY;
 import static com.comp3111.localendar.database.DatabaseConstants.TABLE_NAME;
 import static com.comp3111.localendar.database.DatabaseConstants.TITLE;
 import static com.comp3111.localendar.database.DatabaseConstants.DESCRIPTION;
+
 
 import java.util.ArrayList;
 
@@ -61,10 +63,11 @@ public class CalendarSearch extends Activity{
         searchEditText = (EditText) findViewById(R.id.etSearch);
       }
 	public void searchEvent(String input) {
-		String id,location,Description,title;
+		String id,location,Description,title,year,month,day,date;
 		ArrayList<String> matchList = new ArrayList<String>();
 		ArrayList<String> matchListTitle = new ArrayList<String>();
-		String[] from = {_ID, TITLE, DESCRIPTION, LOCATION,};
+		ArrayList<String> matchListDate = new ArrayList<String>();
+		String[] from = {_ID, TITLE, DESCRIPTION, LOCATION,YEAR,MONTH,DAY};
 		SQLiteDatabase db = MyCalendar.dbhelper.getReadableDatabase();
 		cursor = db.query(TABLE_NAME, from, null, null, null, null, null);
 		if(cursor!=null)
@@ -75,11 +78,19 @@ public class CalendarSearch extends Activity{
 			 location = cursor.getString(cursor.getColumnIndex(LOCATION));
 			 Description = cursor.getString(cursor.getColumnIndex(DESCRIPTION));
 			 title = cursor.getString(cursor.getColumnIndex(TITLE));
+			 year= cursor.getString(cursor.getColumnIndex(YEAR));
+			 month= cursor.getString(cursor.getColumnIndex(MONTH));
+			 day= cursor.getString(cursor.getColumnIndex(DAY));
+			 int fakeMonth = Integer.parseInt(month); 
+			 int realMonth=fakeMonth-1;
+			 month=Integer.toString(realMonth);
+			 date=year+"/"+month+"/"+day;
 			// Toast.makeText(this, title, Toast.LENGTH_SHORT).show();
 			if(input==null || ambigiousSearch(input, location) || ambigiousSearch(input, Description) || ambigiousSearch(input, title)){
 				i++;
 				matchList.add(id);
 				matchListTitle.add(title);
+				matchListDate.add(date);
 			}
 		}
 		if(i!=0){
@@ -90,6 +101,8 @@ public class CalendarSearch extends Activity{
             	intent.putExtra("ID"+Integer.toString(j), index);
             	String event = matchListTitle.get(j); 
             	intent.putExtra("TITLE"+Integer.toString(j), event);
+            	String eventDate = matchListDate.get(j); 
+            	intent.putExtra("DATE"+Integer.toString(j), eventDate);
             }
 			startActivity(intent);
 			finish();
