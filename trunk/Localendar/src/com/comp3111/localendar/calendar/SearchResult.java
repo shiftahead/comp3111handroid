@@ -18,6 +18,7 @@ public class SearchResult extends Activity{
 	private ArrayList<String> eventID = new ArrayList<String>();
 	private ArrayList<String> eventTitle = new ArrayList<String>();
 	private ArrayList<String> eventDate = new ArrayList<String>();
+	private ArrayList<String> showView = new ArrayList<String>();
 	private String number;
 	private ListView listView;
 	
@@ -37,7 +38,7 @@ public class SearchResult extends Activity{
         	eventTitle.add(title);
         	eventDate.add(time);
         }
-        ArrayList<String> showView = new ArrayList<String>();
+        
         int max1=0,max2=0;
         for(int k=0;k<i;k++){
         	if(eventTitle.get(k).length()>max1) max1=eventTitle.get(k).length();
@@ -63,7 +64,7 @@ public class SearchResult extends Activity{
 					long id) {
 				// TODO Auto-generated method stub
 				String itemString = (String)parent.getItemAtPosition(position);
-				int i = eventTitle.indexOf(itemString);
+				int i = showView.indexOf(itemString);
 				String event_id = eventID.get(i);
 				Intent intent = new Intent (SearchResult.this, EventDetailActivity.class);	
 				intent.putExtra("ID", event_id);
