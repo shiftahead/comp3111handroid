@@ -66,7 +66,6 @@ ResultCallback<People.LoadPeopleResult>, View.OnClickListener{
 	  
 	  private SignInButton mSignInButton;
 	  private Button mSignOutButton;
-	  private Button mRevokeButton;
 	  private TextView mStatus;
 	  private ListView mCirclesListView;
 	  private ArrayAdapter<String> mCirclesAdapter;
@@ -83,13 +82,11 @@ ResultCallback<People.LoadPeopleResult>, View.OnClickListener{
 	  
         mSignInButton = (SignInButton) findViewById(R.id.sign_in_button);
 	    mSignOutButton = (Button) findViewById(R.id.sign_out_button);
-	    mRevokeButton = (Button) findViewById(R.id.revoke_access_button);
 	    mStatus = (TextView) findViewById(R.id.sign_in_status);
 	    mCirclesListView = (ListView) findViewById(R.id.circles_list);
 	    
 	    mSignInButton.setOnClickListener(this);
 	    mSignOutButton.setOnClickListener(this);
-	    mRevokeButton.setOnClickListener(this);
 	    
 	    mCirclesList = new ArrayList<String>();
 	    mCirclesAdapter = new ArrayAdapter<String>(
@@ -160,18 +157,6 @@ ResultCallback<People.LoadPeopleResult>, View.OnClickListener{
 	            mGoogleApiClient.disconnect();
 	            mGoogleApiClient.connect();
 	            break;
-	          case R.id.revoke_access_button:
-	            // After we revoke permissions for the user with a GoogleApiClient
-	            // instance, we must discard it and create a new one.
-	            Plus.AccountApi.clearDefaultAccount(mGoogleApiClient);
-	            // Our sample has caches no user data from Google+, however we
-	            // would normally register a callback on revokeAccessAndDisconnect
-	            // to delete user data so that we comply with Google developer
-	            // policies.
-	            Plus.AccountApi.revokeAccessAndDisconnect(mGoogleApiClient);
-	            mGoogleApiClient = buildGoogleApiClient();
-	            mGoogleApiClient.connect();
-	            break;
 	      }
 	    }
 	  }
@@ -183,7 +168,6 @@ ResultCallback<People.LoadPeopleResult>, View.OnClickListener{
 	    // Update the user interface to reflect that the user is signed in.
 	    mSignInButton.setEnabled(false);
 	    mSignOutButton.setEnabled(true);
-	    mRevokeButton.setEnabled(true);
 	    
 	    // Retrieve some profile information to personalize our app for the user.
 	    Person currentUser = Plus.PeopleApi.getCurrentPerson(mGoogleApiClient);
@@ -300,7 +284,6 @@ ResultCallback<People.LoadPeopleResult>, View.OnClickListener{
 		    // Update the UI to reflect that the user is signed out.
 		    mSignInButton.setEnabled(true);
 		    mSignOutButton.setEnabled(false);
-		    mRevokeButton.setEnabled(false);
 		    
 		    mStatus.setText(R.string.status_signed_out);
 		    
