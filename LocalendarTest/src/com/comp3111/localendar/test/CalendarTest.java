@@ -65,8 +65,6 @@ public class CalendarTest extends ActivityInstrumentationTestCase2<Localendar>{
 	    Thread.sleep(200);
 	    solo.sendKey(Solo.MENU);
 	    Thread.sleep(200);
-	    //solo.clickOnMenuItem("Week");
-	    //Thread.sleep(200);
 	    solo.sendKey(Solo.MENU);
 	    Thread.sleep(200);
 	    solo.clickOnMenuItem("Month");
