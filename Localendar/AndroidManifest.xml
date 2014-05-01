@@ -117,12 +117,12 @@
                   android:screenOrientation="portrait" />    
         <activity 
             android:name="com.comp3111.localendar.SettingsActivity"
-            android:theme="@style/Theme.MyAppThemeNoIcon"
+            android:theme="@style/Theme.MyAppTheme"
             android:screenOrientation="portrait" >
         </activity>
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyDXzFpt3VELu-UIGcX2UjYPKuvMnje-dqc" />
+            android:value="AIzaSyCBkL7iCOQIsAyhPFGC4Baowxe19u61qs0" />
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />

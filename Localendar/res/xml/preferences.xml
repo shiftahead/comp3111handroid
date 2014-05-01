@@ -1,7 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+	<PreferenceCategory
+	    android:title="Default value" >
+	    <ListPreference
+	        android:key="duration_key"
+	        android:title="Default event duration"
+	        android:summary="Choose the default event duration"
+	        android:dialogTitle="Duration"
+	        android:entries="@array/default_event_duration_entries"
+	        android:entryValues="@array/default_event_duration_values" 
+	        android:defaultValue="1.5"/>
+	    <CheckBoxPreference
+	        android:key="is_complusory_key"
+	        android:defaultValue="false"
+	        android:summary="Is the event compulsory by default?"
+	        android:title="Compulsory event"/> 
+	    <ListPreference
+	        android:key="transportation_key"
+	        android:title="Default transportation"
+	        android:summary="Choose the default transportation"
+	        android:dialogTitle="Transportation"
+	        android:entries="@array/transportation"
+	        android:entryValues="@array/transportation" 
+	        android:defaultValue="Drive"/>
+	    <ListPreference
+	        android:key="marker_color_key"
+	        android:title="Default marker color"
+	        android:summary="Choose the default marker color shown on the map"
+	        android:dialogTitle="Marker color"
+	        android:entries="@array/default_marker_color_entries"
+	        android:entryValues="@array/default_marker_color_values" 
+	        android:defaultValue="Red"/> 
+	</PreferenceCategory>
 	<PreferenceCategory 
-	    android:title="">
+	    android:title="Notification" >
+	    <CheckBoxPreference
+	        android:key="vibrate_key"
+	        android:title="Vibrate"
+	        android:summary="Vibrate on notification" 
+	        android:defaultValue="true" />
+	    <RingtonePreference
+	        android:key="ring_tone_key"
+	        android:title="Default ringtone"
+	        android:summary="Choose the ringtone for notification"
+	        android:showSilent="true"
+	        android:defaultValue="content://settings/system/notification_sound"
+	        android:ringtoneType="notification"/>
+	</PreferenceCategory>
+	<PreferenceCategory 
+	    android:title="Miscellaneous">
        <Preference 
            android:title="Sign in with Google+">
            <intent
