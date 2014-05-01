@@ -20,6 +20,7 @@ import android.widget.TimePicker;
 import com.comp3111.localendar.Localendar;
 import com.comp3111.localendar.R;
 import com.comp3111.localendar.calendar.AddEventActivity;
+import com.comp3111.localendar.calendar.CalendarSearch;
 import com.comp3111.localendar.calendar.EditEventActivity;
 import com.comp3111.localendar.calendar.EventDetailActivity;
 import com.comp3111.localendar.support.ClearableAutoCompleteTextView;
@@ -313,5 +314,21 @@ public class CalendarTest extends ActivityInstrumentationTestCase2<Localendar>{
 	    solo.clickOnButton("CANCEL");
 	    Thread.sleep(5000);
 	}
-	
+	public void testSearchEvent() throws InterruptedException {
+		 Instrumentation instrumentation = getInstrumentation();
+	     Instrumentation.ActivityMonitor monitor = instrumentation.addMonitor(CalendarSearch.class.getName(), null, false);
+		  TouchUtils.tapView(this, calendar);
+		  Thread.sleep(500);
+		  solo.sendKey(Solo.MENU);
+		  Thread.sleep(1000);
+		  solo.sendKey(Solo.MENU);
+		  Thread.sleep(500);
+		  solo.clickOnMenuItem("Search");
+		  Thread.sleep(500);
+		  Activity currentActivity = getInstrumentation().waitForMonitorWithTimeout(monitor, 500);
+		  assertNotNull(currentActivity);
+		  Button cancelButton = (Button) currentActivity.findViewById(R.id.btnCancel);
+		  TouchUtils.tapView(this, cancelButton);
+		  Thread.sleep(500);
+	}
 }
