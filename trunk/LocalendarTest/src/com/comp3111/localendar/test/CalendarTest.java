@@ -5,6 +5,7 @@ import android.app.Instrumentation;
 import android.graphics.Point;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.TouchUtils;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -23,8 +24,10 @@ import com.comp3111.localendar.calendar.AddEventActivity;
 import com.comp3111.localendar.calendar.CalendarSearch;
 import com.comp3111.localendar.calendar.EditEventActivity;
 import com.comp3111.localendar.calendar.EventDetailActivity;
+import com.comp3111.localendar.calendar.SearchResult;
 import com.comp3111.localendar.support.ClearableAutoCompleteTextView;
 import com.comp3111.localendar.support.ClearableEditText;
+import com.google.android.gms.drive.internal.t;
 import com.robotium.solo.Solo;
 
 public class CalendarTest extends ActivityInstrumentationTestCase2<Localendar>{
@@ -314,7 +317,7 @@ public class CalendarTest extends ActivityInstrumentationTestCase2<Localendar>{
 	    solo.clickOnButton("CANCEL");
 	    Thread.sleep(5000);
 	}
-	public void testSearchEvent() throws InterruptedException {
+	public void testSearchEventCancel() throws InterruptedException {
 		 Instrumentation instrumentation = getInstrumentation();
 	     Instrumentation.ActivityMonitor monitor = instrumentation.addMonitor(CalendarSearch.class.getName(), null, false);
 		  TouchUtils.tapView(this, calendar);
@@ -324,11 +327,126 @@ public class CalendarTest extends ActivityInstrumentationTestCase2<Localendar>{
 		  solo.sendKey(Solo.MENU);
 		  Thread.sleep(500);
 		  solo.clickOnMenuItem("Search");
-		  Thread.sleep(500);
+		  Thread.sleep(1500);
 		  Activity currentActivity = getInstrumentation().waitForMonitorWithTimeout(monitor, 500);
 		  assertNotNull(currentActivity);
 		  Button cancelButton = (Button) currentActivity.findViewById(R.id.btnCancel);
+		  
 		  TouchUtils.tapView(this, cancelButton);
+	}
+	public void testSearchEventWithResult() throws InterruptedException {
+		 Instrumentation instrumentation = getInstrumentation();
+	     Instrumentation.ActivityMonitor monitor = instrumentation.addMonitor(CalendarSearch.class.getName(), null, false);
+		  TouchUtils.tapView(this, calendar);
 		  Thread.sleep(500);
+		  solo.sendKey(Solo.MENU);
+		  Thread.sleep(500);
+		  solo.sendKey(Solo.MENU);
+		  Thread.sleep(500);
+		  solo.clickOnMenuItem("Search");
+		  Thread.sleep(1500);
+		  Activity currentActivity = getInstrumentation().waitForMonitorWithTimeout(monitor, 500);
+		  assertNotNull(currentActivity);
+		  EditText inputText = (EditText) currentActivity.findViewById(R.id.etSearch);
+		  Button findButton = (Button) currentActivity.findViewById(R.id.btnFind);
+	  
+		  TouchUtils.tapView(this, inputText);
+		  Thread.sleep(300);
+		  this.sendKeys(KeyEvent.KEYCODE_H);
+		  Thread.sleep(500);
+		  this.sendKeys(KeyEvent.KEYCODE_ENTER);
+		  Thread.sleep(500);
+		  //set monitor to search result
+		  instrumentation.removeMonitor(monitor);
+		  monitor = instrumentation.addMonitor(SearchResult.class.getName(), null, false);
+		  TouchUtils.tapView(this, findButton);
+		  Thread.sleep(1500);
+		  currentActivity = getInstrumentation().waitForMonitorWithTimeout(monitor, 500);
+		  ListView listResut = (ListView) currentActivity.findViewById(R.id.result_list); 
+		  // set monitor to event detail
+		  instrumentation.removeMonitor(monitor);
+		  monitor = instrumentation.addMonitor(EventDetailActivity.class.getName(), null, false);
+		  View child = listResut.getChildAt(1);
+		  assertNotNull(child);
+		  Thread.sleep(500);
+		  solo.clickOnView(child);
+		  
+		  currentActivity = getInstrumentation().waitForMonitorWithTimeout(monitor, 500);
+		  assertNotNull(currentActivity);
+		  Thread.sleep(1500);
+		  currentActivity.finish();
+		
+	}
+	public void testSearchEventAllResult() throws InterruptedException {
+		 Instrumentation instrumentation = getInstrumentation();
+	     Instrumentation.ActivityMonitor monitor = instrumentation.addMonitor(CalendarSearch.class.getName(), null, false);
+		  TouchUtils.tapView(this, calendar);
+		  Thread.sleep(500);
+		  solo.sendKey(Solo.MENU);
+		  Thread.sleep(500);
+		  solo.sendKey(Solo.MENU);
+		  Thread.sleep(500);
+		  solo.clickOnMenuItem("Search");
+		  Thread.sleep(1500);
+		  Activity currentActivity = getInstrumentation().waitForMonitorWithTimeout(monitor, 500);
+		  assertNotNull(currentActivity);
+		  Button findButton = (Button) currentActivity.findViewById(R.id.btnFind);
+	      instrumentation.removeMonitor(monitor);
+		  monitor = instrumentation.addMonitor(SearchResult.class.getName(), null, false);
+		  TouchUtils.tapView(this, findButton);
+		  Thread.sleep(1500);
+		  currentActivity = getInstrumentation().waitForMonitorWithTimeout(monitor, 500);
+		  ListView listResut = (ListView) currentActivity.findViewById(R.id.result_list); 
+		  instrumentation.removeMonitor(monitor);
+		  monitor = instrumentation.addMonitor(EventDetailActivity.class.getName(), null, false);
+		  View child = listResut.getChildAt(0);
+		  assertNotNull(child);
+		  Thread.sleep(500);
+		  solo.clickOnView(child);
+		  currentActivity = getInstrumentation().waitForMonitorWithTimeout(monitor, 500);
+		  assertNotNull(currentActivity);
+		  Thread.sleep(1500);
+		  currentActivity.finish();
+	}
+	public void testSearchEventNoResult() throws InterruptedException {
+		 Instrumentation instrumentation = getInstrumentation();
+	     Instrumentation.ActivityMonitor monitor = instrumentation.addMonitor(CalendarSearch.class.getName(), null, false);
+		  TouchUtils.tapView(this, calendar);
+		  Thread.sleep(500);
+		  solo.sendKey(Solo.MENU);
+		  Thread.sleep(500);
+		  solo.sendKey(Solo.MENU);
+		  Thread.sleep(500);
+		  solo.clickOnMenuItem("Search");
+		  Thread.sleep(1500);
+		  Activity currentActivity = getInstrumentation().waitForMonitorWithTimeout(monitor, 500);
+		  assertNotNull(currentActivity);
+		  EditText inputText = (EditText) currentActivity.findViewById(R.id.etSearch);
+		  Button findButton = (Button) currentActivity.findViewById(R.id.btnFind);
+	  
+		  TouchUtils.tapView(this, inputText);
+		  Thread.sleep(300);
+		  this.sendKeys(KeyEvent.KEYCODE_H);
+		  Thread.sleep(500);
+		  this.sendKeys(KeyEvent.KEYCODE_H);
+		  Thread.sleep(500);
+		  this.sendKeys(KeyEvent.KEYCODE_H);
+		  Thread.sleep(500);
+		  this.sendKeys(KeyEvent.KEYCODE_H);
+		  Thread.sleep(500);
+		  this.sendKeys(KeyEvent.KEYCODE_H);
+		  Thread.sleep(500);
+		  this.sendKeys(KeyEvent.KEYCODE_H);
+		  Thread.sleep(500);
+		  this.sendKeys(KeyEvent.KEYCODE_H);
+		  Thread.sleep(500);
+		  this.sendKeys(KeyEvent.KEYCODE_ENTER);
+		  Thread.sleep(500);
+		  
+		  TouchUtils.tapView(this, findButton);
+		  Thread.sleep(5000);
+		  
+		  currentActivity.finish();
+		
 	}
 }
