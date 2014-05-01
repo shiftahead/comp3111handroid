@@ -4,8 +4,10 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.preference.Preference;
 import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -14,6 +16,7 @@ import android.widget.Toast;
 
 public class SettingsActivity extends Activity {
 
+	
 	 @Override
 	    protected void onCreate(Bundle savedInstanceState) {
 	        super.onCreate(savedInstanceState);
@@ -50,6 +53,7 @@ public class SettingsActivity extends Activity {
 		 super.startActivity(intent);
 		 overridePendingTransition(R.anim.right_in,R.anim.left_out);	 
 	 }
+	 
 	 
 	 
 	 private void addShortcut() {

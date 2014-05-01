@@ -28,6 +28,34 @@
         <item>1.5 hours ahead</item>
         <item>2 hours ahead</item>
         </string-array>
+        
+      <string-array name="default_event_duration_entries">
+        <item>15 mins</item>
+        <item>30 mins</item>
+        <item>1 hour</item>
+        <item>1.5 hours</item>
+        <item>2 hours</item>
+        </string-array>
+        
+      <string-array name="default_event_duration_values">
+          <item>0.25</item>
+          <item>0.5</item>
+          <item>1</item>
+          <item>1.5</item>
+          <item>2</item>
+      </string-array>
+      
+      <string-array name="default_marker_color_entries">
+        <item>Red</item>
+        <item>Green</item>
+        <item>Blue</item>
+        </string-array>
+        
+      <string-array name="default_marker_color_values">
+        <item>Red</item>
+        <item>Green</item>
+        <item>Blue</item>
+        </string-array>
 
     <string name="title_activity_main_tab">Main</string>
     <string name="title_activity_calendar">Calendar</string>
