@@ -5,7 +5,6 @@
 	    <ListPreference
 	        android:key="duration_key"
 	        android:title="Default event duration"
-	        android:summary="Choose the default event duration"
 	        android:dialogTitle="Duration"
 	        android:entries="@array/default_event_duration_entries"
 	        android:entryValues="@array/default_event_duration_values" 
@@ -18,7 +17,6 @@
 	    <ListPreference
 	        android:key="transportation_key"
 	        android:title="Default transportation"
-	        android:summary="Choose the default transportation"
 	        android:dialogTitle="Transportation"
 	        android:entries="@array/transportation"
 	        android:entryValues="@array/transportation" 
@@ -26,7 +24,6 @@
 	    <ListPreference
 	        android:key="marker_color_key"
 	        android:title="Default marker color"
-	        android:summary="Choose the default marker color shown on the map"
 	        android:dialogTitle="Marker color"
 	        android:entries="@array/default_marker_color_entries"
 	        android:entryValues="@array/default_marker_color_values" 
@@ -41,10 +38,9 @@
 	        android:defaultValue="true" />
 	    <RingtonePreference
 	        android:key="ring_tone_key"
-	        android:title="Default ringtone"
-	        android:summary="Choose the ringtone for notification"
+	        android:title="Default notification ringtone"
 	        android:showSilent="true"
-	        android:defaultValue="content://settings/system/notification_sound"
+	        
 	        android:ringtoneType="notification"/>
 	</PreferenceCategory>
 	<PreferenceCategory 
