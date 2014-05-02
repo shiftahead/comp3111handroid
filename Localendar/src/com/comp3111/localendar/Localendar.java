@@ -66,7 +66,7 @@ import android.widget.Toast;
 import com.comp3111.localendar.calendar.AddEventActivity;
 import com.comp3111.localendar.calendar.CalendarSearch;
 import com.comp3111.localendar.calendar.MyCalendar;
-import com.comp3111.localendar.facebook.FacebookLogin;
+//import com.comp3111.localendar.facebook.FacebookLogin;
 import com.comp3111.localendar.map.MyGoogleMap;
 import com.comp3111.localendar.map.Place;
 import com.comp3111.localendar.support.ClearableAutoCompleteTextView;
@@ -375,6 +375,7 @@ public class Localendar extends Activity implements OnClickListener, OnCheckedCh
 		case R.id.go_to_today :
 			calendar = Calendar.getInstance();
 			MyCalendar.calendarInstance.refresh();
+			MyGoogleMap.refresh("");
 			MyCalendar.setTimeInMillis(calendar.getTimeInMillis());
 			MyCalendar.setViewModeToMonth(false);
 			setCalendarTitle();
