@@ -96,6 +96,8 @@ public class SettingsFragment extends PreferenceFragment implements OnSharedPref
         mTransportation.setOnPreferenceChangeListener(listener);
         mMarker.setOnPreferenceChangeListener(listener);
         mRingtone.setOnPreferenceChangeListener(listener);
+        mVibrate.setOnPreferenceChangeListener(listener);
+        mCompulsory.setOnPreferenceChangeListener(listener);
     }
     
     @Override
@@ -110,6 +112,7 @@ public class SettingsFragment extends PreferenceFragment implements OnSharedPref
 	        SharedPreferences prefs = context.getSharedPreferences(
 	                SettingsFragment.SHARED_PREFS_NAME, Context.MODE_PRIVATE);
 	        String ringtone = prefs.getString(SettingsFragment.RINGTONE, null);
+            setRingTonePreference(context, ringtone);
 	        return ringtone;
 	    }
 
@@ -139,16 +142,16 @@ public class SettingsFragment extends PreferenceFragment implements OnSharedPref
         if (preference == mDuration) {
         	mDuration.setValue((String) newValue);
         	mDuration.setSummary(mDuration.getEntry());
-        	//prefs.edit().putString(SettingsFragment.DURATION, (String) newValue).apply();
+        	prefs.edit().putString(SettingsFragment.DURATION, (String) newValue).apply();
         } else if (preference == mTransportation) {
         	mTransportation.setValue((String) newValue);
         	mTransportation.setSummary(mTransportation.getEntry());
-        	//prefs.edit().putString(SettingsFragment.TRANSPORTATION, (String) newValue).apply();
+        	prefs.edit().putString(SettingsFragment.TRANSPORTATION, (String) newValue).apply();
         } 
           else if (preference == mMarker) {
         	mMarker.setValue((String) newValue);
         	mMarker.setSummary(mMarker.getEntry());
-        	//prefs.edit().putString(SettingsFragment.MARKER, (String) newValue).apply();
+        	prefs.edit().putString(SettingsFragment.MARKER, (String) newValue).apply();
         }
           else if (preference == mRingtone) {
             if (newValue instanceof String) {
@@ -157,7 +160,16 @@ public class SettingsFragment extends PreferenceFragment implements OnSharedPref
                 mRingtone.setSummary(ringtone == null ? "" : ringtone);
             }
             return true;
-        } else {
+        }
+          else if (preference == mVibrate) {
+        	  mVibrate.setChecked((Boolean) newValue);
+        	  return true;
+          }
+          else if (preference == mCompulsory) {
+        	  mCompulsory.setChecked((Boolean) newValue);
+        	  return true;
+          }
+          else {
             return true;
         }
         return false;
