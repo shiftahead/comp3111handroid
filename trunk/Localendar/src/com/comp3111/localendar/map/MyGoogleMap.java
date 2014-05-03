@@ -363,11 +363,8 @@ public class MyGoogleMap {
 		SQLiteDatabase db = MyCalendar.dbhelper.getReadableDatabase();
 		String selection = YEAR + " = " + (Localendar.calendar.getTime().getYear() + 1900) + " AND " +
 				MONTH + " = "  + (Localendar.calendar.getTime().getMonth() + 1) + " AND " +
-				DAY + " = " + Localendar.calendar.getTime().getDate();
-//		cursor = db.query(TABLE_NAME, from, null, null, null, null, null);
+				DAY + " = " + Localendar.calendar.getTime().getDate();;
 		cursor = db.query(TABLE_NAME, from, selection, null, null, null, HOUR + ", " + MINUTE);
-		
-
 				
 		while(cursor.moveToNext()){
 			location.add(cursor.getString(0));
@@ -383,13 +380,6 @@ public class MyGoogleMap {
 			int dummy = 0;
 			List<String> url= new ArrayList<String>();
 			while(location.size() > dummy+1){
-//				drawPath(path(Place.getPlaceFromAddress(location.get(dummy)), Place.getPlaceFromAddress(location.get(dummy+1)) ) );
-				//depricated 
-//				url.add(URLformation(location.get(dummy), location.get(dummy+1), transportation.get(dummy+1)
-//						, year.get(dummy+1), month.get(dummy+1), day.get(dummy+1), hour.get(dummy+1), minute.get(dummy+1)));
-//				drawPath(findingPath(location.get(dummy), location.get(dummy+1), transportation.get(dummy+1)
-//								, year.get(dummy+1), month.get(dummy+1), day.get(dummy+1), hour.get(dummy+1), minute.get(dummy+1)) );
-				
 				new DrawingPath().execute(URLformation(location.get(dummy), location.get(dummy+1), transportation.get(dummy+1)
 								, year.get(dummy+1), month.get(dummy+1), day.get(dummy+1), hour.get(dummy+1), minute.get(dummy+1)));
 				
@@ -400,7 +390,6 @@ public class MyGoogleMap {
 		
 	}
 	
-//	public static void refresh(){
 	public static void refresh(String id){
 		// refresh Marker
 		if(!id.isEmpty()){ //edit or delete events occur
@@ -409,35 +398,26 @@ public class MyGoogleMap {
 
 				String[] from = {_ID, TITLE, LOCATION, HOUR, MINUTE};
 				SQLiteDatabase db = MyCalendar.dbhelper.getReadableDatabase();
-				cursor = db.query(TABLE_NAME, from, null, null, null, null, null);
+				String selection = _ID + " = " + id;
+				cursor = db.query(TABLE_NAME, from, selection, null, null, null, null);
 				Boolean found = false;
-				ArrayList<String> locationl = new ArrayList<String>();
-							
-				while(cursor.moveToNext()){
-					locationl.add(cursor.getString(2));
-					if(cursor.getString(0).contentEquals(id)){ //edit events
-						String title = cursor.getString(1), location = cursor.getString(2)
+
+				while(cursor.moveToNext()){ //edit event
+					String title = cursor.getString(1), location = cursor.getString(2)
 								, hour = cursor.getString(3), minute = cursor.getString(4);
+					
+					Marker erasedmarker = markerList.get(marker_id.indexOf(id));
+					erasedmarker.remove();
+					addmarker(Place.getPlaceFromAddress(location), true, id + "." + title, new String(hour + ":" + minute));
 						
-						Marker erasedmarker = markerList.get(marker_id.indexOf(id));
-						erasedmarker.remove();
-						
-						addmarker(Place.getPlaceFromAddress(location), true, id + "." + title, new String(hour + ":" + minute));
-						
-						found = true;
-						break;
-					}
+					found = true;
 				}
+				
 				if(!found){//delete event
-					for(int i=0 ; i<marker_id.size() ; i++){
-						if(!locationl.contains(marker_id.get(i))){
-							Marker erasedmarker = markerList.get(i);
-							erasedmarker.remove();
-							markerList.remove(i);
-							marker_id.remove(i);
-							break;
-						}
-					}
+					int index = marker_id.indexOf(id);
+					markerList.get(index).remove();
+					marker_id.remove(id);
+					markerList.remove(index);
 				}
 			}
 		}
@@ -613,60 +593,6 @@ public class MyGoogleMap {
 	
 }
     
-// to be disposed
-//    public static List<LatLng> path(Place input1, Place input2) {
-//    	
-//    String resultList = new String();
-//    List<LatLng> resultcoor = new ArrayList<LatLng>();
-//	
-//    HttpURLConnection conn = null;
-//    StringBuilder jsonResults = new StringBuilder();
-//    try {
-//        StringBuilder sb = new StringBuilder(DIRECTIONS_API_BASE + OUT_JSON);
-//        sb.append("?origin="+String.valueOf(input1.getLatitude())+","+String.valueOf(input1.getLongitude()));
-//        sb.append("&destination="+String.valueOf(input2.getLatitude())+","+String.valueOf(input2.getLongitude()));
-//        sb.append("&sensor=false");
-//        
-//
-//        URL url = new URL(sb.toString());
-//        conn = (HttpURLConnection) url.openConnection();
-//        InputStreamReader in = new InputStreamReader(conn.getInputStream());
-//
-//        // Load the results into a StringBuilder
-//        int read;
-//        char[] buff = new char[1024];
-//        while ((read = in.read(buff)) != -1) {
-//            jsonResults.append(buff, 0, read);
-//        }
-//    } catch (MalformedURLException e) {
-//        Log.e(LOG_TAG, "Error processing Places API URL", e);
-//        return resultcoor;
-//    } catch (IOException e) {
-//        Log.e(LOG_TAG, "Error connecting to Places API", e);
-//        return resultcoor;
-//    } finally {
-//        if (conn != null) {
-//            conn.disconnect();
-//        }
-//    }
-//
-//    try {
-//        JSONObject jsonObj = new JSONObject(jsonResults.toString());
-//        JSONArray routesJsonArray = jsonObj.optJSONArray("routes");
-//        JSONObject routes = routesJsonArray.optJSONObject(0);
-//        JSONObject overviewPolylines = routes.optJSONObject("overview_polyline");
-//        resultList = overviewPolylines.optString("points");
-//        
-//    } catch (JSONException e) {
-//        Log.e(LOG_TAG, "Cannot process JSON results", e);
-//    }
-//    
-//   	resultcoor = decode(resultList);
-//    
-//	return resultcoor;
-//	
-//    }
-    
     private static String timeCalculation(String syear, String smonth, String sday, String shour, String sminute){
     	
     	Calendar time = new GregorianCalendar(Integer.parseInt(syear), Integer.parseInt(smonth), 
@@ -837,7 +763,16 @@ public class MyGoogleMap {
 		}
 	}
 	
-	
+	public static int pathVisibility(){  // 0 no path, 1 show path, -1 hide path 
+		int path = 0;
+		if(pathList.isEmpty())
+			return 0;
+		if(pathList.get(0).isVisible())
+			return 1;
+		else
+			return -1;
+		
+	}
 	
 
 }
