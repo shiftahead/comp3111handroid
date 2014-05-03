@@ -69,6 +69,7 @@ import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 import com.google.android.gms.maps.GoogleMap.OnMarkerDragListener;
 import com.google.android.gms.maps.GoogleMap.OnMyLocationButtonClickListener;
 import com.google.android.gms.maps.UiSettings;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -92,7 +93,8 @@ public class MyGoogleMap {
 	private static ArrayList<Marker> markerList = null;
 	private static ArrayList<String> marker_id = null;
 	
-	private static DrawingPath path = null;
+	private static float DEFAULTMARKERCOLOR = BitmapDescriptorFactory.HUE_RED;
+	
 		    
 	public MyGoogleMap(GoogleMap map) {
 		mapInstance = this;
@@ -171,14 +173,14 @@ public class MyGoogleMap {
 	
 	public void setMapListener(){
 		localendarMap.setOnMapLongClickListener(new OnMapLongClickListener() {
-
+// Location returned from coordinate is not accurate enough to implement addmarker function. 
 	             @Override
 	             public void onMapLongClick(LatLng arg0) {
 	                 // TODO Auto-generated method stub
-	                 Log.d("arg0", arg0.latitude + "-" + arg0.longitude);
-	                 Place place;
-	                 place = Place.getPlaceFromCoordinate(arg0.latitude, arg0.longitude);
-	         		Toast.makeText(Localendar.instance, place.getName(), Toast.LENGTH_SHORT).show();
+//	                 Log.d("arg0", arg0.latitude + "-" + arg0.longitude);
+//	                 Place place;
+//	                 place = Place.getPlaceFromCoordinate(arg0.latitude, arg0.longitude);
+//	         		Toast.makeText(Localendar.instance, place.getName(), Toast.LENGTH_SHORT).show();
 //	             	addmarker(Place.getPlaceFromAddress(placeSearch), true, placeSearch, "Click to add a event");
 	             }
 	         });
@@ -203,7 +205,8 @@ public class MyGoogleMap {
 		}
 		try{
 			ll = new LatLng(place.getLatitude(), place.getLongitude());
-			newMarker = localendarMap.addMarker(new MarkerOptions().position(ll).draggable(true).title(title).snippet(time));
+			newMarker = localendarMap.addMarker(new MarkerOptions().position(ll).draggable(true).title(title).snippet(time).
+					icon((BitmapDescriptorFactory.defaultMarker(DEFAULTMARKERCOLOR))));
 		} catch(Exception e){
 			Toast.makeText(Localendar.instance, "The place cannot be shown on the map", Toast.LENGTH_SHORT).show();
 			return false;
@@ -233,18 +236,26 @@ public class MyGoogleMap {
 
 		
 		 localendarMap.setOnMarkerDragListener(new OnMarkerDragListener() {
-			 
-//        	 final ImageView deleteMarker = (Localendar.instance).deleteMarker;
-//        	 final RadioGroup radio = (Localendar.instance).mainRadio;
-			 
 			 LatLng origMarkerPosition;
 			 
              @Override
              public void onMarkerDragStart(Marker arg0) {
-            	 origMarkerPosition = arg0.getPosition();
+            	 
+ 				Cursor cursor;
+ 				String[] from = {_ID, LOCATION};
+ 				SQLiteDatabase db = MyCalendar.dbhelper.getReadableDatabase();
+ 				cursor = db.query(TABLE_NAME, from, "_ID="+marker_id.get(markerList.indexOf(arg0)), null, null, null, null);
+ 				String location = null;
+ 				while(cursor.moveToNext()){
+ 					location = cursor.getString(1);
+ 				}
+ 				Place plocation = Place.getPlaceFromAddress(location);
+
+ 				origMarkerPosition = new LatLng(plocation.getLatitude(), plocation.getLongitude());
+//            	 origMarkerPosition = arg0.getPosition();
             	 Localendar.instance.mainRadio.setVisibility(View.GONE);
             	 Localendar.instance.deleteMarker.setVisibility(View.VISIBLE);
-            	 
+            	 arg0.setAlpha((float) 0.6);
              }
              
              @Override
@@ -255,14 +266,13 @@ public class MyGoogleMap {
          	        trashBin.setImageResource(R.drawable.cancel_button_pressed);
         	    } else
         	    	trashBin.setImageResource(R.drawable.cancel_button_normal);
-
             }
              
              @Override
              public void onMarkerDragEnd(Marker arg0) {
+            	 arg0.setAlpha((float) 1);
             	 Localendar.instance.mainRadio.setVisibility(View.VISIBLE);
             	 Localendar.instance.deleteMarker.setVisibility(View.GONE);
-            	 
             	 final ImageView trashBin = Localendar.instance.deleteMarker;
             	 Point markerScreenPosition = localendarMap.getProjection().toScreenLocation(arg0.getPosition());
             	 
@@ -312,6 +322,30 @@ public class MyGoogleMap {
 			}
 		});
 	}	
+	
+	public static void setMarkerColor(String color){
+		if(color.contentEquals("Blue"))
+			for(Marker marker: markerList){
+				marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+			}
+		if(color.contentEquals("Green"))
+			for(Marker marker: markerList){
+				marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+			}
+		if(color.contentEquals("Red"))
+			for(Marker marker: markerList){
+				marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+			}
+	}
+	
+	public static void setDefaultMarkerCoor(String color){
+		if(color.contentEquals("Blue"))
+			DEFAULTMARKERCOLOR = BitmapDescriptorFactory.HUE_BLUE;
+		if(color.contentEquals("Green"))
+			DEFAULTMARKERCOLOR = BitmapDescriptorFactory.HUE_GREEN;
+		if(color.contentEquals("Red"))
+			DEFAULTMARKERCOLOR = BitmapDescriptorFactory.HUE_RED;
+	}
 	
 	
 	// have to be arranged according to time
@@ -700,7 +734,7 @@ public class MyGoogleMap {
 	         .width(5)
 	    .geodesic(true)));
 	}
-	private static long time;
+	private static long time = 0;
 	
 	// locaiton1 for orign, locaiton 2 for destincation
 	public static long travelingTime(String location1, String location2, String transportation
@@ -789,6 +823,21 @@ public class MyGoogleMap {
 	    protected void onCancelled() {
 	    }
 	}
+	
+	public static void showPath(){
+		for(Polyline Line: pathList){
+			Line.setVisible(true);
+		}
+	}
+	
+
+	public static void hidePath(){
+		for(Polyline Line: pathList){
+			Line.setVisible(false);
+		}
+	}
+	
+	
 	
 
 }

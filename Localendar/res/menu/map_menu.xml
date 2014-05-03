@@ -31,4 +31,13 @@
                     android:orderInCategory = "3"/>
           </menu>   
     </item>
+    	<item android:id="@+id/show_path"
+          android:title="Show Path"
+          android:orderInCategory="3">
+    	</item>
+    	
+    		<item android:id="@+id/hide_path"
+        	  android:title="Hide Path"
+         	 android:orderInCategory="3">
+    		</item>
 </menu>
