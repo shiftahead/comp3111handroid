@@ -13,4 +13,5 @@
   * [Minutes9 9th meeting on Apr. 15]
   * [Minutes10 10th meeting on Apr. 23]
   * [Minutes11 11th meeting on Apr. 29]
+  * [Minutes12 12th meeting on May 4]
  * [https://code.google.com/p/comp3111handroid/w/list All Wiki pages]
