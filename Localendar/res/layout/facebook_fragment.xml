@@ -5,8 +5,22 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    
-
+     <ImageView
+        android:id="@+id/facebook_photo"
+        android:layout_gravity="center_horizontal" 
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="60dp" />
+     
+     <TextView   
+    	android:layout_height="wrap_content"   
+        android:layout_width="wrap_content"  
+        android:layout_gravity="center_horizontal" 
+        android:id="@+id/facebook_username"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        android:layout_marginTop="20dp" />
+	
     <com.facebook.widget.LoginButton
         android:id="@+id/fb_auth_button"
         android:layout_width="wrap_content"
@@ -15,9 +29,13 @@
         android:layout_marginTop="60dp" />
 	<Button
 	    android:id="@+id/fb_share_button"
-	    android:text="Share Localendar"
+	    android:text="  Share Localendar  "
+	    android:textSize="16sp"
+	    android:textStyle="bold"
+	    android:textColor="@android:color/white"
 	    android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/facebook_button"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="60dp"  />
+        android:layout_marginTop="30dp"  />
 </LinearLayout>
