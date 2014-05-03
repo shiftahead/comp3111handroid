@@ -357,6 +357,22 @@ public class Localendar extends Activity implements OnClickListener, OnCheckedCh
 	    }
 	    else if(currentTabIndex == 1) {
 	    	getMenuInflater().inflate(R.menu.map_menu, menu);
+	    	
+			MenuItem showPathMenue = menu.findItem(R.id.show_path), hidePathMenue = menu.findItem(R.id.hide_path);
+	    	switch (MyGoogleMap.pathVisibility()) {
+	    		case 0:
+		    		showPathMenue.setVisible(false);
+		    		hidePathMenue.setVisible(false);
+		    		break;
+	    		case 1:
+		    		showPathMenue.setVisible(false);
+		    		hidePathMenue.setVisible(true);
+		    		break;
+	    		case -1:
+		    		showPathMenue.setVisible(true);
+		    		hidePathMenue.setVisible(false);
+		    		break;
+	    	}
 	    }
 	    return super.onPrepareOptionsMenu(menu);
 	}
