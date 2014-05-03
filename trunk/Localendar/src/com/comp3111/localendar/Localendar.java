@@ -66,7 +66,7 @@ import android.widget.Toast;
 import com.comp3111.localendar.calendar.AddEventActivity;
 import com.comp3111.localendar.calendar.CalendarSearch;
 import com.comp3111.localendar.calendar.MyCalendar;
-//import com.comp3111.localendar.facebook.FacebookLogin;
+import com.comp3111.localendar.facebook.FacebookLogin;
 import com.comp3111.localendar.map.MyGoogleMap;
 import com.comp3111.localendar.map.Place;
 import com.comp3111.localendar.support.ClearableAutoCompleteTextView;
@@ -392,6 +392,21 @@ public class Localendar extends Activity implements OnClickListener, OnCheckedCh
 			return true;
 		case R.id.map_hybrid :
 			MyGoogleMap.localendarMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+			return true;
+		case R.id.map_blue:
+			MyGoogleMap.setMarkerColor("Blue");
+			return true;
+		case R.id.map_red:
+			MyGoogleMap.setMarkerColor("Red");
+			return true;
+		case R.id.map_green:
+			MyGoogleMap.setMarkerColor("Green");
+			return true;
+		case R.id.show_path:
+			MyGoogleMap.showPath();
+			return true;
+		case R.id.hide_path:
+			MyGoogleMap.hidePath();
 			return true;
 		}
 	

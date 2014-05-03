@@ -187,6 +187,7 @@ public class MyCalendar extends Fragment {
 								Localendar.calendar.setTimeInMillis(Localendar.calendar.getTimeInMillis() - DAY_IN_MILLISECOND);
 								Localendar.instance.setCalendarTitle();
 								refresh();
+								MyGoogleMap.refresh("");
 								Animation am2 = AnimationUtils.loadAnimation(Localendar.instance,R.anim.up_in);
 								eventList.startAnimation(am2);
 							}
@@ -206,6 +207,7 @@ public class MyCalendar extends Fragment {
 								Localendar.calendar.setTimeInMillis(Localendar.calendar.getTimeInMillis() + DAY_IN_MILLISECOND);
 								Localendar.instance.setCalendarTitle();
 								refresh();
+								MyGoogleMap.refresh("");
 								Animation am2 = AnimationUtils.loadAnimation(Localendar.instance,R.anim.down_in);
 								eventList.startAnimation(am2);
 							}
@@ -272,6 +274,7 @@ public class MyCalendar extends Fragment {
 									Localendar.calendar.setTimeInMillis(Localendar.calendar.getTimeInMillis() - DAY_IN_MILLISECOND);
 									Localendar.instance.setCalendarTitle();
 									refresh();
+									MyGoogleMap.refresh("");
 									Animation am2 = AnimationUtils.loadAnimation(Localendar.instance,R.anim.up_in);
 									eventList.startAnimation(am2);
 								}
@@ -290,6 +293,7 @@ public class MyCalendar extends Fragment {
 								public void run(){
 									Localendar.calendar.setTimeInMillis(Localendar.calendar.getTimeInMillis() + DAY_IN_MILLISECOND);
 									Localendar.instance.setCalendarTitle();
+									MyGoogleMap.refresh("");
 									refresh();
 									Animation am2 = AnimationUtils.loadAnimation(Localendar.instance,R.anim.down_in);
 									eventList.startAnimation(am2);
