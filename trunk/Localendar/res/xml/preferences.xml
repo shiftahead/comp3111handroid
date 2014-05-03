@@ -10,7 +10,7 @@
 	        android:entryValues="@array/default_event_duration_values" 
 	        android:defaultValue="1.5"/>
 	    <CheckBoxPreference
-	        android:key="is_complusory_key"
+	        android:key="is_compulsory_key"
 	        android:defaultValue="false"
 	        android:summary="Is the event compulsory by default?"
 	        android:title="Compulsory event"/> 

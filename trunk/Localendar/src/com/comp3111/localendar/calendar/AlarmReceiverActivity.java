@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import com.comp3111.localendar.Localendar;
 import com.comp3111.localendar.R;
+import com.comp3111.localendar.SettingsFragment;
 import com.comp3111.localendar.R.*;
 
 import android.app.Activity;
@@ -126,7 +127,7 @@ public class AlarmReceiverActivity extends Activity{
     //Get an alarm sound. Try for an alarm. If none set, try notification, 
     //Otherwise, ringtone.
     private Uri getAlarmUri() {
-        Uri alert = RingtoneManager
+    	Uri alert = RingtoneManager
                 .getDefaultUri(RingtoneManager.TYPE_ALARM);
         if (alert == null) {
             alert = RingtoneManager

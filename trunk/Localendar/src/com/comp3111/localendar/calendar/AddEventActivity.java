@@ -1,53 +1,5 @@
 package com.comp3111.localendar.calendar;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-
-import com.comp3111.localendar.R;
-import com.comp3111.localendar.R.anim;
-import com.comp3111.localendar.R.id;
-import com.comp3111.localendar.R.layout;
-import com.comp3111.localendar.map.MyGoogleMap;
-import com.comp3111.localendar.map.Place;
-import com.comp3111.localendar.support.ClearableAutoCompleteTextView;
-import com.comp3111.localendar.support.ClearableEditText;
-import com.comp3111.localendar.support.PlacesAutoCompleteAdapter;
-
-import android.net.Uri;
-import android.os.Bundle;
-import android.provider.CalendarContract;
-import android.support.v4.app.NotificationCompat;
-import android.app.ActionBar;
-import android.app.Activity;
-import android.app.AlarmManager;
-import android.app.Fragment;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.ContentUris;
-import android.content.ContentValues;
-import android.content.Context;
-import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.view.View.OnClickListener;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.DatePicker;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
-import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.TimePicker;
-import android.widget.Toast;
 import static com.comp3111.localendar.database.DatabaseConstants.COMPULSORY;
 import static com.comp3111.localendar.database.DatabaseConstants.DAY;
 import static com.comp3111.localendar.database.DatabaseConstants.DESCRIPTION;
@@ -61,6 +13,37 @@ import static com.comp3111.localendar.database.DatabaseConstants.TABLE_NAME;
 import static com.comp3111.localendar.database.DatabaseConstants.TITLE;
 import static com.comp3111.localendar.database.DatabaseConstants.TRANSPORTATION;
 import static com.comp3111.localendar.database.DatabaseConstants.YEAR;
+
+import java.util.Calendar;
+
+import android.app.ActionBar;
+import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.ContentValues;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TimePicker;
+import android.widget.Toast;
+
+import com.comp3111.localendar.R;
+import com.comp3111.localendar.SettingsFragment;
+import com.comp3111.localendar.map.MyGoogleMap;
+import com.comp3111.localendar.support.ClearableAutoCompleteTextView;
+import com.comp3111.localendar.support.ClearableEditText;
+import com.comp3111.localendar.support.PlacesAutoCompleteAdapter;
 
 
 public class AddEventActivity extends Activity {
@@ -95,6 +78,12 @@ public class AddEventActivity extends Activity {
         LayoutInflater inflator = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View actionBarView = inflator.inflate(R.layout.addevent_actionbar, null);
         actionBar.setCustomView(actionBarView);
+        
+        SharedPreferences sharedPreferences = getSharedPreferences(SettingsFragment.SHARED_PREFS_NAME, Context.MODE_PRIVATE);
+        String defaultDuration = sharedPreferences.getString(SettingsFragment.DURATION, "1.5");
+        String defaultTransportation = sharedPreferences.getString(SettingsFragment.TRANSPORTATION, "Drive");
+        boolean isCompulsory = sharedPreferences.getBoolean(SettingsFragment.IS_COMPULSORY, false);
+        
 		
 		eventTitle = (ClearableEditText) findViewById(R.id.event_title);
 		eventDescription = (ClearableEditText) findViewById(R.id.event_description);
@@ -106,6 +95,38 @@ public class AddEventActivity extends Activity {
 		eventTransportation = (Spinner) findViewById(R.id.event_transportation);
 		eventReminderTime = (Spinner) findViewById(R.id.remind_time);
 		eventCompulsory = (CheckBox) findViewById(R.id.event_compulsory);
+		
+		if (defaultDuration.equals("0.25")) {
+			eventHour.setText("0");
+			eventMinute.setText("15");
+		} else if (defaultDuration.equals("0.5")) {
+			eventHour.setText("0");
+			eventMinute.setText("30");
+		} else if (defaultDuration.equals("1")) {
+			eventHour.setText("1");
+			eventMinute.setText("0");
+		} else if (defaultDuration.equals("1.5")) {
+			eventHour.setText("1");
+			eventMinute.setText("30");
+		} else if (defaultDuration.equals("2")) {
+			eventHour.setText("2");
+			eventMinute.setText("0");
+		}
+		
+		if (defaultTransportation.equals("Drive")) {
+			eventTransportation.setSelection(0);
+		} else if (defaultTransportation.equals("Public transportation")) {
+			eventTransportation.setSelection(1);
+		} else if (defaultTransportation.equals("On foot")) {
+			eventTransportation.setSelection(2);
+		}
+		
+		if (isCompulsory) {
+			eventCompulsory.setChecked(true);
+		} else {
+			eventCompulsory.setChecked(false);
+		}
+			
 		
 		eventTime.setIs24HourView(true);
 		eventLocation.setAdapter(new PlacesAutoCompleteAdapter(this, R.layout.autocomplete_result_list_item));
