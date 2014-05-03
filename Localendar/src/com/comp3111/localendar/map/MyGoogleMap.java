@@ -764,7 +764,6 @@ public class MyGoogleMap {
 	}
 	
 	public static int pathVisibility(){  // 0 no path, 1 show path, -1 hide path 
-		int path = 0;
 		if(pathList.isEmpty())
 			return 0;
 		if(pathList.get(0).isVisible())
