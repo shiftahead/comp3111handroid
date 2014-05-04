@@ -38,15 +38,15 @@ The minutes of the last meeting were approved without amendment.
 
 ===2. presentation===
 
-*1. Introduction (structure and relation of app)  Wang Ding
+*1. Introduction (structure and relation of app) -- Wang Ding
 
-*2. User story 
+*2. User story --Zeng Xiong
 
-*3 demo and fulfillment of requirement 
+*3 demo and fulfillment of requirement  -- Yang ji
 
 *4 Test coverage and UML －－zhang tian
 
-*5 Challenge ，lesson and  conclusion
+*5 Challenge ，lesson and  conclusion -- TAM Shih Lung
 
 == 4. Meeting adjournment and next meeting ==
 
