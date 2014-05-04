@@ -95,7 +95,6 @@ public class MyGoogleMap {
 	
 	private static float DEFAULTMARKERCOLOR = BitmapDescriptorFactory.HUE_RED;
 	
-		    
 	public MyGoogleMap(GoogleMap map) {
 		mapInstance = this;
 		localendarMap = map;
@@ -132,18 +131,10 @@ public class MyGoogleMap {
                                     return false;
                               }
                      });
-        
-//        drawPath(path(Place.getPlaceFromAddress("Tsim Sha Tsui Station, Tsim Sha Tsui").getLatLng(), Place.getPlaceFromAddress("Central").getLatLng() ) );
-        
-//        addmarker(Place.getPlaceFromAddress("HKUST (South), Clear Water Bay".replaceAll("\\s+","")), true);
-        
+       
         pathing();
         refresh("");
        
-		
-        
-//        drawPath();
-//        drawPath(path("China", "Beijing" ) );
         //set Marker called;
         setMarkerListener();
         setInfoWindowListener();
@@ -187,7 +178,6 @@ public class MyGoogleMap {
 	}
 	
 	//The function of addmarker and zoom the camera to the added marker if boolean zoomto is set to true;
-//	public static boolean addmarker(Place place, boolean zoomto){
 	public static boolean addmarker(Place place, boolean zoomto, String title, String time){
 		Marker newMarker = null;
 		LatLng ll = null;
@@ -225,10 +215,8 @@ public class MyGoogleMap {
 			@Override
 			public boolean onMarkerClick(Marker arg0) {
 				// TODO Auto-generated method stub
-//				arg0.remove();
 				//for testing
-				time = travelingTime("Tin Shui Wai", "Yuen Long", "Drive", "", "", "", "", "");
-				Toast.makeText(Localendar.instance, String.valueOf(time), Toast.LENGTH_SHORT).show();
+//				Toast.makeText(Localendar.instance, String.valueOf(time), Toast.LENGTH_SHORT).show();
 				return false;
 			}
 			
@@ -357,7 +345,7 @@ public class MyGoogleMap {
 				, transportation = new ArrayList<String>();		
 		Cursor cursor;
 		
-		Calendar today = Calendar.getInstance();
+//		Calendar today = Calendar.getInstance();
 		
 		String[] from = {LOCATION, YEAR, MONTH, DAY, HOUR, MINUTE, TRANSPORTATION};
 		SQLiteDatabase db = MyCalendar.dbhelper.getReadableDatabase();
@@ -378,7 +366,6 @@ public class MyGoogleMap {
 		
 		if(!location.isEmpty()){
 			int dummy = 0;
-			List<String> url= new ArrayList<String>();
 			while(location.size() > dummy+1){
 				new DrawingPath().execute(URLformation(location.get(dummy), location.get(dummy+1), transportation.get(dummy+1)
 								, year.get(dummy+1), month.get(dummy+1), day.get(dummy+1), hour.get(dummy+1), minute.get(dummy+1)));
@@ -441,8 +428,8 @@ public class MyGoogleMap {
         	if(mode.contentEquals("On foot"))
         		sb.append("walking");
         	if(mode.contentEquals("Public transportation")){
-        		sb.append("&arrival_time="+timeCalculation(arrival_year, arrival_month, arrival_day, arrival_hour, arrival_minute));
         		sb.append("transit");
+        		sb.append("&arrival_time="+timeCalculation(arrival_year, arrival_month, arrival_day, arrival_hour, arrival_minute));
         	}
         }
         return sb.toString();
@@ -527,72 +514,6 @@ public class MyGoogleMap {
     private static final String OUT_JSON = "/json"; 
 	private static final String DIRECTIONS_API_BASE = "http://maps.googleapis.com/maps/api/directions";
 	
-    public static List<LatLng> findingPath(String input1, String input2, String mode, 
-    		String arrival_year, String arrival_month, String arrival_day, String arrival_hour, String arrival_minute) {
-//    public static List<LatLng> findingPath(String input1, String input2){
-    	
-    String resultList = new String();
-    List<LatLng> resultcoor = new ArrayList<LatLng>();
-	
-    HttpURLConnection conn = null;
-    StringBuilder jsonResults = new StringBuilder();
-    try {
-    	//forming URL
-        StringBuilder sb = new StringBuilder(DIRECTIONS_API_BASE + OUT_JSON);
-        sb.append("?origin="+ input1.replaceAll("\\s+",""));
-        sb.append("&destination="+input2.replaceAll("\\s+",""));
-        sb.append("&sensor=false");
-        
-        if(!mode.contentEquals("Drive")){  //default is drive
-        	sb.append("&mode=");
-        	if(mode.contentEquals("On foot"))
-        		sb.append("walking");
-        	if(mode.contentEquals("Public transportation")){
-        		sb.append("&arrival_time="+timeCalculation(arrival_year, arrival_month, arrival_day, arrival_hour, arrival_minute));
-        		sb.append("transit");
-        	}
-        }
-        
-        URL url = new URL(sb.toString());
-        conn = (HttpURLConnection) url.openConnection();
-        InputStreamReader in = new InputStreamReader(conn.getInputStream());
-        
-        // Load the results into a StringBuilder
-        int read;
-        char[] buff = new char[1024];
-        while ((read = in.read(buff)) != -1) {
-            jsonResults.append(buff, 0, read);
-        }
-    } catch (MalformedURLException e) {
-        Log.e(LOG_TAG, "Error processing Places API URL", e);
-        return resultcoor;
-    } catch (IOException e) {
-        Log.e(LOG_TAG, "Error connecting to Places API", e);
-        return resultcoor;
-    } finally {
-        if (conn != null) {
-            conn.disconnect();
-        }
-    }
-    //getting encoded path
-    try {
-        JSONObject jsonObj = new JSONObject(jsonResults.toString());
-        JSONArray routesJsonArray = jsonObj.getJSONArray("routes");
-        if(!routesJsonArray.isNull(0)){
-        	JSONObject routes = routesJsonArray.optJSONObject(0);
-        	JSONObject overviewPolylines = routes.optJSONObject("overview_polyline");
-        	resultList = overviewPolylines.optString("points");
-        }
-    } catch (JSONException e) {
-        Log.e(LOG_TAG, "Cannot process JSON results", e);
-    }
-   //decode the path
-  	resultcoor = decode(resultList);
-    
-	return resultcoor;
-	
-}
-    
     private static String timeCalculation(String syear, String smonth, String sday, String shour, String sminute){
     	
     	Calendar time = new GregorianCalendar(Integer.parseInt(syear), Integer.parseInt(smonth), 
@@ -639,22 +560,8 @@ public class MyGoogleMap {
 
         return path;
     }
-   
-  //for testing purpose
-//	public static void drawPath(){
-//		List<LatLng> lat = new ArrayList<LatLng>(); 
-//		lat.add(new LatLng(22.3375, 114.2630));		
-//		lat.add(new LatLng(22.4515, 114.0081));
-//		lat.add(new LatLng(22.3184, 114.1699));
-//
-//		line.add(localenderMap.addPolyline(new PolylineOptions()
-//	    .addAll(lat)
-//	         .width(15)
-//	    .geodesic(true)));
-//	}
-	
+   	
 	public static void drawPath(List<LatLng> list){	
-//		if(!list.isEmpty())
 		pathList.add(localendarMap.addPolyline(new PolylineOptions()
 	    .addAll(list)
 	         .width(5)
@@ -728,15 +635,6 @@ public class MyGoogleMap {
 	            	JSONObject duration = legsobj.optJSONObject("duration");
 	            	value = duration.optString("value");
 	            }
-//	            
-//	            JSONObject jsonObj = new JSONObject(jsonResults.toString());
-//	            JSONArray routesJsonArray = jsonObj.getJSONArray("routes");
-//	            if(!routesJsonArray.isNull(0)){
-//	            	JSONObject routes = routesJsonArray.optJSONObject(0);
-//	            	JSONObject overviewPolylines = routes.optJSONObject("overview_polyline");
-//	            	resultList = overviewPolylines.optString("points");
-//	            }
-	            
 	            
 	        } catch (JSONException e) {
 	            Log.e(LOG_TAG, "Cannot process JSON results", e);
