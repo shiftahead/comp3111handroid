@@ -31,7 +31,7 @@ public class AboutusActivityTest extends ActivityInstrumentationTestCase2<Aboutu
     }
    public void testLink() throws InterruptedException{
 	   assertNotNull(link);
-	   //assertTrue(solo.searchText("https"));
+	   assertTrue(solo.searchText("https"));
 	   solo.clickOnText("https://code.google.com/p/comp3111handroid/");
 	   Thread.sleep(3000);
    }
