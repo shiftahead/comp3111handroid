@@ -66,6 +66,7 @@ public class AlarmReceiverActivity extends Activity{
 
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
+        requestWindowFeature(Window.PROGRESS_VISIBILITY_OFF);
         if(realTimeNeed >= expectTimeNeed){
 	        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 	        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND,
