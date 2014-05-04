@@ -78,13 +78,23 @@
 		                style="@style/main_tab_bottom" />  
 		     </RadioGroup>
 		     
- 			            <ImageButton
+                        <ImageButton
+		                android:id="@+id/facebookShare"
+		                android:layout_width="wrap_content"
+		                android:layout_height="wrap_content"
+		                 android:visibility="gone"
+		                 style="@style/main_tab_bottom"
+		                android:src="@drawable/ic_action_share"  />		
+             
+						<ImageButton
 		                android:id="@+id/deleteMarker"
 		                android:layout_width="wrap_content"
 		                android:layout_height="wrap_content"
 		                 android:visibility="gone"
-		                android:src="@drawable/cancel_button_normal" />
-        	 
+		                 style="@style/main_tab_bottom"
+		                android:src="@drawable/ic_action_discard" />
+              			            		    
+ 			            	 
     	</LinearLayout>     
        
     </RelativeLayout>
