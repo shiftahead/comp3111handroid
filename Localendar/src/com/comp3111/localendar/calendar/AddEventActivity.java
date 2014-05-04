@@ -266,6 +266,8 @@ public class AddEventActivity extends Activity {
     	intentAlarm.putExtra("hour", hour);
     	intentAlarm.putExtra("minute", minute);
     	intentAlarm.putExtra("venue", location);
+    	intentAlarm.putExtra("transportation", transportation);
+    	intentAlarm.putExtra("ExpectTimeNeeded", rt);
         PendingIntent pendingIntent = PendingIntent.getActivity(this,
                 1, intentAlarm, PendingIntent.FLAG_CANCEL_CURRENT);
     	
