@@ -6,29 +6,28 @@
         android:orientation="vertical" >
         <View
     		    android:layout_width="fill_parent"
-		    	android:layout_height="20dp"
+		    	android:layout_height="30dp"
 		    	android:background="@color/holo_light"/>
+        <View
+    		    android:layout_width="fill_parent"
+		    	android:layout_height="2dp"
+		    	android:background="@color/mid_blue"/>
         
         <ListView android:layout_width="fill_parent"   
                   android:layout_height="300dp"  
                   android:id="@+id/result_list" 
                   android:listSelector="@drawable/event_background" >
         </ListView>
-        
-        <View
-    		    android:layout_width="fill_parent"
-		    	android:layout_height="20dp"
-		    	android:background="@color/holo_light"/>
     	<View
     		    android:layout_width="fill_parent"
-		    	android:layout_height="2dp"
-		    	android:background="@color/mid_blue"/>
+		    	android:layout_height="1dp"
+		    	android:background="@color/gray"/>
     
         <Button
 			android:id="@+id/result_exit"
 			style="@style/main_tab_bottom"
 			android:gravity="center"
-			android:textSize="20sp"
+			android:textSize="14sp"
 			android:text="Cancel">		    
 		</Button> 
 		

@@ -28,7 +28,7 @@ public class SearchResult extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.search_result);
-        setTitle("Search Result");
+        setTitle("   Search Result");
         listView = (ListView) findViewById(R.id.result_list);
         exitButton = (Button) findViewById(R.id.result_exit);
         exitButton.setOnClickListener(this);
