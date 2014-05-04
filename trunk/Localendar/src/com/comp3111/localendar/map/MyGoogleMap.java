@@ -518,8 +518,10 @@ public class MyGoogleMap {
     	
     	Calendar time = new GregorianCalendar(Integer.parseInt(syear), Integer.parseInt(smonth), 
     								Integer.parseInt(sday), Integer.parseInt(shour), Integer.parseInt(sminute));
+    	
+    	
     	    	
-    	return String.valueOf(time.getTimeInMillis());
+    	return String.valueOf(time.getTimeInMillis()/1000);
     }
     
 	
@@ -624,7 +626,6 @@ public class MyGoogleMap {
 	        super.onPostExecute(jsonResults);
 	        
 	        String value = new String();
-	        List<LatLng> resultcoor = new ArrayList<LatLng>();
 	        try {
 	            JSONObject jsonObj = new JSONObject(jsonResults.toString());
 	            JSONArray routesJsonArray = jsonObj.getJSONArray("routes");
