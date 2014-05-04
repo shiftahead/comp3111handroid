@@ -12,7 +12,7 @@
     <style name="Theme.MyAppThemeNoIcon" parent="@style/Theme.MyAppTheme">
     	<item name="android:icon">@android:color/transparent</item>
     </style>
-    
+   
     <style name="main_tab_bottom">  
        <item name="android:textSize">@dimen/tab_text_size</item>  
        <item name="android:textColor">@color/tab_text_color</item>  

@@ -5,34 +5,52 @@
 	android:layout_height="match_parent"
 	android:orientation="vertical">
     
-    <TextView
-		android:text="Search: "
-		android:textAppearance="?android:attr/textAppearanceLarge"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content">      
-    </TextView>
+    <View
+    		    android:layout_width="fill_parent"
+		    	android:layout_height="20dp"
+		    	android:background="@color/holo_light"/>
+   
     <EditText
 		android:id="@+id/etSearch"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:inputType="none">       
     </EditText>
-    <LinearLayout
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content">
+    
+    <View
+    		    android:layout_width="fill_parent"
+		    	android:layout_height="20dp"
+		    	android:background="@color/holo_light"/>
+    <View
+    		    android:layout_width="fill_parent"
+		    	android:layout_height="2dp"
+		    	android:background="@color/mid_blue"/>
+   
+   <RadioGroup
+        	android:layout_width="fill_parent"
+        	android:layout_height="50dip"
+        	android:layout_gravity="bottom"
+        	android:gravity="center_vertical"
+        	android:orientation="horizontal" >
 		<Button
 			android:id="@+id/btnFind"
-			android:layout_width="0dp"
-			android:layout_height="wrap_content"
-			android:layout_weight="1"
-			android:text="Find">		    
+			style="@style/main_tab_bottom"
+			android:gravity="center"
+			android:textSize="20sp"
+			android:text="Confirm">		    
 		</Button>     
+		<View
+    		    android:layout_width="2dp"
+		    	android:layout_height="fill_parent"
+		    	android:background="@color/mid_blue"/>
+		
 		<Button
 			android:id="@+id/btnCancel"
-			android:layout_width="0dp"
-			android:layout_height="wrap_content"
-			android:layout_weight="1"
-			android:text="Cancel">		    
+			style="@style/main_tab_bottom"
+			android:gravity="center"
+			android:textSize="20sp"
+			android:text="Cancel">	
+				    
 		</Button> 
-    </LinearLayout>
+    </RadioGroup>
 </LinearLayout>
