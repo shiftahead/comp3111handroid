@@ -7,8 +7,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.comp3111.localendar.R;
-import com.facebook.HttpMethod;
-import com.facebook.LoggingBehavior;
 import com.facebook.Request;
 import com.facebook.Response;
 import com.facebook.Session;

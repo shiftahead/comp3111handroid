@@ -92,7 +92,7 @@ public class FacebookLogin extends FragmentActivity {
 			  params.putString("caption", "I am using Localendar");
 			  params.putString("description", "A wonderful location based calendar");
 			  params.putString("link", "https://code.google.com/p/comp3111handroid/");
-			  params.putString("picture", "https://comp3111handroid.googlecode.com/svn/trunk/Localendar/res/drawable-hdpi/localendar_logo.png");
+			  params.putString("picture", "https://comp3111handroid.googlecode.com/svn/trunk/Localendar/res/drawable-hdpi/small_logo_color.png");
 			  WebDialog feedDialog = (new WebDialog.FeedDialogBuilder(facebookInstance, Session.getActiveSession(),params))
 					  .setOnCompleteListener(new OnCompleteListener() {
 
@@ -141,7 +141,7 @@ public class FacebookLogin extends FragmentActivity {
 			  params.putString("caption", title);
 			  params.putString("description", "Time: "+time+". "+"Location: "+location+". "+"Description: "+description);
 			  params.putString("link", "https://code.google.com/p/comp3111handroid/");
-			  params.putString("picture", "https://comp3111handroid.googlecode.com/svn/trunk/Localendar/res/drawable-hdpi/localendar_logo.png");
+			  params.putString("picture", "https://comp3111handroid.googlecode.com/svn/trunk/Localendar/res/drawable-hdpi/small_logo_color.png");
 			  WebDialog feedDialog = (new WebDialog.FeedDialogBuilder(facebookInstance, Session.getActiveSession(),params))
 					  .setOnCompleteListener(new OnCompleteListener() {
 
