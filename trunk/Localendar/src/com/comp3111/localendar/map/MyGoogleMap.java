@@ -326,7 +326,7 @@ public class MyGoogleMap {
 			}
 	}
 	
-	public static void setDefaultMarkerCoor(String color){
+	public static void setDefaultMarkerColor(String color){
 		if(color.contentEquals("Blue"))
 			DEFAULTMARKERCOLOR = BitmapDescriptorFactory.HUE_BLUE;
 		if(color.contentEquals("Green"))
@@ -578,9 +578,11 @@ public class MyGoogleMap {
 	// locaiton1 for orign, locaiton 2 for destincation
 	public static long travelingTime(String location1, String location2, String transportation
 			, String year, String month, String day, String hour, String minute){ 
-		new LocaitonReminder().execute(URLformation(location1, location2, transportation
+//		new LocaitonReminder().execute(URLformation(location1, location2, transportation
+//				, year, month, day, hour, minute));
+		
+		return locationreminding(URLformation(location1, location2, transportation
 				, year, month, day, hour, minute));
-		return time;
 	}
     
 	public static class LocaitonReminder extends AsyncTask<String, Void, String>{
@@ -631,7 +633,7 @@ public class MyGoogleMap {
 	        
 	        String value = new String("0");
 	        try {
-	            JSONObject jsonObj = new JSONObject(jsonResults.toString());
+	            JSONObject jsonObj = new JSONObject(jsonResults);
 	            JSONArray routesJsonArray = jsonObj.getJSONArray("routes");
 	            if(!routesJsonArray.isNull(0)){
 	            	JSONObject routes = routesJsonArray.optJSONObject(0);
@@ -652,6 +654,58 @@ public class MyGoogleMap {
 	    protected void onCancelled() {
 	    }
 	}
+	
+	
+	
+	private static int locationreminding(String urlString){
+		HttpURLConnection conn = null;
+		StringBuilder jsonResults = new StringBuilder();
+		
+	try{
+        URL url = new URL(urlString);
+        conn = (HttpURLConnection) url.openConnection();
+        InputStreamReader in = new InputStreamReader(conn.getInputStream());
+        
+        // Load the results into a StringBuilder
+        int read;
+        char[] buff = new char[1024];
+        while ((read = in.read(buff)) != -1) {
+            jsonResults.append(buff, 0, read);
+        }
+    } catch (MalformedURLException e) {
+        Log.e(LOG_TAG, "Error processing Places API URL", e);
+        return -1;
+    } catch (IOException e) {
+        Log.e(LOG_TAG, "Error connecting to Places API", e);
+        return -1;
+    } finally {
+        if (conn != null) {
+            conn.disconnect();
+        }
+    }
+		String obejct = jsonResults.toString();
+
+        String value = new String("0");
+        try {
+            JSONObject jsonObj = new JSONObject(obejct);
+            JSONArray routesJsonArray = jsonObj.getJSONArray("routes");
+            if(!routesJsonArray.isNull(0)){
+            	JSONObject routes = routesJsonArray.optJSONObject(0);
+            	JSONArray legs = routes.optJSONArray("legs");
+            	JSONObject legsobj = legs.optJSONObject(0);
+            	JSONObject duration = legsobj.optJSONObject("duration");
+            	value = duration.optString("value");
+            }
+            
+        } catch (JSONException e) {
+            Log.e(LOG_TAG, "Cannot process JSON results", e);
+        }
+      		return Integer.valueOf(value);
+	
+	}
+	
+	
+	
 	
 	public static void showPath(){
 		for(Polyline Line: pathList){
