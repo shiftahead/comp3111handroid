@@ -137,13 +137,11 @@ public class CalendarTest extends ActivityInstrumentationTestCase2<Localendar>{
 	      EditText eventMinute = (EditText) currentActivity.findViewById(R.id.duration_minute);
 	      ClearableAutoCompleteTextView eventLocation = (ClearableAutoCompleteTextView) currentActivity.findViewById(R.id.event_location);
 	      Spinner eventTransportation = (Spinner) currentActivity.findViewById(R.id.event_transportation);
+	      Spinner eventRemindTime = (Spinner) currentActivity.findViewById(R.id.remind_time);
 	      CheckBox eventCompulsory = (CheckBox) currentActivity.findViewById(R.id.event_compulsory);
 	      Button confirmAdd = (Button) currentActivity.findViewById(R.id.confirm_add);
 	      Button cancelAdd = (Button) currentActivity.findViewById(R.id.cancel_add);
-	      
-	      Point size = new Point();
-	      currentActivity.getWindowManager().getDefaultDisplay().getSize(size);
-	      
+	      	      
 	      assertTrue(View.VISIBLE == eventTitle.getVisibility());
 	      
 	      solo.clickOnView(eventTitle);
@@ -172,10 +170,14 @@ public class CalendarTest extends ActivityInstrumentationTestCase2<Localendar>{
 	      Thread.sleep(500);
 	      solo.clickOnText("Drive");
 	      Thread.sleep(500);
+	      solo.clickOnView(eventRemindTime);
+	      Thread.sleep(500);
+	      solo.clickOnText("5 minutes ahead");
+	      Thread.sleep(500);	      
 	      //TouchUtils.tapView(this, eventCompulsory);
 	      solo.clickOnView(confirmAdd);
-	      Thread.sleep(2000);
-	      
+	      Thread.sleep(500);
+	      solo.clickOnText("Stop");
 	      currentActivity.finish();
 	}
 	public void testAddnewEvent() throws InterruptedException {
@@ -196,6 +198,7 @@ public class CalendarTest extends ActivityInstrumentationTestCase2<Localendar>{
 	      EditText eventMinute = (EditText) currentActivity.findViewById(R.id.duration_minute);
 	      ClearableAutoCompleteTextView eventLocation = (ClearableAutoCompleteTextView) currentActivity.findViewById(R.id.event_location);
 	      Spinner eventTransportation = (Spinner) currentActivity.findViewById(R.id.event_transportation);
+	      Spinner eventRemindTime = (Spinner) currentActivity.findViewById(R.id.remind_time);
 	      CheckBox eventCompulsory = (CheckBox) currentActivity.findViewById(R.id.event_compulsory);
 	      Button confirmAdd = (Button) currentActivity.findViewById(R.id.confirm_add);
 	      Button cancelAdd = (Button) currentActivity.findViewById(R.id.cancel_add);
@@ -218,25 +221,31 @@ public class CalendarTest extends ActivityInstrumentationTestCase2<Localendar>{
 	      solo.clickOnView(eventLocation);
 	      this.sendKeys("H ENTER");
 	      Thread.sleep(500);
-	      this.sendKeys("O ENTER");
+	      this.sendKeys("K ENTER");
 	      Thread.sleep(500);
-	      this.sendKeys("N ENTER");
+	      this.sendKeys("U ENTER");
 	      Thread.sleep(500);
-	      this.sendKeys("G ENTER");
+	      this.sendKeys("S ENTER");
 	      Thread.sleep(500);
-	      assertEquals(eventLocation.getAdapter().getItem(1).toString(), "Hong Kong");
+	      this.sendKeys("T ENTER");
 	      Thread.sleep(500);
-	      solo.clickOnText("Hong Kong");
+	      solo.clickOnText("HKUST, Hong Kong");
 	      Thread.sleep(500);
 	      solo.clickOnView(eventTransportation);
 	      Thread.sleep(500);
 	      solo.clickOnText("On foot");
 	      Thread.sleep(500);
 	      //TouchUtils.tapView(this, eventCompulsory);
+	      solo.clickOnView(eventRemindTime);
+	      Thread.sleep(500);
+	      solo.clickOnText("5 minutes ahead");
+	      Thread.sleep(500);	      
+	      //TouchUtils.tapView(this, eventCompulsory);
 	      solo.clickOnView(confirmAdd);
-	      Thread.sleep(2000);
-	      currentActivity.finish();
-	      
+	      Thread.sleep(500);
+	      solo.clickOnText("Later");
+	      solo.clickOnText("Stop");
+	      currentActivity.finish(); 
 	   }
 	
 	
