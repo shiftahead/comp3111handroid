@@ -26,6 +26,20 @@ The minutes of the last meeting were approved without amendment.
 
 == 3. Discussion Items ==
 
+＝== 3.1 test case ===
+
+|| Zhang Tian || Test case  report on Jenkins  ||
+|| Wang Ding  || Test case of Time based reminder ||
+|| Yang Ji       || Test case of Facebook share  ||
+|| Zeng Xiong  ||  Test case of Facebook signin||
+|| TAM Shih Lung ||  Test case of UI ||
+
+＝== 3.2 presentation ===
+
+
+
+
+
 ===1. Task and deadline===
 
 || *No.* || *Task* || *Assigned to* || *Deadline* ||
