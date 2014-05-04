@@ -243,17 +243,31 @@ public class MyGoogleMap {
 //            	 origMarkerPosition = arg0.getPosition();
             	 Localendar.instance.mainRadio.setVisibility(View.GONE);
             	 Localendar.instance.deleteMarker.setVisibility(View.VISIBLE);
+            	 Localendar.instance.facebookShare.setVisibility(View.VISIBLE);
             	 arg0.setAlpha((float) 0.6);
              }
              
              @Override
             public void onMarkerDrag(Marker arg0) {
             	 final ImageView trashBin = Localendar.instance.deleteMarker;
+            	 final ImageView facebookShare = Localendar.instance.facebookShare;
             	 Point markerScreenPosition = localendarMap.getProjection().toScreenLocation(arg0.getPosition());
-         	    if (overlap(markerScreenPosition, trashBin)) {
-         	        trashBin.setImageResource(R.drawable.cancel_button_pressed);
-        	    } else
-        	    	trashBin.setImageResource(R.drawable.cancel_button_normal);
+
+            	 switch(overlap(markerScreenPosition, trashBin)){
+           	 		case 0:
+           	 			trashBin.setImageResource(R.drawable.ic_action_discard);
+           	 			facebookShare.setImageResource(R.drawable.ic_action_share);
+           	 			break;
+           	 		case 1:
+           	 			trashBin.setImageResource(R.drawable.ic_action_discard_pressed);
+           	 			facebookShare.setImageResource(R.drawable.ic_action_share);
+           	 			break;
+           	 		case -1:
+           	 			facebookShare.setImageResource(R.drawable.ic_action_share_pressed);
+           	 			trashBin.setImageResource(R.drawable.ic_action_discard);
+           	 			break;
+            	 }
+         	    
             }
              
              @Override
@@ -261,30 +275,55 @@ public class MyGoogleMap {
             	 arg0.setAlpha((float) 1);
             	 Localendar.instance.mainRadio.setVisibility(View.VISIBLE);
             	 Localendar.instance.deleteMarker.setVisibility(View.GONE);
+            	 Localendar.instance.facebookShare.setVisibility(View.GONE);
             	 final ImageView trashBin = Localendar.instance.deleteMarker;
+            	 final ImageView facebookShare = Localendar.instance.facebookShare;
             	 Point markerScreenPosition = localendarMap.getProjection().toScreenLocation(arg0.getPosition());
             	 
-            	 if (overlap(markerScreenPosition, trashBin)) {
-            	   	if(markerList.contains(arg0)){
+            	 switch(overlap(markerScreenPosition, trashBin)){
+            	 	case 0:
+            	 		arg0.setPosition(origMarkerPosition);
+            	 		break;
+            	 	case 1:
+            	 		arg0.remove();
             	   		marker_id.remove(markerList.indexOf(arg0));
             	   		markerList.remove(markerList.indexOf(arg0));
-            	   	}
-            	     arg0.remove();
-            	 } else
-            		 arg0.setPosition(origMarkerPosition);
-         			
+            	   		break;
+            	 	case -1:
+            	 		arg0.setPosition(origMarkerPosition);
+            	 		//to do
+            	 		break;
+            	 }
+            	 
              }
              
-             Boolean overlap(Point mkrScnPosition, ImageView trashBin){
+             Boolean overlapDELETE(Point mkrScnPosition, ImageView trashBin){
             	 	int[] imgCoords = new int[2];
             	 	trashBin.getLocationOnScreen(imgCoords);
-//            	    Log.e(TAG, " ****** Img x:" + imgCoords[0] + " y:" + imgCoords[1] + "    Point x:" + point.x + "  y:" + point.y + " Width:" + imgview.getWidth() + " Height:" + imgview.getHeight());
-//            	    boolean overlapX = mkrScnPosition.x < imgCoords[0] + imgview.getWidth() && point.x > imgCoords[0] - imgview.getWidth();
-            	    boolean overlapY = mkrScnPosition.y > imgCoords[1] - 2*trashBin.getHeight();
-//            	    return overlapX && overlapY;
-//            	    Toast.makeText(Localendar.instance, mkrScnPosition.toString() + "VS " + String.valueOf(imgCoords[1]) +"," + trashBin.getHeight() , Toast.LENGTH_SHORT).show();
-            	    return overlapY;
-//            	 return true;
+            	 	boolean overlapX = mkrScnPosition.x > imgCoords[0] ;
+            	    boolean overlapY = mkrScnPosition.y > imgCoords[1] - 3*trashBin.getHeight();
+            	    return overlapX && overlapY;
+             }
+             
+             int overlap(Point mkrScnPosition, ImageView trashBin){  //1 trash bin, -1 share, 0 not overlap
+         	 	int[] imgCoords = new int[2];
+         	 	trashBin.getLocationOnScreen(imgCoords);
+         	 	boolean overlapX = mkrScnPosition.x > imgCoords[0] ;
+         	    boolean overlapY = mkrScnPosition.y > imgCoords[1] - 3*trashBin.getHeight();
+         	    if(overlapX && overlapY)
+         	    	return 1;
+         	    if(!overlapX&&overlapY)
+         	    	return -1;
+         	    return 0;
+             }
+             
+             Boolean overlapSHARE(Point mkrScnPosition, ImageView trashBin){
+         	 	int[] imgCoords = new int[2];
+         	 	trashBin.getLocationOnScreen(imgCoords);
+         	 	boolean overlapX = mkrScnPosition.x < imgCoords[0] ;
+				Toast.makeText(Localendar.instance, String.valueOf(imgCoords[0]), Toast.LENGTH_SHORT).show();
+         	    boolean overlapY = mkrScnPosition.y > imgCoords[1] - 3*trashBin.getHeight();
+         	    return overlapX && overlapY;
              }
 
      });
@@ -578,86 +617,12 @@ public class MyGoogleMap {
 	// locaiton1 for orign, locaiton 2 for destincation
 	public static long travelingTime(String location1, String location2, String transportation
 			, String year, String month, String day, String hour, String minute){ 
-//		new LocaitonReminder().execute(URLformation(location1, location2, transportation
-//				, year, month, day, hour, minute));
 		
-		return locationreminding(URLformation(location1, location2, transportation
+		return locationReminding(URLformation(location1, location2, transportation
 				, year, month, day, hour, minute));
 	}
-    
-	public static class LocaitonReminder extends AsyncTask<String, Void, String>{
-		@Override
-	    protected String doInBackground(String... urlString) {
-	        // TODO Auto-generated method stub
-
-			HttpURLConnection conn = null;
-			StringBuilder jsonResults = new StringBuilder();
-			
-		try{
-	        URL url = new URL(urlString[0]);
-	        conn = (HttpURLConnection) url.openConnection();
-	        InputStreamReader in = new InputStreamReader(conn.getInputStream());
-	        
-	        // Load the results into a StringBuilder
-	        int read;
-	        char[] buff = new char[1024];
-	        while ((read = in.read(buff)) != -1) {
-	            jsonResults.append(buff, 0, read);
-	        }
-	    } catch (MalformedURLException e) {
-	        Log.e(LOG_TAG, "Error processing Places API URL", e);
-	        return "";
-	    } catch (IOException e) {
-	        Log.e(LOG_TAG, "Error connecting to Places API", e);
-	        return "";
-	    } finally {
-	        if (conn != null) {
-	            conn.disconnect();
-	        }
-	    }
-			return jsonResults.toString();
-	    }
-	 
-	    @Override
-	    protected void onPreExecute() {
-	    }
-	 
-	    @Override
-	    protected void onProgressUpdate(Void... values) {
-	    }
-	   
-	    @Override
-	    protected void onPostExecute(String jsonResults) {
-	        // TODO Auto-generated method stub
-	        super.onPostExecute(jsonResults);
-	        
-	        String value = new String("0");
-	        try {
-	            JSONObject jsonObj = new JSONObject(jsonResults);
-	            JSONArray routesJsonArray = jsonObj.getJSONArray("routes");
-	            if(!routesJsonArray.isNull(0)){
-	            	JSONObject routes = routesJsonArray.optJSONObject(0);
-	            	JSONArray legs = routes.optJSONArray("legs");
-	            	JSONObject legsobj = legs.optJSONObject(0);
-	            	JSONObject duration = legsobj.optJSONObject("duration");
-	            	value = duration.optString("value");
-	            }
-	            
-	        } catch (JSONException e) {
-	            Log.e(LOG_TAG, "Cannot process JSON results", e);
-	        }
-	      		time = Integer.valueOf(value);
-//			Toast.makeText(Localendar.instance, time, Toast.LENGTH_SHORT).show();
-	    }
-	 
-	    @Override
-	    protected void onCancelled() {
-	    }
-	}
-	
-	
-	
-	private static int locationreminding(String urlString){
+    	
+	private static int locationReminding(String urlString){
 		HttpURLConnection conn = null;
 		StringBuilder jsonResults = new StringBuilder();
 		
@@ -703,9 +668,6 @@ public class MyGoogleMap {
       		return Integer.valueOf(value);
 	
 	}
-	
-	
-	
 	
 	public static void showPath(){
 		for(Polyline Line: pathList){
