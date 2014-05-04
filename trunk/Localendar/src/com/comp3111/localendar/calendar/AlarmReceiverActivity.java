@@ -32,7 +32,7 @@ import com.google.android.gms.maps.model.LatLng;
 public class AlarmReceiverActivity extends Activity{
 
     private MediaPlayer mMediaPlayer;
-    private long realTimeNeed = 0;
+    private long realTimeNeed;
     private Location myCurrentLocation;
 	private int numMessages = 0;
 	private NotificationManager myNotificationManager; 
@@ -62,13 +62,7 @@ public class AlarmReceiverActivity extends Activity{
         expectTimeNeed = getIntent().getLongExtra("ExpectTimeNeeded", 0);
     	
         myCurrentLocation = MyGoogleMap.getMyLocation();
-		Toast.makeText(this, Double.toString(myCurrentLocation.getLatitude()) + ',' + Double.toString(myCurrentLocation.getLongitude()), Toast.LENGTH_SHORT).show();
-        
-        realTimeNeed = MyGoogleMap.travelingTime(Double.toString(myCurrentLocation.getLatitude()) + ',' + Double.toString(myCurrentLocation.getLongitude()), eventVenue, eventTransportation, eventYear, eventMonth, eventDay, eventHour, eventMinute);
-        
-        
-		Toast.makeText(this, Long.toString(realTimeNeed), Toast.LENGTH_SHORT).show();
-		Toast.makeText(this, Long.toString(expectTimeNeed), Toast.LENGTH_SHORT).show();
+        realTimeNeed = MyGoogleMap.travelingTime(Double.toString(myCurrentLocation.getLatitude()) + "," + Double.toString(myCurrentLocation.getLongitude()), eventVenue, eventTransportation, eventYear, eventMonth, eventDay, eventHour, eventMinute);
 		
         if(realTimeNeed <= expectTimeNeed){
         	finish();	
