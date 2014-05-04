@@ -25,6 +25,7 @@ public class AboutusActivityTest extends ActivityInstrumentationTestCase2<Aboutu
     @Override
     protected void setUp() throws Exception {
         super.setUp();
+        setActivityInitialTouchMode(true);
         mAboutusActivity = (AboutusActivity) getActivity();
 	    solo = new Solo(getInstrumentation(), getActivity());
         link = (TextView) mAboutusActivity.findViewById(R.id.link);
