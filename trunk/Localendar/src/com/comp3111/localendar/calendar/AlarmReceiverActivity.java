@@ -2,11 +2,7 @@ package com.comp3111.localendar.calendar;
 
 import java.io.IOException;
 
-import com.comp3111.localendar.Localendar;
 import com.comp3111.localendar.R;
-import com.comp3111.localendar.SettingsFragment;
-import com.comp3111.localendar.R.*;
-
 import android.app.Activity;
 import android.app.NotificationManager;
 import android.content.Context;
@@ -35,24 +31,55 @@ import com.google.android.gms.maps.model.LatLng;
 
 public class AlarmReceiverActivity extends Activity{
 
-	private Float distance; // the tolerate final distance between user and destination
-	private Place destination; // the destination place
-	private float[] actual_distance;
     private MediaPlayer mMediaPlayer;
+    private long realTimeNeed = 0;
+    private Location myCurrentLocation;
 	private int numMessages = 0;
 	private NotificationManager myNotificationManager; 
 	private TextView textView;
 
+    String eventTitle;
+    String eventYear;
+    String eventMonth;
+    String eventDay;
+    String eventHour;
+    String eventMinute;
+    String eventVenue;
+    String eventTransportation;
+    long expectTimeNeed;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
+        eventTitle = getIntent().getStringExtra("title");
+        eventYear = getIntent().getStringExtra("year");
+        eventMonth = getIntent().getStringExtra("month");
+        eventDay = getIntent().getStringExtra("day");
+        eventHour = getIntent().getStringExtra("hour");
+        eventMinute = getIntent().getStringExtra("minute");
+        eventVenue = getIntent().getStringExtra("venue");
+        eventTransportation = getIntent().getStringExtra("transportation");
+        expectTimeNeed = getIntent().getLongExtra("ExpectTimeNeeded", 0);
+    	
+        myCurrentLocation = MyGoogleMap.getMyLocation();
+		Toast.makeText(this, Double.toString(myCurrentLocation.getLatitude()) + ',' + Double.toString(myCurrentLocation.getLongitude()), Toast.LENGTH_SHORT).show();
+        
+        realTimeNeed = MyGoogleMap.travelingTime(Double.toString(myCurrentLocation.getLatitude()) + ',' + Double.toString(myCurrentLocation.getLongitude()), eventVenue, eventTransportation, eventYear, eventMonth, eventDay, eventHour, eventMinute);
+        
+        
+		Toast.makeText(this, Long.toString(realTimeNeed), Toast.LENGTH_SHORT).show();
+		Toast.makeText(this, Long.toString(expectTimeNeed), Toast.LENGTH_SHORT).show();
+		
+        if(realTimeNeed <= expectTimeNeed){
+        	finish();	
+        }
+        
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND,
                 WindowManager.LayoutParams.FLAG_DIM_BEHIND);
         setContentView(R.layout.alarm);
-        
 
-		Toast.makeText(this, Double.toString(MyGoogleMap.mapInstance.getMyLocation().getLatitude()), Toast.LENGTH_SHORT).show();
         displayNotification();
         
         Button stopAlarm = (Button) findViewById(R.id.stopAlarm);
@@ -69,13 +96,7 @@ public class AlarmReceiverActivity extends Activity{
 
     private void displayNotification() {
 		// TODO Auto-generated method stub
-        String eventTitle = getIntent().getStringExtra("title");
-        String eventYear = getIntent().getStringExtra("year");
-        String eventMonth = getIntent().getStringExtra("month");
-        String eventDay = getIntent().getStringExtra("day");
-        String eventHour = getIntent().getStringExtra("hour");
-        String eventMinute = getIntent().getStringExtra("minute");
-        String eventVenue = getIntent().getStringExtra("venue");
+
         
         textView= (TextView) findViewById(R.id.EventDetailAlarm);
         textView.setText("Time is up for"+eventTitle);
@@ -125,9 +146,9 @@ public class AlarmReceiverActivity extends Activity{
     }
 
     //Get an alarm sound. Try for an alarm. If none set, try notification, 
-    //Otherwise, ringtone.
+    //Otherwise, ring-tone.
     private Uri getAlarmUri() {
-    	Uri alert = RingtoneManager
+        Uri alert = RingtoneManager
                 .getDefaultUri(RingtoneManager.TYPE_ALARM);
         if (alert == null) {
             alert = RingtoneManager
