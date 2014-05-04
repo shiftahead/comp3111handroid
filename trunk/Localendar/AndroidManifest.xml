@@ -121,7 +121,7 @@
                   android:screenOrientation="portrait" />    
         <activity 
             android:name="com.comp3111.localendar.SettingsActivity"
-            android:theme="@style/Theme.MyAppTheme"
+            android:theme="@style/Theme.MyAppThemeNoIcon"
             android:screenOrientation="portrait" >
         </activity>
         <meta-data
