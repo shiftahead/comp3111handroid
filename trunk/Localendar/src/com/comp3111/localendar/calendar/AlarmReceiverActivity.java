@@ -65,7 +65,7 @@ public class AlarmReceiverActivity extends Activity{
         realTimeNeed = MyGoogleMap.travelingTime(Double.toString(myCurrentLocation.getLatitude()) + "," + Double.toString(myCurrentLocation.getLongitude()), eventVenue, eventTransportation, eventYear, eventMonth, eventDay, eventHour, eventMinute);
 
         super.onCreate(savedInstanceState);
-        
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         if(realTimeNeed >= expectTimeNeed){
 	        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 	        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND,
