@@ -77,6 +77,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.LatLng;
 //import com.google.maps.android.PolyUtil;
+import com.google.android.gms.maps.model.Marker;
 
 
 public class Localendar extends Activity implements OnClickListener, OnCheckedChangeListener, OnItemClickListener {
@@ -93,7 +94,8 @@ public class Localendar extends Activity implements OnClickListener, OnCheckedCh
 	private ImageView searchIcon;
 	private static TextView calendarTitle;
 	
-    public ImageButton deleteMarker;  
+    public ImageButton deleteMarker;
+    public ImageButton facebookShare;
     public RadioGroup mainRadio;
 
 	
@@ -201,6 +203,7 @@ public class Localendar extends Activity implements OnClickListener, OnCheckedCh
 	    searchIcon.setVisibility(View.VISIBLE);
 	    
 	    deleteMarker = (ImageButton) findViewById(R.id.deleteMarker);
+	    facebookShare =  (ImageButton) findViewById(R.id.facebookShare);
 	    mainRadio = (RadioGroup) findViewById(R.id.main_radio);
 	    
 	    calendar = Calendar.getInstance();
@@ -270,8 +273,7 @@ public class Localendar extends Activity implements OnClickListener, OnCheckedCh
 	//Click the items on the autocomplete list and the result will be allocated to the String and Doubles
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
     	String placeSearch = (String) adapterView.getItemAtPosition(position);
-    	myGoogleMap.addmarker(Place.getPlaceFromAddress(placeSearch), true, placeSearch, "Click to add a event");
-//        myGoogleMap.moveCamera(Place.getPlaceFromAddress(placeSearch));
+    	myGoogleMap.addmarker(Place.getPlaceFromAddress(placeSearch), false, placeSearch, "Click to add a event");
     	Toast.makeText(this, placeSearch, Toast.LENGTH_SHORT).show();
         // hide the keyboard
 		InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);

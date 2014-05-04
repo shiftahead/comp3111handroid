@@ -91,7 +91,9 @@ public class AddEventActivity extends Activity {
 		eventTime = (TimePicker) findViewById(R.id.time_picker);
 		eventHour = (EditText) findViewById(R.id.duration_hour);
 		eventMinute = (EditText) findViewById(R.id.duration_minute);
+		String text = getIntent().getStringExtra("location");
 		eventLocation = (ClearableAutoCompleteTextView) findViewById(R.id.event_location);
+		eventLocation.setText(text);
 		eventTransportation = (Spinner) findViewById(R.id.event_transportation);
 		eventReminderTime = (Spinner) findViewById(R.id.remind_time);
 		eventCompulsory = (CheckBox) findViewById(R.id.event_compulsory);
