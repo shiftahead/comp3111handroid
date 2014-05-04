@@ -36,12 +36,9 @@ public class LocalendarTest extends ActivityInstrumentationTestCase2<Localendar>
 	
 	private Localendar localendar;
 	private RadioButton calendar, map;
-	private Button add,settings;
+	private Button settings;
 	private ClearableAutoCompleteTextView searchBox;
 	private ImageView searchIcon;
-	
-	private TextView projectSettingView1; 
-	private TextView projectSettingView2;
 
 	public LocalendarTest() {
 		super(Localendar.class);
@@ -55,15 +52,11 @@ public class LocalendarTest extends ActivityInstrumentationTestCase2<Localendar>
 	    
 	    solo = new Solo(getInstrumentation(), getActivity());
 		localendar = (Localendar) getActivity();
-		add = (Button) localendar.findViewById(R.id.add_button);
 		calendar = (RadioButton) localendar.findViewById(R.id.calendar_button);
 		map = (RadioButton) localendar.findViewById(R.id.map_button);
 		settings = (Button) localendar.findViewById(R.id.settings_button);
 		searchBox = (ClearableAutoCompleteTextView) localendar.findViewById(R.id.search_box);
 	    searchIcon = (ImageView) localendar.findViewById(R.id.place_view);
-	    
-	    projectSettingView1= (TextView)localendar.findViewById(R.id.my_account);
-	    projectSettingView2= (TextView)localendar.findViewById(R.id.about_us);
 	}
 	 
 	public void testView() { 
