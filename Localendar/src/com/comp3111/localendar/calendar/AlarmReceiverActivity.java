@@ -63,11 +63,10 @@ public class AlarmReceiverActivity extends Activity{
     	
         myCurrentLocation = MyGoogleMap.getMyLocation();
         realTimeNeed = MyGoogleMap.travelingTime(Double.toString(myCurrentLocation.getLatitude()) + "," + Double.toString(myCurrentLocation.getLongitude()), eventVenue, eventTransportation, eventYear, eventMonth, eventDay, eventHour, eventMinute);
-
-        super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        requestWindowFeature(Window.PROGRESS_VISIBILITY_OFF);
-        if(realTimeNeed >= expectTimeNeed){
+        realTimeNeed = realTimeNeed * 1000;
+				
+        if(realTimeNeed > expectTimeNeed){
+            super.onCreate(savedInstanceState);
 	        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 	        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND,
 	                WindowManager.LayoutParams.FLAG_DIM_BEHIND);
@@ -85,7 +84,12 @@ public class AlarmReceiverActivity extends Activity{
 	        });
 	        playSound(this, getAlarmUri());	
 	    }
-       
+        else{
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.about_us);
+        	finish();
+        	return;
+        }
     }
 
     private void displayNotification() {
