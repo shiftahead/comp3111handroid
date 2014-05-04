@@ -44,7 +44,7 @@ The minutes of the last meeting were approved without amendment.
 
 *3 demo and fulfillment of requirement 
 
-*4 Test coverage and UML －－ZhangTian
+*4 Test coverage and UML －－zhang tian
 
 *5 Challenge ，lesson and  conclusion
 
