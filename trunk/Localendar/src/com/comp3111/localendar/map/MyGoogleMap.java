@@ -178,7 +178,7 @@ public class MyGoogleMap {
 	}
 	
 	//The function of addmarker and zoom the camera to the added marker if boolean zoomto is set to true;
-	public static boolean addmarker(Place place, boolean zoomto, String title, String time){
+	public static boolean addmarker(Place place, boolean draggable, String title, String time){
 		Marker newMarker = null;
 		LatLng ll = null;
 		
@@ -195,14 +195,13 @@ public class MyGoogleMap {
 		}
 		try{
 			ll = new LatLng(place.getLatitude(), place.getLongitude());
-			newMarker = localendarMap.addMarker(new MarkerOptions().position(ll).draggable(true).title(title).snippet(time).
+			newMarker = localendarMap.addMarker(new MarkerOptions().position(ll).draggable(draggable).title(title).snippet(time).
 					icon((BitmapDescriptorFactory.defaultMarker(DEFAULTMARKERCOLOR))));
 		} catch(Exception e){
 			Toast.makeText(Localendar.instance, "The place cannot be shown on the map", Toast.LENGTH_SHORT).show();
 			return false;
 		}
-		if(zoomto == true)
-	        localendarMap.animateCamera(CameraUpdateFactory.newLatLngZoom(ll, 15));
+		localendarMap.animateCamera(CameraUpdateFactory.newLatLngZoom(ll, 15));
 		newMarker.showInfoWindow();
 		if(!id.isEmpty())   //event exists for that marker
 			markerList.add(newMarker);
@@ -297,14 +296,6 @@ public class MyGoogleMap {
             	 
              }
              
-             Boolean overlapDELETE(Point mkrScnPosition, ImageView trashBin){
-            	 	int[] imgCoords = new int[2];
-            	 	trashBin.getLocationOnScreen(imgCoords);
-            	 	boolean overlapX = mkrScnPosition.x > imgCoords[0] ;
-            	    boolean overlapY = mkrScnPosition.y > imgCoords[1] - 3*trashBin.getHeight();
-            	    return overlapX && overlapY;
-             }
-             
              int overlap(Point mkrScnPosition, ImageView trashBin){  //1 trash bin, -1 share, 0 not overlap
          	 	int[] imgCoords = new int[2];
          	 	trashBin.getLocationOnScreen(imgCoords);
@@ -315,15 +306,6 @@ public class MyGoogleMap {
          	    if(!overlapX&&overlapY)
          	    	return -1;
          	    return 0;
-             }
-             
-             Boolean overlapSHARE(Point mkrScnPosition, ImageView trashBin){
-         	 	int[] imgCoords = new int[2];
-         	 	trashBin.getLocationOnScreen(imgCoords);
-         	 	boolean overlapX = mkrScnPosition.x < imgCoords[0] ;
-				Toast.makeText(Localendar.instance, String.valueOf(imgCoords[0]), Toast.LENGTH_SHORT).show();
-         	    boolean overlapY = mkrScnPosition.y > imgCoords[1] - 3*trashBin.getHeight();
-         	    return overlapX && overlapY;
              }
 
      });
@@ -337,6 +319,7 @@ public class MyGoogleMap {
 				if(!markerList.contains(arg0)){
 					Toast.makeText(Localendar.instance, "Adding Events!", Toast.LENGTH_SHORT).show();
 					Intent intent = new Intent(Localendar.instance, AddEventActivity.class);
+					intent.putExtra("location", arg0.getTitle());
 					Localendar.instance.startActivity(intent);
 					Localendar.instance.overridePendingTransition(R.anim.left_in, R.anim.right_out);
 				}
