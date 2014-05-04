@@ -17,7 +17,7 @@ The minutes of the last meeting were approved without amendment.
 
 == 2. Report on Progress ==
 
-|| Zhang Tian || Test & event search   ||
+|| Zhang Tian || Test case of setting,signinGoogle+  & event search   ||
 || Wang Ding  || Time based reminder ||
 || Yang Ji       || Calendar UI & Facebook share  ||
 || Zeng Xiong  ||  Reminder notice  & application setting||
