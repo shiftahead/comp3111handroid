@@ -1,5 +1,6 @@
 package com.comp3111.localendar.test;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import android.app.Activity;
@@ -7,6 +8,7 @@ import android.app.Instrumentation;
 import android.graphics.Point;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.TouchUtils;
+import android.view.Display;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -154,16 +156,47 @@ public class LocalendarTest extends ActivityInstrumentationTestCase2<Localendar>
 	    Thread.sleep(200);
 		
 	}
-	/*
-	public void testSetting_labelText1() {
-        String expected ="My Account";
-        String actual = projectSettingView1.getText().toString();
-        assertEquals(expected, actual);
-    }
-	public void testSetting_labelText2() {
-        String expected ="About us";
-        String actual = projectSettingView2.getText().toString();
-        assertEquals(expected, actual);
-    }
-    */
+	public void testAddeventFromMap() throws InterruptedException {
+
+		 Instrumentation instrumentation = getInstrumentation();
+	     Instrumentation.ActivityMonitor monitor = instrumentation.addMonitor(AddEventActivity.class.getName(), null, false);
+	     
+		 TouchUtils.tapView(this, map);
+	     Thread.sleep(200);
+	    
+		 TouchUtils.tapView(this, searchIcon);
+			
+		 TouchUtils.tapView(this, searchBox);
+			
+		 this.sendKeys(KeyEvent.KEYCODE_B);
+		 Thread.sleep(300);
+	     this.sendKeys(KeyEvent.KEYCODE_E);
+		 Thread.sleep(300);
+		 this.sendKeys(KeyEvent.KEYCODE_I);
+		 Thread.sleep(300);
+		 this.sendKeys(KeyEvent.KEYCODE_J);
+		 Thread.sleep(300);
+		 this.sendKeys(KeyEvent.KEYCODE_ENTER);
+		 Thread.sleep(3000);
+		 
+		 solo.clickOnText("Beijing, China");
+		 Thread.sleep(5000);
+		 
+		 TouchUtils.tapView(this, searchIcon);
+		 Thread.sleep(1000);
+//		 assertTrue(solo.searchText("Beijing"));
+//		 solo.clickOnText("Beijing, China");
+//		 Thread.sleep(5000);
+		 Display display = localendar.getWindowManager().getDefaultDisplay();
+		 Point size = new Point();
+		 display.getSize(size);
+		 float x = size.x;
+		 float y = size.y;
+		 solo.clickOnScreen(x/2, y/6);
+		 Thread.sleep(5000);
+		 Activity currentActivity = getInstrumentation().waitForMonitorWithTimeout(monitor, 500);
+	     assertNotNull(currentActivity);
+		 Thread.sleep(3000);
+		 currentActivity.finish();
+	}
 }
