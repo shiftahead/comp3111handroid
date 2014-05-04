@@ -9,7 +9,6 @@ import static com.comp3111.localendar.database.DatabaseConstants.TABLE_NAME;
 import static com.comp3111.localendar.database.DatabaseConstants.TITLE;
 import static com.comp3111.localendar.database.DatabaseConstants.DESCRIPTION;
 
-
 import java.util.ArrayList;
 
 import android.R.integer;
@@ -20,6 +19,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.EventLogTags.Description;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
@@ -40,6 +40,7 @@ public class CalendarSearch extends Activity{
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.search_event);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         setTitle("Event Search");
         findButton = (Button) findViewById(R.id.btnFind);
         findButton.setOnClickListener(new OnClickListener() {

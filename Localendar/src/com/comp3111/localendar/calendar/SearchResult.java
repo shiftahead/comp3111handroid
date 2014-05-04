@@ -10,17 +10,19 @@ import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.comp3111.localendar.R;
 
-public class SearchResult extends Activity{
+public class SearchResult extends Activity implements View.OnClickListener {
 	private ArrayList<String> eventID = new ArrayList<String>();
 	private ArrayList<String> eventTitle = new ArrayList<String>();
 	private ArrayList<String> eventDate = new ArrayList<String>();
 	private ArrayList<String> showView = new ArrayList<String>();
 	private String number;
 	private ListView listView;
+	private Button exitButton;
 	
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +30,8 @@ public class SearchResult extends Activity{
         setContentView(R.layout.search_result);
         setTitle("Search Result");
         listView = (ListView) findViewById(R.id.result_list);
+        exitButton = (Button) findViewById(R.id.result_exit);
+        exitButton.setOnClickListener(this);
         Intent intent = getIntent();
         number=intent.getExtras().getString("numbers"); 
         int i = Integer.parseInt(number);
@@ -83,5 +87,10 @@ public class SearchResult extends Activity{
 		}
 		
 		return number;
+	}
+	@Override
+	public void onClick(View v) {
+		this.finish();
+		
 	}
 }
