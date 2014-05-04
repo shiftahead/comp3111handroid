@@ -43,7 +43,7 @@ The minutes of the last meeting were approved without amendment.
 
 *2. User story
 
-*3 demo
+*3 demo and fulfillment of requirement
 
 *4 Challenge and lesson
 
