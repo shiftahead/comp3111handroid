@@ -38,7 +38,7 @@ public class FacebookLogin extends FragmentActivity {
 	    actionBar.setTitle("Facebook");
         actionBar.setDisplayHomeAsUpEnabled(true);
         
-        
+        /*
         try {
             PackageInfo info = getPackageManager().getPackageInfo(
                     "com.comp3111.localendar", 
@@ -53,7 +53,7 @@ public class FacebookLogin extends FragmentActivity {
         } catch (NoSuchAlgorithmException e) {
 
         }
-        
+        */
         
 	    if (savedInstanceState == null) {
 	        // Add the fragment on initial activity setup
