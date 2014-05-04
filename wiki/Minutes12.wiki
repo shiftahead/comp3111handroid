@@ -39,7 +39,7 @@ The minutes of the last meeting were approved without amendment.
 
 ===2. presentation===
 
-*1. structure and relation of app
+*1. Introduction (structure and relation of app)
 
 *2. User story
 
@@ -48,6 +48,7 @@ The minutes of the last meeting were approved without amendment.
 *4 Challenge and lesson
 
 *5 Test coverage and UML
+    (conclusion)
 
 == 4. Meeting adjournment and next meeting ==
 
