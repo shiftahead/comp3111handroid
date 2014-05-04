@@ -77,7 +77,7 @@ public class CalendarSearch extends Activity{
 			Toast.makeText(this, "The calendar is empty", Toast.LENGTH_SHORT).show();
 		}
 		int i = 0;
-		while(cursor.moveToNext()){
+		do{
 			 id = cursor.getString(cursor.getColumnIndex(_ID));
 			 location = cursor.getString(cursor.getColumnIndex(LOCATION));
 			 Description = cursor.getString(cursor.getColumnIndex(DESCRIPTION));
@@ -93,7 +93,7 @@ public class CalendarSearch extends Activity{
 				matchListTitle.add(title);
 				matchListDate.add(date);
 			}
-		}
+		}while(cursor.moveToNext());
 		if(i!=0){
 			Intent intent = new Intent (this,SearchResult.class);
 			intent.putExtra("numbers", Integer.toString(i));
