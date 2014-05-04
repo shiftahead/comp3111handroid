@@ -29,13 +29,12 @@ The minutes of the last meeting were approved without amendment.
 ===1. Task and deadline===
 
 || *No.* || *Task* || *Assigned to* || *Deadline* ||
-|| 1. || Reminder time based and location based   || WANG Ding|| May ,4 ||
-|| 2. || Search in event list|| ZHANG Tian || May,5 ||
-|| 3. || Facebook share|| YANG Ji || May, 4||
-|| 4. || Implement test cases || All team members || May,4||
-|| 5. || Find Bugs and fix bugs || All team members || May,4||
-|| 6. || Marker color || TAM Shih Lung || May,4 ||
-|| 7. || Application Settings || ZENG Xiong || May,4||
+|| 1. || location based test   || WANG Ding|| May ,8 ||
+|| 2. || test case and coverage report|| ZHANG Tian || May,8 ||
+|| 3. || Test Facebook share|| YANG Ji || May, 8||
+|| 4. || Find Bugs and fix bugs || All team members || May,8||
+|| 5. || test of marker on map || TAM Shih Lung || May,8 ||
+|| 6. ||   || ZENG Xiong || May,8||
 
 ===2. presentation===
 
