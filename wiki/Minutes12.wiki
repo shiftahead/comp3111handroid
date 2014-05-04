@@ -45,10 +45,9 @@ The minutes of the last meeting were approved without amendment.
 
 *3 demo and fulfillment of requirement
 
-*4 Challenge and lesson
+*4 Test coverage and UML
 
-*5 Test coverage and UML
-    (conclusion)
+*5 Challenge， lesson and  conclusion
 
 == 4. Meeting adjournment and next meeting ==
 
