@@ -40,7 +40,7 @@ public class CalendarSearch extends Activity{
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.search_event);
-        
+        setTitle("Event Search");
         findButton = (Button) findViewById(R.id.btnFind);
         findButton.setOnClickListener(new OnClickListener() {
 			
