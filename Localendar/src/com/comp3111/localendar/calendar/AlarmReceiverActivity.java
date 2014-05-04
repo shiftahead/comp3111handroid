@@ -63,29 +63,28 @@ public class AlarmReceiverActivity extends Activity{
     	
         myCurrentLocation = MyGoogleMap.getMyLocation();
         realTimeNeed = MyGoogleMap.travelingTime(Double.toString(myCurrentLocation.getLatitude()) + "," + Double.toString(myCurrentLocation.getLongitude()), eventVenue, eventTransportation, eventYear, eventMonth, eventDay, eventHour, eventMinute);
-		
-        if(realTimeNeed <= expectTimeNeed){
-        	finish();	
-        }
-        
-        super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
-        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND,
-                WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-        setContentView(R.layout.alarm);
 
-        displayNotification();
+        super.onCreate(savedInstanceState);
         
-        Button stopAlarm = (Button) findViewById(R.id.stopAlarm);
-        stopAlarm.setOnTouchListener(new OnTouchListener() {
-            public boolean onTouch(View arg0, MotionEvent arg1) {
-                mMediaPlayer.stop();
-                finish();
-                return false;
-            }
-        });
-        playSound(this, getAlarmUri());
-        
+        if(realTimeNeed >= expectTimeNeed){
+	        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+	        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND,
+	                WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+	        setContentView(R.layout.alarm);
+	        
+	        displayNotification();
+	        
+	        Button stopAlarm = (Button) findViewById(R.id.stopAlarm);
+	        stopAlarm.setOnTouchListener(new OnTouchListener() {
+	            public boolean onTouch(View arg0, MotionEvent arg1) {
+	                mMediaPlayer.stop();
+	                finish();
+	                return false;
+	            }
+	        });
+	        playSound(this, getAlarmUri());	
+	    }
+       
     }
 
     private void displayNotification() {
