@@ -100,13 +100,6 @@ public class CalendarTest extends ActivityInstrumentationTestCase2<Localendar>{
 		  Instrumentation instrumentation = getInstrumentation();
 	      Instrumentation.ActivityMonitor monitor = instrumentation.addMonitor(AddEventActivity.class.getName(), null, false);
 
-	      // Start another activity...
-	      /*
-	      Intent intent = new Intent(Intent.ACTION_MAIN);
-	      intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-	      intent.setClassName(instrumentation.getTargetContext(), AddEventActivity.class.getName());
-	      instrumentation.startActivitySync(intent);
-	       */
 	      TouchUtils.tapView(this, add);
 	      
 	      // Wait for it to start...
@@ -153,82 +146,40 @@ public class CalendarTest extends ActivityInstrumentationTestCase2<Localendar>{
 	      
 	      assertTrue(View.VISIBLE == eventTitle.getVisibility());
 	      
-	      TouchUtils.tapView(this, eventTitle);
+	      solo.clickOnView(eventTitle);
 	      Thread.sleep(500);
 	      sendKeys("A B C ENTER");
 	      Thread.sleep(500);
 	      
-	      TouchUtils.tapView(this, eventDescription);
+	      solo.clickOnView(eventDescription);
 	      Thread.sleep(500);
 	      sendKeys("A B C ENTER");
 	      Thread.sleep(500);
-	      
-	      //Drag screen
-	      TouchUtils.drag(this, 0, 0, size.y/4, size.y/20, 100);
-	      Thread.sleep(500);
-	      
-	      //6 lines of code modify Date
-	      /*
-	      TouchUtils.drag(this, size.x/5, 2*size.x/5, size.y/5, 0, 20);
-	      Thread.sleep(500);
-	      
-	      TouchUtils.drag(this, size.x/2, size.x/2, size.y/5, 0, 20);
-	      Thread.sleep(500);
-	      
-	      TouchUtils.drag(this, 2*size.x/3, 2*size.x/3, size.y/5, 0, 20);
-	      Thread.sleep(500);
-	      */
-	      //Drag screen
-	      TouchUtils.drag(this, 0, 0, size.y/4, size.y/16, 100);
-	      Thread.sleep(500);
-	      
-	      //4 lines of code modify Time
-	      TouchUtils.drag(this, size.x/5, 2*size.x/5, size.y/5, 0, 20);
-	      Thread.sleep(500);
-	      
-	      TouchUtils.drag(this, size.x/2, size.x/2, size.y/5, 0, 20);
-	      Thread.sleep(500);
-	      
-	      //Drag screen
-	      TouchUtils.drag(this, 0, 0, size.y/4, size.y/16, 100);
-	      Thread.sleep(500);
-	      
-	      TouchUtils.tapView(this, eventHour);
-	      Thread.sleep(500);
-	      sendKeys("1");
-	      Thread.sleep(500);	    
-	      
-	      TouchUtils.tapView(this, eventMinute);
-	      Thread.sleep(500);
-	      sendKeys("1 0");
-	      Thread.sleep(500);
-	      
-	      TouchUtils.tapView(this, eventLocation);
+	      solo.clickOnView(eventLocation);
 	      this.sendKeys("H ENTER");
-	      Thread.sleep(1000);
-	      this.sendKeys("O ENTER");
-	      Thread.sleep(1000);
-	      this.sendKeys("N ENTER");
-	      Thread.sleep(1000);
-	      this.sendKeys("G ENTER");
-	      Thread.sleep(1000);
-	      assertEquals(eventLocation.getAdapter().getItem(1).toString(), "Hong Kong");
-	      Thread.sleep(1000);
-	      TouchUtils.tapView(this, eventLocation);
-	         
-	      //Drag screen
-	      TouchUtils.drag(this, 0, 0, size.y/4, size.y/16, 100);
 	      Thread.sleep(500);
-	      
-	      TouchUtils.tapView(this, eventTransportation);
+	      this.sendKeys("O ENTER");
+	      Thread.sleep(500);
+	      this.sendKeys("N ENTER");
+	      Thread.sleep(500);
+	      this.sendKeys("G ENTER");
+	      Thread.sleep(500);
+	      assertEquals(eventLocation.getAdapter().getItem(1).toString(), "Hong Kong");
+	      Thread.sleep(500);
+	      solo.clickOnText("Hong Kong");
+	      Thread.sleep(500);
+	      solo.clickOnView(eventTransportation);
+	      Thread.sleep(500);
+	      solo.clickOnText("Drive");
+	      Thread.sleep(500);
 	      //TouchUtils.tapView(this, eventCompulsory);
-	      TouchUtils.tapView(this, confirmAdd);
+	      solo.clickOnView(confirmAdd);
+	      Thread.sleep(2000);
 	      
 	      currentActivity.finish();
 	}
 	public void testAddnewEvent() throws InterruptedException {
-		
-		  Instrumentation instrumentation = getInstrumentation();
+		 Instrumentation instrumentation = getInstrumentation();
 	      Instrumentation.ActivityMonitor monitor = instrumentation.addMonitor(AddEventActivity.class.getName(), null, false);
 
 	      TouchUtils.tapView(this, add);
@@ -254,68 +205,39 @@ public class CalendarTest extends ActivityInstrumentationTestCase2<Localendar>{
 	      
 	      assertTrue(View.VISIBLE == eventTitle.getVisibility());
 	      
-	      TouchUtils.tapView(this, eventTitle);
+	      
+	      solo.clickOnView(eventTitle);
 	      Thread.sleep(500);
-	      sendKeys("H H H ENTER");
+	      sendKeys("H H ENTER");
 	      Thread.sleep(500);
 	      
-	      TouchUtils.tapView(this, eventDescription);
+	      solo.clickOnView(eventDescription);
 	      Thread.sleep(500);
-	      sendKeys("H H H ENTER");
+	      sendKeys("H H ENTER");
 	      Thread.sleep(500);
-	      
-	      //Drag screen
-	      TouchUtils.drag(this, 0, 0, size.y/4, size.y/20, 100);
-	      Thread.sleep(500);
-	      
-	      //Drag screen
-	      TouchUtils.drag(this, 0, 0, size.y/4, size.y/16, 100);
-	      Thread.sleep(500);
-	      
-	      //4 lines of code modify Time
-	      TouchUtils.drag(this, size.x/5, 2*size.x/5, size.y/5, 0, 20);
-	      Thread.sleep(500);
-	      
-	      TouchUtils.drag(this, size.x/2, size.x/2, size.y/5, 0, 20);
-	      Thread.sleep(500);
-	      
-	      //Drag screen
-	      TouchUtils.drag(this, 0, 0, size.y/4, size.y/16, 100);
-	      Thread.sleep(500);
-	      
-	      TouchUtils.tapView(this, eventHour);
-	      Thread.sleep(500);
-	      sendKeys("1");
-	      Thread.sleep(500);	    
-	      
-	      TouchUtils.tapView(this, eventMinute);
-	      Thread.sleep(500);
-	      sendKeys("1 0");
-	      Thread.sleep(500);
-	      
-	      TouchUtils.tapView(this, eventLocation);
+	      solo.clickOnView(eventLocation);
 	      this.sendKeys("H ENTER");
-	      Thread.sleep(1000);
-	      this.sendKeys("O ENTER");
-	      Thread.sleep(1000);
-	      this.sendKeys("N ENTER");
-	      Thread.sleep(1000);
-	      this.sendKeys("G ENTER");
-	      Thread.sleep(1000);
-	      assertEquals(eventLocation.getAdapter().getItem(1).toString(), "Hong Kong");
-	      Thread.sleep(1000);
-	      TouchUtils.tapView(this, eventLocation);
-	         
-	      //Drag screen
-	      TouchUtils.drag(this, 0, 0, size.y/4, size.y/16, 100);
 	      Thread.sleep(500);
-	      
-	      TouchUtils.tapView(this, eventTransportation);
+	      this.sendKeys("O ENTER");
+	      Thread.sleep(500);
+	      this.sendKeys("N ENTER");
+	      Thread.sleep(500);
+	      this.sendKeys("G ENTER");
+	      Thread.sleep(500);
+	      assertEquals(eventLocation.getAdapter().getItem(1).toString(), "Hong Kong");
+	      Thread.sleep(500);
+	      solo.clickOnText("Hong Kong");
+	      Thread.sleep(500);
+	      solo.clickOnView(eventTransportation);
+	      Thread.sleep(500);
+	      solo.clickOnText("On foot");
+	      Thread.sleep(500);
 	      //TouchUtils.tapView(this, eventCompulsory);
-	      TouchUtils.tapView(this, confirmAdd);
-	      
+	      solo.clickOnView(confirmAdd);
+	      Thread.sleep(2000);
 	      currentActivity.finish();
-	}
+	      
+	   }
 	
 	
 	public void testEditEvent() throws InterruptedException{
