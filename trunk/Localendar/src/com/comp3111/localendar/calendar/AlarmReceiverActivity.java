@@ -64,6 +64,8 @@ public class AlarmReceiverActivity extends Activity{
         myCurrentLocation = MyGoogleMap.getMyLocation();
         realTimeNeed = MyGoogleMap.travelingTime(Double.toString(myCurrentLocation.getLatitude()) + "," + Double.toString(myCurrentLocation.getLongitude()), eventVenue, eventTransportation, eventYear, eventMonth, eventDay, eventHour, eventMinute);
         realTimeNeed = realTimeNeed * 1000;
+        
+		Toast.makeText(this, Long.toString(realTimeNeed), Toast.LENGTH_SHORT).show();
 				
         if(realTimeNeed > expectTimeNeed){
             super.onCreate(savedInstanceState);
