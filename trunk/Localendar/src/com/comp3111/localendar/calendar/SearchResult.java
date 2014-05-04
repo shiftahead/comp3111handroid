@@ -26,6 +26,7 @@ public class SearchResult extends Activity{
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.search_result);
+        setTitle("Search Result");
         listView = (ListView) findViewById(R.id.result_list);
         Intent intent = getIntent();
         number=intent.getExtras().getString("numbers"); 
