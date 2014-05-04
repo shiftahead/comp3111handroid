@@ -67,7 +67,7 @@ public class AlarmReceiverActivity extends Activity{
         
 		Toast.makeText(this, Long.toString(realTimeNeed), Toast.LENGTH_SHORT).show();
 				
-        if(realTimeNeed > expectTimeNeed){
+        if(realTimeNeed < expectTimeNeed){
             super.onCreate(savedInstanceState);
 	        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 	        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND,
