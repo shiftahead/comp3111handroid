@@ -7,7 +7,15 @@
     
     <View
     		    android:layout_width="fill_parent"
-		    	android:layout_height="20dp"
+		    	android:layout_height="30dp"
+		    	android:background="@color/holo_light"/>
+     <View
+    		    android:layout_width="fill_parent"
+		    	android:layout_height="2dp"
+		    	android:background="@color/mid_blue"/>
+     <View
+    		    android:layout_width="fill_parent"
+		    	android:layout_height="10dp"
 		    	android:background="@color/holo_light"/>
    
     <EditText
@@ -19,12 +27,12 @@
     
     <View
     		    android:layout_width="fill_parent"
-		    	android:layout_height="20dp"
+		    	android:layout_height="10dp"
 		    	android:background="@color/holo_light"/>
     <View
     		    android:layout_width="fill_parent"
-		    	android:layout_height="2dp"
-		    	android:background="@color/mid_blue"/>
+		    	android:layout_height="1dp"
+		    	android:background="@color/gray"/>
    
    <RadioGroup
         	android:layout_width="fill_parent"
@@ -36,19 +44,19 @@
 			android:id="@+id/btnFind"
 			style="@style/main_tab_bottom"
 			android:gravity="center"
-			android:textSize="20sp"
+			android:textSize="14sp"
 			android:text="Confirm">		    
 		</Button>     
 		<View
-    		    android:layout_width="2dp"
+    		    android:layout_width="1dp"
 		    	android:layout_height="fill_parent"
-		    	android:background="@color/mid_blue"/>
+		    	android:background="@color/gray"/>
 		
 		<Button
 			android:id="@+id/btnCancel"
 			style="@style/main_tab_bottom"
 			android:gravity="center"
-			android:textSize="20sp"
+			android:textSize="14sp"
 			android:text="Cancel">	
 				    
 		</Button> 
