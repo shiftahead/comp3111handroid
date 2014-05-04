@@ -75,6 +75,7 @@ public class CalendarSearch extends Activity{
 			cursor.moveToFirst();
 		else{
 			Toast.makeText(this, "The calendar is empty", Toast.LENGTH_SHORT).show();
+			this.finish();
 		}
 		int i = 0;
 		do{
