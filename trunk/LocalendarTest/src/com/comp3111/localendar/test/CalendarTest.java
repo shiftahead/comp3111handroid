@@ -377,7 +377,7 @@ public class CalendarTest extends ActivityInstrumentationTestCase2<Localendar>{
 		  currentActivity.finish();
 		
 	}
-	public void testSearchEventAllResult() throws InterruptedException {
+	public void testSearchEventWithAllResult() throws InterruptedException {
 		 Instrumentation instrumentation = getInstrumentation();
 	     Instrumentation.ActivityMonitor monitor = instrumentation.addMonitor(CalendarSearch.class.getName(), null, false);
 		  TouchUtils.tapView(this, calendar);
