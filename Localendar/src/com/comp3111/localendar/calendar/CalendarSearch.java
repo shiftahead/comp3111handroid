@@ -47,7 +47,8 @@ public class CalendarSearch extends Activity{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				String input = searchEditText.getText().toString();
+				String input = null;
+				input=searchEditText.getText().toString();
 				searchEvent(input);
 			}
 		});
@@ -72,6 +73,9 @@ public class CalendarSearch extends Activity{
 		cursor = db.query(TABLE_NAME, from, null, null, null, null, null);
 		if(cursor!=null)
 			cursor.moveToFirst();
+		else{
+			Toast.makeText(this, "The calendar is empty", Toast.LENGTH_SHORT).show();
+		}
 		int i = 0;
 		while(cursor.moveToNext()){
 			 id = cursor.getString(cursor.getColumnIndex(_ID));
