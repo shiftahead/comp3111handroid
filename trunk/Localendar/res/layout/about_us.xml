@@ -48,6 +48,7 @@
 		    android:layout_marginLeft="15sp"
 		    android:autoLink="web"
 		    android:textColor="#000"
+		    android:linksClickable="true"
 		    android:layout_gravity="center_vertical"
 		    android:textSize="13sp" />
 
