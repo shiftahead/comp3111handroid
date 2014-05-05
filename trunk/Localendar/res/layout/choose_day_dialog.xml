@@ -44,24 +44,26 @@
         	android:gravity="center_vertical"
         	android:orientation="horizontal" >
 		<Button
-			android:id="@+id/chooseday_confirm"
-			style="@style/main_tab_bottom"
-			android:gravity="center"
-			android:textSize="14sp"
-			android:text="Confirm">		    
-		</Button>     
-		<View
-    		    android:layout_width="1dp"
-		    	android:layout_height="fill_parent"
-		    	android:background="@color/gray"/>
-		
-		<Button
 			android:id="@+id/chooseday_cancel"
 			style="@style/main_tab_bottom"
 			android:gravity="center"
 			android:textSize="14sp"
 			android:text="Cancel">	
-				    
-		</Button> 
+		</Button>
+			 
+		<View
+    		    android:layout_width="1dp"
+		    	android:layout_height="fill_parent"
+		    	android:background="@color/gray"/>
+		
+		
+		<Button
+			android:id="@+id/chooseday_confirm"
+			style="@style/main_tab_bottom"
+			android:gravity="center"
+			android:textSize="14sp"
+			android:text="Confirm">		    
+		</Button>  
+				     
     </RadioGroup>
 </LinearLayout>
