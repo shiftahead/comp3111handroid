@@ -3,6 +3,7 @@ package com.comp3111.localendar.test;
 import android.app.Activity;
 import android.app.Instrumentation;
 import android.graphics.Point;
+import android.graphics.PointF;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.TouchUtils;
 import android.view.Display;
@@ -23,6 +24,7 @@ import com.comp3111.localendar.Localendar;
 import com.comp3111.localendar.R;
 import com.comp3111.localendar.calendar.AddEventActivity;
 import com.comp3111.localendar.calendar.CalendarSearch;
+import com.comp3111.localendar.calendar.DayChooseActivity;
 import com.comp3111.localendar.calendar.EditEventActivity;
 import com.comp3111.localendar.calendar.EventDetailActivity;
 import com.comp3111.localendar.calendar.SearchResult;
@@ -59,21 +61,73 @@ public class CalendarTest extends ActivityInstrumentationTestCase2<Localendar>{
 		searchBox = (ClearableAutoCompleteTextView) localendar.findViewById(R.id.search_box);
 	    searchIcon = (ImageView) localendar.findViewById(R.id.place_view);
 	}
-	public void testCalendarmenu() throws InterruptedException {
+	public void testCalendarMenu() throws InterruptedException {
 		TouchUtils.tapView(this, calendar);
 	    Thread.sleep(200);
 	    solo.sendKey(Solo.MENU);
 	    Thread.sleep(200);
-	    solo.sendKey(Solo.MENU);
-	    Thread.sleep(2000);
-	    solo.clickOnMenuItem("Day");
+	    solo.clickOnMenuItem("Month View");
 	    Thread.sleep(200);
 	    solo.sendKey(Solo.MENU);
 	    Thread.sleep(200);
+	    solo.clickOnMenuItem("Day View");
+	    Thread.sleep(200);
 	    solo.sendKey(Solo.MENU);
 	    Thread.sleep(200);
-	    solo.clickOnMenuItem("Month");
+	    solo.clickOnMenuItem("Go to");
 	    Thread.sleep(200);
+	    solo.clickOnMenuItem("Today");
+	    Thread.sleep(200);
+	}
+	
+	public void testSwipe() throws InterruptedException {
+		TouchUtils.tapView(this, calendar);
+		Thread.sleep(200);
+		solo.drag(200, 200, 100, 900, 1);
+		Thread.sleep(1000);
+		solo.drag(200, 200, 1000, 50, 1);
+		Thread.sleep(1000);
+		solo.scrollToSide(Solo.LEFT);
+		Thread.sleep(500);
+		solo.scrollToSide(Solo.RIGHT);
+		Thread.sleep(500);
+	}
+	
+	public void testGotoDate() throws InterruptedException {
+		
+		Instrumentation instrumentation = getInstrumentation();
+	    Instrumentation.ActivityMonitor monitor = instrumentation.addMonitor(DayChooseActivity.class.getName(), null, false);
+	    
+		TouchUtils.tapView(this, calendar);
+		Thread.sleep(200);
+		solo.clickOnMenuItem("Go to");
+	    Thread.sleep(200);
+	    solo.clickOnMenuItem("Choose Date");
+	    Thread.sleep(200);
+	    Activity currentActivity = getInstrumentation().waitForMonitorWithTimeout(monitor, 500);
+	    assertNotNull(currentActivity);
+	    Button cancel = (Button) currentActivity.findViewById(R.id.chooseday_cancel);
+	    solo.scrollDown();
+	    Thread.sleep(500);
+		solo.clickOnView(cancel);
+		Thread.sleep(200);
+		currentActivity.finish();
+		Thread.sleep(500);
+		instrumentation.removeMonitor(monitor);
+	    monitor = instrumentation.addMonitor(DayChooseActivity.class.getName(), null, false);
+		solo.clickOnMenuItem("Go to");
+	    Thread.sleep(200);
+	    solo.clickOnMenuItem("Choose Date");
+	    Thread.sleep(200);
+	    currentActivity = getInstrumentation().waitForMonitorWithTimeout(monitor, 500);
+	    assertNotNull(currentActivity);
+	    solo.scrollDown();
+	    Thread.sleep(500);
+	    Button confirm = (Button) currentActivity.findViewById(R.id.chooseday_confirm);
+		solo.clickOnView(confirm);
+		Thread.sleep(500);
+		currentActivity.finish();
+		Thread.sleep(500);
 	}
 	public void testEventDetail() throws InterruptedException {
 		
@@ -341,7 +395,7 @@ public class CalendarTest extends ActivityInstrumentationTestCase2<Localendar>{
 		  Thread.sleep(1000);
 		  solo.sendKey(Solo.MENU);
 		  Thread.sleep(500);
-		  solo.clickOnMenuItem("Search");
+		  solo.clickOnMenuItem("Search Event");
 		  Thread.sleep(1500);
 		  Activity currentActivity = getInstrumentation().waitForMonitorWithTimeout(monitor, 500);
 		  assertNotNull(currentActivity);
@@ -358,7 +412,7 @@ public class CalendarTest extends ActivityInstrumentationTestCase2<Localendar>{
 		  Thread.sleep(500);
 		  solo.sendKey(Solo.MENU);
 		  Thread.sleep(500);
-		  solo.clickOnMenuItem("Search");
+		  solo.clickOnMenuItem("Search Event");
 		  Thread.sleep(1500);
 		  Activity currentActivity = getInstrumentation().waitForMonitorWithTimeout(monitor, 500);
 		  assertNotNull(currentActivity);
@@ -401,7 +455,7 @@ public class CalendarTest extends ActivityInstrumentationTestCase2<Localendar>{
 		  Thread.sleep(500);
 		  solo.sendKey(Solo.MENU);
 		  Thread.sleep(500);
-		  solo.clickOnMenuItem("Search");
+		  solo.clickOnMenuItem("Search Event");
 		  Thread.sleep(1500);
 		  Activity currentActivity = getInstrumentation().waitForMonitorWithTimeout(monitor, 500);
 		  assertNotNull(currentActivity);
@@ -432,7 +486,7 @@ public class CalendarTest extends ActivityInstrumentationTestCase2<Localendar>{
 		  Thread.sleep(500);
 		  solo.sendKey(Solo.MENU);
 		  Thread.sleep(500);
-		  solo.clickOnMenuItem("Search");
+		  solo.clickOnMenuItem("Search Event");
 		  Thread.sleep(1500);
 		  Activity currentActivity = getInstrumentation().waitForMonitorWithTimeout(monitor, 500);
 		  assertNotNull(currentActivity);
