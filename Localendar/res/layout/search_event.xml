@@ -40,19 +40,8 @@
         	android:layout_gravity="bottom"
         	android:gravity="center_vertical"
         	android:orientation="horizontal" >
-		<Button
-			android:id="@+id/btnFind"
-			style="@style/main_tab_bottom"
-			android:gravity="center"
-			android:textSize="14sp"
-			android:text="Confirm">		    
-		</Button>     
-		<View
-    		    android:layout_width="1dp"
-		    	android:layout_height="fill_parent"
-		    	android:background="@color/gray"/>
-		
-		<Button
+        	
+		 <Button
 			android:id="@+id/btnCancel"
 			style="@style/main_tab_bottom"
 			android:gravity="center"
@@ -60,5 +49,18 @@
 			android:text="Cancel">	
 				    
 		</Button> 
+		<View
+    		    android:layout_width="1dp"
+		    	android:layout_height="fill_parent"
+		    	android:background="@color/gray"/>
+		
+		
+		<Button
+			android:id="@+id/btnFind"
+			style="@style/main_tab_bottom"
+			android:gravity="center"
+			android:textSize="14sp"
+			android:text="Confirm">		    
+		</Button>    
     </RadioGroup>
 </LinearLayout>
