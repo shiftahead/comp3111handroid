@@ -129,6 +129,40 @@ public class CalendarTest extends ActivityInstrumentationTestCase2<Localendar>{
 		currentActivity.finish();
 		Thread.sleep(500);
 	}
+	
+	public void testLongTouch() throws InterruptedException {
+		TouchUtils.tapView(this, calendar);
+		Thread.sleep(200);
+		ListView eventList = (ListView) localendar.findViewById(R.id.events_list);
+	    View child1 = eventList.getChildAt(0);
+	    assertNotNull(child1);
+	    View child2 = eventList.getChildAt(1);
+	    assertNotNull(child2);
+	    
+	    Thread.sleep(500);
+		solo.clickLongOnView(child1, 3000);
+		Thread.sleep(500);
+		solo.clickOnView(child2);
+		Thread.sleep(500);
+		solo.clickOnView(child2);
+		Thread.sleep(500);
+		solo.clickOnView(child1);
+		Thread.sleep(500);
+		solo.clickLongOnView(child2, 3000);
+		Thread.sleep(500);
+		solo.clickOnView(child1);
+		Thread.sleep(500);
+		solo.clickOnView(child1);
+		Thread.sleep(500);
+		solo.clickOnView(child2);
+		Thread.sleep(500);
+		solo.clickLongOnView(child2, 3000);
+		Thread.sleep(500);
+		solo.clickOnActionBarItem(R.id.menu_delete);
+		Thread.sleep(500);
+
+	}
+	
 	public void testEventDetail() throws InterruptedException {
 		
 		 Instrumentation instrumentation = getInstrumentation();
