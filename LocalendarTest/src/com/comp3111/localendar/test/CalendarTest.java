@@ -5,6 +5,7 @@ import android.app.Instrumentation;
 import android.graphics.Point;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.TouchUtils;
+import android.view.Display;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -462,5 +463,49 @@ public class CalendarTest extends ActivityInstrumentationTestCase2<Localendar>{
 		  
 		  currentActivity.finish();
 		
+	}
+	public void testShowOnMap() throws InterruptedException {
+		Instrumentation ins = getInstrumentation();
+		Instrumentation.ActivityMonitor am = ins.addMonitor(EventDetailActivity.class.getName(), null, false);
+		
+		TouchUtils.tapView(this, calendar);
+		Thread.sleep(500);
+		ListView eventList = (ListView) localendar.findViewById(R.id.events_list);
+		int childCount = eventList.getChildCount()-1;
+		View child = eventList.getChildAt(childCount);
+	    assertNotNull(child);
+	    Thread.sleep(500);
+	    solo.clickOnView(child);
+	    
+	    Activity currentActivity = getInstrumentation().waitForMonitorWithTimeout(am, 500);
+		assertNotNull(currentActivity);
+	    
+		ins.removeMonitor(am);
+		am = ins.addMonitor(Localendar.class.getName(), null, false);
+		
+		solo.sendKey(Solo.MENU);
+	    solo.clickOnMenuItem("Show on map");	
+	    Thread.sleep(3000);
+	    
+	    currentActivity = getInstrumentation().waitForMonitorWithTimeout(am, 500);
+		assertNotNull(currentActivity);
+		
+		Display display = localendar.getWindowManager().getDefaultDisplay();
+		Point size = new Point();
+		display.getSize(size);
+		float x = size.x;
+		float y = size.y;
+		
+		ins.removeMonitor(am);
+		am = ins.addMonitor(EventDetailActivity.class.getName(), null, false);
+		
+		solo.clickOnScreen(x/2, 2*y/5);
+		Thread.sleep(3000);
+		
+		currentActivity = getInstrumentation().waitForMonitorWithTimeout(am, 500);
+		assertNotNull(currentActivity);
+		
+		currentActivity.finish();
+
 	}
 }
