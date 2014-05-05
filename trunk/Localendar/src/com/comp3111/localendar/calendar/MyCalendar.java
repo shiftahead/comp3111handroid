@@ -214,7 +214,29 @@ public class MyCalendar extends Fragment {
 							}
 						}, 200);
 					}
+					else if(upX - downX > 200 && Math.abs(downY-upY) < 100) {
+						setViewModeToMonth(true);
+						setTimeInMillis(Localendar.calendar.getTimeInMillis());
+						Localendar.instance.setCalendarTitle();
+						return true;
+					}
 					return false;
+				}
+			}
+			else if(viewMode == MONTH_VIEW) {
+				switch(event.getAction()) {
+				case MotionEvent.ACTION_DOWN:
+					downX = event.getX();
+					downY = event.getY();
+					return true;
+				case MotionEvent.ACTION_UP:
+					upX = event.getX();
+					upY = event.getY();
+					if(upX - downX < -200 && Math.abs(downY-upY) < 100) {
+						setViewModeToMonth(false);
+						Localendar.instance.setCalendarTitle();
+						return true;
+					}
 				}
 			}
 			return false;
@@ -301,6 +323,12 @@ public class MyCalendar extends Fragment {
 								}
 							}, 200);
 						}
+						else if(upX - downX > 200 && Math.abs(downY-upY) < 100) {
+							setViewModeToMonth(true);
+							setTimeInMillis(Localendar.calendar.getTimeInMillis());
+							Localendar.instance.setCalendarTitle();
+							return true;
+						}
 						return false;
 					}
 				}
@@ -356,6 +384,11 @@ public class MyCalendar extends Fragment {
 							}
 						}, 200);
 						return false;
+					}
+					else if(upX - downX < -200 && Math.abs(downY-upY) < 100) {
+						setViewModeToMonth(false);
+						Localendar.instance.setCalendarTitle();
+						return true;
 					}
 					else if(y < 1 || y > 6 || x > 6) 
 						return true;
