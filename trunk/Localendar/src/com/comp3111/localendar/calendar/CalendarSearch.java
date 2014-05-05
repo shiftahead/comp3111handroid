@@ -72,7 +72,7 @@ public class CalendarSearch extends Activity{
 		String[] from = {_ID, TITLE, DESCRIPTION, LOCATION,YEAR,MONTH,DAY};
 		SQLiteDatabase db = MyCalendar.dbhelper.getReadableDatabase();
 		cursor = db.query(TABLE_NAME, from, null, null, null, null, null);
-		if(cursor!=null)
+		if(cursor!=null && cursor.getCount()>0)
 			cursor.moveToFirst();
 		else{
 			Toast.makeText(this, "The calendar is empty", Toast.LENGTH_SHORT).show();
