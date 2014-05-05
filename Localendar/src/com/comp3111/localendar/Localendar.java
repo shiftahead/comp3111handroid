@@ -65,6 +65,7 @@ import android.widget.Toast;
 
 import com.comp3111.localendar.calendar.AddEventActivity;
 import com.comp3111.localendar.calendar.CalendarSearch;
+import com.comp3111.localendar.calendar.DayChooseActivity;
 import com.comp3111.localendar.calendar.MyCalendar;
 import com.comp3111.localendar.facebook.FacebookLogin;
 import com.comp3111.localendar.map.MyGoogleMap;
@@ -356,6 +357,17 @@ public class Localendar extends Activity implements OnClickListener, OnCheckedCh
 	    
 	    if(currentTabIndex == 0) {
 	    	getMenuInflater().inflate(R.menu.calendar_menu, menu);
+	    	MenuItem dayView = menu.findItem(R.id.day_view);
+	    	MenuItem monthView = menu.findItem(R.id.month_view);
+	    	if(MyCalendar.viewMode == MyCalendar.DAY_VIEW) {
+	    		dayView.setVisible(false);
+	    		monthView.setVisible(true);
+	    	}
+			else if(MyCalendar.viewMode == MyCalendar.MONTH_VIEW) {
+				dayView.setVisible(true);
+	    		monthView.setVisible(false);
+			}
+	    	
 	    }
 	    else if(currentTabIndex == 1) {
 	    	getMenuInflater().inflate(R.menu.map_menu, menu);
@@ -398,9 +410,13 @@ public class Localendar extends Activity implements OnClickListener, OnCheckedCh
 			MyCalendar.setViewModeToMonth(false);
 			setCalendarTitle();
 			return true;
+		case R.id.go_to_chooseday:
+			Intent intent = new Intent(this, DayChooseActivity.class);
+			startActivity(intent);
+			return true;
 		case R.id.event_search : 
-			Intent intent = new Intent(this, CalendarSearch.class);
-	    	startActivity(intent);
+			Intent intent2 = new Intent(this, CalendarSearch.class);
+	    	startActivity(intent2);
 			return true;
 		case R.id.map_normal :
 			MyGoogleMap.localendarMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
