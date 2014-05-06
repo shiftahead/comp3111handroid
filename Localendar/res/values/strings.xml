@@ -27,6 +27,7 @@
         <item>1 hour ahead</item>
         <item>1.5 hours ahead</item>
         <item>2 hours ahead</item>
+        <item>On time</item>
         </string-array>
         
       <string-array name="default_event_duration_entries">
