@@ -66,27 +66,6 @@ public class CalendarTest extends ActivityInstrumentationTestCase2<Localendar>{
 	}
 	public void testCalendarMenu() throws InterruptedException {
 		TouchUtils.tapView(this, calendar);
-	    Thread.sleep(200);
-	    solo.sendKey(Solo.MENU);
-	    Thread.sleep(200);
-	    solo.sendKey(Solo.MENU);
-	    Thread.sleep(200);
-	    solo.clickOnMenuItem("Month View");
-	    Thread.sleep(200);
-	    solo.sendKey(Solo.MENU);
-	    Thread.sleep(200);
-	    solo.clickOnMenuItem("Day View");
-	    Thread.sleep(200);
-	    solo.sendKey(Solo.MENU);
-	    Thread.sleep(200);
-	    solo.clickOnMenuItem("Go to");
-	    Thread.sleep(200);
-	    solo.clickOnMenuItem("Today");
-	    Thread.sleep(200);
-	}
-	
-	public void testSwipe() throws InterruptedException {
-		TouchUtils.tapView(this, calendar);
 		Thread.sleep(200);
 		
 		Display display = localendar.getWindowManager().getDefaultDisplay();
@@ -124,8 +103,24 @@ public class CalendarTest extends ActivityInstrumentationTestCase2<Localendar>{
 	    Thread.sleep(200);
 	    
 	    
+	    Thread.sleep(200);
+	    solo.sendKey(Solo.MENU);
+	    Thread.sleep(200);
+	    solo.sendKey(Solo.MENU);
+	    Thread.sleep(200);
+	    solo.clickOnMenuItem("Month View");
+	    Thread.sleep(200);
+	    solo.sendKey(Solo.MENU);
+	    Thread.sleep(200);
+	    solo.clickOnMenuItem("Day View");
+	    Thread.sleep(200);
+	    solo.sendKey(Solo.MENU);
+	    Thread.sleep(200);
+	    solo.clickOnMenuItem("Go to");
+	    Thread.sleep(200);
+	    solo.clickOnMenuItem("Today");
+	    Thread.sleep(200);
 	}
-	
 	public void testGotoDate() throws InterruptedException {
 		
 		Instrumentation instrumentation = getInstrumentation();
@@ -143,7 +138,7 @@ public class CalendarTest extends ActivityInstrumentationTestCase2<Localendar>{
 	    solo.clickOnMenuItem("Choose Date");
 	    Thread.sleep(200);
 	    
-	    solo.setDatePicker(0, 2014, 4, 1);
+	    solo.setDatePicker(0, 2014, 4, 10);
 	    Thread.sleep(500);
 	    
 	    Activity currentActivity = getInstrumentation().waitForMonitorWithTimeout(monitor, 500);
