@@ -2,18 +2,17 @@ package com.comp3111.localendar.calendar;
 
 import java.io.IOException;
 
-import com.comp3111.localendar.R;
 import android.app.Activity;
 import android.app.NotificationManager;
 import android.content.Context;
-import android.location.Criteria;
+import android.content.SharedPreferences;
 import android.location.Location;
-import android.location.LocationManager;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.support.v4.app.NotificationCompat;
 import android.view.MotionEvent;
 import android.view.View;
@@ -24,10 +23,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.comp3111.localendar.R;
+import com.comp3111.localendar.SettingsFragment;
 import com.comp3111.localendar.map.MyGoogleMap;
-import com.comp3111.localendar.map.Place;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.model.LatLng;
 
 public class AlarmReceiverActivity extends Activity{
 
@@ -37,6 +35,7 @@ public class AlarmReceiverActivity extends Activity{
 	private int numMessages = 0;
 	private NotificationManager myNotificationManager; 
 	private TextView textView;
+	private Vibrator v;
 
     String eventTitle;
     String eventYear;
@@ -47,6 +46,8 @@ public class AlarmReceiverActivity extends Activity{
     String eventVenue;
     String eventTransportation;
     long expectTimeNeed;
+    boolean vibrate;
+    String alarm;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -60,7 +61,12 @@ public class AlarmReceiverActivity extends Activity{
         eventVenue = getIntent().getStringExtra("venue");
         eventTransportation = getIntent().getStringExtra("transportation");
         expectTimeNeed = getIntent().getLongExtra("ExpectTimeNeeded", 0);
-    	
+        
+        v = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
+        SharedPreferences sharedPreferences = getSharedPreferences(SettingsFragment.SHARED_PREFS_NAME, Context.MODE_PRIVATE);
+        vibrate = sharedPreferences.getBoolean(SettingsFragment.VIBRATE, false);
+        alarm = sharedPreferences.getString(SettingsFragment.RINGTONE, "default ringtone");
+        
         myCurrentLocation = MyGoogleMap.getMyLocation();
         realTimeNeed = MyGoogleMap.travelingTime(Double.toString(myCurrentLocation.getLatitude()) + "," + Double.toString(myCurrentLocation.getLongitude()), eventVenue, eventTransportation, eventYear, eventMonth, eventDay, eventHour, eventMinute);
         realTimeNeed = realTimeNeed * 1000;
@@ -80,6 +86,7 @@ public class AlarmReceiverActivity extends Activity{
 	        stopAlarm.setOnTouchListener(new OnTouchListener() {
 	            public boolean onTouch(View arg0, MotionEvent arg1) {
 	                mMediaPlayer.stop();
+	                v.cancel();
 	                finish();
 	                return false;
 	            }
@@ -140,6 +147,10 @@ public class AlarmReceiverActivity extends Activity{
                 mMediaPlayer.prepare();
                 mMediaPlayer.start();
             }
+            if (vibrate) {
+            long[] pattern = {500,500};
+            v.vibrate(pattern, 0);
+            }
         } catch (IOException e) {
             System.out.println("OOPS");
         }
@@ -148,8 +159,7 @@ public class AlarmReceiverActivity extends Activity{
     //Get an alarm sound. Try for an alarm. If none set, try notification, 
     //Otherwise, ring-tone.
     private Uri getAlarmUri() {
-        Uri alert = RingtoneManager
-                .getDefaultUri(RingtoneManager.TYPE_ALARM);
+    	Uri alert =Uri.parse(alarm);
         if (alert == null) {
             alert = RingtoneManager
                     .getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
