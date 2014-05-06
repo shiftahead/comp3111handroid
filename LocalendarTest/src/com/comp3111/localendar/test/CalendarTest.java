@@ -113,7 +113,10 @@ public class CalendarTest extends ActivityInstrumentationTestCase2<Localendar>{
 		Thread.sleep(500);
 		
 		CalendarView month = (CalendarView) localendar.findViewById(R.id.calendar_monthview);
-		
+		solo.drag(width/2, width/2, height-400, 200, 1);
+		Thread.sleep(500);
+		solo.drag(width/2, width/2, height-700, height-300, 1);
+		Thread.sleep(500);
 		solo.clickOnView(month);
 		solo.clickOnMenuItem("Go to");
 	    Thread.sleep(200);
