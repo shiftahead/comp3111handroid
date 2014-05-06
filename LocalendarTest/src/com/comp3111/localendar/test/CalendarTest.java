@@ -272,6 +272,7 @@ public class CalendarTest extends ActivityInstrumentationTestCase2<Localendar>{
 	      //TouchUtils.tapView(this, eventCompulsory);
 	      solo.clickOnView(confirmAdd);
 	      Thread.sleep(500);
+	      solo.clickOnText("Later");
 	      solo.clickOnText("Stop");
 	      currentActivity.finish();
 	}
@@ -333,13 +334,11 @@ public class CalendarTest extends ActivityInstrumentationTestCase2<Localendar>{
 	      //TouchUtils.tapView(this, eventCompulsory);
 	      solo.clickOnView(eventRemindTime);
 	      Thread.sleep(500);
-	      solo.clickOnText("5 minutes ahead");
+	      solo.clickOnText("On time");
 	      Thread.sleep(500);	      
 	      //TouchUtils.tapView(this, eventCompulsory);
 	      solo.clickOnView(confirmAdd);
 	      Thread.sleep(500);
-	      solo.clickOnText("Later");
-	      solo.clickOnText("Stop");
 	      currentActivity.finish(); 
 	   }
 	
