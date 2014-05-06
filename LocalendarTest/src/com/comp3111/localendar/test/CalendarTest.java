@@ -488,6 +488,31 @@ public class CalendarTest extends ActivityInstrumentationTestCase2<Localendar>{
 		  currentActivity = getInstrumentation().waitForMonitorWithTimeout(monitor, 500);
 		  assertNotNull(currentActivity);
 		  Thread.sleep(1500);
+		  
+		  instrumentation.removeMonitor(monitor);
+		  monitor = instrumentation.addMonitor(Localendar.class.getName(), null, false);
+			
+		  solo.sendKey(Solo.MENU);
+		  solo.clickOnMenuItem("Show on map");	
+		  Thread.sleep(3000);
+		    
+		  currentActivity = getInstrumentation().waitForMonitorWithTimeout(monitor, 500);
+		  assertNotNull(currentActivity);
+			
+		  Display display = localendar.getWindowManager().getDefaultDisplay();
+		  Point size = new Point();
+		  display.getSize(size);
+		  float x = size.x;
+	      float y = size.y;
+			
+		  instrumentation.removeMonitor(monitor);
+		  monitor = instrumentation.addMonitor(EventDetailActivity.class.getName(), null, false);
+			
+		  solo.clickOnScreen(x/2, 2*y/5);
+		  Thread.sleep(3000);
+			
+		  currentActivity = getInstrumentation().waitForMonitorWithTimeout(monitor, 500);
+		  assertNotNull(currentActivity);
 		  currentActivity.finish();
 		
 	}
@@ -563,49 +588,5 @@ public class CalendarTest extends ActivityInstrumentationTestCase2<Localendar>{
 		  
 		  currentActivity.finish();
 		
-	}
-	public void testShowOnMap() throws InterruptedException {
-		Instrumentation ins = getInstrumentation();
-		Instrumentation.ActivityMonitor am = ins.addMonitor(EventDetailActivity.class.getName(), null, false);
-		
-		TouchUtils.tapView(this, calendar);
-		Thread.sleep(500);
-		ListView eventList = (ListView) localendar.findViewById(R.id.events_list);
-		View child = eventList.getChildAt(0);
-	    assertNotNull(child);
-	    Thread.sleep(500);
-	    solo.clickOnView(child);
-	    Thread.sleep(1500);
-	    
-	    Activity currentActivity = getInstrumentation().waitForMonitorWithTimeout(am, 500);
-		assertNotNull(currentActivity);
-	    
-		ins.removeMonitor(am);
-		am = ins.addMonitor(Localendar.class.getName(), null, false);
-		
-		solo.sendKey(Solo.MENU);
-	    solo.clickOnMenuItem("Show on map");	
-	    Thread.sleep(3000);
-	    
-	    currentActivity = getInstrumentation().waitForMonitorWithTimeout(am, 500);
-		assertNotNull(currentActivity);
-		
-		Display display = localendar.getWindowManager().getDefaultDisplay();
-		Point size = new Point();
-		display.getSize(size);
-		float x = size.x;
-		float y = size.y;
-		
-		ins.removeMonitor(am);
-		am = ins.addMonitor(EventDetailActivity.class.getName(), null, false);
-		
-		solo.clickOnScreen(x/2, 2*y/5);
-		Thread.sleep(3000);
-		
-		currentActivity = getInstrumentation().waitForMonitorWithTimeout(am, 500);
-		assertNotNull(currentActivity);
-		
-		currentActivity.finish();
-
 	}
 }
