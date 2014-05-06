@@ -470,6 +470,7 @@ public class MyCalendar extends Fragment {
    	    private void deleteSelectedItems() {				
    	    	for (String id:selection) {
    	    		deleteEvent(id);
+       	    	MyGoogleMap.refresh(id);
    	    	}
 		}
            
