@@ -248,6 +248,7 @@ public class CalendarTest extends ActivityInstrumentationTestCase2<Localendar>{
 	      Thread.sleep(500);
 	      sendKeys("A B C ENTER");
 	      Thread.sleep(500);
+	      //solo.setTimePicker(0, 12,10);
 	      solo.clickOnView(eventLocation);
 	      this.sendKeys("H ENTER");
 	      Thread.sleep(500);
@@ -571,7 +572,7 @@ public class CalendarTest extends ActivityInstrumentationTestCase2<Localendar>{
 	    assertNotNull(child);
 	    Thread.sleep(500);
 	    solo.clickOnView(child);
-	    Thread.sleep(500);
+	    Thread.sleep(1500);
 	    
 	    Activity currentActivity = getInstrumentation().waitForMonitorWithTimeout(am, 500);
 		assertNotNull(currentActivity);
