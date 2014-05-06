@@ -108,11 +108,14 @@ public class CalendarTest extends ActivityInstrumentationTestCase2<Localendar>{
 	    solo.sendKey(Solo.MENU);
 	    Thread.sleep(200);
 		solo.clickOnMenuItem("Go to");
-	    Thread.sleep(200);
-	    solo.setDatePicker(0, 2014, 4, 1);
 	    Thread.sleep(500);
+	   
 	    solo.clickOnMenuItem("Choose Date");
 	    Thread.sleep(200);
+	    
+	    solo.setDatePicker(0, 2014, 4, 1);
+	    Thread.sleep(500);
+	    
 	    Activity currentActivity = getInstrumentation().waitForMonitorWithTimeout(monitor, 500);
 	    assertNotNull(currentActivity);
 	    Button cancel = (Button) currentActivity.findViewById(R.id.chooseday_cancel);
