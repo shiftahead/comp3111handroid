@@ -366,6 +366,16 @@ public class MyGoogleMap {
 			DEFAULTMARKERCOLOR = BitmapDescriptorFactory.HUE_RED;
 	}
 	
+	public static String getDefaultMarkerColor(){
+		if(DEFAULTMARKERCOLOR == BitmapDescriptorFactory.HUE_BLUE)
+			return "Blue";
+		if(DEFAULTMARKERCOLOR == BitmapDescriptorFactory.HUE_GREEN)
+			return "HUE_GREEN";
+		if(DEFAULTMARKERCOLOR == BitmapDescriptorFactory.HUE_RED)
+			return "RED";
+		return "";
+	}
+	
 	
 	// have to be arranged according to time
 	public static void pathing(){
