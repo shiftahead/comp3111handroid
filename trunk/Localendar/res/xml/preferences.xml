@@ -38,10 +38,9 @@
 	        android:defaultValue="true" />
 	    <RingtonePreference
 	        android:key="ring_tone_key"
-	        android:title="Default notification ringtone"
+	        android:title="Default alarm ringtone"
 	        android:showSilent="true"
-	        
-	        android:ringtoneType="notification"/>
+	        android:ringtoneType="alarm"/>
 	</PreferenceCategory>
 	<PreferenceCategory 
 	    android:title="Miscellaneous">

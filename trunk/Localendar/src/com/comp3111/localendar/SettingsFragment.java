@@ -1,6 +1,8 @@
 package com.comp3111.localendar;
 
 
+import com.comp3111.localendar.map.MyGoogleMap;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -39,9 +41,11 @@ public class SettingsFragment extends PreferenceFragment implements OnSharedPref
 	CheckBoxPreference mVibrate;
 	RingtonePreference mRingtone;
 	
+	
 	public static SharedPreferences getSharedPreferences(Context context) {
         return context.getSharedPreferences(SHARED_PREFS_NAME , Context.MODE_PRIVATE);
     }
+	
 	
 	/** Set the default shared preferences in the proper context */
     public static void setDefaultValues(Context context) {
@@ -77,6 +81,13 @@ public class SettingsFragment extends PreferenceFragment implements OnSharedPref
         mDuration.setSummary(mDuration.getEntry());
         mTransportation.setSummary(mTransportation.getEntry());
         mMarker.setSummary(mMarker.getEntry());
+
+        if (mMarker.getEntry().equals("Blue"))
+        	MyGoogleMap.setDefaultMarkerColor("Blue");
+        else if (mMarker.getEntry().equals("Red"))
+        	MyGoogleMap.setDefaultMarkerColor("Red");
+        else if (mMarker.getEntry().equals("Green"))
+        	MyGoogleMap.setDefaultMarkerColor("Green");
 	}
 	
     @Override
@@ -151,6 +162,15 @@ public class SettingsFragment extends PreferenceFragment implements OnSharedPref
           else if (preference == mMarker) {
         	mMarker.setValue((String) newValue);
         	mMarker.setSummary(mMarker.getEntry());
+        	
+            
+            if (mMarker.getEntry().equals("Blue"))
+            	MyGoogleMap.setDefaultMarkerColor("Blue");
+            else if (mMarker.getEntry().equals("Red"))
+            	MyGoogleMap.setDefaultMarkerColor("Red");
+            else if (mMarker.getEntry().equals("Green"))
+            	MyGoogleMap.setDefaultMarkerColor("Green");
+        	
         	prefs.edit().putString(SettingsFragment.MARKER, (String) newValue).apply();
         }
           else if (preference == mRingtone) {
