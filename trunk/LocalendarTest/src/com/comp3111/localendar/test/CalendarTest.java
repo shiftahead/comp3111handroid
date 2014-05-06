@@ -99,7 +99,7 @@ public class CalendarTest extends ActivityInstrumentationTestCase2<Localendar>{
 	    Instrumentation.ActivityMonitor monitor = instrumentation.addMonitor(DayChooseActivity.class.getName(), null, false);
 	    
 		TouchUtils.tapView(this, calendar);
-		Thread.sleep(200);
+		Thread.sleep(1000);
 		solo.clickOnMenuItem("Go to");
 	    Thread.sleep(200);
 	    solo.clickOnMenuItem("Choose Date");
@@ -435,7 +435,8 @@ public class CalendarTest extends ActivityInstrumentationTestCase2<Localendar>{
 		  assertNotNull(currentActivity);
 		  Button cancelButton = (Button) currentActivity.findViewById(R.id.btnCancel);
 		  
-		  TouchUtils.tapView(this, cancelButton);
+		  solo.clickOnText("Cancel");
+		  Thread.sleep(1000);
 	}
 	public void testSearchEventWithResult() throws InterruptedException {
 		 Instrumentation instrumentation = getInstrumentation();
@@ -462,7 +463,8 @@ public class CalendarTest extends ActivityInstrumentationTestCase2<Localendar>{
 		  //set monitor to search result
 		  instrumentation.removeMonitor(monitor);
 		  monitor = instrumentation.addMonitor(SearchResult.class.getName(), null, false);
-		  TouchUtils.tapView(this, findButton);
+		  Thread.sleep(1000);
+		  solo.clickOnText("Confirm");
 		  Thread.sleep(1500);
 		  currentActivity = getInstrumentation().waitForMonitorWithTimeout(monitor, 500);
 		  ListView listResut = (ListView) currentActivity.findViewById(R.id.result_list); 
@@ -496,7 +498,8 @@ public class CalendarTest extends ActivityInstrumentationTestCase2<Localendar>{
 		  Button findButton = (Button) currentActivity.findViewById(R.id.btnFind);
 	      instrumentation.removeMonitor(monitor);
 		  monitor = instrumentation.addMonitor(SearchResult.class.getName(), null, false);
-		  TouchUtils.tapView(this, findButton);
+		  Thread.sleep(1000);
+		  solo.clickOnText("Confirm");
 		  Thread.sleep(1500);
 		  currentActivity = getInstrumentation().waitForMonitorWithTimeout(monitor, 500);
 		  ListView listResut = (ListView) currentActivity.findViewById(R.id.result_list); 
@@ -545,8 +548,8 @@ public class CalendarTest extends ActivityInstrumentationTestCase2<Localendar>{
 		  Thread.sleep(500);
 		  this.sendKeys(KeyEvent.KEYCODE_ENTER);
 		  Thread.sleep(500);
-		  
-		  TouchUtils.tapView(this, findButton);
+		  Thread.sleep(1000);
+		  solo.clickOnText("Confirm");
 		  Thread.sleep(5000);
 		  
 		  currentActivity.finish();
