@@ -34,7 +34,7 @@ The minutes of the last meeting were approved without amendment.
 || 3. || Test Facebook share|| YANG Ji || May, 8||
 || 4. || Find Bugs and fix bugs || All team members || May,8||
 || 5. || test of marker on map || TAM Shih Lung || May,8 ||
-|| 6. ||   || ZENG Xiong || May,8||
+|| 6. || Improve settings activity || ZENG Xiong || May,8||
 
 ===2. presentation===
 
