@@ -203,6 +203,24 @@ public class MyGoogleMap {
 		return true;
 	}
 	
+	public static Marker addmarker(Place place, String title, String time){
+		Marker newMarker = null;
+		LatLng ll = null;
+		
+		try{
+			ll = new LatLng(place.getLatitude(), place.getLongitude());
+			newMarker = localendarMap.addMarker(new MarkerOptions().position(ll).draggable(false).title(title).snippet(time).
+					icon((BitmapDescriptorFactory.defaultMarker(DEFAULTMARKERCOLOR))));
+		} catch(Exception e){
+			Toast.makeText(Localendar.instance, "The place cannot be shown on the map", Toast.LENGTH_SHORT).show();
+			return null;
+		}
+		localendarMap.animateCamera(CameraUpdateFactory.newLatLngZoom(ll, 15));
+		newMarker.showInfoWindow();
+
+		return newMarker;
+	}
+	
 	public void setMarkerListener(){	
 		localendarMap.setOnMarkerClickListener(new OnMarkerClickListener(){
 			@Override
@@ -222,18 +240,24 @@ public class MyGoogleMap {
              @Override
              public void onMarkerDragStart(Marker arg0) {
             	 
- 				Cursor cursor;
- 				String[] from = {_ID, LOCATION};
- 				SQLiteDatabase db = MyCalendar.dbhelper.getReadableDatabase();
- 				cursor = db.query(TABLE_NAME, from, "_ID="+marker_id.get(markerList.indexOf(arg0)), null, null, null, null);
- 				String location = null;
- 				while(cursor.moveToNext()){
- 					location = cursor.getString(1);
- 				}
- 				Place plocation = Place.getPlaceFromAddress(location);
+            	 
+            	String location = null;
+            	if(markerList.contains(arg0)){
+            		Cursor cursor;
+            		String[] from = {_ID, LOCATION};
+            		SQLiteDatabase db = MyCalendar.dbhelper.getReadableDatabase();
+            		cursor = db.query(TABLE_NAME, from, "_ID="+marker_id.get(markerList.indexOf(arg0)), null, null, null, null);
+            		while(cursor.moveToNext()){
+            			location = cursor.getString(1);
+            		}
+            	}
+            	else
+            		location = arg0.getTitle();
+            	
+            	Place plocation = Place.getPlaceFromAddress(location);
+     			origMarkerPosition = new LatLng(plocation.getLatitude(), plocation.getLongitude());
 
- 				origMarkerPosition = new LatLng(plocation.getLatitude(), plocation.getLongitude());
-//            	 origMarkerPosition = arg0.getPosition();
+//     			origMarkerPosition = arg0.getPosition();
             	 Localendar.instance.mainRadio.setVisibility(View.GONE);
             	 Localendar.instance.deleteMarker.setVisibility(View.VISIBLE);
             	 Localendar.instance.facebookShare.setVisibility(View.VISIBLE);
