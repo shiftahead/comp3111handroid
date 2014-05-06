@@ -19,6 +19,7 @@ import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.comp3111.localendar.Localendar;
 import com.comp3111.localendar.R;
@@ -108,6 +109,8 @@ public class CalendarTest extends ActivityInstrumentationTestCase2<Localendar>{
 	    Thread.sleep(200);
 		solo.clickOnMenuItem("Go to");
 	    Thread.sleep(200);
+	    solo.setDatePicker(0, 2014, 4, 1);
+	    Thread.sleep(500);
 	    solo.clickOnMenuItem("Choose Date");
 	    Thread.sleep(200);
 	    Activity currentActivity = getInstrumentation().waitForMonitorWithTimeout(monitor, 500);
