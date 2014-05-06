@@ -274,7 +274,7 @@ public class Localendar extends Activity implements OnClickListener, OnCheckedCh
 	//Click the items on the autocomplete list and the result will be allocated to the String and Doubles
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
     	String placeSearch = (String) adapterView.getItemAtPosition(position);
-    	myGoogleMap.addmarker(Place.getPlaceFromAddress(placeSearch), false, placeSearch, "Click to add a event");
+    	myGoogleMap.addmarker(Place.getPlaceFromAddress(placeSearch), false, "", placeSearch, "Click to add a event");
     	Toast.makeText(this, placeSearch, Toast.LENGTH_SHORT).show();
         // hide the keyboard
 		InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);

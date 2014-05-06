@@ -78,6 +78,7 @@ import com.google.android.gms.maps.model.PolylineOptions;
 
 //import com.google.maps.android.PolyUtil;
 import com.comp3111.localendar.database.*;
+import com.comp3111.localendar.facebook.FacebookLogin;
 import com.comp3111.localendar.support.ClearableAutoCompleteTextView;
 import com.comp3111.localendar.support.PlacesAutoCompleteAdapter;
 import com.comp3111.localendar.calendar.*;
@@ -178,16 +179,9 @@ public class MyGoogleMap {
 	}
 	
 	//The function of addmarker and zoom the camera to the added marker if boolean zoomto is set to true;
-	public static boolean addmarker(Place place, boolean draggable, String title, String time){
+	public static boolean addmarker(Place place, boolean draggable, String id, String title, String time){
 		Marker newMarker = null;
 		LatLng ll = null;
-		
-		int dummy = title.indexOf(".");
-		String id = new String(); 
-		if(dummy>0){
-			id = title.substring(0, dummy);
-			title = title.substring(dummy+1);
-		}
 		
 		if(!id.isEmpty() && marker_id.contains(id)){
 			Toast.makeText(Localendar.instance, "The marker has already be added on the map", Toast.LENGTH_SHORT).show();
@@ -290,7 +284,22 @@ public class MyGoogleMap {
             	   		break;
             	 	case -1:
             	 		arg0.setPosition(origMarkerPosition);
-            	 		//to do
+         				Cursor cursor;
+         				String[] from = {_ID, LOCATION, MONTH, DAY, HOUR, MINUTE, DESCRIPTION};
+         				SQLiteDatabase db = MyCalendar.dbhelper.getReadableDatabase();
+         				cursor = db.query(TABLE_NAME, from, "_ID="+marker_id.get(markerList.indexOf(arg0)), null, null, null, null);
+         				String location = null, month = null, day = null, hour = null, minute = null, description = null;
+         				while(cursor.moveToNext()){
+         					location = cursor.getString(1);		month = cursor.getString(2);		day = cursor.getString(3);
+         					hour = cursor.getString(4);		minute = cursor.getString(5);		description = cursor.getString(6);
+         				}                      
+            	 		
+            	    	Intent intent = new Intent(Localendar.instance, FacebookLogin.class);
+            	    	intent.putExtra("TITLE", arg0.getTitle());
+            	    	intent.putExtra("DESCRIPTION", description);
+            	    	intent.putExtra("TIME", month + "/" + day + " " + hour + ":" + minute);
+            	    	intent.putExtra("LOCATION", location);
+            	    	Localendar.instance.startActivity(intent);
             	 		break;
             	 }
             	 
@@ -417,7 +426,7 @@ public class MyGoogleMap {
 					
 					Marker erasedmarker = markerList.get(marker_id.indexOf(id));
 					erasedmarker.remove();
-					addmarker(Place.getPlaceFromAddress(location), true, id + "." + title, new String(hour + ":" + minute));
+					addmarker(Place.getPlaceFromAddress(location), true, id, title, new String(hour + ":" + minute));
 						
 					found = true;
 				}
