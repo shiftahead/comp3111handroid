@@ -460,11 +460,11 @@ public class CalendarTest extends ActivityInstrumentationTestCase2<Localendar>{
 		  EditText inputText = (EditText) currentActivity.findViewById(R.id.etSearch);
 		  Button findButton = (Button) currentActivity.findViewById(R.id.btnFind);
 	  
-		  TouchUtils.tapView(this, inputText);
+		  
 		  Thread.sleep(300);
-		  this.sendKeys(KeyEvent.KEYCODE_H);
+		  solo.sendKey(KeyEvent.KEYCODE_H);
 		  Thread.sleep(500);
-		  this.sendKeys(KeyEvent.KEYCODE_ENTER);
+		  solo.sendKey(KeyEvent.KEYCODE_ENTER);
 		  Thread.sleep(500);
 		  //set monitor to search result
 		  instrumentation.removeMonitor(monitor);
@@ -536,23 +536,23 @@ public class CalendarTest extends ActivityInstrumentationTestCase2<Localendar>{
 		  EditText inputText = (EditText) currentActivity.findViewById(R.id.etSearch);
 		  Button findButton = (Button) currentActivity.findViewById(R.id.btnFind);
 	  
-		  TouchUtils.tapView(this, inputText);
+		  
 		  Thread.sleep(300);
-		  this.sendKeys(KeyEvent.KEYCODE_H);
+		  solo.sendKey(KeyEvent.KEYCODE_H);
 		  Thread.sleep(500);
-		  this.sendKeys(KeyEvent.KEYCODE_H);
+		  solo.sendKey(KeyEvent.KEYCODE_H);
 		  Thread.sleep(500);
-		  this.sendKeys(KeyEvent.KEYCODE_H);
+		  solo.sendKey(KeyEvent.KEYCODE_H);
 		  Thread.sleep(500);
-		  this.sendKeys(KeyEvent.KEYCODE_H);
+		  solo.sendKey(KeyEvent.KEYCODE_H);
 		  Thread.sleep(500);
-		  this.sendKeys(KeyEvent.KEYCODE_H);
+		  solo.sendKey(KeyEvent.KEYCODE_H);
 		  Thread.sleep(500);
-		  this.sendKeys(KeyEvent.KEYCODE_H);
+		  solo.sendKey(KeyEvent.KEYCODE_H);
 		  Thread.sleep(500);
-		  this.sendKeys(KeyEvent.KEYCODE_H);
+		  solo.sendKey(KeyEvent.KEYCODE_H);
 		  Thread.sleep(500);
-		  this.sendKeys(KeyEvent.KEYCODE_ENTER);
+		  solo.sendKey(KeyEvent.KEYCODE_ENTER);
 		  Thread.sleep(500);
 		  Thread.sleep(1000);
 		  solo.clickOnText("Confirm");
@@ -574,6 +574,7 @@ public class CalendarTest extends ActivityInstrumentationTestCase2<Localendar>{
 	    Thread.sleep(500);
 	    solo.clickOnView(child);
 	    Thread.sleep(500);
+	    
 	    Activity currentActivity = getInstrumentation().waitForMonitorWithTimeout(am, 500);
 		assertNotNull(currentActivity);
 	    
