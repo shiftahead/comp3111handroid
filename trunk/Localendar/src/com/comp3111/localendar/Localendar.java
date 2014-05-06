@@ -188,10 +188,6 @@ public class Localendar extends Activity implements OnClickListener, OnCheckedCh
     					searchBox.setVisibility(View.GONE);
     					searchBoxShown = false;
     					
-    					//remove the marker
-    					searchMarker.remove();
-    					searchMarker = null;
-    					
     					// hide the keyboard
     					InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
     					imm.hideSoftInputFromWindow(searchBox.getWindowToken(), 0);
@@ -199,6 +195,9 @@ public class Localendar extends Activity implements OnClickListener, OnCheckedCh
     			}
     			else {
     				searchBox.setText("");
+					//remove the marker
+					searchMarker.remove();
+					searchMarker = null;
     			}
     		}
     	});
