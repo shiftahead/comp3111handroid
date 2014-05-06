@@ -6,6 +6,7 @@ import android.graphics.Point;
 import android.graphics.PointF;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.TouchUtils;
+import android.util.Log;
 import android.view.Display;
 import android.view.KeyEvent;
 import android.view.View;
@@ -25,6 +26,7 @@ import com.comp3111.localendar.Localendar;
 import com.comp3111.localendar.R;
 import com.comp3111.localendar.calendar.AddEventActivity;
 import com.comp3111.localendar.calendar.CalendarSearch;
+import com.comp3111.localendar.calendar.CalendarView;
 import com.comp3111.localendar.calendar.DayChooseActivity;
 import com.comp3111.localendar.calendar.EditEventActivity;
 import com.comp3111.localendar.calendar.EventDetailActivity;
@@ -86,14 +88,39 @@ public class CalendarTest extends ActivityInstrumentationTestCase2<Localendar>{
 	public void testSwipe() throws InterruptedException {
 		TouchUtils.tapView(this, calendar);
 		Thread.sleep(200);
-		solo.drag(200, 200, 100, 900, 1);
-		Thread.sleep(1000);
-		solo.drag(200, 200, 1000, 50, 1);
-		Thread.sleep(1000);
-		solo.scrollToSide(Solo.LEFT);
+		
+		Display display = localendar.getWindowManager().getDefaultDisplay();
+		Point size = new Point();
+		display.getSize(size);
+		float width = size.x;
+		float height = size.y;
+		
+		
+		solo.drag(width/2, width/2, height-400, 200, 1);
 		Thread.sleep(500);
-		solo.scrollToSide(Solo.RIGHT);
+		solo.drag(width/2, width/2, height-700, height-300, 1);
 		Thread.sleep(500);
+		solo.drag(width/2, width/2, 200, height-300, 1);
+		Thread.sleep(500);
+		solo.drag(width/2, width/2, height-400, 100, 1);
+		Thread.sleep(500);
+		
+		solo.drag(10, width-10, height-300, height-300, 1);
+		Thread.sleep(500);
+		solo.drag(width-10, 10, height-300, height-300, 1);
+		Thread.sleep(500);
+		solo.drag(10, width-10, height-800, height-800, 1);
+		Thread.sleep(500);
+		
+		CalendarView month = (CalendarView) localendar.findViewById(R.id.calendar_monthview);
+		
+		solo.clickOnView(month);
+		solo.clickOnMenuItem("Go to");
+	    Thread.sleep(200);
+	    solo.clickOnMenuItem("Today");
+	    Thread.sleep(200);
+	    
+	    
 	}
 	
 	public void testGotoDate() throws InterruptedException {
@@ -133,7 +160,6 @@ public class CalendarTest extends ActivityInstrumentationTestCase2<Localendar>{
 	    Thread.sleep(200);
 	    currentActivity = getInstrumentation().waitForMonitorWithTimeout(monitor, 500);
 	    assertNotNull(currentActivity);
-	    solo.scrollDown();
 	    Thread.sleep(500);
 	    Button confirm = (Button) currentActivity.findViewById(R.id.chooseday_confirm);
 		solo.clickOnView(confirm);
@@ -143,8 +169,11 @@ public class CalendarTest extends ActivityInstrumentationTestCase2<Localendar>{
 	}
 	
 	public void testLongTouch() throws InterruptedException {
+		
+		
 		TouchUtils.tapView(this, calendar);
 		Thread.sleep(200);
+		
 		ListView eventList = (ListView) localendar.findViewById(R.id.events_list);
 	    View child1 = eventList.getChildAt(0);
 	    assertNotNull(child1);
