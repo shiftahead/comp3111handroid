@@ -131,8 +131,7 @@ public class EventDetailActivity extends Activity {
 	    case R.id.addmarker:{
 	    	
 	    	Place mlocation= Place.getPlaceFromAddress(location);
-//	    	if(MyGoogleMap.addmarker(mlocation, true)) {
-		    if(MyGoogleMap.addmarker(mlocation, true, new String(id + "." + title), new String(hour + ":" + minute))) {
+		    if(MyGoogleMap.addmarker(mlocation, true, id, title, new String(hour + ":" + minute))) {
 	    		Localendar.instance.setPagerIndex(1);
 				this.finish();
 				overridePendingTransition(R.anim.right_in, R.anim.left_out);

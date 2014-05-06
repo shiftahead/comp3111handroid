@@ -139,7 +139,11 @@ public class FacebookLogin extends FragmentActivity {
 			  Bundle params = new Bundle();
 			  params.putString("name", "My Localendar Event");
 			  params.putString("caption", title);
-			  params.putString("description", "Time: "+time+". "+"Location: "+location+". "+"Description: "+description);
+//			  params.putString("description", "Time: "+time+". "+ "\\n" + "Location: "+location+". ");
+			  if(!description.isEmpty())
+				  params.putString("description", "Time: " + time +". "+ "Location: "+location+ ". "  +"Description: " + description);
+			  else 
+				  params.putString("description", "Time: " + time+". " + "Location: "+location+ ". ");
 			  params.putString("link", "https://code.google.com/p/comp3111handroid/");
 			  params.putString("picture", "https://comp3111handroid.googlecode.com/svn/trunk/Localendar/res/drawable-hdpi/small_logo_color.png");
 			  WebDialog feedDialog = (new WebDialog.FeedDialogBuilder(facebookInstance, Session.getActiveSession(),params))
