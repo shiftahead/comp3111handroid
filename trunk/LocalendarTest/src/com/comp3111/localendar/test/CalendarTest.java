@@ -568,8 +568,7 @@ public class CalendarTest extends ActivityInstrumentationTestCase2<Localendar>{
 		TouchUtils.tapView(this, calendar);
 		Thread.sleep(500);
 		ListView eventList = (ListView) localendar.findViewById(R.id.events_list);
-		int childCount = eventList.getChildCount()-1;
-		View child = eventList.getChildAt(childCount);
+		View child = eventList.getChildAt(0);
 	    assertNotNull(child);
 	    Thread.sleep(500);
 	    solo.clickOnView(child);
