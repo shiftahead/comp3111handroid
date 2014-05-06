@@ -243,7 +243,9 @@ public class AddEventActivity extends Activity {
 		case 5:
 			return (long) (1.5 * Hour_to_Millis);
 		case 6:
-			return (long) (2 * Hour_to_Millis);			
+			return (long) (2 * Hour_to_Millis);
+		case 7:
+			return 0;
 		default:
 			break;
 		}
