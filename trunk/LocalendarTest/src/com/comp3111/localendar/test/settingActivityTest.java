@@ -4,7 +4,6 @@ import com.comp3111.localendar.AboutusActivity;
 import com.comp3111.localendar.SettingsActivity;
 import com.comp3111.localendar.SigninActivity;
 import com.comp3111.localendar.calendar.EventDetailActivity;
-import com.comp3111.localendar.facebook.FacebookLogin;
 import com.robotium.solo.Solo;
 
 import android.app.ActionBar;
@@ -71,17 +70,17 @@ public class settingActivityTest extends ActivityInstrumentationTestCase2<Settin
 	    currentActivity.finish();
     	
 	}
-    public void testFacebook() throws InterruptedException {
-    	Instrumentation instrumentation = getInstrumentation();
-	    Instrumentation.ActivityMonitor monitor = instrumentation.addMonitor(FacebookLogin.class.getName(), null, false);
-    	solo.clickOnText("Facebook");
-    	Thread.sleep(500);
-    	Activity currentActivity = getInstrumentation().waitForMonitorWithTimeout(monitor, 500);
-	    assertNotNull(currentActivity);
-        solo.clickOnActionBarHomeButton();  
-	    currentActivity.finish();
-    	
-	}
+//    public void testFacebook() throws InterruptedException {
+//    	Instrumentation instrumentation = getInstrumentation();
+//	    Instrumentation.ActivityMonitor monitor = instrumentation.addMonitor(FacebookLogin.class.getName(), null, false);
+//    	solo.clickOnText("Facebook");
+//    	Thread.sleep(500);
+//    	Activity currentActivity = getInstrumentation().waitForMonitorWithTimeout(monitor, 500);
+//	    assertNotNull(currentActivity);
+//        solo.clickOnActionBarHomeButton();  
+//	    currentActivity.finish();
+//    	
+//	}
     public void testAboutUS() throws InterruptedException {
     	Instrumentation instrumentation = getInstrumentation();
 	    Instrumentation.ActivityMonitor monitor = instrumentation.addMonitor(AboutusActivity.class.getName(), null, false);

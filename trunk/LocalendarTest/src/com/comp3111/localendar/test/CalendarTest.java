@@ -66,6 +66,8 @@ public class CalendarTest extends ActivityInstrumentationTestCase2<Localendar>{
 	    Thread.sleep(200);
 	    solo.sendKey(Solo.MENU);
 	    Thread.sleep(200);
+	    solo.sendKey(Solo.MENU);
+	    Thread.sleep(200);
 	    solo.clickOnMenuItem("Month View");
 	    Thread.sleep(200);
 	    solo.sendKey(Solo.MENU);
@@ -100,6 +102,10 @@ public class CalendarTest extends ActivityInstrumentationTestCase2<Localendar>{
 	    
 		TouchUtils.tapView(this, calendar);
 		Thread.sleep(1000);
+		solo.sendKey(Solo.MENU);
+	    Thread.sleep(200);
+	    solo.sendKey(Solo.MENU);
+	    Thread.sleep(200);
 		solo.clickOnMenuItem("Go to");
 	    Thread.sleep(200);
 	    solo.clickOnMenuItem("Choose Date");
@@ -567,7 +573,7 @@ public class CalendarTest extends ActivityInstrumentationTestCase2<Localendar>{
 	    assertNotNull(child);
 	    Thread.sleep(500);
 	    solo.clickOnView(child);
-	    
+	    Thread.sleep(500);
 	    Activity currentActivity = getInstrumentation().waitForMonitorWithTimeout(am, 500);
 		assertNotNull(currentActivity);
 	    
