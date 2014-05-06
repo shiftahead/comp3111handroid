@@ -64,6 +64,7 @@ import com.google.android.gms.location.LocationClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener;
+import com.google.android.gms.maps.GoogleMap.OnMapClickListener;
 import com.google.android.gms.maps.GoogleMap.OnMapLongClickListener;
 import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 import com.google.android.gms.maps.GoogleMap.OnMarkerDragListener;
@@ -137,7 +138,7 @@ public class MyGoogleMap {
         refresh("");
        
         //set Marker called;
-        setMarkerListener();
+//        setMarkerListener();
         setInfoWindowListener();
         setMapListener();
 
@@ -164,6 +165,7 @@ public class MyGoogleMap {
 	}
 	
 	public void setMapListener(){
+		
 		localendarMap.setOnMapLongClickListener(new OnMapLongClickListener() {
 // Location returned from coordinate is not accurate enough to implement addmarker function. 
 	             @Override
@@ -176,6 +178,8 @@ public class MyGoogleMap {
 //	             	addmarker(Place.getPlaceFromAddress(placeSearch), true, placeSearch, "Click to add a event");
 	             }
 	         });
+		 
+
 	}
 	
 	//The function of addmarker and zoom the camera to the added marker if boolean zoomto is set to true;
@@ -221,128 +225,128 @@ public class MyGoogleMap {
 		return newMarker;
 	}
 	
-	public void setMarkerListener(){	
-		localendarMap.setOnMarkerClickListener(new OnMarkerClickListener(){
-			@Override
-			public boolean onMarkerClick(Marker arg0) {
-				// TODO Auto-generated method stub
-				//for testing
-//				Toast.makeText(Localendar.instance, String.valueOf(time), Toast.LENGTH_SHORT).show();
-				return false;
-			}
-			
-		});
-
-		
-		 localendarMap.setOnMarkerDragListener(new OnMarkerDragListener() {
-			 LatLng origMarkerPosition;
-			 
-             @Override
-             public void onMarkerDragStart(Marker arg0) {
-            	 
-            	 
-            	String location = null;
-            	if(markerList.contains(arg0)){
-            		Cursor cursor;
-            		String[] from = {_ID, LOCATION};
-            		SQLiteDatabase db = MyCalendar.dbhelper.getReadableDatabase();
-            		cursor = db.query(TABLE_NAME, from, "_ID="+marker_id.get(markerList.indexOf(arg0)), null, null, null, null);
-            		while(cursor.moveToNext()){
-            			location = cursor.getString(1);
-            		}
-            	}
-            	else
-            		location = arg0.getTitle();
-            	
-            	Place plocation = Place.getPlaceFromAddress(location);
-     			origMarkerPosition = new LatLng(plocation.getLatitude(), plocation.getLongitude());
-
-//     			origMarkerPosition = arg0.getPosition();
-            	 Localendar.instance.mainRadio.setVisibility(View.GONE);
-            	 Localendar.instance.deleteMarker.setVisibility(View.VISIBLE);
-            	 Localendar.instance.facebookShare.setVisibility(View.VISIBLE);
-            	 arg0.setAlpha((float) 0.6);
-             }
-             
-             @Override
-            public void onMarkerDrag(Marker arg0) {
-            	 final ImageView trashBin = Localendar.instance.deleteMarker;
-            	 final ImageView facebookShare = Localendar.instance.facebookShare;
-            	 Point markerScreenPosition = localendarMap.getProjection().toScreenLocation(arg0.getPosition());
-
-            	 switch(overlap(markerScreenPosition, trashBin)){
-           	 		case 0:
-           	 			trashBin.setImageResource(R.drawable.ic_action_discard);
-           	 			facebookShare.setImageResource(R.drawable.ic_action_share);
-           	 			break;
-           	 		case 1:
-           	 			trashBin.setImageResource(R.drawable.ic_action_discard_pressed);
-           	 			facebookShare.setImageResource(R.drawable.ic_action_share);
-           	 			break;
-           	 		case -1:
-           	 			facebookShare.setImageResource(R.drawable.ic_action_share_pressed);
-           	 			trashBin.setImageResource(R.drawable.ic_action_discard);
-           	 			break;
-            	 }
-         	    
-            }
-             
-             @Override
-             public void onMarkerDragEnd(Marker arg0) {
-            	 arg0.setAlpha((float) 1);
-            	 Localendar.instance.mainRadio.setVisibility(View.VISIBLE);
-            	 Localendar.instance.deleteMarker.setVisibility(View.GONE);
-            	 Localendar.instance.facebookShare.setVisibility(View.GONE);
-            	 final ImageView trashBin = Localendar.instance.deleteMarker;
-            	 final ImageView facebookShare = Localendar.instance.facebookShare;
-            	 Point markerScreenPosition = localendarMap.getProjection().toScreenLocation(arg0.getPosition());
-            	 
-            	 switch(overlap(markerScreenPosition, trashBin)){
-            	 	case 0:
-            	 		arg0.setPosition(origMarkerPosition);
-            	 		break;
-            	 	case 1:
-            	 		arg0.remove();
-            	   		marker_id.remove(markerList.indexOf(arg0));
-            	   		markerList.remove(markerList.indexOf(arg0));
-            	   		break;
-            	 	case -1:
-            	 		arg0.setPosition(origMarkerPosition);
-         				Cursor cursor;
-         				String[] from = {_ID, LOCATION, MONTH, DAY, HOUR, MINUTE, DESCRIPTION};
-         				SQLiteDatabase db = MyCalendar.dbhelper.getReadableDatabase();
-         				cursor = db.query(TABLE_NAME, from, "_ID="+marker_id.get(markerList.indexOf(arg0)), null, null, null, null);
-         				String location = null, month = null, day = null, hour = null, minute = null, description = null;
-         				while(cursor.moveToNext()){
-         					location = cursor.getString(1);		month = cursor.getString(2);		day = cursor.getString(3);
-         					hour = cursor.getString(4);		minute = cursor.getString(5);		description = cursor.getString(6);
-         				}                      
-            	 		
-            	    	Intent intent = new Intent(Localendar.instance, FacebookLogin.class);
-            	    	intent.putExtra("TITLE", arg0.getTitle());
-            	    	intent.putExtra("DESCRIPTION", description);
-            	    	intent.putExtra("TIME", month + "/" + day + " " + hour + ":" + minute);
-            	    	intent.putExtra("LOCATION", location);
-            	    	Localendar.instance.startActivity(intent);
-            	 		break;
-            	 }
-            	 
-             }
-             
-             int overlap(Point mkrScnPosition, ImageView trashBin){  //1 trash bin, -1 share, 0 not overlap
-         	 	int[] imgCoords = new int[2];
-         	 	trashBin.getLocationOnScreen(imgCoords);
-         	 	boolean overlapX = mkrScnPosition.x > imgCoords[0] ;
-         	    boolean overlapY = mkrScnPosition.y > imgCoords[1] - 3*trashBin.getHeight();
-         	    if(overlapX && overlapY)
-         	    	return 1;
-         	    if(!overlapX&&overlapY)
-         	    	return -1;
-         	    return 0;
-             }
-
-     });
-  }
+//	public void setMarkerListener(){	
+//		localendarMap.setOnMarkerClickListener(new OnMarkerClickListener(){
+//			@Override
+//			public boolean onMarkerClick(Marker arg0) {
+//				// TODO Auto-generated method stub
+//				//for testing
+////				Toast.makeText(Localendar.instance, String.valueOf(time), Toast.LENGTH_SHORT).show();
+//				return false;
+//			}
+//			
+//		});
+//
+//		
+//		 localendarMap.setOnMarkerDragListener(new OnMarkerDragListener() {
+//			 LatLng origMarkerPosition;
+//			 
+//             @Override
+//             public void onMarkerDragStart(Marker arg0) {
+//            	 
+//            	 
+//            	String location = null;
+//            	if(markerList.contains(arg0)){
+//            		Cursor cursor;
+//            		String[] from = {_ID, LOCATION};
+//            		SQLiteDatabase db = MyCalendar.dbhelper.getReadableDatabase();
+//            		cursor = db.query(TABLE_NAME, from, "_ID="+marker_id.get(markerList.indexOf(arg0)), null, null, null, null);
+//            		while(cursor.moveToNext()){
+//            			location = cursor.getString(1);
+//            		}
+//            	}
+//            	else
+//            		location = arg0.getTitle();
+//            	
+//            	Place plocation = Place.getPlaceFromAddress(location);
+//     			origMarkerPosition = new LatLng(plocation.getLatitude(), plocation.getLongitude());
+//
+////     			origMarkerPosition = arg0.getPosition();
+//            	 Localendar.instance.mainRadio.setVisibility(View.GONE);
+//            	 Localendar.instance.deleteMarker.setVisibility(View.VISIBLE);
+//            	 Localendar.instance.facebookShare.setVisibility(View.VISIBLE);
+//            	 arg0.setAlpha((float) 0.6);
+//             }
+//             
+//             @Override
+//            public void onMarkerDrag(Marker arg0) {
+//            	 final ImageView trashBin = Localendar.instance.deleteMarker;
+//            	 final ImageView facebookShare = Localendar.instance.facebookShare;
+//            	 Point markerScreenPosition = localendarMap.getProjection().toScreenLocation(arg0.getPosition());
+//
+//            	 switch(overlap(markerScreenPosition, trashBin)){
+//           	 		case 0:
+//           	 			trashBin.setImageResource(R.drawable.ic_action_discard);
+//           	 			facebookShare.setImageResource(R.drawable.ic_action_share);
+//           	 			break;
+//           	 		case 1:
+//           	 			trashBin.setImageResource(R.drawable.ic_action_discard_pressed);
+//           	 			facebookShare.setImageResource(R.drawable.ic_action_share);
+//           	 			break;
+//           	 		case -1:
+//           	 			facebookShare.setImageResource(R.drawable.ic_action_share_pressed);
+//           	 			trashBin.setImageResource(R.drawable.ic_action_discard);
+//           	 			break;
+//            	 }
+//         	    
+//            }
+//             
+//             @Override
+//             public void onMarkerDragEnd(Marker arg0) {
+//            	 arg0.setAlpha((float) 1);
+//            	 Localendar.instance.mainRadio.setVisibility(View.VISIBLE);
+//            	 Localendar.instance.deleteMarker.setVisibility(View.GONE);
+//            	 Localendar.instance.facebookShare.setVisibility(View.GONE);
+//            	 final ImageView trashBin = Localendar.instance.deleteMarker;
+//            	 final ImageView facebookShare = Localendar.instance.facebookShare;
+//            	 Point markerScreenPosition = localendarMap.getProjection().toScreenLocation(arg0.getPosition());
+//            	 
+//            	 switch(overlap(markerScreenPosition, trashBin)){
+//            	 	case 0:
+//            	 		arg0.setPosition(origMarkerPosition);
+//            	 		break;
+//            	 	case 1:
+//            	 		arg0.remove();
+//            	   		marker_id.remove(markerList.indexOf(arg0));
+//            	   		markerList.remove(markerList.indexOf(arg0));
+//            	   		break;
+//            	 	case -1:
+//            	 		arg0.setPosition(origMarkerPosition);
+//         				Cursor cursor;
+//         				String[] from = {_ID, LOCATION, MONTH, DAY, HOUR, MINUTE, DESCRIPTION};
+//         				SQLiteDatabase db = MyCalendar.dbhelper.getReadableDatabase();
+//         				cursor = db.query(TABLE_NAME, from, "_ID="+marker_id.get(markerList.indexOf(arg0)), null, null, null, null);
+//         				String location = null, month = null, day = null, hour = null, minute = null, description = null;
+//         				while(cursor.moveToNext()){
+//         					location = cursor.getString(1);		month = cursor.getString(2);		day = cursor.getString(3);
+//         					hour = cursor.getString(4);		minute = cursor.getString(5);		description = cursor.getString(6);
+//         				}                      
+//            	 		
+//            	    	Intent intent = new Intent(Localendar.instance, FacebookLogin.class);
+//            	    	intent.putExtra("TITLE", arg0.getTitle());
+//            	    	intent.putExtra("DESCRIPTION", description);
+//            	    	intent.putExtra("TIME", month + "/" + day + " " + hour + ":" + minute);
+//            	    	intent.putExtra("LOCATION", location);
+//            	    	Localendar.instance.startActivity(intent);
+//            	 		break;
+//            	 }
+//            	 
+//             }
+//             
+//             int overlap(Point mkrScnPosition, ImageView trashBin){  //1 trash bin, -1 share, 0 not overlap
+//         	 	int[] imgCoords = new int[2];
+//         	 	trashBin.getLocationOnScreen(imgCoords);
+//         	 	boolean overlapX = mkrScnPosition.x > imgCoords[0] ;
+//         	    boolean overlapY = mkrScnPosition.y > imgCoords[1] - 3*trashBin.getHeight();
+//         	    if(overlapX && overlapY)
+//         	    	return 1;
+//         	    if(!overlapX&&overlapY)
+//         	    	return -1;
+//         	    return 0;
+//             }
+//
+//     });
+//  }
 
 	public void setInfoWindowListener(){
 		
