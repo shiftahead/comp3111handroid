@@ -1,0 +1,53 @@
+# Meeting Minutes of Apr. 23 #
+
+---
+
+| Date | Apr. 23, 2014 |
+|:-----|:--------------|
+| Time | 9:30pm - 11:30pm |
+| Place | LC-01, LG1, Library, HKUST |
+| Attendance | TAM Shih Lung, WANG Ding, YANG Ji, ZENG Xiong, ZHANG Tian |
+| Absence | --            |
+| Recorder |  Yang Ji      |
+
+
+---
+
+
+## 1. Approval of Minutes ##
+
+The minutes of the last meeting were approved without amendment.
+
+## 2. Report on Progress ##
+
+| Zhang Tian | Test case and server testing google+ setting   |
+|:-----------|:-----------------------------------------------|
+| Wang Ding  |  Reminder setting                              |
+| Yang Ji       | Calendar UI, month view & swipe animation      |
+| Zeng Xiong  |  Reminder                                      |
+| TAM Shih Lung |  Marker functions                              |
+
+
+## 3. Discussion Items ##
+
+### 1. Task and deadline ###
+
+| **No.** | **Task** | **Assigned to** | **Deadline** |
+|:--------|:---------|:----------------|:-------------|
+| 1.      | Reminder time based and location based   | WANG Ding       | Apr. 29      |
+| 2.      | Search in event list| ZHANG Tian      | Apr. 29      |
+| 3.      | Calendar UI enhancement & facebook share| YANG Ji         | Apr. 29      |
+| 4.      | Implement test cases | All team members | Apr. 29      |
+| 5.      | Marker function enhancement | TAM Shih Lung   | Apr. 29      |
+| 6.      | Settings & alarm notice | ZENG Xiong      | Apr. 29      |
+
+
+
+
+## 4. Meeting adjournment and next meeting ##
+
+The meeting lasts for 2 hours and no adjournment.
+
+The next meeting is scheduled on 4.29.2014, 8:00 pm .
+
+The location is LC08, LG1, Library, HKUST.

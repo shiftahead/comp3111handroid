@@ -1,0 +1,63 @@
+# Meeting Minutes of May 6 #
+
+---
+
+| Date | May 6, 2014 |
+|:-----|:------------|
+| Time | 8:00pm - 12:00pm |
+| Place | LC-13, LG1, Library, HKUST |
+| Attendance | TAM Shih Lung, WANG Ding, YANG Ji, ZENG Xiong, ZHANG Tian |
+| Absence | --          |
+| Recorder |  Yang Ji    |
+
+
+---
+
+
+## 1. Approval of Minutes ##
+
+The minutes of the last meeting were approved without amendment.
+
+## 2. Report on Progress ##
+
+| Zhang Tian | Test case of setting,signinGoogle+  & event search   |
+|:-----------|:-----------------------------------------------------|
+| Wang Ding  | Time based reminder                                  |
+| Yang Ji       | Calendar UI & Facebook share                         |
+| Zeng Xiong  |  Reminder notice  & application setting              |
+| TAM Shih Lung |  Marker & path functions                             |
+
+
+## 3. Discussion Items ##
+
+### 1. Task and deadline ###
+
+| **No.** | **Task** | **Assigned to** | **Deadline** |
+|:--------|:---------|:----------------|:-------------|
+| 1.      | location based test   | WANG Ding       | May ,8       |
+| 2.      | test case and coverage report| ZHANG Tian      | May,8        |
+| 3.      | Test Facebook share| YANG Ji         | May, 8       |
+| 4.      | Find Bugs and fix bugs | All team members | May,8        |
+| 5.      | test of marker on map | TAM Shih Lung   | May,8        |
+| 6.      | Improve settings activity | ZENG Xiong      | May,8        |
+
+### 2. presentation ###
+
+**1. Introduction (structure and relation of app) -- Wang Ding**
+
+**2. User story --Zeng Xiong**
+
+**3 demo and fulfillment of requirement  -- Yang ji**
+
+**4 Test coverage and UML －－zhang tian**
+
+**5 Challenge ，lesson and  conclusion -- TAM Shih Lung**
+
+## 4. Meeting adjournment and next meeting ##
+
+The meeting lasts for 5 hours and no adjournment.
+
+The next next meeting is scheduled on 06/05/2014 8:00 pm .
+The rehearsal is scheduled on 07/05/2014 9:30 pm .
+
+The location is LG1, Library, HKUST.

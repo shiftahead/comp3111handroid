@@ -1,0 +1,50 @@
+# Meeting Minutes of Mar. 17 #
+
+---
+
+| Date | Mar. 17, 2014 |
+|:-----|:--------------|
+| Time | 8:00pm - 10:00pm |
+| Place | LC-01, LG1, Library, HKUST |
+| Attendance | TAM Shih Lung, WANG Ding, YANG Ji, ZENG Xiong, ZHANG Tian |
+| Absence | --            |
+| Recorder |  YANG Ji      |
+
+
+---
+
+
+## 1. Approval of Minutes ##
+
+The minutes of the last meeting were approved without amendment.
+
+## 2. Report on Progress ##
+
+| Zhang Tian | Query location information, ongoing |
+|:-----------|:------------------------------------|
+| Wang Ding  | Search auto-complete, ongoing       |
+| Yang Ji       | User interface framework updated, ongoing  |
+| Zeng Xiong  | Location based reminder, ongoing    |
+| TAM Shih Lung | Show path function, ongoing         |
+
+
+## 3. Discussion Items ##
+
+| **No.** | **Task** | **Assigned to** | **Deadline** |
+|:--------|:---------|:----------------|:-------------|
+| 1.      | Voice recognition + search auto-complete | WANG Ding       | Apr. 1       |
+| 2.      | Query location information | ZHANG Tian      | Apr.1        |
+| 3.      | UI improvement + integration of functions| YANG Ji         | Apr. 1       |
+| 4.      | Implement test cases | All team members | Apr. 1       |
+| 5.      | Show path functions | TAM Shih Lung   | Apr. 1       |
+| 6.      | Location based reminder | ZENG Xiong      | Apr. 1       |
+
+
+
+## 4. Meeting adjournment and next meeting ##
+
+The meeting lasts for 2 hours and no adjournment.
+
+The next meeting is scheduled on March.29 2014, 8:00 pm - 10:00 pm.
+
+The location is same,  LC-07,LG1,Library,HKUST.

@@ -1,0 +1,121 @@
+# Localendar #
+
+  * [Introduction](Proposal#Introduction.md)
+  * [Project Description](Proposal#Project_Description.md)
+    * [Google Map Search](Proposal#Google_Map_Search.md)
+    * [Adding Events](Proposal#Adding_Events.md)
+    * [Editing or Deleting Events](Proposal#Editing_or_Deleting_Events.md)
+    * [Reminder](Proposal#Reminder.md)
+    * [Check location using GPS](Proposal#Check_location_using_GPS.md)
+    * [Check location using WiFi](Proposal#Check_location_using_WiFi_(optional).md)
+    * [Login](Proposal#Login_(optional).md)
+  * [Motivation](Proposal#Motivation.md)
+  * [Group Members & Roles](Proposal#Group_Members_&_Roles.md)
+  * [Development Tools](Proposal#Development_Tools.md)
+  * [Development Schedule](Proposal#Development_Schedule.md)
+
+
+---
+
+# Introduction #
+Our COMP3111 group project is basically a location-based calendar. Apart from classical calendar features, it can also implement function closely related to location of events and users.
+
+---
+
+
+# Project Description #
+
+## Google Map Search ##
+As a location-based To-do kind application which is based on Google Map, searching places should be available, this allows user to input a place to the search bar and get the result displayed on the Google Map.
+
+## Adding Events ##
+To create an event, the user is prompted to first locate the correct place of the event, and then input several pieces of basic information related to the event to be scheduled:
+> ### Name ###
+> Input the title(name) of the event;
+> ### Time ###
+> The start time and duration of the event;
+> ### Description ###
+> The description of the event (optional for the user);
+> ### Event type ###
+    * Compulsory: If an event is set as compulsory, the user’s location will be checked at the start time of the event;
+    * Optional
+> ### Transportation type (Optional) ###
+> Drive, public transportation and walking would be provided as 3 options to the user and the user is prompted to select one of them as the transportation method, then the estimated time needed will be provided.
+
+## Editing or Deleting Events ##
+For the user to edit the basic information of an event or to delete an event.
+
+## Reminder ##
+There are 2 ways to remind a user:
+> ### Timed Reminder ###
+> A specified time is set during adding an event procedure and the app will remind the user at that specified time.
+> ### Remind me based on my current location ###
+> The system will check the remaining time for the next event, calculate the time needed based on my current location and remind me if the remaining time is shorter than the time needed.
+
+## Check location using GPS ##
+When the start time is reached, the application will check the location of the user using GPS and to report to the user about whether he or she has reached the place on time.
+
+## Check location using WiFi (optional) ##
+When the start time is reached, the application will check the indoor location of the user using WiFi and to report to the user about whether he or she reached the place on time.
+
+## Login (optional) ##
+This application allows user to login with Google account and moreover, to sync his or her schedule from a location-based list to Google Calendar.
+
+---
+
+# Motivation #
+
+Nowadays, we usually use time-based schedule. For sure, we can clearly know the time-ordering of events, yet, we have no idea about the location of those events. We also do not know anything regarding travel time or best path unless we switch to other map applications.
+
+The problem is we do not always remember to check it. Instead of forgetting the tasks, what happens more often is, we are late. This motivates us to build a to-do apps with recommend path or estimated arrival time. An alarm reminder based-on the estimated arrival time and current location would further secure Android user from being late. It could help people to manage their time easily and more relaxingly.
+
+
+---
+
+# Group Members & Roles #
+
+| **Name** | **ITSC** | **STU ID (Last 4 digits)** | **Year** | **Role**|
+|:---------|:---------|:---------------------------|:---------|:--------|
+| TAM, Shih Lung  | sltam--  | 8730                       | 2        | Developer |
+| WANG, Ding | dwang--  | 6270                       | 2        | Server Administrator |
+| YANG, Ji | jyang--  | 9133                       | 3        | Developer |
+| ZENG, Xiong | xzeng--  | 5056                       | 2        |  UI developer |
+| ZHANG, Tian | tzhang-- | 6098                       | 2        | UI developer |
+
+
+---
+
+# Development Tools #
+
+The app will be designed and made by using the following tools:
+
+  * Eclipse , Android Developer Tools   Build: v22.3.0-887826
+
+  * Android SDK
+
+  * Google API
+
+  * Subversion
+
+---
+
+# Development Schedule #
+
+| **Week** | **Finishing Date** | **Task** |
+|:---------|:-------------------|:---------|
+| 2        | Feb. 14            | Submission of initial proposal |
+| 3        | Feb. 20            | Proposal presentation |
+| 4        | Mar. 1             | System requirement and functional specification |
+| 5        | Mar. 7             | Finish homepage UI design |
+| 6        | Mar. 15            | Realize localization and schedule function |
+| 7        | Mar. 21            | Complete pre-prototype |
+| 8        | Mar. 25            | 1st inner testing on functionality |
+| 8        | Mar. 29            | Release Beta version (1.0b1)|
+| 9        | Apr. 1             | Prototype presentation |
+| 10       | Apr. 7             | Complete optional task 1, update version to 1.0b2 |
+| 11       | Apr. 15            | 2nd inner testing for 1.0b2 |
+| 13       | May 8              | Final presentation |
+
+
+
+

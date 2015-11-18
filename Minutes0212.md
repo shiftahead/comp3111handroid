@@ -1,0 +1,39 @@
+# Meeting Minutes of Feb. 12 #
+
+---
+
+| Date | Feb. 12, 2014 |
+|:-----|:--------------|
+| Time | 8:00pm - 10:40pm |
+| Place | LC-14, LG1, Library, HKUST |
+| Attendance | TAM Shih Lung, WANG Ding, YANG Ji, ZENG Xiong, ZHANG Tian |
+| Absence | --            |
+| Recorder | YANG Ji       |
+
+
+---
+
+
+## 1. Approval of Minutes ##
+
+The minutes of the last meeting were approved without amendment.
+
+## 2. Report on Progress ##
+
+Project initial ideas have been discussed with JC and the professor.
+
+## 3. Discussion Items ##
+
+  1. Come up new idea related to mobile phone feature, such as localization and mobile sensor.
+  1. Make a tentative project management plan and schedule.
+  1. Finish the project [proposal](Proposal.md).
+  1. Send wiki link to TA, and ask for advice.
+
+## 4. Goals for coming week ##
+
+  1. Start coding.
+  1. All team members learn some basic knowledge on Java/Android programming.
+
+## 5. Meeting adjournment and next meeting ##
+The meeting lasts for 2 hours and 40 minutes and no adjournment. <br>
+The next meeting is proposed to be held on Feb. 17.

@@ -1,0 +1,49 @@
+# Meeting Minutes of Feb. 8 #
+
+---
+
+| Date | Feb. 8, 2014 |
+|:-----|:-------------|
+| Time | 8:00pm - 10:00pm |
+| Place | LC-14, LG1, Library, HKUST |
+| Attendance | TAM Shih Lung, WANG Ding, YANG Ji, ZENG Xiong, ZHANG Tian |
+| Absence | --           |
+| Recorder |  Zhang Tian  |
+
+
+---
+
+
+## 1. Approval of Minutes ##
+
+This is the first meeting.
+
+## 2. Report on Progress ##
+
+This is the first meeting so no progress to report.
+
+## 3. Discussion Items ##
+
+**3.1** Brainstorm of project, everyone come up with an idea about android application.
+
+**3.2** Set up project on code.google.com.
+
+**3.3** Learn to use SVN and corresponding svn eclipse plugins.
+
+**3.4** Send email to TA, and make appointment to discuss 5 initial ide we get.
+
+## 4. Goals for coming week ##
+
+**4.1** finalize  and determine the topic about android apps
+
+**4.2** learning coding for android apps
+
+**4.3** submit the initial idea to TA.
+
+## 5. Meeting adjournment and next meeting ##
+
+The meeting lasts for 2 hours and no adjournment.
+
+The next meeting is scheduled on Feb.12 2014, 8:00 pm - 10:00 pm.
+
+The location is same,  LC-14,LG1,Library,HKUST.

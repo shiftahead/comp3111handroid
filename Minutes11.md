@@ -1,0 +1,54 @@
+# Meeting Minutes of Apr. 29 #
+
+---
+
+| Date | Apr. 29, 2014 |
+|:-----|:--------------|
+| Time | 8:00pm - 10:00pm |
+| Place | LC-08, LG1, Library, HKUST |
+| Attendance | TAM Shih Lung, WANG Ding, YANG Ji, ZENG Xiong, ZHANG Tian |
+| Absence | --            |
+| Recorder |  Yang Ji      |
+
+
+---
+
+
+## 1. Approval of Minutes ##
+
+The minutes of the last meeting were approved without amendment.
+
+## 2. Report on Progress ##
+
+| Zhang Tian | Test & event search   |
+|:-----------|:----------------------|
+| Wang Ding  | Time based reminder   |
+| Yang Ji       | Calendar UI & Facebook share  |
+| Zeng Xiong  |  Reminder notice  & application setting|
+| TAM Shih Lung |  Marker & path functions|
+
+
+## 3. Discussion Items ##
+
+### 1. Task and deadline ###
+
+| **No.** | **Task** | **Assigned to** | **Deadline** |
+|:--------|:---------|:----------------|:-------------|
+| 1.      | Reminder time based and location based   | WANG Ding       | May ,4       |
+| 2.      | Search in event list| ZHANG Tian      | May,5        |
+| 3.      | Facebook share| YANG Ji         | May, 4       |
+| 4.      | Implement test cases | All team members | May,4        |
+| 5.      | Find Bugs and fix bugs | All team members | May,4        |
+| 6.      | Marker color | TAM Shih Lung   | May,4        |
+| 7.      | Application Settings | ZENG Xiong      | May,4        |
+
+
+## 4. Meeting adjournment and next meeting ##
+
+The meeting lasts for 2 hours and no adjournment.
+
+The next meeting is scheduled on 04/05/2014 7:00 pm .
+The next next meeting is scheduled on 06/05/2014 8:00 pm .
+The rehearsal is scheduled on 07/05/2014 9:30 pm .
+
+The location is LG1, Library, HKUST.

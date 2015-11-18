@@ -1,0 +1,59 @@
+# Meeting Minutes of Feb. 17 #
+
+---
+
+| Date | Feb. 17, 2014 |
+|:-----|:--------------|
+| Time | 8:00pm - 10:00pm |
+| Place | LC-14, LG1, Library, HKUST |
+| Attendance | TAM Shih Lung, WANG Ding, YANG Ji, ZENG Xiong, ZHANG Tian |
+| Absence | --            |
+| Recorder | Zhang Tian    |
+
+
+---
+
+
+## 1. Approval of Minutes ##
+
+The minutes of the last meeting were approved without amendment.
+
+## 2. Report on Progress ##
+
+Project proposal has been submitted
+
+Since work division is not finished, no individual progress report
+
+## 3. Discussion Items ##
+
+### **3.1 Presentation** ###
+
+**3.1.1** Wang Ding, Zeng Xiong, and TAM Shih Lung will present our proposal
+
+**3.1.2** Zhang Tian and Yang Ji are  responsible for PPT
+
+**3.1.3** The final rehearsal is scheduled on morning of Feb.20
+
+### **3.2 Division of Work** ###
+
+**3.2.1** The total project is divided into 3 main parts: Google Map implementation, UI design and event manipulation.
+
+**3.2.2** Zhang Tian and Wang Ding are responsible for Google Map implementation.
+
+**3.2.3** The UI design will be finished by Zeng Xiong and Yang Ji
+
+**3.2.4** TAM Shih Lung's task is creating the event list
+
+## 4. Goals for coming week ##
+
+**4.1** On Feb,20 , we will finish our proposal presentation in class
+
+**4.2** Before March, 7th, we should almost finish our own part and start to synthesis them into one apps
+
+## 5. Meeting adjournment and next meeting ##
+
+No meeting adjournment
+
+**Time** : Feb, 20 2014, 10: 30 am to 12: 00 am
+
+**Venue** : Library, LG1 LC15

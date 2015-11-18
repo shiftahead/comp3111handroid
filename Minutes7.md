@@ -1,0 +1,53 @@
+# Meeting Minutes of Mar. 25 #
+
+---
+
+| Date | Mar. 25, 2014 |
+|:-----|:--------------|
+| Time | 11:00pm - 12:00pm |
+| Place | LC-01, LG1, Library, HKUST |
+| Attendance | TAM Shih Lung, WANG Ding, YANG Ji, ZENG Xiong, ZHANG Tian |
+| Absence | --            |
+| Recorder |  Zhang Tian   |
+
+
+---
+
+
+## 1. Approval of Minutes ##
+
+The minutes of the last meeting were approved without amendment.
+
+## 2. Report on Progress ##
+
+| Zhang Tian | Code maintenance |
+|:-----------|:-----------------|
+| Wang Ding  | Search auto-complete |
+| Yang Ji       | User interface (Search function & shortcut)  |
+| Zeng Xiong  | Reminder, minor UI improvement|
+| TAM Shih Lung | Show path function, ongoing |
+
+
+## 3. Discussion Items ##
+
+### 1. Task and deadline ###
+
+| **No.** | **Task** | **Assigned to** | **Deadline** |
+|:--------|:---------|:----------------|:-------------|
+| 1.      | Voice recognition  | WANG Ding       | Apr. 6       |
+| 2.      | Test case | ZHANG Tian      | Apr.6        |
+| 3.      | Calendar functions | YANG Ji         | Apr. 6       |
+| 4.      | Implement test cases | All team members | Apr. 6       |
+| 5.      | Show path functions | TAM Shih Lung   | Apr. 6       |
+| 6.      | Time based reminder & Location based reminder | ZENG Xiong      | Apr. 6       |
+| 7.      | Presentation rehearsal and ppt   | All team members | Apr. 6       |
+
+
+
+## 4. Meeting adjournment and next meeting ##
+
+The meeting lasts for 1 hour and no adjournment.
+
+The next meeting is scheduled on 4.1.2014, 8:00 pm - 10:00 pm.
+
+The location is same - LC, LG1, Library, HKUST.

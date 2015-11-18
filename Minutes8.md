@@ -1,0 +1,65 @@
+# Meeting Minutes of Apr. 4 #
+
+---
+
+| Date | Apr. 4, 2014 |
+|:-----|:-------------|
+| Time | 8:30pm - 12:00pm |
+| Place | LC-02, LG1, Library, HKUST |
+| Attendance | TAM Shih Lung, WANG Ding, YANG Ji, ZENG Xiong, ZHANG Tian |
+| Absence | --           |
+| Recorder |  Zhang Tian  |
+
+
+---
+
+
+## 1. Approval of Minutes ##
+
+The minutes of the last meeting were approved without amendment.
+
+## 2. Report on Progress ##
+
+| Zhang Tian | Code maintenance |
+|:-----------|:-----------------|
+| Wang Ding  | Search auto-complete |
+| Yang Ji       | User interface (Search function & shortcut)  |
+| Zeng Xiong  | Reminder, minor UI improvement|
+| TAM Shih Lung | Show path function, ongoing |
+
+
+## 3. Discussion Items ##
+
+### 1. Task and deadline ###
+
+| **No.** | **Task** | **Assigned to** | **Deadline** |
+|:--------|:---------|:----------------|:-------------|
+| 1.      | Voice recognition  | WANG Ding       | Apr. 10      |
+| 2.      | Combination of map and calendar | ZHANG Tian      | Apr.10       |
+| 3.      | Calendar functions | YANG Ji         | Apr. 10      |
+| 4.      | Implement test cases | All team members | Apr. 10      |
+| 5.      | Show path functions | TAM Shih Lung   | Apr. 10      |
+| 6.      | Time based reminder & Location based reminder | ZENG Xiong      | Apr. 10      |
+| 7.      | Presentation rehearsal and ppt   | All team members | Apr. 8       |
+
+### 2. Presenting Materials ###
+
+#### 1. Presenting slides ####
+
+|1. | UML. | Yang Ji |
+|:--|:-----|:--------|
+|2. | Backlog | Zhang Tian |
+|3. | Burndown | Zhang Tian |
+|4. | Prototype Demo | Wang Ding, Zeng Xiong |
+|5. | what next | TAM Shih Lung |
+|6. | Thank you & Q&A. |         |
+
+
+
+## 4. Meeting adjournment and next meeting ##
+
+The meeting lasts for 3 hour and no adjournment.
+
+The next meeting is scheduled on 4.11.2014, 8:00 pm - 10:00 pm.
+
+The location is same - LC, LG1, Library, HKUST.
